@@ -1,0 +1,40 @@
+$mainColor: #f79320;
+// i{
+//     font-size: 50px;
+// }
+.bg{
+    background-color: $mainColor;
+}
+i{
+    color: $mainColor;
+    font-size: 40px;
+}
+.items{
+    color: #fff;
+    position: relative;
+    &::before{
+        content: '';
+        position: absolute;
+        top:6%;
+        left: 100%;
+        width: 3px;
+        height: 90%;
+        background-color: #fff;
+    }
+    .item{
+        span{
+            width: 80px;
+            height: 80px;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .data{
+            sub{
+                font-size: 14px;
+            }
+        }
+    }
+}

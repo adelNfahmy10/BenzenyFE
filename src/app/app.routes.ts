@@ -3,11 +3,19 @@ import { NavbarComponent } from './layout/blanck/navbar/navbar.component';
 import { DashboardComponent } from './layout/blanck/dashboard/dashboard.component';
 import { FooterComponent } from './layout/blanck/footer/footer.component';
 import { NotfoundComponent } from './layout/blanck/notfound/notfound.component';
+import { BalanceComponent } from './layout/blanck/balance/balance.component';
+import { CompaniesComponent } from './layout/blanck/companies/companies.component';
+import { PetrolstationComponent } from './layout/blanck/petrolstation/petrolstation.component';
+import { SettingsComponent } from './layout/blanck/settings/settings.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'dashboard', pathMatch:'full'},
     {path:'navbar', component:NavbarComponent, title:'Navbar'},
-    {path:'dashboard', component:DashboardComponent, title:'dashboard'},
+    {path:'home', component:DashboardComponent, title:'Home'},
+    {path:'balance', component:BalanceComponent, title:'Balance'},
+    {path:'company', component:CompaniesComponent, title:'Company'},
+    {path:'petrolstation', component:PetrolstationComponent, title:'Petrol Stations'},
+    {path:'setting', component:SettingsComponent, title:'Setting'},
     {path:'footer', component:FooterComponent, title:'footer'},
     {path:'**', component:NotfoundComponent, title:'notfound'},
 ];
