@@ -1,1 +1,45 @@
-<p>navbar works!</p>
+<nav class="navbar p-3">
+   <div class="d-flex flex-column align-items-center justify-content-start gap-4">
+        <div class="text-center">
+            <img src="./assets/image/logo.webp" class="logo" alt="">
+        </div>
+        <ul class="list-unstyled list p-2 rounded-4 d-flex flex-column gap-2">
+            <li class="active cr d-flex align-items-center gap-2" routerLink="/home" routerLinkActive="active">
+                <i class="fa-solid fa-house"></i>
+                <!-- <span>HOME</span> -->
+            </li>
+
+            <li class="cr d-flex align-items-center gap-2" routerLink="/balance" routerLinkActive="active">
+                <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                <!-- <span>BALANCE</span> -->
+            </li>
+
+            <li class="cr d-flex align-items-center gap-2" routerLink="/company" routerLinkActive="active">
+                <i class="fa-solid fa-building"></i>
+                <!-- <span>Company</span> -->
+            </li>
+
+            <li class="cr d-flex align-items-center gap-2" routerLink="/petrolstation" routerLinkActive="active">
+                <i class="fa-solid fa-gas-pump"></i>
+                <!-- <span class="petrolstation">Petrol Stations</span> -->
+            </li>
+
+            <li class="cr d-flex align-items-center gap-2" routerLink="/setting" routerLinkActive="active">
+                <i class="fa-solid fa-bars-progress"></i>
+                <!-- <span>SETTING</span> -->
+            </li>
+        </ul>
+        <div class="d-flex flex-column justify-content-center align-items-center gap-3">
+            <div class="profile d-flex flex-column gap-2 justify-content-center align-items-center">
+                <span class="rounded-circle">
+                    <img src="../../../../assets/image/user.png" class="user rounded-circle" alt="user">
+                </span>
+                <span>MO Shreif</span>
+            </div>
+            <div class="logout d-flex flex-column justify-content-center align-items-center p-2 rounded-circle text-white">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+   </div>
+</nav>

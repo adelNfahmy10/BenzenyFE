@@ -1,0 +1,75 @@
+$mainColor: #f79320;
+.navbar{
+    align-items: start;
+    min-height: 100vh;
+    transition: all .3s;
+    .logo{
+        width: 80px;
+    }
+    .list{
+        width: 40px;
+        transition: all .3s;
+        background-color: #eee;
+        li{
+            margin-block: 15px;
+            position: relative;
+            transition: all .3s;
+            i{
+                font-size: 20px;
+            }
+            span{
+                transition: all .3s;
+                opacity: 0;
+                font-size: 12px;
+            }
+            &::before{
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 135%;
+                transform: translateY(-50%);
+                width: 0;
+                height: 0;
+                background-color: $mainColor;
+                transition: all .3s;
+            }
+            &:hover::before{
+                width: 3px;
+                height: 25px;
+                left: 135%;
+            }
+            &.active, &:hover, &:hover span{
+                color: $mainColor;
+            }
+            &.active::before{
+                width: 3px;
+                height: 25px;
+            }
+        }
+        // &:hover {
+        //     width: 130px;
+        // }
+        &:hover li span{
+            opacity: 1;
+        }
+    }
+
+    .profile{
+        .user{
+            width: 30px;
+        }
+        span{
+            font-size: 14px;
+        }
+    }
+
+    .logout{
+        background-color: $mainColor;
+        i{
+            transform: rotate(180deg);
+        }
+        span{
+            font-size: 10px;
+        }
+    }
+}
