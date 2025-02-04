@@ -12,6 +12,7 @@ import { FooterComponent } from './layout/blanck/footer/footer.component';
 })
 export class AppComponent {
   open:Boolean = true
+
   slideNav():void{
     if(this.open){
       this.open = false
