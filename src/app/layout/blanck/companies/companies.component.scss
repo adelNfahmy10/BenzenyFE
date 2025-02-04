@@ -1,0 +1,70 @@
+$mainColor: #f79320;
+.mainbg{
+    background-color: $mainColor;
+}
+.mainColor{
+    color: $mainColor;
+}
+i:not(.fa-ellipsis-vertical){
+    color: $mainColor;
+    font-size: 40px;
+}
+.item{
+    span{
+        background-color: $mainColor;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i{
+            color: #fff;
+        }
+    }
+}
+.muted{
+    color: #aaa !important;
+}
+.barnches, .users{
+    svg{
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: -1;
+    }
+}
+.doted{
+    &.active{
+        background-color: $mainColor;
+    }
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #8e8e8e;
+}
+.ibanNum{
+    overflow: hidden;
+    & > svg{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    @media (max-width: 576px) {
+        & > svg{
+            z-index: -1;
+        }
+    }
+}
+.taiba{
+    position: relative;
+    &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 2px;
+        height: 90%;
+        background-color: #c8c8c8;
+    }
+}
