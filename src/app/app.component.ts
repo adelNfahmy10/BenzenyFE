@@ -6,10 +6,18 @@ import { FooterComponent } from './layout/blanck/footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent],
+  imports: [RouterOutlet, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'benzenyFE';
+  open:Boolean = true
+  slideNav():void{
+    if(this.open){
+      this.open = false
+    } else {
+      this.open = true
+    }
+  }
+
 }

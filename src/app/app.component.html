@@ -1,9 +1,12 @@
-<div class="d-flex flex-column justify-content-between">
-    <div class="d-flex gap-2">
-        <app-navbar></app-navbar>
-        <div class="w-100 bg">
-            <router-outlet></router-outlet>
+<section class="home">
+    <div class="container-fluid">
+        <div class="d-flex">
+            <div [class.slide]="open" class="nav h-100 bg-white position-fixed top-0 start-0 z-3" (click)="slideNav()">
+                <app-navbar></app-navbar>
+            </div>
+            <div class="components w-100">
+                <router-outlet></router-outlet>
+            </div>
         </div>
     </div>
-    <app-footer></app-footer>
-</div>
+</section>
