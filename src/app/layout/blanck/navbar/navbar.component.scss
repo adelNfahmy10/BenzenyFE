@@ -2,8 +2,8 @@ $mainColor: #f79320;
 .navbar{
     position: relative;
     align-items: start;
-    transition: all .3s;
-    & > i{
+    transition: all .6s;
+    & > span{
         color: #fff;
         position: absolute;
         left: 100%;
@@ -22,50 +22,35 @@ $mainColor: #f79320;
         }
     }
     .list{
-        width: 40px;
         transition: all .3s;
-        background-color: #eee;
         li{
-            margin-block: 15px;
             position: relative;
             transition: all .3s;
-            i{
-                font-size: 20px;
-            }
+            padding: 5px 10px;
+            background-color: #eee;
+            color: #aaa;
+            width: 46px;
             span{
-                transition: all .3s;
                 opacity: 0;
-                font-size: 12px;
+                display: none;
+                transition: all .6s;
             }
-            &::before{
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 135%;
-                transform: translateY(-50%);
-                width: 0;
-                height: 0;
+            i{
+                font-size: 30px;
+                transition: all .6s;
+            }
+            &.active, &:hover{
                 background-color: $mainColor;
-                transition: all .3s;
-            }
-            &:hover::before{
-                width: 3px;
-                height: 25px;
-                left: 135%;
-            }
-            &.active, &:hover, &:hover span{
-                color: $mainColor;
-            }
-            &.active::before{
-                width: 3px;
-                height: 25px;
+                color: #fff;
             }
         }
-        // &:hover {
-        //     width: 130px;
-        // }
+        &:hover li{
+            width: 100%;
+        }
         &:hover li span{
             opacity: 1;
+            display: block;
+            color: #fff;
         }
     }
     .profile{
