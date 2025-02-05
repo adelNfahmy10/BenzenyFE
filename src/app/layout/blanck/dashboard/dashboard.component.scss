@@ -7,19 +7,9 @@ i{
     font-size: 40px;
 }
 .items{
-    color: #fff;
-    position: relative;
-    &::before{
-        content: '';
-        position: absolute;
-        top:6%;
-        left: 100%;
-        width: 3px;
-        height: 90%;
-        background-color: #fff;
-    }
     .item{
         position: relative;
+        color: #fff;
         &::before{
             content: '';
             position: absolute;
@@ -30,11 +20,19 @@ i{
             height: 50%;
             background-color: #fff;
         }
+        &:last-child::before{
+            content: none;
+        }
         @media (max-width:768px) {
             &::before{
-                content: none
+                content: '';
+                position: absolute;
+                top: 100%;
+                transform: translate(-25%, -70%);
+                width: 70%;
+                height: 3px;
+                background-color: #fff;
             }
-            border-bottom: 2px solid #fff;
         }
         span{
             width: 80px;
@@ -44,7 +42,6 @@ i{
             justify-content: center;
             align-items: center;
         }
-        
         .data{
             sub{
                 font-size: 14px;

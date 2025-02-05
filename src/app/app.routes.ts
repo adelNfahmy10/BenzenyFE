@@ -9,7 +9,7 @@ import { PetrolstationComponent } from './layout/blanck/petrolstation/petrolstat
 import { SettingsComponent } from './layout/blanck/settings/settings.component';
 
 export const routes: Routes = [
-    {path:'',redirectTo:'dashboard', pathMatch:'full'},
+    {path:'',redirectTo:'home', pathMatch:'full'},
     {path:'navbar', component:NavbarComponent, title:'Navbar'},
     {path:'home', component:DashboardComponent, title:'Home'},
     {path:'balance', component:BalanceComponent, title:'Balance'},
