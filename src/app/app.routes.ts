@@ -7,13 +7,14 @@ import { BalanceComponent } from './layout/blanck/balance/balance.component';
 import { CompaniesComponent } from './layout/blanck/companies/companies.component';
 import { PetrolstationComponent } from './layout/blanck/petrolstation/petrolstation.component';
 import { SettingsComponent } from './layout/blanck/settings/settings.component';
+import { CarsComponent } from './layout/blanck/cars/cars.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'home', pathMatch:'full'},
-    {path:'navbar', component:NavbarComponent, title:'Navbar'},
     {path:'home', component:DashboardComponent, title:'Home'},
-    {path:'balance', component:BalanceComponent, title:'Balance'},
     {path:'company', component:CompaniesComponent, title:'Company'},
+    {path:'balance', component:BalanceComponent, title:'Balance'},
+    {path:'cars', component:CarsComponent, title:'Cars'},
     {path:'petrolstation', component:PetrolstationComponent, title:'Petrol Stations'},
     {path:'setting', component:SettingsComponent, title:'Setting'},
     {path:'footer', component:FooterComponent, title:'footer'},
