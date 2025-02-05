@@ -1,0 +1,47 @@
+$mainColor:#F79320;
+.details{
+    position: relative;
+    &::before{
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        right: 0;
+        width: 2px;
+        height: 50%;
+        background-color: #ddd;
+    }
+    &:first-child::before{
+        content: none;
+    }
+    &:last-child::before{
+        content: none;
+    }
+    @media (max-width:991px) {
+        &::before{
+            content: '';
+            position: absolute;
+            top: 100%;
+            transform: translate(-25%, -70%);
+            width: 70%;
+            height: 3px;
+            background-color: #ddd;
+        }
+    }
+}
+.doted{
+    &.active{
+        background-color: $mainColor;
+    }
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #8e8e8e;
+}
+table{
+    span{
+        font-size: 14px;
+        color: #CBCBCB;
+    }
+}

@@ -8,6 +8,8 @@ import { CompaniesComponent } from './layout/blanck/companies/companies.componen
 import { PetrolstationComponent } from './layout/blanck/petrolstation/petrolstation.component';
 import { SettingsComponent } from './layout/blanck/settings/settings.component';
 import { CarsComponent } from './layout/blanck/cars/cars.component';
+import { AnalyticsComponent } from './layout/blanck/analytics/analytics.component';
+import { ManagementComponent } from './layout/blanck/management/management.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'home', pathMatch:'full'},
@@ -16,6 +18,8 @@ export const routes: Routes = [
     {path:'balance', component:BalanceComponent, title:'Balance'},
     {path:'cars', component:CarsComponent, title:'Cars'},
     {path:'petrolstation', component:PetrolstationComponent, title:'Petrol Stations'},
+    {path:'analytics', component:AnalyticsComponent, title:'analyics'},
+    {path:'management', component:ManagementComponent, title:'Management'},
     {path:'setting', component:SettingsComponent, title:'Setting'},
     {path:'footer', component:FooterComponent, title:'footer'},
     {path:'**', component:NotfoundComponent, title:'notfound'},

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Chart, layouts, registerables } from 'chart.js'
+
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-analytics',
@@ -7,6 +10,35 @@ import { Component } from '@angular/core';
   templateUrl: './analytics.component.html',
   styleUrl: './analytics.component.scss'
 })
-export class AnalyticsComponent {
+export class AnalyticsComponent implements OnInit {
+  chart:any;
+
+  public config:any = {
+    type: 'line',
+    data: {
+      labels:['JAN', 'FEB', 'MAR', 'APR'],
+        datasets: [
+          {
+            label:'Sales',
+            data: [100 ,200, 400, 600],
+            borderColor: '#F79320',
+            backgroundColor:'#F79320',
+            // fill: true,
+          },
+      ]
+    },
+    options: {
+      responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    },
+  };
+  
+  ngOnInit(): void {
+    this.chart = new Chart('MyChart', this.config)
+  }
 
 }
