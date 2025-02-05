@@ -1,0 +1,56 @@
+$mainColor: #f79320;
+.main-color{
+    color: $mainColor;
+}
+.main-bg{
+    background-color: $mainColor;
+}
+.sub-item{
+    color: $mainColor;
+}
+.details{
+    position: relative;
+    &::before{
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        right: 0;
+        width: 2px;
+        height: 50%;
+        background-color: #ddd;
+    }
+    &:first-child::before{
+        content: none;
+    }
+    &:last-child::before{
+        content: none;
+    }
+    @media (max-width:991px) {
+        &::before{
+            content: '';
+            position: absolute;
+            top: 100%;
+            transform: translate(-25%, -70%);
+            width: 70%;
+            height: 3px;
+            background-color: #ddd;
+        }
+    }
+}
+.search{
+    input{
+        border-color: $mainColor;
+    }
+    svg{
+        position: absolute;
+        top: 13px;
+        right: 20px;
+    }
+}
+.option{
+    background-color: #DCDCDC;
+    h5{
+        font-size: 18px;
+    }
+}
