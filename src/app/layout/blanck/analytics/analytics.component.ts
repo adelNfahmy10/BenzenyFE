@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart, layouts, registerables } from 'chart.js'
-
+import { Chart, registerables } from 'chart.js'
 Chart.register(...registerables);
 
 @Component({
