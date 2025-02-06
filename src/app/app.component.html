@@ -1,6 +1,8 @@
 <section class="home">
     <div class="d-flex w-100">
-        <div [ngClass]="{'slide': !open}" class="nav position-sticky h-100 top-0 bg-white z-3">
+        <div [ngClass]="{
+            'slide': !open,
+            }" class="nav position-sticky h-100 top-0 bg-white z-3 animate__animated animate__fadeInLeft">
             <nav class="navbar p-3 pb-0 position-relative">
                 <span class="setting position-absolute cr"  (click)="slideNav()">
                     <i class="fa-solid fa-gear"></i>
