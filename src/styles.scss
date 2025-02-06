@@ -9,3 +9,15 @@ $mainColor: #f79320;
 .cr{
     cursor: pointer;
 }
+::-webkit-scrollbar {
+    width: 1px;
+  }
+::-webkit-scrollbar-track {
+background: #fff;
+}
+::-webkit-scrollbar-thumb {
+background: #fff;
+}
+body{
+    overflow-x: hidden;
+}
