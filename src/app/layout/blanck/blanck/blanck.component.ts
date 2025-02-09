@@ -1,15 +1,15 @@
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-blanck',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [RouterOutlet, NgClass, RouterLink, RouterLinkActive],
+  templateUrl: './blanck.component.html',
+  styleUrl: './blanck.component.scss'
 })
-export class AppComponent {
+export class BlanckComponent {
   open:Boolean = true
 
   slideNav():void{
@@ -19,5 +19,4 @@ export class AppComponent {
       this.open = true
     }
   }
-
 }
