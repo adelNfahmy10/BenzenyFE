@@ -78,7 +78,7 @@ export class DashboardComponent implements OnInit{
       }
     },
   };
-  
+
   chartBin:any;
   public configBin:any = {
     type: 'doughnut',
