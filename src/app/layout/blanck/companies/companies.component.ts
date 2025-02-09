@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, inject, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Chart , registerables } from 'chart.js';
 import { ViewallComponent } from "../../../../assets/share/buttons/viewall/viewall.component";
 import { BtnaddComponent } from "../../../../assets/share/buttons/btnadd/btnadd.component";
 import { RouterLink } from '@angular/router';
-import { NgFor } from '@angular/common';
+import { isPlatformBrowser, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 Chart.register(...registerables)
 
 @Component({
@@ -15,6 +17,7 @@ Chart.register(...registerables)
   styleUrl: './companies.component.scss'
 })
 export class CompaniesComponent {
+  private readonly _PLATFORM_ID = inject(PLATFORM_ID)
   data:any[] = [
     { id: '10', branchName: 'Makka', region: 'Makka', vehicles: '25',drivers:'18',iban:'SA123214231432412341235421',station:'a',petrolType:'s'},
     { id: '11', branchName: 'Riyadh', region: 'Riyadh', vehicles: '32',drivers:'20',iban:'SA12354362643523452345152',station:'a',petrolType:'s'},
@@ -29,5 +32,24 @@ export class CompaniesComponent {
     return this.data.filter(row =>
       Object.values(row).some((value:any) => value.toString().toLowerCase().includes(this.filterText.toLowerCase()))
     );
+  }
+
+  @ViewChild('table') template!:ElementRef
+  download(){
+    if(isPlatformBrowser(this._PLATFORM_ID)){
+      const data = this.template.nativeElement
+
+      html2canvas(data).then(canvas => {
+        const imgWidth = 208
+        const pageHeight = 295
+        const imgHeight = (canvas.height * imgWidth) / canvas.width
+        const heightLeft = imgHeight
+
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const contentDataURL = canvas.toDataURL('image/png')
+        pdf.addImage(contentDataURL, 'png', 0, 0, imgWidth, imgHeight)
+        pdf.save('table.pdf')
+      })
+    }
   }
 }
