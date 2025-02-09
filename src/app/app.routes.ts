@@ -1,5 +1,5 @@
+import { LoginComponent } from './layout/auth/login/login.component';
 import { Routes } from '@angular/router';
-import { NavbarComponent } from './layout/blanck/navbar/navbar.component';
 import { DashboardComponent } from './layout/blanck/dashboard/dashboard.component';
 import { FooterComponent } from './layout/blanck/footer/footer.component';
 import { NotfoundComponent } from './layout/blanck/notfound/notfound.component';
@@ -10,9 +10,17 @@ import { SettingsComponent } from './layout/blanck/settings/settings.component';
 import { CarsComponent } from './layout/blanck/cars/cars.component';
 import { AnalyticsComponent } from './layout/blanck/analytics/analytics.component';
 import { ManagementComponent } from './layout/blanck/management/management.component';
+import { AuthComponent } from './layout/auth/auth/auth.component';
+import { RegistarComponent } from './layout/auth/registar/registar.component';
+import { BlanckComponent } from './layout/blanck/blanck/blanck.component';
 
 export const routes: Routes = [
-    {path:'',redirectTo:'home', pathMatch:'full'},
+  {path:'', component:AuthComponent, title:'login', children:[
+    {path:'', redirectTo:'login', pathMatch:'full'},
+    {path:'login', component:LoginComponent, title:'Login'},
+    {path:'register', component:RegistarComponent, title:'Register'},
+  ]},
+  {path:'', component:BlanckComponent, title:'home', children:[
     {path:'home', component:DashboardComponent, title:'Home'},
     {path:'company', component:CompaniesComponent, title:'Company'},
     {path:'balance', component:BalanceComponent, title:'Balance'},
@@ -22,5 +30,6 @@ export const routes: Routes = [
     {path:'management', component:ManagementComponent, title:'Management'},
     {path:'setting', component:SettingsComponent, title:'Setting'},
     {path:'footer', component:FooterComponent, title:'footer'},
-    {path:'**', component:NotfoundComponent, title:'notfound'},
+  ]},
+  {path:'**', component:NotfoundComponent, title:'notfound'},
 ];
