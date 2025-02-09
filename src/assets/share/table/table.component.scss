@@ -1,0 +1,71 @@
+$mainColor: #f79320;
+.search{
+    input{
+        border-color: $mainColor;
+    }
+    svg{
+        position: absolute;
+        top: 13px;
+        right: 20px;
+    }
+}
+.option{
+  background-color: #DCDCDC;
+}
+h5{
+  font-size: 14px;
+}
+.table-container {
+  margin-top: 20px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.table th {
+  cursor: pointer;
+  background-color: #f8f9fa;
+}
+
+.table td {
+  cursor: pointer;
+}
+
+.bg-warning {
+  background-color: orange !important;
+}
+
+.filter-input {
+  margin-bottom: 20px;
+  padding: 8px;
+  width: 100%;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.my-pagination ::ng-deep .ngx-pagination .current {
+  // transition: all .3s;
+  background: $mainColor !important;
+  color: #fff !important  ;
+  // -webkit-transition: all .3s;
+  // -moz-transition: all .3s;
+  // -ms-transition: all .3s;
+  // -o-transition: all .3s;
+}
+.my-pagination ::ng-deep .ngx-pagination .pagination-next, .my-pagination ::ng-deep .ngx-pagination .pagination-previous{
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+background: #eee;
+border-radius: 20px;
+}
+::-webkit-scrollbar-thumb {
+background: $mainColor;
+border-radius: 20px;
+}

@@ -24,7 +24,7 @@ i:not(.fa-ellipsis-vertical){
         position: absolute;
         top: 0;
         right: 0;
-        z-index: -1;
+        z-index: 1;
     }
 }
 .doted{
@@ -103,8 +103,8 @@ i:not(.fa-ellipsis-vertical){
     }
 }
 .option{
-    background-color: #DCDCDC;
+    background-color: $mainColor;
     h5{
-        font-size: 18px;
+        font-size: 14px;
     }
 }
