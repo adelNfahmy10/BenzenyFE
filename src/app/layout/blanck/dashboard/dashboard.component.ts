@@ -14,7 +14,6 @@ Chart.register(...registerables);
 export class DashboardComponent implements OnInit{
   private readonly _ToastrService = inject(ToastrService)
 
-
   ngOnInit(): void {
     this.chartLine = new Chart('ChartLine', this.configLine)
     this.chartBar = new Chart('ChartBar', this.configBar)
@@ -148,4 +147,6 @@ export class DashboardComponent implements OnInit{
       this._ToastrService.success('Failed To Copy IBAN Branch')
     });
   }
+
+
 }

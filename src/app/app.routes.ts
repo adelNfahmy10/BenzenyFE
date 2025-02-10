@@ -13,6 +13,7 @@ import { ManagementComponent } from './layout/blanck/management/management.compo
 import { AuthComponent } from './layout/auth/auth/auth.component';
 import { RegistarComponent } from './layout/auth/registar/registar.component';
 import { BlanckComponent } from './layout/blanck/blanck/blanck.component';
+import { DriversComponent } from './layout/blanck/drivers/drivers.component';
 
 export const routes: Routes = [
   {path:'', component:AuthComponent, title:'login', children:[
@@ -25,6 +26,7 @@ export const routes: Routes = [
     {path:'company', component:CompaniesComponent, title:'Company'},
     {path:'balance', component:BalanceComponent, title:'Balance'},
     {path:'cars', component:CarsComponent, title:'Cars'},
+    {path:'drivers', component:DriversComponent, title:'Drivers'},
     {path:'petrolstation', component:PetrolstationComponent, title:'Petrol Stations'},
     {path:'analytics', component:AnalyticsComponent, title:'analyics'},
     {path:'management', component:ManagementComponent, title:'Management'},
