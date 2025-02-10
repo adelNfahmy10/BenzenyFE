@@ -22,14 +22,16 @@ export class LoginComponent {
 
   submitLoginForm():void{
     let data = this.loginForm.value
-    this._AuthService.login(data).subscribe({
-      next:(res)=>{
-        console.log(res);
-        this._Router.navigate(['/home'])
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    })
+    this._Router.navigate(['/home'])
+
+    // this._AuthService.login(data).subscribe({
+    //   next:(res)=>{
+    //     console.log(res);
+    //     this._Router.navigate(['/home'])
+    //   },
+    //   error:(err)=>{
+    //     console.log(err);
+    //   }
+    // })
   }
 }
