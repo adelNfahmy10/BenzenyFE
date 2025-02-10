@@ -1,5 +1,5 @@
 <div class="row g-3">
-  <div class="col-lg-6 animate__animated animate__fadeInRight">
+  <div class="col-lg-8 animate__animated animate__fadeInRight">
     <div class="search position-relative">
         <input type="search" [(ngModel)]="filterText" class="form-control px-4 py-3 rounded-5" placeholder="Search by Petrol Stations Names, Address... ">
         <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -8,9 +8,9 @@
         </svg>
     </div>
   </div>
-  <div class="col-lg-6 animate__animated animate__fadeInRight">
+  <div class="col-lg-4 animate__animated animate__fadeInRight">
     <div class="row g-1 option pt-1 pb-2 px-2 rounded-5 mt-1">
-      <div class="col-lg-4">
+      <div class="col-lg-6">
         <div class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr">
             <h5 class="mb-0">Add Balance</h5>
             <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,15 +18,8 @@
           </svg>
         </div>
       </div>
-      <div class="col-lg-4">
-          <div class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr">
-              <h5 class="mb-0">Edit</h5>
-              <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.4583 10.22L8.5775 13.1008C8.11167 13.5667 7.4675 13.8333 6.81 13.8333H6.66667V13.69C6.66667 13.0325 6.93333 12.3883 7.39917 11.9225L10.28 9.04167L11.4583 10.22ZM12.3275 6.99417L11.4583 7.86333L12.6367 9.04167L13.5058 8.1725C13.8308 7.8475 13.8308 7.31917 13.5058 6.99417C13.1808 6.66917 12.6533 6.66833 12.3275 6.99417ZM20 10.5C20 16.0142 15.5142 20.5 10 20.5C4.48583 20.5 0 16.0142 0 10.5C0 4.98583 4.48583 0.5 10 0.5C15.5142 0.5 20 4.98583 20 10.5ZM14.6842 5.81583C13.7092 4.84083 12.1242 4.84083 11.1492 5.81583L6.22083 10.7442C5.43417 11.5308 5 12.5775 5 13.69V14.6667C5 15.1275 5.3725 15.5 5.83333 15.5H6.81C7.9225 15.5 8.96917 15.0658 9.75583 14.2792L14.6842 9.35083C15.6592 8.37583 15.6592 6.79083 14.6842 5.81583Z" fill="#F97C21"/>
-            </svg>
-          </div>
-      </div>
-      <div class="col-lg-4">
+
+      <div class="col-lg-6">
           <div class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr" (click)="download()">
               <h5 class="mb-0">Download file</h5>
               <svg width="14" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">

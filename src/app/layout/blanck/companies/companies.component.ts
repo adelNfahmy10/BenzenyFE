@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, PLATFORM_ID, RendererFactory2, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, PLATFORM_ID, RendererFactory2, ViewChild } from '@angular/core';
 import { Chart , registerables } from 'chart.js';
 import { ViewallComponent } from "../../../../assets/share/buttons/viewall/viewall.component";
 import { BtnaddComponent } from "../../../../assets/share/buttons/btnadd/btnadd.component";
@@ -17,15 +17,16 @@ Chart.register(...registerables)
   templateUrl: './companies.component.html',
   styleUrl: './companies.component.scss'
 })
-export class CompaniesComponent {
+export class CompaniesComponent{
   /* Injection Services */
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
   private readonly _ToastrService = inject(ToastrService)
 
-
   /* DATA Table Branches */
   data:any[] = [
-    { id: '10', branchName: 'Makka', region: 'Makka', vehicles: '25',drivers:'18',iban:'SA123214231432412341235421',station:'a',petrolType:'s'},
+    { id: '8', branchName: 'Makka', region: 'Makka', vehicles: '25',drivers:'18',iban:'SA123214231432412341235421',station:'a',petrolType:'s'},
+    { id: '9', branchName: 'Makka', region: 'Makka', vehicles: '62',drivers:'79',iban:'SA12321423543624352335421',station:'a',petrolType:'s'},
+    { id: '10', branchName: 'Makka', region: 'Makka', vehicles: '93',drivers:'20',iban:'SA123214a12352351321435421',station:'a',petrolType:'s'},
     { id: '11', branchName: 'Riyadh', region: 'Riyadh', vehicles: '32',drivers:'20',iban:'SA12354362643523452345152',station:'a',petrolType:'s'},
     { id: '12', branchName: 'Dammam', region: 'Eastern', vehicles: '53',drivers:'9',iban:'SA43123134253412341235421',station:'a',petrolType:'s'},
     { id: '13', branchName: 'Abha', region: 'Asir', vehicles: '12',drivers:'6',iban:'SA123223451234123441235421',station:'a',petrolType:'s'},
@@ -40,6 +41,86 @@ export class CompaniesComponent {
     );
   }
 
+  // filterBranachList:any[] = []
+  // filterByName(event:any){
+  //   let searchValue = event.target.value.toLowerCase()
+  //   if(searchValue){
+  //     console.log(searchValue);
+  //     this.filterBranachList = this.data.filter(name=>
+  //       name.branchName.toLowerCase().includes(searchValue)
+  //     )
+  //     console.log(this.filterBranachList);
+
+  //   } else {
+  //     this.filterBranachList = [...this.data]
+  //   }
+  // }
+  // filterByRegion(event:any){
+  //   let searchValue = event.target.value.toLowerCase()
+
+  //   if(searchValue){
+  //     this.filterBranachList = this.data.filter(region=>
+  //       region.region.toLowerCase().includes(searchValue)
+  //     )
+  //   } else {
+  //     this.filterBranachList = [...this.data]
+  //   }
+  // }
+  // filterByVehicles(event:any){
+  //   let searchValue = event.target.value.toLowerCase()
+
+  //   if(searchValue){
+  //     this.filterBranachList = this.data.filter(vehicle=>
+  //       vehicle.vehicles.toLowerCase().includes(searchValue)
+  //     )
+  //   } else {
+  //     this.filterBranachList = [...this.data]
+  //   }
+  // }
+  // filterByDrivers(event:any){
+  //   let searchValue = event.target.value.toLowerCase()
+
+  //   if(searchValue){
+  //     this.filterBranachList = this.data.filter(driver=>
+  //       driver.drivers.toLowerCase().includes(searchValue)
+  //     )
+  //   } else {
+  //     this.filterBranachList = [...this.data]
+  //   }
+  // }
+  // filterByIBAN(event:any){
+  //   let searchValue = event.target.value.toLowerCase()
+
+  //   if(searchValue){
+  //     this.filterBranachList = this.data.filter(iban=>
+  //       iban.iban.toLowerCase().includes(searchValue)
+  //     )
+  //   } else {
+  //     this.filterBranachList = [...this.data]
+  //   }
+  // }
+  // filterByStation(event:any){
+  //   let searchValue = event.target.value.toLowerCase()
+
+  //   if(searchValue){
+  //     this.filterBranachList = this.data.filter(station=>
+  //       station.station.toLowerCase().includes(searchValue)
+  //     )
+  //   } else {
+  //     this.filterBranachList = [...this.data]
+  //   }
+  // }
+  // filterByPetrolType(event:any){
+  //   let searchValue = event.target.value.toLowerCase()
+
+  //   if(searchValue){
+  //     this.filterBranachList = this.data.filter(petrolType=>
+  //       petrolType.petrolType.toLowerCase().includes(searchValue)
+  //     )
+  //   } else {
+  //     this.filterBranachList = [...this.data]
+  //   }
+  // }
   /* Download Table With PDF */
   @ViewChild('table') template!:ElementRef
   download(){
