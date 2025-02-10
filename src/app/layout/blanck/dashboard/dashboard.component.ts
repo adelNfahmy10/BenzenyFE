@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
+import { ToastrService } from 'ngx-toastr';
 Chart.register(...registerables);
 
 @Component({
@@ -11,6 +12,9 @@ Chart.register(...registerables);
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit{
+  private readonly _ToastrService = inject(ToastrService)
+
+
   ngOnInit(): void {
     this.chartLine = new Chart('ChartLine', this.configLine)
     this.chartBar = new Chart('ChartBar', this.configBar)
@@ -116,5 +120,32 @@ export class DashboardComponent implements OnInit{
     },
   };
 
+  /* Copy ID And IBAN */
+  @ViewChild('iban') elementIban!:ElementRef
+  @ViewChild('ibanBranach') elementIbanBrnach!:ElementRef
 
+  copyIban():void{
+    const textCopy = this.elementIban.nativeElement.innerText;
+    navigator.clipboard.writeText(textCopy)
+    .then(() => {
+      this._ToastrService.success('IBAN Copied To Clipboard','Success',{
+        positionClass:'toast-bottom-right',
+      })
+    })
+    .catch((err) => {
+      this._ToastrService.success('Failed To Copy IBAN')
+    });
+  }
+  copyIbanBranches():void{
+    const textCopy = this.elementIbanBrnach.nativeElement.innerText;
+    navigator.clipboard.writeText(textCopy)
+    .then(() => {
+      this._ToastrService.success('IBAN Branch Copied To Clipboard','Success',{
+        positionClass:'toast-bottom-right',
+      })
+    })
+    .catch((err) => {
+      this._ToastrService.success('Failed To Copy IBAN Branch')
+    });
+  }
 }
