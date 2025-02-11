@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js'
+import { HeaderComponent } from "../../../../assets/share/header/header.component";
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-analytics',
   standalone: true,
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './analytics.component.html',
   styleUrl: './analytics.component.scss'
 })
@@ -35,7 +36,7 @@ export class AnalyticsComponent implements OnInit {
         }
     },
   };
-  
+
   ngOnInit(): void {
     this.chart = new Chart('MyChart', this.config)
   }

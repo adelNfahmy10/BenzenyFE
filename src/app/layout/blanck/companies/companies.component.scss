@@ -92,19 +92,4 @@ i:not(.fa-ellipsis-vertical){
         }
     }
 }
-.search{
-    input{
-        border-color: $mainColor;
-    }
-    svg{
-        position: absolute;
-        top: 13px;
-        right: 20px;
-    }
-}
-.option{
-    background-color: $mainColor;
-    h5{
-        font-size: 14px;
-    }
-}
+

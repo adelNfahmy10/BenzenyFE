@@ -2,12 +2,13 @@ import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core'
 import { RouterLink } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { ToastrService } from 'ngx-toastr';
+import { HeaderComponent } from "../../../../assets/share/header/header.component";
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

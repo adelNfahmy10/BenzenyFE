@@ -14,6 +14,7 @@ import { AuthComponent } from './layout/auth/auth/auth.component';
 import { RegistarComponent } from './layout/auth/registar/registar.component';
 import { BlanckComponent } from './layout/blanck/blanck/blanck.component';
 import { DriversComponent } from './layout/blanck/drivers/drivers.component';
+import { BranchesComponent } from './layout/blanck/branches/branches.component';
 
 export const routes: Routes = [
   {path:'', component:AuthComponent, title:'login', children:[
@@ -24,6 +25,7 @@ export const routes: Routes = [
   {path:'', component:BlanckComponent, title:'home', children:[
     {path:'home', component:DashboardComponent, title:'Home'},
     {path:'company', component:CompaniesComponent, title:'Company'},
+    {path:'branch', component:BranchesComponent, title:'Branches'},
     {path:'balance', component:BalanceComponent, title:'Balance'},
     {path:'cars', component:CarsComponent, title:'Cars'},
     {path:'drivers', component:DriversComponent, title:'Drivers'},
