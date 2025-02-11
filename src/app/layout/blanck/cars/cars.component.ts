@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { TableComponent } from "../../../../assets/share/table/table.component";
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from "../../../../assets/share/header/header.component";
 
 @Component({
   selector: 'app-cars',
   standalone: true,
-  imports: [FormsModule, TableComponent],
+  imports: [FormsModule, TableComponent, HeaderComponent],
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.scss'
 })

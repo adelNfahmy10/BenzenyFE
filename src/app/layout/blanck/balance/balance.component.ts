@@ -3,11 +3,12 @@ import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TableComponent } from "../../../../assets/share/table/table.component";
+import { HeaderComponent } from "../../../../assets/share/header/header.component";
 
 @Component({
   selector: 'app-balance',
   standalone: true,
-  imports: [ FormsModule, TableComponent],
+  imports: [FormsModule, TableComponent, HeaderComponent],
   templateUrl: './balance.component.html',
   styleUrl: './balance.component.scss'
 })

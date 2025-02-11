@@ -1,0 +1,24 @@
+$mainColor:#f79320;
+.search{
+  input{
+      border-color: $mainColor;
+  }
+  svg{
+      position: absolute;
+      top: 13px;
+      right: 20px;
+  }
+}
+.option{
+  background-color: $mainColor;
+  h5{
+      font-size: 14px;
+  }
+}
+.download-container{
+  .download-list{
+    position: absolute;
+    width: 100%;
+    top: 5px;
+  }
+}
