@@ -1,9 +1,91 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 $mainColor: #f79320;
-*:not(i){
-  font-family: "Plus Jakarta Sans", serif;
+h1{
+  color: #000;
+  font-family: "Plus Jakarta Sans";
+  font-size: 40px;
+  font-weight: 600;
+  margin: 0;
 }
+h2{
+  text-align: center;
+  font-family: "Plus Jakarta Sans";
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0;
+}
+h3{
+  font-family: "Plus Jakarta Sans";
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+h4{
+  font-family: "Plus Jakarta Sans";
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+h5{
+  color: #110E20;
+  font-family: "Plus Jakarta Sans";
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+.muted{
+  color: #7E86A3 !important;
+  font-family: "Plus Jakarta Sans";
+  font-size: 13px;
+  font-weight: 500;
+}
+.dis-active-btn{
+  color: $mainColor;
+  font-family: "Plus Jakarta Sans";
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  height: 29px;
+  padding: 5px 24px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $mainColor;
+  border-radius: 17px;
+  background-color: transparent;
+  transition: all .3s;
+  &:hover{
+    background-color: $mainColor;
+    color: #fff;
+  }
+}
+.active-btn{
+  font-family: "Plus Jakarta Sans";
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  height: 29px;
+  padding: 5px 24px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $mainColor;
+  border-radius: 17px;
+  background-color: $mainColor;
+  color: #fff;
+}
+.text-table{
+  color: #222 !important;
+  font-family: "Plus Jakarta Sans";
+  font-size: 14px;
+  font-weight: 600;
+  background-color: transparent;
+  background-color: #DCDCDC1A !important;
+  margin: 0;
+}
+.linear-bg{
+  background-image: linear-gradient(to left, #f7932028 10%, #fff 90%) !important;
+}
+
 .main-color{
     color: $mainColor;
 }

@@ -1,53 +1,53 @@
 $mainColor: #f79320;
 .search{
-    input{
-        border-color: $mainColor;
+  input{
+    border-color: $mainColor;
+    &::placeholder{
+      color: #B8B8B8;
+      font-weight: 300;
     }
-    svg{
-        position: absolute;
-        top: 13px;
-        right: 20px;
-    }
+  }
+  svg{
+    position: absolute;
+    top: 13px;
+    right: 20px;
+  }
 }
-.option{
-  background-color: #DCDCDC;
-}
-h5{
-  font-size: 14px;
-}
-.table-container {
-  margin-top: 20px;
+
+.download-container{
+  .download-list{
+    position: absolute;
+    width: 100%;
+    top: 5px;
+  }
 }
 
 .table {
-  width: 100%;
-  margin-bottom: 20px;
+  th, td{
+    cursor: pointer;
+  }
 }
 
-.table th {
-  cursor: pointer;
-  background-color: #f8f9fa;
+input[type="checkbox"]{
+  background-color: transparent;
+  border: 1px solid #949494;
+  width: 20px;
+  height: 20px;
+  &:checked {
+    background-color: $mainColor;
+    border-color: $mainColor;
+  }
 }
 
-.table td {
-  cursor: pointer;
-}
-
-.bg-warning {
-  background-color: orange !important;
-}
-
-.filter-input {
-  margin-bottom: 20px;
-  padding: 8px;
-  width: 100%;
+.muted{
+  font-weight: 300;
 }
 
 .pagination-controls {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
 }
+
 .my-pagination ::ng-deep .ngx-pagination .current {
   // transition: all .3s;
   background: $mainColor !important;
@@ -57,15 +57,16 @@ h5{
   // -ms-transition: all .3s;
   // -o-transition: all .3s;
 }
+
 .my-pagination ::ng-deep .ngx-pagination .pagination-next, .my-pagination ::ng-deep .ngx-pagination .pagination-previous{
   display: none;
 }
 
 ::-webkit-scrollbar-track {
-background: #eee;
-border-radius: 20px;
+  background: #eee;
+  border-radius: 20px;
 }
 ::-webkit-scrollbar-thumb {
-background: $mainColor;
-border-radius: 20px;
+  background: $mainColor;
+  border-radius: 20px;
 }

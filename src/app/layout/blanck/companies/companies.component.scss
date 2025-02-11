@@ -1,95 +1,50 @@
 $mainColor: #f79320;
-i:not(.fa-ellipsis-vertical){
-    color: $mainColor;
-    font-size: 40px;
-}
-.item{
-    span{
-        background-color: $mainColor;
-        width: 70px;
-        height: 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        i{
-            color: #fff;
-        }
-    }
-}
-.muted{
-    color: #aaa !important;
-}
 .barnches, .users{
-    svg{
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 1;
-    }
-}
-.doted{
-    &.active{
-        background-color: $mainColor;
-    }
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: #8e8e8e;
-}
-.ibanNum{
-    overflow: hidden;
-    & > svg{
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-    @media (max-width: 576px) {
-        & > svg{
-            z-index: -1;
-        }
-    }
-}
-.taiba{
-    position: relative;
-    &::before{
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 2px;
-        height: 90%;
-        background-color: #c8c8c8;
-    }
-}
-.details{
-    position: relative;
-    &::before{
-        content: '';
-        position: absolute;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        right: 0;
-        width: 2px;
-        height: 50%;
-        background-color: #ddd;
-    }
-    &:first-child::before{
-        content: none;
-    }
-    &:last-child::before{
-        content: none;
-    }
-    @media (max-width:991px) {
-        &::before{
-            content: '';
-            position: absolute;
-            top: 100%;
-            transform: translate(-25%, -70%);
-            width: 70%;
-            height: 3px;
-            background-color: #ddd;
-        }
-    }
+  & > svg{
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+  }
+  .dis-active-btn{
+    border : none;
+    color: #6D6D6D;
+    background-color: #DCDCDC;
+  }
+  .active-btn{
+    border : none;
+    background-color: #008D7A;
+  }
 }
 
+.iban{
+  .iban-number{
+    font-weight: 800;
+  }
+  & > svg{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  @media (max-width: 576px) {
+    & > svg{
+        z-index: -1;
+    }
+  }
+}
+
+.taiba{
+  &::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    right:15px;
+    width: 2px;
+    height: 90%;
+    background-color: #c8c8c8;
+  }
+}
+
+.company-Info{
+  border: 1px solid $mainColor;
+}

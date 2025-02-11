@@ -1,5 +1,17 @@
 $mainColor: #f79320;
-
 .viewall{
+  border: 1px solid $mainColor;
+  width: 111px;
+  height: 29px;
+  padding: 5px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: $mainColor;
+  color: #FFF;
+  font-family: "Plus Jakarta Sans";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  border-radius: 17px;
 }

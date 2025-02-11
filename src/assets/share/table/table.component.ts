@@ -5,6 +5,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ViewallComponent } from "../buttons/viewall/viewall.component";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-table',
@@ -66,8 +67,22 @@ export class TableComponent {
     });
   }
 
+  /* Download Table With PDF */
+  open:boolean = false
+  openList():void{
+    if(this.open){
+      this.open = false
+      console.log(this.open);
+
+    } else {
+      this.open = true
+      console.log(this.open);
+    }
+  }
+
+
   @ViewChild('table') template!:ElementRef
-  download(){
+  downloadPDF():void{
     if(isPlatformBrowser(this._PLATFORM_ID)){
       const data = this.template.nativeElement
 
@@ -76,12 +91,23 @@ export class TableComponent {
         const pageHeight = 295
         const imgHeight = (canvas.height * imgWidth) / canvas.width
         const heightLeft = imgHeight
-
         const pdf = new jsPDF('p', 'mm', 'a4');
         const contentDataURL = canvas.toDataURL('image/png')
         pdf.addImage(contentDataURL, 'png', 0, 0, imgWidth, imgHeight)
         pdf.save('table.pdf')
       })
     }
+  }
+
+  downloadExcel():void{
+    // Create a workbook and sheet from the HTML table
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
+
+    // Create a new workbook with the worksheet
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    // Export the workbook to Excel file
+    XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
   }
 }

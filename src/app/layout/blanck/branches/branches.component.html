@@ -1,7 +1,7 @@
 <section>
   <div class="container-fluid">
     <div class="row g-3">
-      <div class="col-12">
+      <div class="col-12 animate__animated animate__fadeInRight">
         <div class="main-bg d-flex justify-content-between align-items-center gap-2 rounded-3 text-white p-3">
           <div class="d-flex gap-2 align-items-center">
             <svg width="62" height="63" viewBox="0 0 62 63" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,9 +13,9 @@
         </div>
       </div>
 
-      <div class="col-12">
+      <div class="col-12 animate__animated animate__fadeInRight">
         <div class="row g-3">
-          <div class="col-lg-8 animate__animated animate__fadeInRight">
+          <div class="col-lg-8">
             <div class="search position-relative">
                 <input type="search" [(ngModel)]="filterText" class="form-control px-4 py-3 rounded-5" placeholder="Search by Petrol Stations Names, Address... ">
                 <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +24,7 @@
                 </svg>
             </div>
           </div>
-          <div class="col-lg-4 animate__animated animate__fadeInRight z-3">
+          <div class="col-lg-4 z-3">
             <div class="row g-1 option pt-1 pb-2 px-2 rounded-5 mt-1">
               <div class="col-lg-6">
                 <div class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -36,23 +36,23 @@
               </div>
 
               <div class="col-lg-6">
-                  <div class="position-relative download-container">
-                    <div [class.shadow]="open" class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr position-relative z-3" (click)="openList()">
-                      <h5 class="mb-0">Download file</h5>
-                      <svg width="18" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5 6.7088V0.440345C12.375 0.771928 13.18 1.28272 13.8623 1.9641L17.2011 5.30485C17.8835 5.98622 18.3943 6.79122 18.7258 7.66618H12.4583C11.9293 7.66618 11.5 7.23685 11.5 6.7088ZM19.1437 9.5838H12.4583C10.8733 9.5838 9.58333 8.29389 9.58333 6.7088V0.0225117C9.42904 0.0119701 9.27475 -0.000488281 9.11854 -0.000488281H4.79167C2.14954 0.000470052 0 2.15001 0 4.79214V18.2088C0 20.8509 2.14954 23.0005 4.79167 23.0005H14.375C17.0171 23.0005 19.1667 20.8509 19.1667 18.2088V10.0486C19.1667 9.89239 19.1542 9.7381 19.1437 9.5838ZM13.1359 17.7354L11.5901 19.2821C11.0371 19.8351 10.3098 20.1121 9.58333 20.1121C8.85692 20.1121 8.12954 19.8351 7.57658 19.2821L6.03079 17.7354C5.65608 17.3607 5.65608 16.7541 6.03079 16.3803C6.4055 16.0056 7.01117 16.0056 7.38588 16.3803L8.625 17.6194V13.4047C8.625 12.8757 9.05338 12.4463 9.58333 12.4463C10.1133 12.4463 10.5417 12.8757 10.5417 13.4047V17.6194L11.7808 16.3803C12.1555 16.0056 12.7612 16.0056 13.1359 16.3803C13.5106 16.7541 13.5106 17.3607 13.1359 17.7354Z" fill="#F97C21"/>
-                      </svg>
-                      <svg class="pt-2" width="18" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M2 2L10 11L18 2" stroke="#F97C21" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </div>
-                    <ul class="list-group animate__animated download-list rounded-top-5" [ngClass]="{'animate__fadeInDown': open, 'd-none': !open}">
-                      <li class="list-group-item border-0"></li>
-                      <li class="list-group-item border-0"></li>
-                      <li (click)="downloadExcel()" class="list-group-item cr">Excel Sheet</li>
-                      <li (click)="downloadPDF()" class="list-group-item cr">PDF</li>
-                    </ul>
+                <div class="position-relative download-container">
+                  <div [class.shadow]="open" class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr position-relative z-3" (click)="openList()">
+                    <h5 class="mb-0">Download file</h5>
+                    <svg width="18" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.5 6.7088V0.440345C12.375 0.771928 13.18 1.28272 13.8623 1.9641L17.2011 5.30485C17.8835 5.98622 18.3943 6.79122 18.7258 7.66618H12.4583C11.9293 7.66618 11.5 7.23685 11.5 6.7088ZM19.1437 9.5838H12.4583C10.8733 9.5838 9.58333 8.29389 9.58333 6.7088V0.0225117C9.42904 0.0119701 9.27475 -0.000488281 9.11854 -0.000488281H4.79167C2.14954 0.000470052 0 2.15001 0 4.79214V18.2088C0 20.8509 2.14954 23.0005 4.79167 23.0005H14.375C17.0171 23.0005 19.1667 20.8509 19.1667 18.2088V10.0486C19.1667 9.89239 19.1542 9.7381 19.1437 9.5838ZM13.1359 17.7354L11.5901 19.2821C11.0371 19.8351 10.3098 20.1121 9.58333 20.1121C8.85692 20.1121 8.12954 19.8351 7.57658 19.2821L6.03079 17.7354C5.65608 17.3607 5.65608 16.7541 6.03079 16.3803C6.4055 16.0056 7.01117 16.0056 7.38588 16.3803L8.625 17.6194V13.4047C8.625 12.8757 9.05338 12.4463 9.58333 12.4463C10.1133 12.4463 10.5417 12.8757 10.5417 13.4047V17.6194L11.7808 16.3803C12.1555 16.0056 12.7612 16.0056 13.1359 16.3803C13.5106 16.7541 13.5106 17.3607 13.1359 17.7354Z" fill="#F97C21"/>
+                    </svg>
+                    <svg class="pt-2" width="18" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 2L10 11L18 2" stroke="#F97C21" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                   </div>
+                  <ul class="list-group animate__animated download-list rounded-top-5" [ngClass]="{'animate__fadeInDown': open, 'd-none': !open}">
+                    <li class="list-group-item border-0"></li>
+                    <li class="list-group-item border-0"></li>
+                    <li (click)="downloadExcel()" class="list-group-item cr">Excel Sheet</li>
+                    <li (click)="downloadPDF()" class="list-group-item cr">PDF</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
