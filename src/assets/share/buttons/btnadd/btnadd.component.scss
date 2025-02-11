@@ -1,9 +1,15 @@
 $mainColor: #f79320;
 .add{
+  color: $mainColor;
+  width: 111px;
+  height: 29px;
+  padding: 5px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 17px;
   border: 1px solid $mainColor;
-  color: #000;
-  background-color: transparent;
-  transition: all .3s;
+  background-color: #FFF;
   &:hover{
     background-color: $mainColor;
     color: #fff;

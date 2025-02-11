@@ -1,4 +1,5 @@
 <div class="row g-3">
+  <!-- Section Search -->
   <div class="col-lg-8 animate__animated animate__fadeInRight">
     <div class="search position-relative">
         <input type="search" [(ngModel)]="filterText" class="form-control px-4 py-3 rounded-5" placeholder="Search by Petrol Stations Names, Address... ">
@@ -8,41 +9,50 @@
         </svg>
     </div>
   </div>
+
+  <!-- Section Download -->
   <div class="col-lg-4 animate__animated animate__fadeInRight">
-    <div class="row g-1 option pt-1 pb-2 px-2 rounded-5 mt-1">
+    <div class="row g-1 main-bg pt-1 pb-2 px-2 rounded-5 mt-1">
       <div class="col-lg-6">
         <div class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr">
-            <h5 class="mb-0">Add Balance</h5>
-            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 0.5C8.02219 0.5 6.08879 1.08649 4.4443 2.1853C2.79981 3.28412 1.51809 4.8459 0.761209 6.67317C0.00433286 8.50043 -0.193701 10.5111 0.192152 12.4509C0.578004 14.3907 1.53041 16.1725 2.92894 17.5711C4.32746 18.9696 6.10929 19.922 8.0491 20.3079C9.98891 20.6937 11.9996 20.4957 13.8268 19.7388C15.6541 18.9819 17.2159 17.7002 18.3147 16.0557C19.4135 14.4112 20 12.4778 20 10.5C19.9971 7.84872 18.9426 5.30684 17.0679 3.4321C15.1932 1.55736 12.6513 0.502868 10 0.5ZM13.3333 11.3333H10.8333V13.8333C10.8333 14.0543 10.7455 14.2663 10.5893 14.4226C10.433 14.5789 10.221 14.6667 10 14.6667C9.77899 14.6667 9.56703 14.5789 9.41075 14.4226C9.25447 14.2663 9.16667 14.0543 9.16667 13.8333V11.3333H6.66667C6.44566 11.3333 6.2337 11.2455 6.07742 11.0893C5.92113 10.933 5.83334 10.721 5.83334 10.5C5.83334 10.279 5.92113 10.067 6.07742 9.91074C6.2337 9.75447 6.44566 9.66667 6.66667 9.66667H9.16667V7.16667C9.16667 6.94565 9.25447 6.73369 9.41075 6.57741C9.56703 6.42113 9.77899 6.33333 10 6.33333C10.221 6.33333 10.433 6.42113 10.5893 6.57741C10.7455 6.73369 10.8333 6.94565 10.8333 7.16667V9.66667H13.3333C13.5544 9.66667 13.7663 9.75447 13.9226 9.91074C14.0789 10.067 14.1667 10.279 14.1667 10.5C14.1667 10.721 14.0789 10.933 13.9226 11.0893C13.7663 11.2455 13.5544 11.3333 13.3333 11.3333Z" fill="#F97C21"/>
+          <h5>Add Balance</h5>
+          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 0.5C8.02219 0.5 6.08879 1.08649 4.4443 2.1853C2.79981 3.28412 1.51809 4.8459 0.761209 6.67317C0.00433286 8.50043 -0.193701 10.5111 0.192152 12.4509C0.578004 14.3907 1.53041 16.1725 2.92894 17.5711C4.32746 18.9696 6.10929 19.922 8.0491 20.3079C9.98891 20.6937 11.9996 20.4957 13.8268 19.7388C15.6541 18.9819 17.2159 17.7002 18.3147 16.0557C19.4135 14.4112 20 12.4778 20 10.5C19.9971 7.84872 18.9426 5.30684 17.0679 3.4321C15.1932 1.55736 12.6513 0.502868 10 0.5ZM13.3333 11.3333H10.8333V13.8333C10.8333 14.0543 10.7455 14.2663 10.5893 14.4226C10.433 14.5789 10.221 14.6667 10 14.6667C9.77899 14.6667 9.56703 14.5789 9.41075 14.4226C9.25447 14.2663 9.16667 14.0543 9.16667 13.8333V11.3333H6.66667C6.44566 11.3333 6.2337 11.2455 6.07742 11.0893C5.92113 10.933 5.83334 10.721 5.83334 10.5C5.83334 10.279 5.92113 10.067 6.07742 9.91074C6.2337 9.75447 6.44566 9.66667 6.66667 9.66667H9.16667V7.16667C9.16667 6.94565 9.25447 6.73369 9.41075 6.57741C9.56703 6.42113 9.77899 6.33333 10 6.33333C10.221 6.33333 10.433 6.42113 10.5893 6.57741C10.7455 6.73369 10.8333 6.94565 10.8333 7.16667V9.66667H13.3333C13.5544 9.66667 13.7663 9.75447 13.9226 9.91074C14.0789 10.067 14.1667 10.279 14.1667 10.5C14.1667 10.721 14.0789 10.933 13.9226 11.0893C13.7663 11.2455 13.5544 11.3333 13.3333 11.3333Z" fill="#F97C21"/>
           </svg>
         </div>
       </div>
 
       <div class="col-lg-6">
-          <div class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr" (click)="download()">
-              <h5 class="mb-0">Download file</h5>
-              <svg width="14" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.5 6.7088V0.440345C12.375 0.771928 13.18 1.28272 13.8623 1.9641L17.2011 5.30485C17.8835 5.98622 18.3943 6.79122 18.7258 7.66618H12.4583C11.9293 7.66618 11.5 7.23685 11.5 6.7088ZM19.1437 9.5838H12.4583C10.8733 9.5838 9.58333 8.29389 9.58333 6.7088V0.0225117C9.42904 0.0119701 9.27475 -0.000488281 9.11854 -0.000488281H4.79167C2.14954 0.000470052 0 2.15001 0 4.79214V18.2088C0 20.8509 2.14954 23.0005 4.79167 23.0005H14.375C17.0171 23.0005 19.1667 20.8509 19.1667 18.2088V10.0486C19.1667 9.89239 19.1542 9.7381 19.1437 9.5838ZM13.1359 17.7354L11.5901 19.2821C11.0371 19.8351 10.3098 20.1121 9.58333 20.1121C8.85692 20.1121 8.12954 19.8351 7.57658 19.2821L6.03079 17.7354C5.65608 17.3607 5.65608 16.7541 6.03079 16.3803C6.4055 16.0056 7.01117 16.0056 7.38588 16.3803L8.625 17.6194V13.4047C8.625 12.8757 9.05338 12.4463 9.58333 12.4463C10.1133 12.4463 10.5417 12.8757 10.5417 13.4047V17.6194L11.7808 16.3803C12.1555 16.0056 12.7612 16.0056 13.1359 16.3803C13.5106 16.7541 13.5106 17.3607 13.1359 17.7354Z" fill="#F97C21"/>
-              </svg>
-              <svg class="pt-2" width="18" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2 2L10 11L18 2" stroke="#F97C21" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+        <div class="position-relative download-container">
+          <div [class.shadow]="open" class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr position-relative z-3" (click)="openList()">
+            <h5 class="mb-0">Download file</h5>
+            <svg width="18" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.5 6.7088V0.440345C12.375 0.771928 13.18 1.28272 13.8623 1.9641L17.2011 5.30485C17.8835 5.98622 18.3943 6.79122 18.7258 7.66618H12.4583C11.9293 7.66618 11.5 7.23685 11.5 6.7088ZM19.1437 9.5838H12.4583C10.8733 9.5838 9.58333 8.29389 9.58333 6.7088V0.0225117C9.42904 0.0119701 9.27475 -0.000488281 9.11854 -0.000488281H4.79167C2.14954 0.000470052 0 2.15001 0 4.79214V18.2088C0 20.8509 2.14954 23.0005 4.79167 23.0005H14.375C17.0171 23.0005 19.1667 20.8509 19.1667 18.2088V10.0486C19.1667 9.89239 19.1542 9.7381 19.1437 9.5838ZM13.1359 17.7354L11.5901 19.2821C11.0371 19.8351 10.3098 20.1121 9.58333 20.1121C8.85692 20.1121 8.12954 19.8351 7.57658 19.2821L6.03079 17.7354C5.65608 17.3607 5.65608 16.7541 6.03079 16.3803C6.4055 16.0056 7.01117 16.0056 7.38588 16.3803L8.625 17.6194V13.4047C8.625 12.8757 9.05338 12.4463 9.58333 12.4463C10.1133 12.4463 10.5417 12.8757 10.5417 13.4047V17.6194L11.7808 16.3803C12.1555 16.0056 12.7612 16.0056 13.1359 16.3803C13.5106 16.7541 13.5106 17.3607 13.1359 17.7354Z" fill="#F97C21"/>
+            </svg>
+            <svg class="pt-2" width="18" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 2L10 11L18 2" stroke="#F97C21" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
+          <ul class="list-group animate__animated download-list rounded-top-5" [ngClass]="{'animate__fadeInDown': open, 'd-none': !open}">
+            <li class="list-group-item border-0"></li>
+            <li class="list-group-item border-0"></li>
+            <li (click)="downloadExcel()" class="list-group-item cr">Excel Sheet</li>
+            <li (click)="downloadPDF()" class="list-group-item cr">PDF</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="col-12 animate__animated animate__fadeInUp">
-    <div class="barnches bg-white p-3 rounded-3">
-      <div class="vehicles-balance d-flex justify-content-between align-items-center">
-          <h5>{{data.title}}</h5>
-          <div class="d-flex justify-content-center align-items-center gap-2">
-            <app-viewall></app-viewall>
-          </div>
+  <!-- Balance Table -->
+  <div class="col-12 animate__animated animate__fadeInUp z-2">
+    <div class="d-flex flex-column gap-3 bg-white p-3 rounded-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <h5>{{data.title}}</h5>
+        <app-viewall></app-viewall>
       </div>
-      <div class="table-responsive" #table >
-          <table class="table table-hover overflow-x-scroll">
+      <div class="table-responsive" #table>
+          <table class="table table-hover overflow-x-scroll table-striped">
               <!-- <thead>
                   <tr>
                       <th>
@@ -73,7 +83,7 @@
               </thead> -->
               <tbody>
                   <tr *ngFor="let row of filteredData | paginate: { itemsPerPage: 3, currentPage: page }"
-                      [ngClass]="{'bg-warning': row.selected}"
+                      [ngClass]="{'main-bg': row.selected}"
                       (click)="toggleRowSelection(row)">
                       <td>
                         <div class="d-flex justify-content-center align-items-center mt-2">
@@ -82,56 +92,56 @@
                       </td>
                       <td>
                        <div class="d-flex flex-column justify-content-center align-items-start">
-                        <span class="text-muted">ID</span>
-                        {{ row.id }}
+                        <span class="muted">ID</span>
+                        <p class="text-table">{{ row.id }}</p>
                        </div>
                       </td>
                       <td>
                         <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="text-muted">Vehicle model</span>
-                          {{ row.vehicleModel }}
+                          <span class="muted">Vehicle model</span>
+                          <p class="text-table">{{ row.vehicleModel }}</p>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="text-muted">Plate</span>
-                          {{ row.plate }}
+                          <span class="muted">Plate</span>
+                          <p class="text-table">{{ row.plate }}</p>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="text-muted">driver name</span>
-                          {{ row.driverName }}
+                          <span class="muted">driver name</span>
+                          <p class="text-table">{{ row.driverName }}</p>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="text-muted">Petrol Type</span>
-                          {{ row.driverPhone }}
+                          <span class="muted">Petrol Type</span>
+                          <p class="text-table">{{ row.driverPhone }}</p>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="text-muted">Total Balance</span>
-                          {{ row.totalBalance }}
+                          <span class="muted">Total Balance</span>
+                          <p class="text-table">{{ row.totalBalance }}</p>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="text-muted">Branch</span>
-                          {{ row.branch }}
+                          <span class="muted">Branch</span>
+                          <p class="text-table">{{ row.branch }}</p>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="text-muted">Total Balance</span>
-                          {{ row.totalBalance }}
+                          <span class="muted">Total Balance</span>
+                          <p class="text-table">{{ row.totalBalance }}</p>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="text-muted">Status</span>
-                          {{ row.status }}
+                          <span class="muted">Status</span>
+                          <p class="text-table">{{ row.status }}</p>
                         </div>
                       </td>
                       <td>
