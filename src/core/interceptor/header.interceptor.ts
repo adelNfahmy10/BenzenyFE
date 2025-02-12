@@ -1,0 +1,10 @@
+import { HttpInterceptorFn } from '@angular/common/http';
+
+export const headerInterceptor: HttpInterceptorFn = (req, next) => {
+
+  req = req.clone({
+    setHeaders: {Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImY5ZGRmYzhmLWZkOTMtNDBiZi1iZWIyLTBlYjBmYjg3Yzg1OSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJBbGh1c3NpZW4iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJzN3NAZXhhbXBsZS5jb20iLCJqdGkiOiIxMTQ1MzQ0NS04Yzc0LTQ2MDAtOGMxNy05YzkxOTUwNjExN2EiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTczOTM2MDc3MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MTg5IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI3MCJ9.8ma769q3HV-WYk6cTz7R_OcOwPzosLNVVdBr_vc-II4'}
+  })
+
+  return next(req);
+};
