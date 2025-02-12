@@ -1,7 +1,8 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "../../../../assets/share/header/header.component";
+import { AuthService } from '../../auth/core/service/auth.service';
+import { Router } from 'express';
 
 @Component({
   selector: 'app-blanck',
@@ -11,6 +12,8 @@ import { HeaderComponent } from "../../../../assets/share/header/header.componen
   styleUrl: './blanck.component.scss'
 })
 export class BlanckComponent {
+  private readonly _AuthService = inject(AuthService)
+  private readonly _Router = inject(Router)
   open:Boolean = true
 
   slideNav():void{
