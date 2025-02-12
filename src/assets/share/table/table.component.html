@@ -46,115 +46,105 @@
 
   <!-- Balance Table -->
   <div class="col-12 animate__animated animate__fadeInUp z-2">
-    <div class="d-flex flex-column gap-3 bg-white p-3 rounded-3">
-      <div class="d-flex justify-content-between align-items-center">
-        <h5>{{data.title}}</h5>
-        <app-viewall></app-viewall>
-      </div>
+    <div class="bg-white rounded-3 shadow">
       <div class="table-responsive" #table>
-          <table class="table table-hover overflow-x-scroll table-striped">
-              <!-- <thead>
-                  <tr>
-                      <th>
-                        <input type="checkbox" [(ngModel)]="selectAll" class="form-check-input" (change)="toggleSelectAll()" />
-                      </th>
-                      <th (click)="sortTable('column1')">
-                        Branch name
-                        <i *ngIf="sortColumn === 'column1'" class="fa" [class.fa-sort-asc]="sortOrder === 'asc'" [class.fa-sort-desc]="sortOrder === 'desc'"></i>
-                        <i *ngIf="sortColumn !== 'column1'" class="fa fa-sort"></i>
-                      </th>
-                      <th (click)="sortTable('column2')">
-                        Region
-                        <i *ngIf="sortColumn === 'column2'" class="fa" [class.fa-sort-asc]="sortOrder === 'asc'" [class.fa-sort-desc]="sortOrder === 'desc'"></i>
-                        <i *ngIf="sortColumn !== 'column2'" class="fa fa-sort"></i>
-                      </th>
-                      <th (click)="sortTable('column3')">
-                        Vehicles
-                        <i *ngIf="sortColumn === 'column3'" class="fa" [class.fa-sort-asc]="sortOrder === 'asc'" [class.fa-sort-desc]="sortOrder === 'desc'"></i>
-                        <i *ngIf="sortColumn !== 'column3'" class="fa fa-sort"></i>
-                      </th>
-                      <th (click)="sortTable('column4')">
-                        Drivers
-                        <i *ngIf="sortColumn === 'column4'" class="fa" [class.fa-sort-asc]="sortOrder === 'asc'" [class.fa-sort-desc]="sortOrder === 'desc'"></i>
-                        <i *ngIf="sortColumn !== 'column4'" class="fa fa-sort"></i>
-                      </th>
-                      <th></th>
-                  </tr>
-              </thead> -->
-              <tbody>
-                  <tr *ngFor="let row of filteredData | paginate: { itemsPerPage: 3, currentPage: page }"
-                      [ngClass]="{'main-bg': row.selected}"
-                      (click)="toggleRowSelection(row)">
-                      <td>
-                        <div class="d-flex justify-content-center align-items-center mt-2">
-                          <input type="checkbox" [(ngModel)]="row.selected" class="form-check-input" />
-                        </div>
-                      </td>
-                      <td>
-                       <div class="d-flex flex-column justify-content-center align-items-start">
-                        <span class="muted">ID</span>
-                        <p class="text-table">{{ row.id }}</p>
-                       </div>
-                      </td>
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="muted">Vehicle model</span>
-                          <p class="text-table">{{ row.vehicleModel }}</p>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="muted">Plate</span>
-                          <p class="text-table">{{ row.plate }}</p>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="muted">driver name</span>
-                          <p class="text-table">{{ row.driverName }}</p>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="muted">Petrol Type</span>
-                          <p class="text-table">{{ row.driverPhone }}</p>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="muted">Total Balance</span>
-                          <p class="text-table">{{ row.totalBalance }}</p>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="muted">Branch</span>
-                          <p class="text-table">{{ row.branch }}</p>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="muted">Total Balance</span>
-                          <p class="text-table">{{ row.totalBalance }}</p>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-start">
-                          <span class="muted">Status</span>
-                          <p class="text-table">{{ row.status }}</p>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex justify-content-center align-items-center mt-3">
-                          <i class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
-                        </div>
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
+        <table class="table table-hover overflow-x-scroll table-striped">
+            <!-- <thead>
+                <tr>
+                    <th>
+                      <input type="checkbox" [(ngModel)]="selectAll" class="form-check-input" (change)="toggleSelectAll()" />
+                    </th>
+                    <th (click)="sortTable('column1')">
+                      Branch name
+                      <i *ngIf="sortColumn === 'column1'" class="fa" [class.fa-sort-asc]="sortOrder === 'asc'" [class.fa-sort-desc]="sortOrder === 'desc'"></i>
+                      <i *ngIf="sortColumn !== 'column1'" class="fa fa-sort"></i>
+                    </th>
+                    <th (click)="sortTable('column2')">
+                      Region
+                      <i *ngIf="sortColumn === 'column2'" class="fa" [class.fa-sort-asc]="sortOrder === 'asc'" [class.fa-sort-desc]="sortOrder === 'desc'"></i>
+                      <i *ngIf="sortColumn !== 'column2'" class="fa fa-sort"></i>
+                    </th>
+                    <th (click)="sortTable('column3')">
+                      Vehicles
+                      <i *ngIf="sortColumn === 'column3'" class="fa" [class.fa-sort-asc]="sortOrder === 'asc'" [class.fa-sort-desc]="sortOrder === 'desc'"></i>
+                      <i *ngIf="sortColumn !== 'column3'" class="fa fa-sort"></i>
+                    </th>
+                    <th (click)="sortTable('column4')">
+                      Drivers
+                      <i *ngIf="sortColumn === 'column4'" class="fa" [class.fa-sort-asc]="sortOrder === 'asc'" [class.fa-sort-desc]="sortOrder === 'desc'"></i>
+                      <i *ngIf="sortColumn !== 'column4'" class="fa fa-sort"></i>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead> -->
+            <tbody>
+                <tr *ngFor="let row of filteredData | paginate: { itemsPerPage: 3, currentPage: page }"
+                    [ngClass]="{'main-bg': row.selected}"
+                    (click)="toggleRowSelection(row)">
+                    <td>
+                      <div class="d-flex justify-content-center align-items-center mt-2">
+                        <input type="checkbox" [(ngModel)]="row.selected" class="form-check-input" />
+                      </div>
+                    </td>
+                    <td>
+                     <div class="d-flex flex-column justify-content-center align-items-start">
+                      <span class="muted">ID</span>
+                      <p class="text-table">{{ row.id }}</p>
+                     </div>
+                    </td>
+                    <td>
+                      <div class="d-flex flex-column justify-content-center align-items-start">
+                        <span class="muted">Vehicle model</span>
+                        <p class="text-table">{{ row.vehicleModel }}</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex flex-column justify-content-center align-items-start">
+                        <span class="muted">Plate</span>
+                        <p class="text-table">{{ row.plate }}</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex flex-column justify-content-center align-items-start">
+                        <span class="muted">driver name</span>
+                        <p class="text-table">{{ row.driverName }}</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex flex-column justify-content-center align-items-start">
+                        <span class="muted">Petrol Type</span>
+                        <p class="text-table">{{ row.driverPhone }}</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex flex-column justify-content-center align-items-start">
+                        <span class="muted">Branch</span>
+                        <p class="text-table">{{ row.branch }}</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex flex-column justify-content-center align-items-start">
+                        <span class="muted">Total Balance</span>
+                        <p class="text-table">{{ row.totalBalance }}</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex flex-column justify-content-center align-items-start">
+                        <span class="muted">Status</span>
+                        <p class="text-table">{{ row.status }}</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-center align-items-center mt-3">
+                        <i class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
+                      </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-          <!-- Pagination Controls -->
-          <pagination-controls (pageChange)="page = $event" class="d-flex justify-content-center my-pagination"></pagination-controls>
+        <!-- Pagination Controls -->
+        <pagination-controls (pageChange)="page = $event" class="d-flex justify-content-center my-pagination"></pagination-controls>
       </div>
     </div>
   </div>

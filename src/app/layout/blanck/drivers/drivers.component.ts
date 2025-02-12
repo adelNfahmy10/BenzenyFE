@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { TableComponent } from '../../../../assets/share/table/table.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-drivers',
@@ -22,4 +23,17 @@ export class DriversComponent {
       { id: '646464161', vehicleModel: 'MG', plate: '512- KSA', driverName: 'Hassan',driverPhone:'+9672213122',petrolType:'62',branch:'El Safa',totalBalance:'50 SAR',status:'Active', selected: false },
     ]
   };
+
+  @ViewChild('table') template!:ElementRef
+  downloadExcel():void{
+    // Create a workbook and sheet from the HTML table
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
+
+    // Create a new workbook with the worksheet
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    // Export the workbook to Excel file
+    XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
+  }
 }

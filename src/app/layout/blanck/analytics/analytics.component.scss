@@ -29,19 +29,17 @@ $mainColor:#F79320;
         }
     }
 }
-.doted{
-    &.active{
-        background-color: $mainColor;
-    }
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background-color: #8e8e8e;
+
+.sub-usual{
+  text-align: center;
+  font-size: 10px;
+  font-weight: 300;
+  margin-top: 5px;
 }
-table{
-    span{
-        font-size: 14px;
-        color: #CBCBCB;
-    }
+
+.chart-container{
+  background-color: #FAFAFA;
+  table th,table td{
+    background-color: #FAFAFA;
+  }
 }
