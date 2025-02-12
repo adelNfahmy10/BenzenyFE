@@ -6,12 +6,12 @@ import jsPDF from 'jspdf';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BranchService } from './core/service/branch.service';
 import * as XLSX from 'xlsx';
-
+import { HeaderComponent } from "../../../../assets/share/header/header.component";
 
 @Component({
   selector: 'app-branches',
   standalone: true,
-  imports: [NgFor, FormsModule, NgxPaginationModule, ReactiveFormsModule,NgClass],
+  imports: [NgFor, FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent],
   templateUrl: './branches.component.html',
   styleUrl: './branches.component.scss'
 })
