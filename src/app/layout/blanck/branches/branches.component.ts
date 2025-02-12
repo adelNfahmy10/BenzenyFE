@@ -8,7 +8,6 @@ import { BranchService } from './core/service/branch.service';
 import * as XLSX from 'xlsx';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 
-
 @Component({
   selector: 'app-branches',
   standalone: true,
