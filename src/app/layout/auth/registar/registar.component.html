@@ -61,7 +61,13 @@
       </div>
       <div class="col-12">
         <label for="file">Attach Files</label>
-        <input formControlName="file" type="file" class="form-control" name="file" id="file" multiple>
+        <!-- in app.component.html -->
+        <ngx-dropzone (change)="onSelect($event)">
+          <ngx-dropzone-label class="main-color fs-2">Choose Files <i class="fa-solid fa-upload"></i></ngx-dropzone-label>
+          <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-preview>
+        </ngx-dropzone>
       </div>
       <div class="col-12">
         <div class="text-center">
