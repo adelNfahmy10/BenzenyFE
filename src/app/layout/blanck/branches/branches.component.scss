@@ -1,18 +1,15 @@
 $mainColor:#f79320;
+h1{
+  font-size: 64px;
+}
 .search{
   input{
-      border-color: $mainColor;
+    border-color: $mainColor;
   }
   svg{
-      position: absolute;
-      top: 13px;
-      right: 20px;
-  }
-}
-.option{
-  background-color: $mainColor;
-  h5{
-      font-size: 14px;
+    position: absolute;
+    top: 13px;
+    right: 20px;
   }
 }
 .download-container{

@@ -1,18 +1,26 @@
 <section>
   <div class="container-fluid">
     <div class="row g-3">
-      <div class="col-12 animate__animated animate__fadeInRight">
-        <div class="main-bg d-flex justify-content-between align-items-center gap-2 rounded-3 text-white p-3">
-          <div class="d-flex gap-2 align-items-center">
+      <!-- Header Page -->
+      <div class="col-12 animate__animated animate__fadeInDown">
+        <app-header></app-header>
+        <h1>Branches</h1>
+      </div>
+
+      <!-- Section Total Branches -->
+      <div class="col-12 animate__animated animate__fadeInDown">
+        <div class="main-bg text-white d-flex justify-content-between align-items-center gap-2 rounded-3 p-3">
+          <div class="d-flex align-items-center gap-2">
             <svg width="62" height="63" viewBox="0 0 62 63" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M-0.0491351 52.1661C-0.0626995 57.8652 4.56077 62.4999 10.2596 62.4999C15.9584 62.4999 20.604 57.8652 20.6175 52.1661C20.629 47.361 17.3397 43.3101 12.8913 42.1605L12.8921 41.8324C12.9023 37.5594 16.3877 34.0821 20.6606 34.0821L41.3272 34.0821C44.2335 34.0821 46.9199 33.1159 49.0834 31.4935L49.058 42.1605C44.6042 43.3101 41.2956 47.361 41.2842 52.1661C41.2706 57.8652 45.8941 62.4999 51.5929 62.4999C57.2918 62.4999 61.9373 57.8652 61.9509 52.1661C61.9623 47.361 58.673 43.3101 54.2247 42.1605L54.2754 20.8394C58.7292 19.6898 62.0378 15.639 62.0492 10.8338C62.0628 5.13474 57.4393 0.500056 51.7405 0.500056C46.0417 0.500057 41.3961 5.13474 41.3826 10.8338C41.3711 15.639 44.6604 19.6898 49.1088 20.8394L49.108 21.1675C49.0978 25.4405 45.6124 28.9178 41.3395 28.9178L20.6729 28.9178C13.5506 28.9178 7.74241 34.7125 7.72545 41.835L7.72467 42.1631C3.27086 43.3127 -0.0376983 47.361 -0.0491351 52.1661Z" fill="white"/>
             </svg>
-            <h5 class="mb-0">Total <br><span>Branch</span></h5>
+            <h3>Total <br><span>Branch</span></h3>
           </div>
-          <h1>22</h1>
+          <h1 class="text-white">22</h1>
         </div>
       </div>
 
+      <!-- Section Tabel -->
       <div class="col-12 animate__animated animate__fadeInRight">
         <div class="row g-3">
           <div class="col-lg-8">
@@ -25,9 +33,9 @@
             </div>
           </div>
           <div class="col-lg-4 z-3">
-            <div class="row g-1 option pt-1 pb-2 px-2 rounded-5 mt-1">
+            <div class="row g-1 main-bg pt-1 pb-2 px-2 rounded-5 mt-1">
               <div class="col-lg-6">
-                <div class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="bg-white d-flex justify-content-center align-items-center gap-1 rounded-5 py-2 cr" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <h5 class="mb-0">Add Branch</h5>
                     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M10 0.5C8.02219 0.5 6.08879 1.08649 4.4443 2.1853C2.79981 3.28412 1.51809 4.8459 0.761209 6.67317C0.00433286 8.50043 -0.193701 10.5111 0.192152 12.4509C0.578004 14.3907 1.53041 16.1725 2.92894 17.5711C4.32746 18.9696 6.10929 19.922 8.0491 20.3079C9.98891 20.6937 11.9996 20.4957 13.8268 19.7388C15.6541 18.9819 17.2159 17.7002 18.3147 16.0557C19.4135 14.4112 20 12.4778 20 10.5C19.9971 7.84872 18.9426 5.30684 17.0679 3.4321C15.1932 1.55736 12.6513 0.502868 10 0.5ZM13.3333 11.3333H10.8333V13.8333C10.8333 14.0543 10.7455 14.2663 10.5893 14.4226C10.433 14.5789 10.221 14.6667 10 14.6667C9.77899 14.6667 9.56703 14.5789 9.41075 14.4226C9.25447 14.2663 9.16667 14.0543 9.16667 13.8333V11.3333H6.66667C6.44566 11.3333 6.2337 11.2455 6.07742 11.0893C5.92113 10.933 5.83334 10.721 5.83334 10.5C5.83334 10.279 5.92113 10.067 6.07742 9.91074C6.2337 9.75447 6.44566 9.66667 6.66667 9.66667H9.16667V7.16667C9.16667 6.94565 9.25447 6.73369 9.41075 6.57741C9.56703 6.42113 9.77899 6.33333 10 6.33333C10.221 6.33333 10.433 6.42113 10.5893 6.57741C10.7455 6.73369 10.8333 6.94565 10.8333 7.16667V9.66667H13.3333C13.5544 9.66667 13.7663 9.75447 13.9226 9.91074C14.0789 10.067 14.1667 10.279 14.1667 10.5C14.1667 10.721 14.0789 10.933 13.9226 11.0893C13.7663 11.2455 13.5544 11.3333 13.3333 11.3333Z" fill="#F97C21"/>
@@ -58,54 +66,56 @@
           </div>
           <div class="col-12 animate__animated animate__fadeInUp z-2">
             <div class="barnches bg-white p-3 rounded-3">
-              <!-- <div class="d-flex gap-2">
-                <input type="text" name="searchByName" id="searchByName" class="form-control rounded-5" (input)="filterByName($event)" placeholder="Search By Branch Name">
-                <input type="text" name="searchByRegion" id="searchByRegion" class="form-control rounded-5" (input)="filterByRegion($event)" placeholder="Search By Region">
-                <input type="text" name="searchByVehicles" id="searchByVehicles" class="form-control rounded-5" (input)="filterByVehicles($event)" placeholder="Search By Vehicles">
-                <input type="text" name="searchByName" id="searchByName" class="form-control rounded-5" (input)="filterByDrivers($event)" placeholder="Search By Drivers">
-                <input type="text" name="searchByIBAN" id="searchByIBAN" class="form-control rounded-5" (input)="filterByIBAN($event)" placeholder="Search By IBAN">
-              </div> -->
+              <!--
+                <div class="d-flex gap-2">
+                  <input type="text" name="searchByName" id="searchByName" class="form-control rounded-5" (input)="filterByName($event)" placeholder="Search By Branch Name">
+                  <input type="text" name="searchByRegion" id="searchByRegion" class="form-control rounded-5" (input)="filterByRegion($event)" placeholder="Search By Region">
+                  <input type="text" name="searchByVehicles" id="searchByVehicles" class="form-control rounded-5" (input)="filterByVehicles($event)" placeholder="Search By Vehicles">
+                  <input type="text" name="searchByName" id="searchByName" class="form-control rounded-5" (input)="filterByDrivers($event)" placeholder="Search By Drivers">
+                  <input type="text" name="searchByIBAN" id="searchByIBAN" class="form-control rounded-5" (input)="filterByIBAN($event)" placeholder="Search By IBAN">
+                </div>
+              -->
               <div class="table-responsive">
                 <table class="table table-hover overflow-x-scroll" #table>
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>
+                      <th class="muted">ID</th>
+                      <th class="muted">
                         <div class="d-flex flex-column gap-1 w-100">
                           <span>Branch Name</span>
                         </div>
                       </th>
-                      <th>
+                      <th class="muted">
                         <div class="d-flex flex-column gap-1">
                           <span>Region</span>
                         </div>
                       </th>
-                      <th>
+                      <th class="muted">
                         <div class="d-flex flex-column gap-1">
                           <span>Vehicles</span>
                         </div>
                       </th>
-                      <th>
+                      <th class="muted">
                         <div class="d-flex flex-column gap-1">
                           <span>Drivers</span>
                         </div>
                       </th>
-                      <th>
+                      <th class="muted">
                         <div class="d-flex flex-column gap-1">
                           <span>IBAN</span>
                         </div>
                       </th>
-                      <th>
+                      <th class="muted">
                         <div class="d-flex flex-column gap-1">
                           <span>Station</span>
                         </div>
                       </th>
-                      <th>
+                      <th class="muted">
                         <div class="d-flex flex-column gap-1">
                           <span>Petrol Type</span>
                         </div>
                       </th>
-                      <th>Actions</th>
+                      <th class="muted">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
