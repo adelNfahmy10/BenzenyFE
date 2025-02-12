@@ -1,4 +1,4 @@
-import { isPlatformBrowser, NgClass, NgFor } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, inject, PLATFORM_ID, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import html2canvas from 'html2canvas';
@@ -11,19 +11,14 @@ import { HeaderComponent } from "../../../../assets/share/header/header.componen
 @Component({
   selector: 'app-branches',
   standalone: true,
-  imports: [NgFor, FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent],
+  imports: [NgFor, FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent, NgIf],
   templateUrl: './branches.component.html',
   styleUrl: './branches.component.scss'
 })
 export class BranchesComponent {
   /* Injection Services */
-  private readonly _PLATFORM_ID = inject(PLATFORM_ID)
-  private readonly _BranchService = inject(BranchService)
   private readonly _FormBuilder = inject(FormBuilder)
-
-  page = 1;
-
-  /* DATA Table Branches */
+  private readonly _PLATFORM_ID = inject(PLATFORM_ID)
   data:any[] = [
     { id: '8', branchName: 'Makka', region: 'Makka', vehicles: '25',drivers:'18',iban:'SA123214231432412341235421',station:'a',petrolType:'s'},
     { id: '9', branchName: 'Makka', region: 'Makka', vehicles: '62',drivers:'79',iban:'SA12321423543624352335421',station:'a',petrolType:'s'},
@@ -34,12 +29,54 @@ export class BranchesComponent {
     { id: '14', branchName: 'Tabuk', region: 'Tabuk', vehicles: '67',drivers:'14',iban:'SA97565637546346254352325',station:'a',petrolType:'s'},
     { id: '15', branchName: 'Medina', region: 'Madina', vehicles: '18',drivers:'32',iban:'SA2364372454365234515112',station:'a',petrolType:'s'},
   ]
+  page = 1;
+  selectAll = false;
 
+  // Sort column and order
   filterText = '';
+  sortColumn: string = '';
+  sortOrder: 'asc' | 'desc' = 'asc';
+
+  // Filtering the data based on search input
   get filteredData() {
-    return this.data.filter(row =>
+    return this.data.filter((row:any[]) =>
       Object.values(row).some((value:any) => value.toString().toLowerCase().includes(this.filterText.toLowerCase()))
     );
+  }
+
+  // Check if the row is selected
+  isSelected(row: any) {
+    return row.selected;
+  }
+
+  // Toggle row selection
+  toggleRowSelection(row: any) {
+    row.selected = !row.selected;
+  }
+
+  // Toggle Select All checkbox
+  toggleSelectAll() {
+    this.data.forEach((row:any) => row.selected = this.selectAll);
+  }
+
+  // Sorting function
+  sortTable(column: string) {
+    if (this.sortColumn === column) {
+      // Toggle sort order
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortOrder = 'asc';
+    }
+
+    this.data.sort((a:any, b:any) => {
+      const aValue = a[column];
+      const bValue = b[column];
+
+      if (aValue < bValue) return this.sortOrder === 'asc' ? -1 : 1;
+      if (aValue > bValue) return this.sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
   }
 
   // filterBranachList:any[] = []
@@ -141,11 +178,15 @@ export class BranchesComponent {
   submitBranchForm():void{
     let data = this.branchForm.value
     console.log(data);
-    // this._BranchService.CreateBranch(data).subscribe({
-    //   next:(res)=>{
-    //     console.log(res);
-    //   }
-    // })
+  }
+  selectedRowId: number | null = null;
+
+  toggleMenu(rowId: number) {
+    if (this.selectedRowId === rowId) {
+      this.selectedRowId = null; // إخفاء القائمة إذا كانت مفتوحة بالفعل
+    } else {
+      this.selectedRowId = rowId; // إظهار القائمة لهذا الصف
+    }
   }
 
   /* Download Table With PDF */

@@ -23,6 +23,7 @@
       <!-- Section Tabel -->
       <div class="col-12 animate__animated animate__fadeInRight">
         <div class="row g-3">
+
           <div class="col-lg-8">
             <div class="search position-relative">
                 <input type="search" [(ngModel)]="filterText" class="form-control px-4 py-3 rounded-5" placeholder="Search by Petrol Stations Names, Address... ">
@@ -32,6 +33,7 @@
                 </svg>
             </div>
           </div>
+
           <div class="col-lg-4 z-3">
             <div class="row g-1 main-bg pt-1 pb-2 px-2 rounded-5 mt-1">
               <div class="col-lg-6">
@@ -64,6 +66,7 @@
               </div>
             </div>
           </div>
+
           <div class="col-12 animate__animated animate__fadeInUp z-2">
             <div class="barnches bg-white p-3 rounded-3">
               <!--
@@ -75,78 +78,58 @@
                   <input type="text" name="searchByIBAN" id="searchByIBAN" class="form-control rounded-5" (input)="filterByIBAN($event)" placeholder="Search By IBAN">
                 </div>
               -->
-              <div class="table-responsive">
-                <table class="table table-hover overflow-x-scroll" #table>
+              <div class="table-responsive" #table>
+                <table class="table table-hover overflow-x-scroll text-center" #table>
                   <thead>
                     <tr>
                       <th class="muted">ID</th>
-                      <th class="muted">
-                        <div class="d-flex flex-column gap-1 w-100">
-                          <span>Branch Name</span>
-                        </div>
-                      </th>
-                      <th class="muted">
-                        <div class="d-flex flex-column gap-1">
-                          <span>Region</span>
-                        </div>
-                      </th>
-                      <th class="muted">
-                        <div class="d-flex flex-column gap-1">
-                          <span>Vehicles</span>
-                        </div>
-                      </th>
-                      <th class="muted">
-                        <div class="d-flex flex-column gap-1">
-                          <span>Drivers</span>
-                        </div>
-                      </th>
-                      <th class="muted">
-                        <div class="d-flex flex-column gap-1">
-                          <span>IBAN</span>
-                        </div>
-                      </th>
-                      <th class="muted">
-                        <div class="d-flex flex-column gap-1">
-                          <span>Station</span>
-                        </div>
-                      </th>
-                      <th class="muted">
-                        <div class="d-flex flex-column gap-1">
-                          <span>Petrol Type</span>
-                        </div>
-                      </th>
+                      <th class="muted">Branch Name</th>
+                      <th class="muted">Region</th>
+                      <th class="muted">Vehicles</th>
+                      <th class="muted">Drivers</th>
+                      <th class="muted">IBAN</th>
+                      <th class="muted">Station</th>
+                      <th class="muted">Petrol Type</th>
                       <th class="muted">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let row of filteredData">
-                          <td>
+                      <tr *ngFor="let row of filteredData | paginate: { itemsPerPage: 3, currentPage: page } ; let i = index">
+                          <td class="text-table">
                             {{ row.id }}
                           </td>
-                          <td>
+                          <td class="text-table">
                             {{ row.branchName }}
                           </td>
-                          <td>
+                          <td class="text-table">
                             {{ row.region }}
                           </td>
-                          <td>
+                          <td class="text-table">
                             {{ row.vehicles }}
                           </td>
-                          <td>
+                          <td class="text-table">
                             {{ row.drivers }}
                           </td>
-                          <td>
+                          <td class="text-table">
                             {{ row.iban }}
                           </td>
-                          <td>
+                          <td class="text-table">
                             {{ row.station }}
                           </td>
-                          <td>
+                          <td class="text-table">
                             {{ row.petrolType }}
                           </td>
-                          <td>
-                            <div class="d-flex justify-content-center align-items-center mt-3">
-                              <i class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
+                          <td class="text-table">
+                            <div class="position-relative">
+                              <div class="cr position-relative z-2" (click)="toggleMenu(row.id)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                  <path d="M12 12.5H12.01M12 6.5H12.01M12 18.5H12.01M13 12.5C13 13.0523 12.5523 13.5 12 13.5C11.4477 13.5 11 13.0523 11 12.5C11 11.9477 11.4477 11.5 12 11.5C12.5523 11.5 13 11.9477 13 12.5ZM13 18.5C13 19.0523 12.5523 19.5 12 19.5C11.4477 19.5 11 19.0523 11 18.5C11 17.9477 11.4477 17.5 12 17.5C12.5523 17.5 13 17.9477 13 18.5ZM13 6.5C13 7.05228 12.5523 7.5 12 7.5C11.4477 7.5 11 7.05228 11 6.5C11 5.94772 11.4477 5.5 12 5.5C12.5523 5.5 13 5.94772 13 6.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                              <ul [ngClass]="{'animate__fadeInRight': selectedRowId}" *ngIf="selectedRowId === row.id" class="list-group animate__animated action-list z-3">
+                                <li class="list-group-item cr">Update</li>
+                                <li class="list-group-item cr">Delete</li>
+                              </ul>
                             </div>
                           </td>
                       </tr>
