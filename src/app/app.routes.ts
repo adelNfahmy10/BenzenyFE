@@ -22,6 +22,7 @@ export const routes: Routes = [
     {path:'login', component:LoginComponent, title:'Login'},
     {path:'register', component:RegistarComponent, title:'Register'},
   ]},
+
   {path:'', component:BlanckComponent, title:'home', children:[
     {path:'home', component:DashboardComponent, title:'Home'},
     {path:'company', component:CompaniesComponent, title:'Company'},
