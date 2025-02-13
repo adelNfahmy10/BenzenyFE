@@ -37,7 +37,7 @@
           <div class="col-lg-4 z-3">
             <div class="row g-1 main-bg pt-1 pb-2 px-2 rounded-5 mt-1">
               <div class="col-lg-6">
-                <div class="bg-white d-flex justify-content-center align-items-center gap-1 rounded-5 py-2 cr" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="bg-white d-flex justify-content-center align-items-center gap-1 rounded-5 py-2 cr" data-bs-toggle="modal" data-bs-target="#exampleModal-add">
                     <h5 class="mb-0">Add Branch</h5>
                     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M10 0.5C8.02219 0.5 6.08879 1.08649 4.4443 2.1853C2.79981 3.28412 1.51809 4.8459 0.761209 6.67317C0.00433286 8.50043 -0.193701 10.5111 0.192152 12.4509C0.578004 14.3907 1.53041 16.1725 2.92894 17.5711C4.32746 18.9696 6.10929 19.922 8.0491 20.3079C9.98891 20.6937 11.9996 20.4957 13.8268 19.7388C15.6541 18.9819 17.2159 17.7002 18.3147 16.0557C19.4135 14.4112 20 12.4778 20 10.5C19.9971 7.84872 18.9426 5.30684 17.0679 3.4321C15.1932 1.55736 12.6513 0.502868 10 0.5ZM13.3333 11.3333H10.8333V13.8333C10.8333 14.0543 10.7455 14.2663 10.5893 14.4226C10.433 14.5789 10.221 14.6667 10 14.6667C9.77899 14.6667 9.56703 14.5789 9.41075 14.4226C9.25447 14.2663 9.16667 14.0543 9.16667 13.8333V11.3333H6.66667C6.44566 11.3333 6.2337 11.2455 6.07742 11.0893C5.92113 10.933 5.83334 10.721 5.83334 10.5C5.83334 10.279 5.92113 10.067 6.07742 9.91074C6.2337 9.75447 6.44566 9.66667 6.66667 9.66667H9.16667V7.16667C9.16667 6.94565 9.25447 6.73369 9.41075 6.57741C9.56703 6.42113 9.77899 6.33333 10 6.33333C10.221 6.33333 10.433 6.42113 10.5893 6.57741C10.7455 6.73369 10.8333 6.94565 10.8333 7.16667V9.66667H13.3333C13.5544 9.66667 13.7663 9.75447 13.9226 9.91074C14.0789 10.067 14.1667 10.279 14.1667 10.5C14.1667 10.721 14.0789 10.933 13.9226 11.0893C13.7663 11.2455 13.5544 11.3333 13.3333 11.3333Z" fill="#F97C21"/>
@@ -68,7 +68,7 @@
           </div>
 
           <div class="col-12 animate__animated animate__fadeInUp z-2">
-            <div class="barnches bg-white p-3 rounded-3">
+            <div class="barnches bg-white py-3 rounded-3">
               <!--
                 <div class="d-flex gap-2">
                   <input type="text" name="searchByName" id="searchByName" class="form-control rounded-5" (input)="filterByName($event)" placeholder="Search By Branch Name">
@@ -79,7 +79,7 @@
                 </div>
               -->
               <div class="table-responsive" #table>
-                <table class="table table-hover overflow-x-scroll text-center" #table>
+                <table class="table table-hover text-center" #table>
                   <thead>
                     <tr>
                       <th class="muted">ID</th>
@@ -126,9 +126,53 @@
                                   <path d="M12 12.5H12.01M12 6.5H12.01M12 18.5H12.01M13 12.5C13 13.0523 12.5523 13.5 12 13.5C11.4477 13.5 11 13.0523 11 12.5C11 11.9477 11.4477 11.5 12 11.5C12.5523 11.5 13 11.9477 13 12.5ZM13 18.5C13 19.0523 12.5523 19.5 12 19.5C11.4477 19.5 11 19.0523 11 18.5C11 17.9477 11.4477 17.5 12 17.5C12.5523 17.5 13 17.9477 13 18.5ZM13 6.5C13 7.05228 12.5523 7.5 12 7.5C11.4477 7.5 11 7.05228 11 6.5C11 5.94772 11.4477 5.5 12 5.5C12.5523 5.5 13 5.94772 13 6.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                               </div>
-                              <ul [ngClass]="{'animate__fadeInRight': selectedRowId}" *ngIf="selectedRowId === row.id" class="list-group animate__animated action-list z-3">
-                                <li class="list-group-item cr">Update</li>
-                                <li class="list-group-item cr">Delete</li>
+
+                              <ul [ngClass]="{'animate__fadeInDown': selectedRowId}" *ngIf="selectedRowId === row.id" class="list-group animate__animated action-list z-3">
+                                <li class="list-group-item px-2 cr">
+                                  <div class="d-flex justify-content-start align-items-center gap-1 py-1">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <g clip-path="url(#clip0_920_9248)">
+                                      <path d="M12.25 5.25H9.33333C8.37083 5.25 7.58333 6.0375 7.58333 7C7.58333 7.9625 8.37083 8.75 9.33333 8.75H12.25C13.2125 8.75 14 7.9625 14 7C14 6.0375 13.2125 5.25 12.25 5.25ZM9.33333 3.5H12.25C13.2125 3.5 14 2.7125 14 1.75C14 0.7875 13.2125 0 12.25 0H9.33333C8.37083 0 7.58333 0.7875 7.58333 1.75C7.58333 2.7125 8.37083 3.5 9.33333 3.5ZM12.25 10.5H9.33333C8.37083 10.5 7.58333 11.2875 7.58333 12.25C7.58333 13.2125 8.37083 14 9.33333 14H12.25C13.2125 14 14 13.2125 14 12.25C14 11.2875 13.2125 10.5 12.25 10.5ZM4.08333 7.58333H2.33333C1.04417 7.58333 0 8.6275 0 9.91667V11.6667C0 12.9558 1.04417 14 2.33333 14H4.08333C5.3725 14 6.41667 12.9558 6.41667 11.6667V9.91667C6.41667 8.6275 5.3725 7.58333 4.08333 7.58333ZM4.08333 0H2.33333C1.04417 0 0 1.04417 0 2.33333V4.08333C0 5.3725 1.04417 6.41667 2.33333 6.41667H4.08333C5.3725 6.41667 6.41667 5.3725 6.41667 4.08333V2.33333C6.41667 1.04417 5.3725 0 4.08333 0Z" fill="#8B8B8B"/>
+                                      </g>
+                                      <defs>
+                                      <clipPath id="clip0_920_9248">
+                                      <rect width="14" height="14" fill="white"/>
+                                      </clipPath>
+                                      </defs>
+                                    </svg>
+                                    <span class="muted">More Details</span>
+                                  </div>
+                                </li>
+                                <li class="list-group-item px-2 cr">
+                                  <div class="d-flex justify-content-start align-items-center gap-1 py-1">
+                                    <svg width="15" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <g clip-path="url(#clip0_920_9260)">
+                                      <path d="M8.3125 6.804L5.83333 9.28317C5.61575 9.50017 5.31533 9.625 5.0085 9.625H4.66667V9.28317C4.66667 8.97167 4.788 8.67883 5.0085 8.45833L7.48767 5.97917L8.3125 6.804ZM8.92092 4.54592L8.3125 5.15433L9.13733 5.97917L9.74575 5.37075C9.97325 5.14325 9.97325 4.77342 9.74575 4.54592C9.52525 4.32483 9.14083 4.32483 8.92092 4.54592ZM14 2.91667V11.0833C14 12.6916 12.6916 14 11.0833 14H2.91667C1.30842 14 0 12.6916 0 11.0833V2.91667C0 1.30842 1.30842 0 2.91667 0H11.0833C12.6916 0 14 1.30842 14 2.91667ZM10.5712 3.72108C9.90967 3.06017 8.757 3.06017 8.09608 3.72108L4.18367 7.6335C3.74325 8.07392 3.5 8.66017 3.5 9.28317V10.2083C3.5 10.5309 3.76133 10.7917 4.08333 10.7917H5.0085C5.6315 10.7917 6.21775 10.549 6.65817 10.108L10.5706 6.19558C11.2531 5.51308 11.2537 4.40358 10.5712 3.72108Z" fill="#8B8B8B"/>
+                                      </g>
+                                      <defs>
+                                      <clipPath id="clip0_920_9260">
+                                      <rect width="14" height="14" fill="white"/>
+                                      </clipPath>
+                                      </defs>
+                                    </svg>
+                                    <span class="muted">Edit Vehicles</span>
+                                  </div>
+                                </li>
+                                <li class="list-group-item px-2 cr">
+                                  <div class="d-flex justify-content-start align-items-center gap-1">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <g clip-path="url(#clip0_920_9284)">
+                                      <path d="M12.8333 2.33333H10.4411C10.1698 1.00392 8.99206 0 7.58331 0H6.41665C5.00848 0 3.83015 1.00392 3.5589 2.33333H1.16665C0.844646 2.33333 0.583313 2.59408 0.583313 2.91667C0.583313 3.23925 0.844646 3.5 1.16665 3.5H1.66831L2.42431 11.3628C2.56898 12.8666 3.81731 14 5.32756 14H8.66831C10.1809 14 11.4292 12.8642 11.5721 11.3587L12.3165 3.5H12.8327C13.1547 3.5 13.4161 3.23925 13.4161 2.91667C13.4161 2.59408 13.1553 2.33333 12.8333 2.33333ZM6.41665 1.16667H7.58331C8.34281 1.16667 8.98448 1.65608 9.22598 2.33333H4.77456C5.01606 1.65608 5.65773 1.16667 6.41723 1.16667H6.41665ZM9.1624 9.50425C9.39048 9.73233 9.39048 10.101 9.1624 10.3291C9.04865 10.4428 8.89931 10.5 8.74998 10.5C8.60065 10.5 8.45131 10.4428 8.33756 10.3291L6.99998 8.9915L5.6624 10.3291C5.54865 10.4428 5.39931 10.5 5.24998 10.5C5.10065 10.5 4.95131 10.4428 4.83756 10.3291C4.60948 10.101 4.60948 9.73233 4.83756 9.50425L6.17515 8.16667L4.83756 6.82908C4.60948 6.601 4.60948 6.23233 4.83756 6.00425C5.06565 5.77617 5.43431 5.77617 5.6624 6.00425L6.99998 7.34183L8.33756 6.00425C8.56565 5.77617 8.93431 5.77617 9.1624 6.00425C9.39048 6.23233 9.39048 6.601 9.1624 6.82908L7.82481 8.16667L9.1624 9.50425Z" fill="#F00000"/>
+                                      </g>
+                                      <defs>
+                                      <clipPath id="clip0_920_9284">
+                                      <rect width="14" height="14" fill="white"/>
+                                      </clipPath>
+                                      </defs>
+                                    </svg>
+                                    <span class="muted delete-text">Delete Vehicles</span>
+                                  </div>
+                                </li>
                               </ul>
                             </div>
                           </td>
@@ -147,48 +191,250 @@
   </div>
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Add Branch -->
+<div class="modal fade" id="exampleModal-addBranch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Branche</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-content p-3">
+      <div class="modal-header justify-content-end border-0 py-0 pt-2">
+        <svg class="cr" data-bs-dismiss="modal" width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_893_6942)">
+          <path d="M18.5 0C8.29879 0 0 8.29879 0 18.5C0 28.7012 8.29879 37 18.5 37C28.7012 37 37 28.7012 37 18.5C37 8.29879 28.7012 0 18.5 0ZM25.846 24.8285C26.3949 25.4807 26.3116 26.4535 25.661 27.0007C25.3712 27.2443 25.0182 27.363 24.6682 27.363C24.2288 27.363 23.7925 27.1765 23.4873 26.8157L18.5 20.8927L13.5127 26.8157C13.209 27.1765 12.7727 27.363 12.3318 27.363C11.9818 27.363 11.6288 27.2443 11.339 27.0007C10.6884 26.4535 10.6036 25.4807 11.154 24.8285L16.4835 18.5L11.154 12.1715C10.6051 11.5193 10.6884 10.5465 11.339 9.99925C11.9911 9.44887 12.9654 9.53521 13.5112 10.1842L18.4985 16.1073L23.4858 10.1842C24.0315 9.53675 25.0058 9.44887 25.658 9.99925C26.3085 10.5465 26.3933 11.5193 25.843 12.1715L20.5134 18.5L25.843 24.8285H25.846Z" fill="#F79320"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_893_6942">
+          <rect width="37" height="37" fill="white"/>
+          </clipPath>
+          </defs>
+        </svg>
       </div>
-      <div class="modal-body px-5">
-        <form class="row g-3" [formGroup]="branchForm" (ngSubmit)="submitBranchForm()">
-          <div class="col-12">
-            <label for="ttile">Title</label>
-            <input type="text" name="title" id="title" formControlName="title" class="form-control">
+      <div class="modal-body d-flex flex-column gap-3 px-4 pt-0">
+        <div class="d-flex gap-2">
+          <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_865_10413)">
+            <mask id="mask0_865_10413" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="55" height="55">
+            <path d="M54.9573 0H0.0438232V55H54.9573V0Z" fill="white"/>
+            </mask>
+            <g mask="url(#mask0_865_10413)">
+            <path d="M2.431e-05 45.8326C-0.0115107 50.8882 4.08341 55 9.12997 55C14.1765 55 18.2922 50.8882 18.3038 45.8326C18.3141 41.5694 15.4004 37.9764 11.4612 36.9563V36.6651C11.4704 32.8745 14.5583 29.7898 18.3418 29.7898H36.6467C39.2213 29.7898 41.5998 28.9326 43.5158 27.4931L43.4939 36.9551C39.5489 37.9752 36.619 41.5683 36.6086 45.8314C36.5971 50.8871 40.692 54.9988 45.7386 54.9988C50.7851 54.9988 54.9008 50.8871 54.9124 45.8314C54.9227 41.5683 52.009 37.9752 48.0698 36.9551L48.1148 18.0414C52.0598 17.0213 54.9896 13.4282 55 9.16512C55.0116 4.10945 50.9166 -0.00231934 45.8701 -0.00231934C40.8235 -0.00231934 36.7078 4.10945 36.6963 9.16512C36.6859 13.4282 39.5997 17.0213 43.5389 18.0414V18.3326C43.5296 22.1231 40.4417 25.2078 36.6582 25.2078H18.3534C12.0449 25.2078 6.90141 30.3478 6.88642 36.6663V36.9574C2.94029 37.9787 0.0104058 41.5694 2.431e-05 45.8326Z" fill="#F79320"/>
+            </g>
+            <path d="M45.7166 54.0884C50.2519 54.0884 53.9284 50.4061 53.9284 45.8637C53.9284 41.3214 50.2519 37.639 45.7166 37.639C41.1814 37.639 37.5049 41.3214 37.5049 45.8637C37.5049 50.4061 41.1814 54.0884 45.7166 54.0884Z" fill="#F7F7F7"/>
+            <path d="M46.899 47.048V50.6306H44.5332V47.048H40.9562V44.6784H44.5332V41.0958H46.899V44.6784H50.476V47.048H46.899Z" fill="#F79320"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_865_10413">
+            <rect width="55" height="55" fill="white"/>
+            </clipPath>
+            </defs>
+          </svg>
+
+          <div>
+            <h4 class="fw-normal">New</h4>
+            <h3>Branch</h3>
           </div>
-          <div class="col-12">
-            <label for="regionId">Region Id</label>
-            <input type="text" name="regionId" id="regionId" formControlName="regionId" class="form-control">
+        </div>
+
+        <form class="row g-2" [formGroup]="branchForm" (ngSubmit)="submitBranchForm()">
+          <div class="col-md-6">
+            <label for="ttile">Branch name</label>
+            <input type="text" name="title" id="title" formControlName="title" class="form-control" placeholder="Branch Name...">
           </div>
-          <div class="col-12">
-            <label for="companyId">Company</label>
-            <select name="companyId" id="companyId" class="form-select" formControlName="companyId" (change)="onCompanyChange($event)">
-              <option value="">Select...</option>
-              <option value="1">Company 1</option>
-              <option value="2">Company 2</option>
+
+          <div class="col-md-6">
+            <label for="Region">Region Id</label>
+            <select name="regionId" id="regionId" class="form-select" formControlName="companyId" (change)="onCompanyChange($event)">
+              <option value="">Select Region...</option>
+              <option value="1">Region 1</option>
+              <option value="2">Region 2</option>
             </select>
           </div>
-          <div class="col-12">
-            <label for="packageId">Package Id</label>
-            <input type="text" name="packageId" id="packageId" formControlName="packageId" class="form-control">
+
+          <div class="col-md-6">
+            <label for="packageId">IBAN</label>
+            <input type="text" name="packageId" id="packageId" class="form-control" placeholder="SA_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _">
           </div>
-          <div class="col-12">
-            <label for="iban">IBAN</label>
-            <input type="text" name="iban" id="iban" formControlName="iban" class="form-control">
+
+          <div class="col-md-6">
+            <label for="companyId">City</label>
+            <select name="companyId" id="companyId" class="form-select" formControlName="companyId" (change)="onCompanyChange($event)">
+              <option value="">Select City...</option>
+              <option value="1">City 1</option>
+              <option value="2">City 2</option>
+            </select>
           </div>
-          <div class="col-12">
-            <label for="balance">Balance</label>
-            <input type="text" name="balance" id="balance" formControlName="balance" class="form-control">
+
+          <div class="col-md-6">
+            <div class="row g-2">
+              <div class="col-12">
+                <label for="balance">Email</label>
+                <input type="text" name="balance" id="balance" formControlName="balance" class="form-control" placeholder="Email...">
+              </div>
+              <div class="col-12">
+                <label for="balance">Phone Number</label>
+                <div class="d-flex justify-content-center align-items-center">
+                  <h5 class="code-num h-100 py-2 px-3 rounded-start-3">+966</h5>
+                  <input type="tel" name="balance" id="balance" formControlName="balance" class="form-control rounded-0 rounded-end-3 shadow-none border-0" placeholder="Phone...">
+                </div>
+              </div>
+            </div>
           </div>
+
+          <div class="col-md-6">
+            <label for="address">Address</label>
+            <textarea class="form-control" name="address" id="address" rows="4" cols="5" placeholder="Address..."></textarea>
+          </div>
+
           <div class="col-12">
-            <div class="d-flex justify-content-center align-items-center gap-2">
-              <button class="btn btn-warning">Add</button>
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <div class="d-flex justify-content-start align-items-center gap-2">
+              <label for="main">Is Main Branch</label>
+              <label class="switch">
+                <input type="checkbox" (change)="toggleChecked()">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <button class="save-btn btn d-flex justify-content-center align-items-center gap-2">
+                <span>Save</span>
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_893_4557)">
+                  <path d="M17.7083 25H9.375C4.20521 25 0 20.7937 0 15.625V7.29167C0 6.71667 0.465625 6.25 1.04167 6.25C1.61771 6.25 2.08333 6.71667 2.08333 7.29167V15.625C2.08333 19.6458 5.35521 22.9167 9.375 22.9167H17.7083C18.2844 22.9167 18.75 23.3833 18.75 23.9583C18.75 24.5333 18.2844 25 17.7083 25ZM17.7083 0H11.4583V5.20833H17.7083V0ZM25 6.52812V15.625C25 18.501 22.6677 20.8333 19.7917 20.8333H9.375C6.49896 20.8333 4.16667 18.501 4.16667 15.625V5.20833C4.16667 2.33646 6.50312 0 9.375 0V5.20833C9.375 6.35938 10.3073 7.29167 11.4583 7.29167H17.7083C18.8594 7.29167 19.7917 6.35938 19.7917 5.20833V0.288542C20.1354 0.444792 20.4552 0.655208 20.7229 0.925L24.0937 4.32604C24.674 4.91146 25 5.70312 25 6.52812ZM18.75 14.0625C18.75 12.049 17.1177 10.4167 15.1042 10.4167C13.0906 10.4167 11.4583 12.049 11.4583 14.0625C11.4583 16.076 13.0906 17.7083 15.1042 17.7083C17.1177 17.7083 18.75 16.076 18.75 14.0625ZM16.6667 14.0625C16.6667 14.925 15.9667 15.625 15.1042 15.625C14.2417 15.625 13.5417 14.925 13.5417 14.0625C13.5417 13.2 14.2417 12.5 15.1042 12.5C15.9667 12.5 16.6667 13.2 16.6667 14.0625Z"/>
+                  <circle cx="15" cy="14" r="1" fill="#F97C21"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_893_4557">
+                  <rect width="25" height="25" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal View Branch -->
+<div class="modal fade" id="exampleModal-view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content p-3">
+      <div class="modal-header justify-content-end border-0">
+        <svg class="cr" data-bs-dismiss="modal" width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_893_6942)">
+          <path d="M18.5 0C8.29879 0 0 8.29879 0 18.5C0 28.7012 8.29879 37 18.5 37C28.7012 37 37 28.7012 37 18.5C37 8.29879 28.7012 0 18.5 0ZM25.846 24.8285C26.3949 25.4807 26.3116 26.4535 25.661 27.0007C25.3712 27.2443 25.0182 27.363 24.6682 27.363C24.2288 27.363 23.7925 27.1765 23.4873 26.8157L18.5 20.8927L13.5127 26.8157C13.209 27.1765 12.7727 27.363 12.3318 27.363C11.9818 27.363 11.6288 27.2443 11.339 27.0007C10.6884 26.4535 10.6036 25.4807 11.154 24.8285L16.4835 18.5L11.154 12.1715C10.6051 11.5193 10.6884 10.5465 11.339 9.99925C11.9911 9.44887 12.9654 9.53521 13.5112 10.1842L18.4985 16.1073L23.4858 10.1842C24.0315 9.53675 25.0058 9.44887 25.658 9.99925C26.3085 10.5465 26.3933 11.5193 25.843 12.1715L20.5134 18.5L25.843 24.8285H25.846Z" fill="#F79320"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_893_6942">
+          <rect width="37" height="37" fill="white"/>
+          </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <div class="modal-body d-flex flex-column gap-3 px-4">
+        <div class="d-flex gap-2">
+          <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_865_10413)">
+            <mask id="mask0_865_10413" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="55" height="55">
+            <path d="M54.9573 0H0.0438232V55H54.9573V0Z" fill="white"/>
+            </mask>
+            <g mask="url(#mask0_865_10413)">
+            <path d="M2.431e-05 45.8326C-0.0115107 50.8882 4.08341 55 9.12997 55C14.1765 55 18.2922 50.8882 18.3038 45.8326C18.3141 41.5694 15.4004 37.9764 11.4612 36.9563V36.6651C11.4704 32.8745 14.5583 29.7898 18.3418 29.7898H36.6467C39.2213 29.7898 41.5998 28.9326 43.5158 27.4931L43.4939 36.9551C39.5489 37.9752 36.619 41.5683 36.6086 45.8314C36.5971 50.8871 40.692 54.9988 45.7386 54.9988C50.7851 54.9988 54.9008 50.8871 54.9124 45.8314C54.9227 41.5683 52.009 37.9752 48.0698 36.9551L48.1148 18.0414C52.0598 17.0213 54.9896 13.4282 55 9.16512C55.0116 4.10945 50.9166 -0.00231934 45.8701 -0.00231934C40.8235 -0.00231934 36.7078 4.10945 36.6963 9.16512C36.6859 13.4282 39.5997 17.0213 43.5389 18.0414V18.3326C43.5296 22.1231 40.4417 25.2078 36.6582 25.2078H18.3534C12.0449 25.2078 6.90141 30.3478 6.88642 36.6663V36.9574C2.94029 37.9787 0.0104058 41.5694 2.431e-05 45.8326Z" fill="#F79320"/>
+            </g>
+            <path d="M45.7166 54.0884C50.2519 54.0884 53.9284 50.4061 53.9284 45.8637C53.9284 41.3214 50.2519 37.639 45.7166 37.639C41.1814 37.639 37.5049 41.3214 37.5049 45.8637C37.5049 50.4061 41.1814 54.0884 45.7166 54.0884Z" fill="#F7F7F7"/>
+            <path d="M46.899 47.048V50.6306H44.5332V47.048H40.9562V44.6784H44.5332V41.0958H46.899V44.6784H50.476V47.048H46.899Z" fill="#F79320"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_865_10413">
+            <rect width="55" height="55" fill="white"/>
+            </clipPath>
+            </defs>
+          </svg>
+
+          <div>
+            <h4 class="fw-normal">New</h4>
+            <h3>Branch</h3>
+          </div>
+        </div>
+
+        <form class="row g-2" [formGroup]="branchForm" (ngSubmit)="submitBranchForm()">
+          <div class="col-md-6">
+            <label for="ttile">Branch name</label>
+            <input type="text" name="title" id="title" formControlName="title" class="form-control" placeholder="Branch Name...">
+          </div>
+
+          <div class="col-md-6">
+            <label for="Region">Region Id</label>
+            <select name="regionId" id="regionId" class="form-select" formControlName="companyId" (change)="onCompanyChange($event)">
+              <option value="">Select Region...</option>
+              <option value="1">Region 1</option>
+              <option value="2">Region 2</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="packageId">IBAN</label>
+            <input type="text" name="packageId" id="packageId" class="form-control" placeholder="SA_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _">
+          </div>
+
+          <div class="col-md-6">
+            <label for="companyId">City</label>
+            <select name="companyId" id="companyId" class="form-select" formControlName="companyId" (change)="onCompanyChange($event)">
+              <option value="">Select City...</option>
+              <option value="1">City 1</option>
+              <option value="2">City 2</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <div class="row g-2">
+              <div class="col-12">
+                <label for="balance">Email</label>
+                <input type="text" name="balance" id="balance" formControlName="balance" class="form-control" placeholder="Email...">
+              </div>
+              <div class="col-12">
+                <label for="balance">Phone Number</label>
+                <div class="d-flex justify-content-center align-items-center">
+                  <h5 class="code-num h-100 py-2 px-3 rounded-start-3">+966</h5>
+                  <input type="tel" name="balance" id="balance" formControlName="balance" class="form-control rounded-0 rounded-end-3 shadow-none border-0" placeholder="Phone...">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="address">Address</label>
+            <textarea class="form-control" name="address" id="address" rows="4" cols="5" placeholder="Address..."></textarea>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex justify-content-start align-items-center gap-2">
+              <label for="main">Is Main Branch</label>
+              <label class="switch">
+                <input type="checkbox" (change)="toggleChecked()">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <button class="save-btn btn d-flex justify-content-center align-items-center gap-2">
+                <span>Save</span>
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_893_4557)">
+                  <path d="M17.7083 25H9.375C4.20521 25 0 20.7937 0 15.625V7.29167C0 6.71667 0.465625 6.25 1.04167 6.25C1.61771 6.25 2.08333 6.71667 2.08333 7.29167V15.625C2.08333 19.6458 5.35521 22.9167 9.375 22.9167H17.7083C18.2844 22.9167 18.75 23.3833 18.75 23.9583C18.75 24.5333 18.2844 25 17.7083 25ZM17.7083 0H11.4583V5.20833H17.7083V0ZM25 6.52812V15.625C25 18.501 22.6677 20.8333 19.7917 20.8333H9.375C6.49896 20.8333 4.16667 18.501 4.16667 15.625V5.20833C4.16667 2.33646 6.50312 0 9.375 0V5.20833C9.375 6.35938 10.3073 7.29167 11.4583 7.29167H17.7083C18.8594 7.29167 19.7917 6.35938 19.7917 5.20833V0.288542C20.1354 0.444792 20.4552 0.655208 20.7229 0.925L24.0937 4.32604C24.674 4.91146 25 5.70312 25 6.52812ZM18.75 14.0625C18.75 12.049 17.1177 10.4167 15.1042 10.4167C13.0906 10.4167 11.4583 12.049 11.4583 14.0625C11.4583 16.076 13.0906 17.7083 15.1042 17.7083C17.1177 17.7083 18.75 16.076 18.75 14.0625ZM16.6667 14.0625C16.6667 14.925 15.9667 15.625 15.1042 15.625C14.2417 15.625 13.5417 14.925 13.5417 14.0625C13.5417 13.2 14.2417 12.5 15.1042 12.5C15.9667 12.5 16.6667 13.2 16.6667 14.0625Z"/>
+                  <circle cx="15" cy="14" r="1" fill="#F97C21"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_893_4557">
+                  <rect width="25" height="25" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </button>
             </div>
           </div>
         </form>

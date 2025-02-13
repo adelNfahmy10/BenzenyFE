@@ -37,4 +37,15 @@ export class CarsComponent {
     // Export the workbook to Excel file
     XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
   }
+
+
+  isChecked:boolean = false
+  toggleChecked():void{
+    if(this.isChecked){
+      this.isChecked = false
+    } else {
+      this.isChecked = true
+    }
+  }
+
 }

@@ -13,7 +13,7 @@ import * as XLSX from 'xlsx';
 })
 export class DriversComponent {
   data = {
-    title:'Vehicles',
+    title:'Drivers',
     items:[
       { id: '646464156', vehicleModel: 'KIA', plate: '597- KSA', driverName: 'Sayed',driverPhone:'+966513122',petrolType:'92',branch:'Madinah',totalBalance:'50 SAR',status:'Active', selected: false },
       { id: '646464157', vehicleModel: 'MARC', plate: '523- KSA', driverName: 'Eslam',driverPhone:'+96624123',petrolType:'72',branch:'Makkah',totalBalance:'50 SAR',status:'Active', selected: false },
@@ -36,4 +36,14 @@ export class DriversComponent {
     // Export the workbook to Excel file
     XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
   }
+
+  isChecked:boolean = false
+  toggleChecked():void{
+    if(this.isChecked){
+      this.isChecked = false
+    } else {
+      this.isChecked = true
+    }
+  }
+
 }

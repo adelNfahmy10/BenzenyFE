@@ -14,7 +14,7 @@ import { HeaderComponent } from "../../../../assets/share/header/header.componen
 })
 export class BalanceComponent {
   data = {
-    title:'Vehicles Balance - Fuel',
+    title:'Balance',
     items:[
       { id: '646464156', vehicleModel: 'KIA', plate: '597- KSA', driverName: 'Sayed',driverPhone:'+966513122',petrolType:'92',branch:'Madinah',totalBalance:'50 SAR',status:'Active', selected: false },
       { id: '646464157', vehicleModel: 'MARC', plate: '523- KSA', driverName: 'Eslam',driverPhone:'+96624123',petrolType:'72',branch:'Makkah',totalBalance:'50 SAR',status:'Active', selected: false },
@@ -24,5 +24,13 @@ export class BalanceComponent {
       { id: '646464161', vehicleModel: 'MG', plate: '512- KSA', driverName: 'Hassan',driverPhone:'+9672213122',petrolType:'62',branch:'El Safa',totalBalance:'50 SAR',status:'Active', selected: false },
     ]
   };
+  isChecked:boolean = false
+  toggleChecked():void{
+    if(this.isChecked){
+      this.isChecked = false
+    } else {
+      this.isChecked = true
+    }
+  }
 
 }

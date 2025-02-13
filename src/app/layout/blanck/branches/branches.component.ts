@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { BranchService } from './core/service/branch.service';
 import * as XLSX from 'xlsx';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 
@@ -19,6 +18,7 @@ export class BranchesComponent {
   /* Injection Services */
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
+
   data:any[] = [
     { id: '8', branchName: 'Makka', region: 'Makka', vehicles: '25',drivers:'18',iban:'SA123214231432412341235421',station:'a',petrolType:'s'},
     { id: '9', branchName: 'Makka', region: 'Makka', vehicles: '62',drivers:'79',iban:'SA12321423543624352335421',station:'a',petrolType:'s'},
@@ -232,4 +232,14 @@ export class BranchesComponent {
     // Export the workbook to Excel file
     XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
   }
+
+  isChecked:boolean = false
+  toggleChecked():void{
+    if(this.isChecked){
+      this.isChecked = false
+    } else {
+      this.isChecked = true
+    }
+  }
+
 }

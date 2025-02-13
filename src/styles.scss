@@ -106,3 +106,7 @@ background: #fff;
 body{
   overflow-x: hidden;
 }
+input:focus, select:focus,textarea:focus{
+  border: 1px solid $mainColor !important;
+  box-shadow: 0 0 3px $mainColor !important;
+}
