@@ -10,7 +10,7 @@ import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [FormsModule, NgxPaginationModule, NgFor, NgClass, ViewallComponent],
+  imports: [FormsModule, NgxPaginationModule, NgFor, NgClass],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
