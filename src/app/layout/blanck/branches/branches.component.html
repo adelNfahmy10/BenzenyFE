@@ -128,7 +128,7 @@
                               </div>
 
                               <ul [ngClass]="{'animate__fadeInDown': selectedRowId}" *ngIf="selectedRowId === row.id" class="list-group animate__animated action-list z-3">
-                                <li class="list-group-item px-2 cr">
+                                <li class="list-group-item px-2 cr"  data-bs-toggle="modal" data-bs-target="#exampleModal-view">
                                   <div class="d-flex justify-content-start align-items-center gap-1 py-1">
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <g clip-path="url(#clip0_920_9248)">
@@ -192,7 +192,7 @@
 </section>
 
 <!-- Modal Add Branch -->
-<div class="modal fade" id="exampleModal-addBranch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal-add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content p-3">
       <div class="modal-header justify-content-end border-0 py-0 pt-2">
@@ -354,8 +354,8 @@
           </svg>
 
           <div>
-            <h4 class="fw-normal">New</h4>
-            <h3>Branch</h3>
+            <h3>Riyadh Central</h3>
+            <h4 class="fw-normal">Branch</h4>
           </div>
         </div>
 
@@ -421,6 +421,25 @@
 
           <div class="col-12">
             <div class="d-flex justify-content-end align-items-center gap-2">
+              <button class="edit-btn btn d-flex justify-content-center align-items-center gap-2">
+                <span>Edit</span>
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_920_7513)">
+                  <g clip-path="url(#clip1_920_7513)">
+                  <path d="M14.8437 12.15L10.4167 16.5771C10.0281 16.9646 9.49167 17.1875 8.94375 17.1875H8.33333V16.5771C8.33333 16.0208 8.55 15.4979 8.94375 15.1042L13.3708 10.6771L14.8437 12.15ZM15.9302 8.11771L14.8437 9.20417L16.3167 10.6771L17.4031 9.59062C17.8094 9.18437 17.8094 8.52396 17.4031 8.11771C17.0094 7.72292 16.3229 7.72292 15.9302 8.11771ZM25 5.20833V19.7917C25 22.6635 22.6635 25 19.7917 25H5.20833C2.33646 25 0 22.6635 0 19.7917V5.20833C0 2.33646 2.33646 0 5.20833 0H19.7917C22.6635 0 25 2.33646 25 5.20833ZM18.8771 6.64479C17.6958 5.46458 15.6375 5.46458 14.4573 6.64479L7.47083 13.6313C6.68437 14.4177 6.25 15.4646 6.25 16.5771V18.2292C6.25 18.8052 6.71667 19.2708 7.29167 19.2708H8.94375C10.0562 19.2708 11.1031 18.8375 11.8896 18.05L18.876 11.0635C20.0948 9.84479 20.0958 7.86354 18.8771 6.64479Z"/>
+                  </g>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_920_7513">
+                  <rect width="25" height="25" fill="white"/>
+                  </clipPath>
+                  <clipPath id="clip1_920_7513">
+                  <rect width="25" height="25" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </button>
+
               <button class="save-btn btn d-flex justify-content-center align-items-center gap-2">
                 <span>Save</span>
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
