@@ -113,3 +113,131 @@
     </tr>
   </tbody>
 </table>
+
+
+<!-- Modal Add Vehicles -->
+<div class="modal fade" id="exampleModal-add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content p-3">
+      <div class="modal-header justify-content-end border-0 py-0 pt-2">
+        <svg class="cr" data-bs-dismiss="modal" width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_893_6942)">
+          <path d="M18.5 0C8.29879 0 0 8.29879 0 18.5C0 28.7012 8.29879 37 18.5 37C28.7012 37 37 28.7012 37 18.5C37 8.29879 28.7012 0 18.5 0ZM25.846 24.8285C26.3949 25.4807 26.3116 26.4535 25.661 27.0007C25.3712 27.2443 25.0182 27.363 24.6682 27.363C24.2288 27.363 23.7925 27.1765 23.4873 26.8157L18.5 20.8927L13.5127 26.8157C13.209 27.1765 12.7727 27.363 12.3318 27.363C11.9818 27.363 11.6288 27.2443 11.339 27.0007C10.6884 26.4535 10.6036 25.4807 11.154 24.8285L16.4835 18.5L11.154 12.1715C10.6051 11.5193 10.6884 10.5465 11.339 9.99925C11.9911 9.44887 12.9654 9.53521 13.5112 10.1842L18.4985 16.1073L23.4858 10.1842C24.0315 9.53675 25.0058 9.44887 25.658 9.99925C26.3085 10.5465 26.3933 11.5193 25.843 12.1715L20.5134 18.5L25.843 24.8285H25.846Z" fill="#F79320"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_893_6942">
+          <rect width="37" height="37" fill="white"/>
+          </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <div class="modal-body d-flex flex-column gap-3 px-4 pt-0">
+        <div class="d-flex gap-2">
+          <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_865_10413)">
+            <mask id="mask0_865_10413" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="55" height="55">
+            <path d="M54.9573 0H0.0438232V55H54.9573V0Z" fill="white"/>
+            </mask>
+            <g mask="url(#mask0_865_10413)">
+            <path d="M2.431e-05 45.8326C-0.0115107 50.8882 4.08341 55 9.12997 55C14.1765 55 18.2922 50.8882 18.3038 45.8326C18.3141 41.5694 15.4004 37.9764 11.4612 36.9563V36.6651C11.4704 32.8745 14.5583 29.7898 18.3418 29.7898H36.6467C39.2213 29.7898 41.5998 28.9326 43.5158 27.4931L43.4939 36.9551C39.5489 37.9752 36.619 41.5683 36.6086 45.8314C36.5971 50.8871 40.692 54.9988 45.7386 54.9988C50.7851 54.9988 54.9008 50.8871 54.9124 45.8314C54.9227 41.5683 52.009 37.9752 48.0698 36.9551L48.1148 18.0414C52.0598 17.0213 54.9896 13.4282 55 9.16512C55.0116 4.10945 50.9166 -0.00231934 45.8701 -0.00231934C40.8235 -0.00231934 36.7078 4.10945 36.6963 9.16512C36.6859 13.4282 39.5997 17.0213 43.5389 18.0414V18.3326C43.5296 22.1231 40.4417 25.2078 36.6582 25.2078H18.3534C12.0449 25.2078 6.90141 30.3478 6.88642 36.6663V36.9574C2.94029 37.9787 0.0104058 41.5694 2.431e-05 45.8326Z" fill="#F79320"/>
+            </g>
+            <path d="M45.7166 54.0884C50.2519 54.0884 53.9284 50.4061 53.9284 45.8637C53.9284 41.3214 50.2519 37.639 45.7166 37.639C41.1814 37.639 37.5049 41.3214 37.5049 45.8637C37.5049 50.4061 41.1814 54.0884 45.7166 54.0884Z" fill="#F7F7F7"/>
+            <path d="M46.899 47.048V50.6306H44.5332V47.048H40.9562V44.6784H44.5332V41.0958H46.899V44.6784H50.476V47.048H46.899Z" fill="#F79320"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_865_10413">
+            <rect width="55" height="55" fill="white"/>
+            </clipPath>
+            </defs>
+          </svg>
+
+          <div>
+            <h4 class="fw-normal">New</h4>
+            <h3>Vehicles</h3>
+          </div>
+        </div>
+
+        <form class="row g-2">
+          <div class="col-md-6">
+            <label for="ttile">Branch name</label>
+            <input type="text" name="title" id="title" class="form-control" placeholder="Branch Name...">
+          </div>
+
+          <div class="col-md-6">
+            <label for="Region">Region Id</label>
+            <select name="regionId" id="regionId" class="form-select">
+              <option value="">Select Region...</option>
+              <option value="1">Region 1</option>
+              <option value="2">Region 2</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="packageId">IBAN</label>
+            <input type="text" name="packageId" id="packageId" class="form-control" placeholder="SA_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _">
+          </div>
+
+          <div class="col-md-6">
+            <label for="companyId">City</label>
+            <select name="companyId" id="companyId" class="form-select">
+              <option value="">Select City...</option>
+              <option value="1">City 1</option>
+              <option value="2">City 2</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <div class="row g-2">
+              <div class="col-12">
+                <label for="balance">Email</label>
+                <input type="text" name="balance" id="balance" class="form-control" placeholder="Email...">
+              </div>
+              <div class="col-12">
+                <label for="balance">Phone Number</label>
+                <div class="d-flex justify-content-center align-items-center">
+                  <h5 class="code-num h-100 py-2 px-3 rounded-start-3">+966</h5>
+                  <input type="tel" name="balance" id="balance" class="form-control rounded-0 rounded-end-3 shadow-none border-0" placeholder="Phone...">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="address">Address</label>
+            <textarea class="form-control" name="address" id="address" rows="4" cols="5" placeholder="Address..."></textarea>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex justify-content-start align-items-center gap-2">
+              <label for="main">Is Main Branch</label>
+              <label class="switch">
+                <input type="checkbox" (change)="toggleChecked()">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <button class="save-btn btn d-flex justify-content-center align-items-center gap-2">
+                <span>Save</span>
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_893_4557)">
+                  <path d="M17.7083 25H9.375C4.20521 25 0 20.7937 0 15.625V7.29167C0 6.71667 0.465625 6.25 1.04167 6.25C1.61771 6.25 2.08333 6.71667 2.08333 7.29167V15.625C2.08333 19.6458 5.35521 22.9167 9.375 22.9167H17.7083C18.2844 22.9167 18.75 23.3833 18.75 23.9583C18.75 24.5333 18.2844 25 17.7083 25ZM17.7083 0H11.4583V5.20833H17.7083V0ZM25 6.52812V15.625C25 18.501 22.6677 20.8333 19.7917 20.8333H9.375C6.49896 20.8333 4.16667 18.501 4.16667 15.625V5.20833C4.16667 2.33646 6.50312 0 9.375 0V5.20833C9.375 6.35938 10.3073 7.29167 11.4583 7.29167H17.7083C18.8594 7.29167 19.7917 6.35938 19.7917 5.20833V0.288542C20.1354 0.444792 20.4552 0.655208 20.7229 0.925L24.0937 4.32604C24.674 4.91146 25 5.70312 25 6.52812ZM18.75 14.0625C18.75 12.049 17.1177 10.4167 15.1042 10.4167C13.0906 10.4167 11.4583 12.049 11.4583 14.0625C11.4583 16.076 13.0906 17.7083 15.1042 17.7083C17.1177 17.7083 18.75 16.076 18.75 14.0625ZM16.6667 14.0625C16.6667 14.925 15.9667 15.625 15.1042 15.625C14.2417 15.625 13.5417 14.925 13.5417 14.0625C13.5417 13.2 14.2417 12.5 15.1042 12.5C15.9667 12.5 16.6667 13.2 16.6667 14.0625Z"/>
+                  <circle cx="15" cy="14" r="1" fill="#F97C21"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_893_4557">
+                  <rect width="25" height="25" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
