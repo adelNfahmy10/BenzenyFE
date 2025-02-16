@@ -52,14 +52,14 @@ export class RegistarComponent {
     this.step = 2
     this.getCompanyById()
 
-    // this._CompanyService.CreateCompany(formData).subscribe({
-    //   next:(res)=>{
-    //     console.log(res);
-    //     this.companyId = res.data.id
-    //     this.step = 2
-    //     this.getCompanyById()
-    //   }
-    // })
+    this._CompanyService.CreateCompany(formData).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.companyId = res.data.id
+        this.step = 2
+        this.getCompanyById()
+      }
+    })
   }
 
   companyData!:any
