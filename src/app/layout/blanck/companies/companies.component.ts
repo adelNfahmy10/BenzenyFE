@@ -18,6 +18,8 @@ Chart.register(...registerables)
 export class CompaniesComponent{
   private readonly _ToastrService = inject(ToastrService)
 
+  companyName:string | null = localStorage.getItem('companyName')
+
   /* Copy ID And IBAN */
   @ViewChild('Id') elementId!:ElementRef
   @ViewChild('Iban') elementIban!:ElementRef

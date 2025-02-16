@@ -49,36 +49,68 @@ export class RegistarComponent {
     formData.append('CompanyEmail', data.CompanyEmail)
     formData.append('CompanyPhone', data.CompanyPhone)
     formData.append('Files', data.Files)
-    this.step = 2
-    this.getCompanyById()
+    console.log(data);
 
     this._CompanyService.CreateCompany(formData).subscribe({
       next:(res)=>{
         console.log(res);
         this.companyId = res.data.id
         this.step = 2
-        this.getCompanyById()
+        this.getCompanyById(this.companyId)
       }
     })
   }
 
-  companyData!:any
-  userName:string = ''
-  password:string = ''
 
-  getCompanyById():void{
-    this._CompanyService.GetCompanyById('727eddb5-d6de-4b53-a1ee-08dd4b57862b').subscribe({
-      next:(res)=>{
-        this.companyData = res
-        console.log(this.companyData);
-      }
-    })
+  complateForm:FormGroup = this._FormBuilder.group({
+    Username:[''],
+    FullName:[''],
+    Email:[''],
+    Mobile:[''],
+    Password :['']
+  })
+  companyData!:any
+
+
+  getCompanyById(companyId:string):void{
+    if(this.step == 2){
+      this._CompanyService.GetCompanyById(companyId).subscribe({
+        next:(res)=>{
+          this.companyData = res
+        }
+      })
+    }
   }
   continueData():void{
-    let data = {...this.companyData}
-    data.UserName = this.userName
-    data.UserName = this.password
-    console.log(data);
-    this._Router.navigate(['/home'])
+    let oldData = this.companyData.data
+    let newData = this.complateForm.value
+    let data = {
+      ...oldData,
+      ...newData
+    }
+
+    let formData = new FormData
+    formData.append('Id', data.id),
+    formData.append('Name', data.name),
+    formData.append('Description', data.description),
+    formData.append('CompanyEmail', data.companyEmail),
+    formData.append('CompanyPhone', data.companyPhone),
+    formData.append('Username', data.Username),
+    formData.append('FullName', data.FullName),
+    formData.append('Email', data.Email),
+    formData.append('Mobile', data.Mobile),
+    formData.append('Password', data.Password)
+
+    this._CompanyService.UpdateCompany(data.id ,formData).subscribe({
+      next:(res)=>{
+        localStorage.setItem('token', res.data.accessToken)
+        localStorage.setItem('refreshToken', res.data.refresh)
+        localStorage.setItem('userId', res.data.userId)
+        localStorage.setItem('userName', res.data.fullname)
+        localStorage.setItem('companyId', res.data.id)
+        localStorage.setItem('companyName', res.data.name)
+        this._Router.navigate(['/home'])
+      }
+    })
   }
 }

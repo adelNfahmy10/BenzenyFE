@@ -166,13 +166,14 @@ export class BranchesComponent {
   }
 
   branchForm:FormGroup = this._FormBuilder.group({
-    title:[''],
-    regionId:[''],
-    companyId:[''],
-    packageId:[''],
-    iban:[''],
-    balance:[''],
-    isMainBranch:[true],
+    CompanyId:[''],
+    BranchName:[''],
+    IBAN:[''],
+    RegionId:[''],
+    CityId:[''],
+    Email:[''],
+    PhoneNumber:[''],
+    Address:[''],
   })
 
   submitBranchForm():void{

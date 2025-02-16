@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-blanck',
@@ -10,6 +10,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './blanck.component.scss'
 })
 export class BlanckComponent {
+  private readonly _Router = inject(Router)
   open:Boolean = true
 
   slideNav():void{
@@ -18,5 +19,10 @@ export class BlanckComponent {
     } else {
       this.open = true
     }
+  }
+
+  logout():void{
+    localStorage.clear()
+    this._Router.navigate(['login'])
   }
 }
