@@ -78,7 +78,7 @@
 
   @if(step == 2){
     <div class="container">
-      <form class="row g-3">
+      <form class="row g-3" [formGroup]="complateForm" (ngSubmit)="continueData()">
         <div class="col-12">
           <div class="d-flex justify-content-center aling-items-center gap-2">
             <svg width="55" height="86" viewBox="0 0 55 86" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,20 +110,33 @@
           </div>
         </div>
 
-        <div class="col-12">
-          <h3 class="text-start">Company Name: {{companyData.Name}}</h3>
-          <h3 class="text-start">Company Email: {{companyData.CompanyEmail}}</h3>
-          <h3 class="text-start">Company Phone: {{companyData.CompanyPhone}}</h3>
-          <h3 class="text-start">Company Description: {{companyData.Description}}</h3>
-        </div>
-
+        @if(step == 2){
+          <div class="col-12">
+            <h3 class="text-start">Company Name: {{companyData.data.name}}</h3>
+            <h3 class="text-start">Company Email: {{companyData.data.companyEmail}}</h3>
+            <h3 class="text-start">Company Phone: {{companyData.data.companyPhone}}</h3>
+            <h3 class="text-start">Company Description: {{companyData.data.description}}</h3>
+          </div>
+        }
         <div class="col-12">
           <label for="userName">User Name</label>
-          <input [(ngModel)]="userName" type="text" class="form-control" name="userName" id="userName" placeholder="Enter User Name...">
+          <input type="text" formControlName="Username" class="form-control" name="userName" id="userName" placeholder="Enter User Name...">
         </div>
         <div class="col-12">
-          <label for="password">Password</label>
-          <input [(ngModel)]="password" type="password" class="form-control" name="password" id="password" placeholder="Enter Password...">
+          <label for="fullName">Full Name</label>
+          <input type="text" formControlName="FullName" class="form-control" name="fullName" id="fullName" placeholder="Enter User Name...">
+        </div>
+        <div class="col-12">
+          <label for="Email">Email</label>
+          <input type="email" formControlName="Email" class="form-control" name="Email" id="Email" placeholder="Enter User Name...">
+        </div>
+        <div class="col-12">
+          <label for="Mobile">Mobile</label>
+          <input type="tel" formControlName="Mobile" class="form-control" name="Mobile" id="Mobile" placeholder="Enter User Name...">
+        </div>
+        <div class="col-12">
+          <label for="Password">Password</label>
+          <input type="password" formControlName="Password" class="form-control" name="Password" id="Password" placeholder="Enter Password...">
         </div>
 
         <div class="col-12">

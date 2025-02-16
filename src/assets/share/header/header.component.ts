@@ -8,5 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent{
-
+  companyName:string | null = localStorage.getItem('companyName')
+  userName:string | null = localStorage.getItem('userName')
 }

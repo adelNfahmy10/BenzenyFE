@@ -9,16 +9,23 @@ import { environment } from '../../../../../../assets/environment/environment';
 export class BranchService {
   private readonly _HttpClient = inject(HttpClient)
 
-  GetAllBranchs():Observable<any>{
-    return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetAllBranchs`)
+  GetAllBranchs(pageNum:any = 1, pageSize:any = 10):Observable<any>{
+    return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetAllBranchs?pageNumber=${pageNum}&pageSize=${pageSize}`)
   }
 
-  // GetBranchById():Observable<any>{
-  //   return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetAllBranchs`)
-  // }
+  GetBranchById(id:any):Observable<any>{
+    return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetBranchById/${id}`)
+  }
 
   CreateBranch(data:any):Observable<any>{
     return this._HttpClient.post(`${environment.baseURL}api/Branch/v1/CreateBranch/CreateBranch`, data)
   }
 
+  UpdateBranch(id:any, data:any):Observable<any>{
+    return this._HttpClient.put(`${environment.baseURL}api/Branch/v1/UpdateBranch/UpdateBranch?id=${id}`, data)
+  }
+
+  DeleteBranch(id:any):Observable<any>{
+    return this._HttpClient.delete(`${environment.baseURL}api/Branch/v1/DeleteBranch/DeleteBranch/${id}`)
+  }
 }

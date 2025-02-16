@@ -361,13 +361,13 @@
 
         <form class="row g-2" [formGroup]="branchForm" (ngSubmit)="submitBranchForm()">
           <div class="col-md-6">
-            <label for="ttile">Branch name</label>
-            <input type="text" name="title" id="title" formControlName="title" class="form-control" placeholder="Branch Name...">
+            <label for="BranchName">Branch name</label>
+            <input type="text" name="BranchName" id="BranchName" formControlName="BranchName" class="form-control" placeholder="Branch Name...">
           </div>
 
           <div class="col-md-6">
-            <label for="Region">Region Id</label>
-            <select name="regionId" id="regionId" class="form-select" formControlName="companyId" (change)="onCompanyChange($event)">
+            <label for="RegionId">Region Id</label>
+            <select name="RegionId" id="RegionId" class="form-select" formControlName="RegionId">
               <option value="">Select Region...</option>
               <option value="1">Region 1</option>
               <option value="2">Region 2</option>
@@ -375,13 +375,13 @@
           </div>
 
           <div class="col-md-6">
-            <label for="packageId">IBAN</label>
-            <input type="text" name="packageId" id="packageId" class="form-control" placeholder="SA_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _">
+            <label for="IBAN">IBAN</label>
+            <input type="text" formControlName="IBAN" name="IBAN" id="IBAN" class="form-control" placeholder="SA_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _">
           </div>
 
           <div class="col-md-6">
-            <label for="companyId">City</label>
-            <select name="companyId" id="companyId" class="form-select" formControlName="companyId" (change)="onCompanyChange($event)">
+            <label for="CityId">City</label>
+            <select name="CityId" formControlName="CityId" id="CityId" class="form-select" (change)="onCompanyChange($event)">
               <option value="">Select City...</option>
               <option value="1">City 1</option>
               <option value="2">City 2</option>
@@ -391,22 +391,22 @@
           <div class="col-md-6">
             <div class="row g-2">
               <div class="col-12">
-                <label for="balance">Email</label>
-                <input type="text" name="balance" id="balance" formControlName="balance" class="form-control" placeholder="Email...">
+                <label for="Email">Email</label>
+                <input type="text" name="Email" id="Email" formControlName="Email" class="form-control" placeholder="Email...">
               </div>
               <div class="col-12">
-                <label for="balance">Phone Number</label>
+                <label for="PhoneNumber">Phone Number</label>
                 <div class="d-flex justify-content-center align-items-center">
                   <h5 class="code-num h-100 py-2 px-3 rounded-start-3">+966</h5>
-                  <input type="tel" name="balance" id="balance" formControlName="balance" class="form-control rounded-0 rounded-end-3 shadow-none border-0" placeholder="Phone...">
+                  <input type="tel" name="PhoneNumber" id="PhoneNumber" formControlName="PhoneNumber" class="form-control rounded-0 rounded-end-3 shadow-none border-0" placeholder="Phone...">
                 </div>
               </div>
             </div>
           </div>
 
           <div class="col-md-6">
-            <label for="address">Address</label>
-            <textarea class="form-control" name="address" id="address" rows="4" cols="5" placeholder="Address..."></textarea>
+            <label for="Address">Address</label>
+            <textarea class="form-control" formControlName="Address" name="Address" id="Address" rows="4" cols="5" placeholder="Address..."></textarea>
           </div>
 
           <div class="col-12">

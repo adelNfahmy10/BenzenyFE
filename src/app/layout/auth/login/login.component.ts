@@ -22,16 +22,20 @@ export class LoginComponent {
 
   submitLoginForm():void{
     let data = this.loginForm.value
-    this._Router.navigate(['/home'])
 
-    // this._AuthService.login(data).subscribe({
-    //   next:(res)=>{
-    //     console.log(res);
-    //     this._Router.navigate(['/home'])
-    //   },
-    //   error:(err)=>{
-    //     console.log(err);
-    //   }
-    // })
+    this._AuthService.login(data).subscribe({
+      next:(res)=>{
+        localStorage.setItem('token', res.data.accessToken)
+        localStorage.setItem('refreshToken', res.data.refreshToken)
+        localStorage.setItem('userId', res.data.userId)
+        localStorage.setItem('userName', res.data.fullName)
+        localStorage.setItem('companyId', res.data.companyId)
+        localStorage.setItem('companyName', res.data.companyName)
+        this._Router.navigate(['/home'])
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
   }
 }
