@@ -122,7 +122,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @for(branch of allBranches() ; track $index){
+                  @for(branch of allBranches.slice(5) ; track $index){
                     <tr>
                       <td class="text-table">{{$index + 1}}</td>
                       <td class="text-table">{{branch.branchName}}</td>
@@ -136,7 +136,7 @@
             </div>
             <div class="d-flex justify-content-center align-items-center gap-3">
               <app-viewall data-bs-toggle="modal" data-bs-target="#exampleModal-2" [routerLink]="['/branch']"></app-viewall>
-              <app-btnadd data-bs-toggle="modal" data-bs-target="#exampleModal-add"></app-btnadd>
+              <app-btnadd data-bs-toggle="modal" data-bs-target="#exampleModal-add-branch"></app-btnadd>
             </div>
           </div>
         </div>
@@ -146,50 +146,29 @@
             <div class="users position-relative p-3 h-100 bg-white rounded-2">
                 <h5>Users</h5>
                 <ul class="d-flex flex-column position-relative z-3 gap-2 p-0 mt-2">
+                  @for(user of allUsers; track $index){
                     <li class="d-flex justify-content-between align-items-center border border-1 p-2 rounded-3">
-                        <h5>Super Admin 2 </h5>
-                        <div class="d-flex gap-2">
-                          <button class="active-btn">Active</button>
-                          <svg class="cr" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                            <path d="M12 12.5H12.01M12 6.5H12.01M12 18.5H12.01M13 12.5C13 13.0523 12.5523 13.5 12 13.5C11.4477 13.5 11 13.0523 11 12.5C11 11.9477 11.4477 11.5 12 11.5C12.5523 11.5 13 11.9477 13 12.5ZM13 18.5C13 19.0523 12.5523 19.5 12 19.5C11.4477 19.5 11 19.0523 11 18.5C11 17.9477 11.4477 17.5 12 17.5C12.5523 17.5 13 17.9477 13 18.5ZM13 6.5C13 7.05228 12.5523 7.5 12 7.5C11.4477 7.5 11 7.05228 11 6.5C11 5.94772 11.4477 5.5 12 5.5C12.5523 5.5 13 5.94772 13 6.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                        </div>
-                    </li>
-                    <li class="d-flex justify-content-between align-items-center border border-1 p-2 rounded-3">
-                      <h5>Super Admin 2 </h5>
+                      <h5>{{user.fullName}}</h5>
                       <div class="d-flex gap-2">
-                        <button class="dis-active-btn">UnActive</button>
+                        @if(user.isActive){
+                          <span (click)="DeleteUserInCompany(user.userId)" class="active-btn">Active</span>
+                        } @else {
+                          <span (click)="DeleteUserInCompany(user.userId)" class="dis-active-btn">UnActive</span>
+                        }
                         <svg class="cr" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                           <path d="M12 12.5H12.01M12 6.5H12.01M12 18.5H12.01M13 12.5C13 13.0523 12.5523 13.5 12 13.5C11.4477 13.5 11 13.0523 11 12.5C11 11.9477 11.4477 11.5 12 11.5C12.5523 11.5 13 11.9477 13 12.5ZM13 18.5C13 19.0523 12.5523 19.5 12 19.5C11.4477 19.5 11 19.0523 11 18.5C11 17.9477 11.4477 17.5 12 17.5C12.5523 17.5 13 17.9477 13 18.5ZM13 6.5C13 7.05228 12.5523 7.5 12 7.5C11.4477 7.5 11 7.05228 11 6.5C11 5.94772 11.4477 5.5 12 5.5C12.5523 5.5 13 5.94772 13 6.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </div>
-                    </li>
-                    <li class="d-flex justify-content-between align-items-center border border-1 p-2 rounded-3">
-                      <h5>Super Admin 2 </h5>
-                      <div class="d-flex gap-2">
-                        <button class="dis-active-btn">UnActive</button>
-                        <svg class="cr" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                          <path d="M12 12.5H12.01M12 6.5H12.01M12 18.5H12.01M13 12.5C13 13.0523 12.5523 13.5 12 13.5C11.4477 13.5 11 13.0523 11 12.5C11 11.9477 11.4477 11.5 12 11.5C12.5523 11.5 13 11.9477 13 12.5ZM13 18.5C13 19.0523 12.5523 19.5 12 19.5C11.4477 19.5 11 19.0523 11 18.5C11 17.9477 11.4477 17.5 12 17.5C12.5523 17.5 13 17.9477 13 18.5ZM13 6.5C13 7.05228 12.5523 7.5 12 7.5C11.4477 7.5 11 7.05228 11 6.5C11 5.94772 11.4477 5.5 12 5.5C12.5523 5.5 13 5.94772 13 6.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </div>
-                    </li>
-                    <li class="d-flex justify-content-between align-items-center border border-1 p-2 rounded-3">
-                      <h5>Super Admin 2 </h5>
-                      <div class="d-flex gap-2">
-                        <button class="active-btn">Active</button>
-                        <svg class="cr" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                          <path d="M12 12.5H12.01M12 6.5H12.01M12 18.5H12.01M13 12.5C13 13.0523 12.5523 13.5 12 13.5C11.4477 13.5 11 13.0523 11 12.5C11 11.9477 11.4477 11.5 12 11.5C12.5523 11.5 13 11.9477 13 12.5ZM13 18.5C13 19.0523 12.5523 19.5 12 19.5C11.4477 19.5 11 19.0523 11 18.5C11 17.9477 11.4477 17.5 12 17.5C12.5523 17.5 13 17.9477 13 18.5ZM13 6.5C13 7.05228 12.5523 7.5 12 7.5C11.4477 7.5 11 7.05228 11 6.5C11 5.94772 11.4477 5.5 12 5.5C12.5523 5.5 13 5.94772 13 6.5Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </div>
-                    </li>
+                  </li>
+                  }
                 </ul>
                 <div class="d-flex justify-content-center align-items-center gap-3">
-                    <app-viewall></app-viewall>
-                    <app-btnadd></app-btnadd>
+                  <app-viewall></app-viewall>
+                  <app-btnadd data-bs-toggle="modal" data-bs-target="#exampleModal-add-user"></app-btnadd>
                 </div>
                 <svg width="91" height="84" viewBox="0 0 91 84" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M71.1692 34.7433C62.6315 32.9326 57.1572 24.5112 58.9679 15.9735C60.7787 7.43578 69.2001 1.96148 77.7378 3.77221C86.2755 5.58295 91.7498 14.0043 89.939 22.542C88.1283 31.0797 79.7069 36.554 71.1692 34.7433ZM48.1773 83.8074L3.44123 74.3194C1.53823 73.9158 0.326966 72.0479 0.729838 70.1484L1.09476 68.4277C4.11338 54.1948 18.1449 45.0737 32.3778 48.0923C46.6108 51.1109 55.7319 65.1424 52.7133 79.3754L52.3483 81.096C51.9455 82.9955 50.0803 84.211 48.1773 83.8074ZM67.9889 41.2609C60.0706 39.5815 52.2392 41.9517 46.5909 46.9317C53.5786 52.0493 58.3543 59.7292 59.8239 68.2974L82.801 73.1705C86.2422 73.9003 86.9721 70.4591 86.9721 70.4591C89.7893 57.1759 81.2721 44.078 67.9889 41.2609ZM53.7021 23.8467L56.8368 9.06662C57.0703 7.96543 56.6014 6.86989 55.6383 6.27365C54.6806 5.68576 53.4813 5.76224 52.5362 6.52194L47.6191 11.0385L44.307 4.88451C43.1517 3.12556 40.739 2.64982 38.8404 3.88694L33.556 8.06673C33.556 8.06673 30.4185 1.30965 30.3252 1.20715C29.7672 0.599738 28.7775 0.332295 27.8457 0.537442C26.833 0.768558 26.0713 1.54557 25.8552 2.56417L22.7344 17.2789L53.7021 23.8467ZM21.4468 24.1978C20.6762 32.1039 25.8882 39.5239 33.8375 41.2098C41.7867 42.8958 49.562 38.2302 52.0669 30.692L21.4468 24.1978Z" fill="#F97C21" fill-opacity="0.25"/>
-              </svg>
+                </svg>
             </div>
         </div>
       </div>
@@ -306,7 +285,7 @@
 
 
 <!-- Modal Add Branch -->
-<div class="modal fade" id="exampleModal-add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal-add-branch" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content p-3">
       <div class="modal-header justify-content-end border-0 py-0 pt-2">
@@ -409,6 +388,84 @@
                 <span class="slider"></span>
               </label>
             </div>
+          </div>
+
+          <div class="col-12">
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <button class="save-btn btn d-flex justify-content-center align-items-center gap-2">
+                <span>Save</span>
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_893_4557)">
+                  <path d="M17.7083 25H9.375C4.20521 25 0 20.7937 0 15.625V7.29167C0 6.71667 0.465625 6.25 1.04167 6.25C1.61771 6.25 2.08333 6.71667 2.08333 7.29167V15.625C2.08333 19.6458 5.35521 22.9167 9.375 22.9167H17.7083C18.2844 22.9167 18.75 23.3833 18.75 23.9583C18.75 24.5333 18.2844 25 17.7083 25ZM17.7083 0H11.4583V5.20833H17.7083V0ZM25 6.52812V15.625C25 18.501 22.6677 20.8333 19.7917 20.8333H9.375C6.49896 20.8333 4.16667 18.501 4.16667 15.625V5.20833C4.16667 2.33646 6.50312 0 9.375 0V5.20833C9.375 6.35938 10.3073 7.29167 11.4583 7.29167H17.7083C18.8594 7.29167 19.7917 6.35938 19.7917 5.20833V0.288542C20.1354 0.444792 20.4552 0.655208 20.7229 0.925L24.0937 4.32604C24.674 4.91146 25 5.70312 25 6.52812ZM18.75 14.0625C18.75 12.049 17.1177 10.4167 15.1042 10.4167C13.0906 10.4167 11.4583 12.049 11.4583 14.0625C11.4583 16.076 13.0906 17.7083 15.1042 17.7083C17.1177 17.7083 18.75 16.076 18.75 14.0625ZM16.6667 14.0625C16.6667 14.925 15.9667 15.625 15.1042 15.625C14.2417 15.625 13.5417 14.925 13.5417 14.0625C13.5417 13.2 14.2417 12.5 15.1042 12.5C15.9667 12.5 16.6667 13.2 16.6667 14.0625Z"/>
+                  <circle cx="15" cy="14" r="1" fill="#F97C21"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_893_4557">
+                  <rect width="25" height="25" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Add User -->
+<div class="modal fade" id="exampleModal-add-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content p-3">
+      <div class="modal-header justify-content-end border-0 py-0 pt-2">
+        <svg class="cr" data-bs-dismiss="modal" width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_893_6942)">
+          <path d="M18.5 0C8.29879 0 0 8.29879 0 18.5C0 28.7012 8.29879 37 18.5 37C28.7012 37 37 28.7012 37 18.5C37 8.29879 28.7012 0 18.5 0ZM25.846 24.8285C26.3949 25.4807 26.3116 26.4535 25.661 27.0007C25.3712 27.2443 25.0182 27.363 24.6682 27.363C24.2288 27.363 23.7925 27.1765 23.4873 26.8157L18.5 20.8927L13.5127 26.8157C13.209 27.1765 12.7727 27.363 12.3318 27.363C11.9818 27.363 11.6288 27.2443 11.339 27.0007C10.6884 26.4535 10.6036 25.4807 11.154 24.8285L16.4835 18.5L11.154 12.1715C10.6051 11.5193 10.6884 10.5465 11.339 9.99925C11.9911 9.44887 12.9654 9.53521 13.5112 10.1842L18.4985 16.1073L23.4858 10.1842C24.0315 9.53675 25.0058 9.44887 25.658 9.99925C26.3085 10.5465 26.3933 11.5193 25.843 12.1715L20.5134 18.5L25.843 24.8285H25.846Z" fill="#F79320"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_893_6942">
+          <rect width="37" height="37" fill="white"/>
+          </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <div class="modal-body d-flex flex-column gap-3 px-4 pt-0">
+        <div class="d-flex align-items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" fill="#F79320" data-name="Layer 1" viewBox="0 0 24 24" width="60" height="60">
+            <path d="M12,16a4,4,0,1,1,4-4A4,4,0,0,1,12,16ZM5.683,16H1a1,1,0,0,1-1-1A6.022,6.022,0,0,1,5.131,9.084a1,1,0,0,1,1.1,1.266A6.009,6.009,0,0,0,6,12a5.937,5.937,0,0,0,.586,2.57,1,1,0,0,1-.9,1.43ZM17,24H7a1,1,0,0,1-1-1,6,6,0,0,1,12,0A1,1,0,0,1,17,24ZM18,8a4,4,0,1,1,4-4A4,4,0,0,1,18,8ZM6,8a4,4,0,1,1,4-4A4,4,0,0,1,6,8Zm17,8H18.317a1,1,0,0,1-.9-1.43A5.937,5.937,0,0,0,18,12a6.009,6.009,0,0,0-.236-1.65,1,1,0,0,1,1.105-1.266A6.022,6.022,0,0,1,24,15,1,1,0,0,1,23,16Z"/>
+          </svg>
+
+          <h3>Add User</h3>
+        </div>
+
+        <form class="row g-2" [formGroup]="userForm" (ngSubmit)="submitUserForm()">
+          <div class="col-12">
+            <label for="FullName">Full Name</label>
+            <input type="text" name="FullName" id="FullName" formControlName="FullName" class="form-control" placeholder="Full Name...">
+          </div>
+
+          <div class="col-md-6">
+            <label for="Mobile">Phone Number</label>
+            <div class="d-flex justify-content-center align-items-center">
+              <h5 class="code-num h-100 py-2 px-3 rounded-start-3">+966</h5>
+              <input type="tel" name="Mobile" id="Mobile" formControlName="Mobile" class="form-control rounded-0 rounded-end-3 shadow-none border-0" placeholder="Phone...">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="Email">Email</label>
+            <input type="text" name="Email" id="Email" formControlName="Email" class="form-control" placeholder="Email...">
+          </div>
+
+          <div class="col-md-6">
+            <label for="Username">User Name</label>
+            <input type="text" name="Username" id="Username" formControlName="Username" class="form-control" placeholder="User Name...">
+          </div>
+
+          <div class="col-md-6">
+            <label for="Password">Password</label>
+            <input type="password" name="Password" id="Password" formControlName="Password" class="form-control" placeholder="Password...">
           </div>
 
           <div class="col-12">

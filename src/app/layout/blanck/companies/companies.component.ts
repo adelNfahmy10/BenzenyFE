@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import { BranchService } from '../branches/core/service/branch.service';
 import { ReigonandcityService } from '../../../../core/services/reigons/reigonandcity.service';
+import { AuthService } from '../../auth/core/service/auth.service';
+import { CompanyService } from './core/service/company.service';
 Chart.register(...registerables)
 
 @Component({
@@ -19,25 +21,28 @@ Chart.register(...registerables)
 })
 export class CompaniesComponent implements OnInit{
   private readonly _FormBuilder = inject(FormBuilder)
+  private readonly _CompanyService = inject(CompanyService)
   private readonly _ToastrService = inject(ToastrService)
   private readonly _BranchService = inject(BranchService)
   private readonly _ReigonandcityService = inject(ReigonandcityService)
+  private readonly _AuthService = inject(AuthService)
 
   companyName:string | null = localStorage.getItem('companyName')
-  allBranches:WritableSignal<any[]> = signal([])
+  allBranches:any[] = []
   companyId:string | null = localStorage.getItem("companyId")
   allRegions:any[] = []
   allCity:any[] = []
+  allUsers:any[] = []
 
   ngOnInit(): void {
     this.getAllBranches()
     this.getAllRegions()
+    this.getAllUsersByCompanyId()
   }
-
   getAllBranches():void{
     this._BranchService.GetAllBranchs().subscribe({
       next:(res)=>{
-        this.allBranches.set(res.data.items)
+        this.allBranches = res.data.items
       }
     })
   }
@@ -87,14 +92,60 @@ export class CompaniesComponent implements OnInit{
     this._BranchService.CreateBranch(formData).subscribe({
       next:(res)=>{
         this.getAllBranches()
+        this.branchForm.reset()
+        this._ToastrService.success(`${res.result}, ${res.msg}`,'Success',{
+          positionClass:'toast-bottom-right',
+        })
       }
     })
 
   }
 
+  getAllUsersByCompanyId():void{
+    this._CompanyService.GetAllUserInCompanyById(this.companyId!).subscribe({
+      next:(res)=>{
+        this.allUsers = res.data
+      }
+    })
+  }
+
+  userForm:FormGroup = this._FormBuilder.group({
+    CompanyId:[''],
+    Username:[''],
+    FullName:[''],
+    Mobile :[''],
+    Email:[''],
+    Password:['']
+  })
+
+  submitUserForm():void{
+    let data = this.userForm.value
+    data.CompanyId = this.companyId
+    let formData = new FormData()
+    formData.append('CompanyId', data.CompanyId),
+    formData.append('Username', data.Username),
+    formData.append('FullName', data.FullName),
+    formData.append('Mobile', data.Mobile),
+    formData.append('Email', data.Email),
+    formData.append('Password', data.Password)
+
+    this._AuthService.register(formData).subscribe({
+      next:(res)=>{
+        this.getAllUsersByCompanyId()
+        this.userForm.reset()
+      }
+    })
+  }
+
+  DeleteUserInCompany(userId:string):void{
+    this._CompanyService.DeleteUserInCompany(this.companyId!,userId).subscribe({
+      next:(res)=>{
+        this.getAllUsersByCompanyId()
+      }
+    })
+  }
 
   selectedRowId: number | null = null;
-
   toggleMenu(rowId: number) {
     if (this.selectedRowId === rowId) {
       this.selectedRowId = null;
