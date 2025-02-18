@@ -6,6 +6,7 @@ import jsPDF from 'jspdf';
 import { NgxPaginationModule } from 'ngx-pagination';
 import * as XLSX from 'xlsx';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
+import { BranchService } from './core/service/branch.service';
 
 @Component({
   selector: 'app-branches',
@@ -18,7 +19,10 @@ export class BranchesComponent {
   /* Injection Services */
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
+  private readonly _BranchService = inject(BranchService)
 
+
+  companyId:string | null = localStorage.getItem("companyId")
   data:any[] = [
     { id: '8', branchName: 'Makka', region: 'Makka', vehicles: '25',drivers:'18',iban:'SA123214231432412341235421',station:'a',petrolType:'s'},
     { id: '9', branchName: 'Makka', region: 'Makka', vehicles: '62',drivers:'79',iban:'SA12321423543624352335421',station:'a',petrolType:'s'},
@@ -167,18 +171,37 @@ export class BranchesComponent {
 
   branchForm:FormGroup = this._FormBuilder.group({
     CompanyId:[''],
-    BranchName:[''],
-    IBAN:[''],
     RegionId:[''],
     CityId:[''],
-    Email:[''],
-    PhoneNumber:[''],
     Address:[''],
+    FullName:[''],
+    Email:[''],
+    Password:[''],
+    PhoneNumber:[''],
+    IBAN:[''],
   })
 
   submitBranchForm():void{
     let data = this.branchForm.value
+    data.CompanyId = this.companyId
     console.log(data);
+    let formData = new FormData()
+    formData.append('CompanyId', data.CompanyId),
+    formData.append('RegionId', data.RegionId),
+    formData.append('CityId', data.CityId),
+    formData.append('Address', data.Address),
+    formData.append('FullName', data.FullName),
+    formData.append('Email', data.Email),
+    formData.append('Password', data.Password),
+    formData.append('PhoneNumber', data.PhoneNumber),
+    formData.append('IBAN', data.IBAN)
+
+    this._BranchService.CreateBranch(formData).subscribe({
+      next:(res)=>{
+        console.log(res);
+      }
+    })
+
   }
   selectedRowId: number | null = null;
 
