@@ -11,8 +11,9 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
 })
 export class BlanckComponent {
   private readonly _Router = inject(Router)
-  open:Boolean = true
+  userName:string | null = localStorage.getItem('userName')
 
+  open:Boolean = true
   slideNav():void{
     if(this.open){
       this.open = false
