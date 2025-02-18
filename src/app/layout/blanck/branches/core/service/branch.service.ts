@@ -10,7 +10,7 @@ export class BranchService {
   private readonly _HttpClient = inject(HttpClient)
 
   GetAllBranchs(pageNum:any = 1, pageSize:any = 10):Observable<any>{
-    return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetAllBranchs?pageNumber=${pageNum}&pageSize=${pageSize}`)
+    return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetAllBranches/GetAllBranches?pageNumber=1&pageSize=10`)
   }
 
   GetBranchById(id:any):Observable<any>{

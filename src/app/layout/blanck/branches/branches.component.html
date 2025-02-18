@@ -88,37 +88,37 @@
                       <th class="muted">Vehicles</th>
                       <th class="muted">Drivers</th>
                       <th class="muted">IBAN</th>
-                      <th class="muted">Station</th>
-                      <th class="muted">Petrol Type</th>
+                      <!-- <th class="muted">Station</th>
+                      <th class="muted">Petrol Type</th> -->
                       <th class="muted">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                       <tr *ngFor="let row of filteredData | paginate: { itemsPerPage: 3, currentPage: page } ; let i = index">
                           <td class="text-table">
-                            {{ row.id }}
+                            {{ i + 1 }}
                           </td>
                           <td class="text-table">
                             {{ row.branchName }}
                           </td>
                           <td class="text-table">
-                            {{ row.region }}
+                            {{ row.regionName }}
                           </td>
                           <td class="text-table">
-                            {{ row.vehicles }}
+                            {{ row.carCount }}
                           </td>
                           <td class="text-table">
-                            {{ row.drivers }}
+                            {{ row.driverCount }}
                           </td>
                           <td class="text-table">
                             {{ row.iban }}
                           </td>
-                          <td class="text-table">
+                          <!-- <td class="text-table">
                             {{ row.station }}
                           </td>
                           <td class="text-table">
                             {{ row.petrolType }}
-                          </td>
+                          </td> -->
                           <td class="text-table">
                             <div class="position-relative">
                               <div class="cr position-relative z-2" (click)="toggleMenu(row.id)">
@@ -241,10 +241,11 @@
 
           <div class="col-md-6">
             <label for="RegionId">Region Id</label>
-            <select name="RegionId" id="RegionId" class="form-select" formControlName="RegionId">
+            <select name="RegionId" id="RegionId" class="form-select" formControlName="RegionId" (change)="onRegionsChange($event)">
               <option value="">Select Region...</option>
-              <option value="1">Region 1</option>
-              <option value="2">Region 2</option>
+              @for(region of allRegions; track $index){
+                <option [value]="region.id">{{region.title}}</option>
+              }
             </select>
           </div>
 
@@ -257,8 +258,9 @@
             <label for="CityId">City</label>
             <select name="CityId" id="CityId" class="form-select" formControlName="CityId">
               <option value="">Select City...</option>
-              <option value="1">City 1</option>
-              <option value="2">City 2</option>
+              @for(city of allCity; track $index){
+                <option [value]="city.id">{{city.name}}</option>
+              }
             </select>
           </div>
 
