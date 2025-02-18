@@ -1,5 +1,5 @@
 import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, ElementRef, inject, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -7,6 +7,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import * as XLSX from 'xlsx';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import { BranchService } from './core/service/branch.service';
+import { ReigonandcityService } from '../../../../core/services/reigons/reigonandcity.service';
 
 @Component({
   selector: 'app-branches',
@@ -15,14 +16,13 @@ import { BranchService } from './core/service/branch.service';
   templateUrl: './branches.component.html',
   styleUrl: './branches.component.scss'
 })
-export class BranchesComponent {
+export class BranchesComponent implements OnInit{
   /* Injection Services */
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
   private readonly _BranchService = inject(BranchService)
+  private readonly _ReigonandcityService = inject(ReigonandcityService)
 
-
-  companyId:string | null = localStorage.getItem("companyId")
   data:any[] = [
     { id: '8', branchName: 'Makka', region: 'Makka', vehicles: '25',drivers:'18',iban:'SA123214231432412341235421',station:'a',petrolType:'s'},
     { id: '9', branchName: 'Makka', region: 'Makka', vehicles: '62',drivers:'79',iban:'SA12321423543624352335421',station:'a',petrolType:'s'},
@@ -35,7 +35,15 @@ export class BranchesComponent {
   ]
   page = 1;
   selectAll = false;
+  companyId:string | null = localStorage.getItem("companyId")
+  allBrnaches:any[] = []
+  allRegions:any[] = []
+  allCity:any[] = []
 
+  ngOnInit(): void {
+    this.getAllRegions()
+    this.getAllBranches()
+  }
   // Sort column and order
   filterText = '';
   sortColumn: string = '';
@@ -43,7 +51,7 @@ export class BranchesComponent {
 
   // Filtering the data based on search input
   get filteredData() {
-    return this.data.filter((row:any[]) =>
+    return this.allBrnaches.filter((row:any[]) =>
       Object.values(row).some((value:any) => value.toString().toLowerCase().includes(this.filterText.toLowerCase()))
     );
   }
@@ -164,9 +172,32 @@ export class BranchesComponent {
   //   }
   // }
 
-  onCompanyChange(event:Event):void{
+  onRegionsChange(event:Event):void{
     let selectId = (event.target as HTMLSelectElement).value
-    console.log(selectId);
+    this.getCityByRegion(selectId)
+  }
+
+  getAllRegions():void{
+    this._ReigonandcityService.GetAllRegions().subscribe({
+      next:(res)=>{
+        this.allRegions = res.data.items
+      }
+    })
+  }
+  getAllBranches():void{
+    this._BranchService.GetAllBranchs().subscribe({
+      next:(res)=>{
+        this.allBrnaches = res.data.items
+      }
+    })
+  }
+
+  getCityByRegion(regionId:string):void{
+    this._ReigonandcityService.GetCityByRegionId(regionId).subscribe({
+      next:(res)=>{
+        this.allCity = res
+      }
+    })
   }
 
   branchForm:FormGroup = this._FormBuilder.group({
@@ -184,7 +215,6 @@ export class BranchesComponent {
   submitBranchForm():void{
     let data = this.branchForm.value
     data.CompanyId = this.companyId
-    console.log(data);
     let formData = new FormData()
     formData.append('CompanyId', data.CompanyId),
     formData.append('RegionId', data.RegionId),
@@ -207,9 +237,9 @@ export class BranchesComponent {
 
   toggleMenu(rowId: number) {
     if (this.selectedRowId === rowId) {
-      this.selectedRowId = null; // إخفاء القائمة إذا كانت مفتوحة بالفعل
+      this.selectedRowId = null;
     } else {
-      this.selectedRowId = rowId; // إظهار القائمة لهذا الصف
+      this.selectedRowId = rowId;
     }
   }
 
