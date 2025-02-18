@@ -14,7 +14,7 @@ export class BranchService {
   }
 
   GetBranchById(id:any):Observable<any>{
-    return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetBranchById/${id}`)
+    return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetBranchById?id=${id}`)
   }
 
   CreateBranch(data:any):Observable<any>{
@@ -26,6 +26,10 @@ export class BranchService {
   }
 
   DeleteBranch(id:any):Observable<any>{
-    return this._HttpClient.delete(`${environment.baseURL}api/Branch/v1/DeleteBranch/DeleteBranch/${id}`)
+    return this._HttpClient.delete(`${environment.baseURL}api/Branch/v1/DeleteBranch/DeleteBranch?id=${id}`)
+  }
+
+  SwitchActive(id:any):Observable<any>{
+    return this._HttpClient.post(`${environment.baseURL}api/Branch/v1/SwitchActive/SwitchActive/${id}`,{})
   }
 }

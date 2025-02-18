@@ -23,27 +23,107 @@ export class BranchesComponent implements OnInit{
   private readonly _BranchService = inject(BranchService)
   private readonly _ReigonandcityService = inject(ReigonandcityService)
 
-  data:any[] = [
-    { id: '8', branchName: 'Makka', region: 'Makka', vehicles: '25',drivers:'18',iban:'SA123214231432412341235421',station:'a',petrolType:'s'},
-    { id: '9', branchName: 'Makka', region: 'Makka', vehicles: '62',drivers:'79',iban:'SA12321423543624352335421',station:'a',petrolType:'s'},
-    { id: '10', branchName: 'Makka', region: 'Makka', vehicles: '93',drivers:'20',iban:'SA123214a12352351321435421',station:'a',petrolType:'s'},
-    { id: '11', branchName: 'Riyadh', region: 'Riyadh', vehicles: '32',drivers:'20',iban:'SA12354362643523452345152',station:'a',petrolType:'s'},
-    { id: '12', branchName: 'Dammam', region: 'Eastern', vehicles: '53',drivers:'9',iban:'SA43123134253412341235421',station:'a',petrolType:'s'},
-    { id: '13', branchName: 'Abha', region: 'Asir', vehicles: '12',drivers:'6',iban:'SA123223451234123441235421',station:'a',petrolType:'s'},
-    { id: '14', branchName: 'Tabuk', region: 'Tabuk', vehicles: '67',drivers:'14',iban:'SA97565637546346254352325',station:'a',petrolType:'s'},
-    { id: '15', branchName: 'Medina', region: 'Madina', vehicles: '18',drivers:'32',iban:'SA2364372454365234515112',station:'a',petrolType:'s'},
-  ]
+  /* All Properties */
   page = 1;
   selectAll = false;
   companyId:string | null = localStorage.getItem("companyId")
   allBrnaches:any[] = []
   allRegions:any[] = []
   allCity:any[] = []
+  branchCount:string = ''
 
+  /* OnInit Functions */
   ngOnInit(): void {
     this.getAllRegions()
     this.getAllBranches()
   }
+
+  /* All Branches */
+  getAllBranches():void{
+    this._BranchService.GetAllBranchs().subscribe({
+      next:(res)=>{
+        this.allBrnaches = res.data.items
+        this.branchCount = res.data.totalCount
+      }
+    })
+  }
+
+  /* All Regions */
+  onRegionsChange(event:Event):void{
+    let selectId = (event.target as HTMLSelectElement).value
+    this.getCityByRegion(selectId)
+  }
+
+  getAllRegions():void{
+    this._ReigonandcityService.GetAllRegions().subscribe({
+      next:(res)=>{
+        this.allRegions = res.data.items
+      }
+    })
+  }
+
+  /* All City */
+  getCityByRegion(regionId:string):void{
+    this._ReigonandcityService.GetCityByRegionId(regionId).subscribe({
+      next:(res)=>{
+        this.allCity = res
+      }
+    })
+  }
+
+  /* Branch Form */
+  branchForm:FormGroup = this._FormBuilder.group({
+    CompanyId:[''],
+    RegionId:[''],
+    CityId:[''],
+    Address:[''],
+    FullName:[''],
+    Email:[''],
+    Password:[''],
+    PhoneNumber:[''],
+    IBAN:[''],
+  })
+
+  /* Submit Branch Form */
+  submitBranchForm():void{
+    let data = this.branchForm.value
+    data.CompanyId = this.companyId
+    let formData = new FormData()
+    formData.append('CompanyId', data.CompanyId),
+    formData.append('RegionId', data.RegionId),
+    formData.append('CityId', data.CityId),
+    formData.append('Address', data.Address),
+    formData.append('FullName', data.FullName),
+    formData.append('Email', data.Email),
+    formData.append('Password', data.Password),
+    formData.append('PhoneNumber', data.PhoneNumber),
+    formData.append('IBAN', data.IBAN)
+
+    this._BranchService.CreateBranch(formData).subscribe({
+      next:(res)=>{
+        this.getAllBranches()
+      }
+    })
+  }
+
+  /* Delete Branch */
+  deleteBranch(branchId:string):void{
+    this._BranchService.DeleteBranch(branchId).subscribe({
+      next:(res)=>{
+        this.getAllBranches()
+      }
+    })
+  }
+
+  /* Switch Active Branches */
+  switchActiveBranch(branchId:string):void{
+    this._BranchService.SwitchActive(branchId).subscribe({
+      next:(res)=>{
+        this.getAllBranches()
+      }
+    })
+  }
+
   // Sort column and order
   filterText = '';
   sortColumn: string = '';
@@ -68,7 +148,7 @@ export class BranchesComponent implements OnInit{
 
   // Toggle Select All checkbox
   toggleSelectAll() {
-    this.data.forEach((row:any) => row.selected = this.selectAll);
+    this.allBrnaches.forEach((row:any) => row.selected = this.selectAll);
   }
 
   // Sorting function
@@ -81,7 +161,7 @@ export class BranchesComponent implements OnInit{
       this.sortOrder = 'asc';
     }
 
-    this.data.sort((a:any, b:any) => {
+    this.allBrnaches.sort((a:any, b:any) => {
       const aValue = a[column];
       const bValue = b[column];
 
@@ -91,6 +171,7 @@ export class BranchesComponent implements OnInit{
     });
   }
 
+  // Filter Inputs
   // filterBranachList:any[] = []
   // filterByName(event:any){
   //   let searchValue = event.target.value.toLowerCase()
@@ -172,69 +253,8 @@ export class BranchesComponent implements OnInit{
   //   }
   // }
 
-  onRegionsChange(event:Event):void{
-    let selectId = (event.target as HTMLSelectElement).value
-    this.getCityByRegion(selectId)
-  }
-
-  getAllRegions():void{
-    this._ReigonandcityService.GetAllRegions().subscribe({
-      next:(res)=>{
-        this.allRegions = res.data.items
-      }
-    })
-  }
-  getAllBranches():void{
-    this._BranchService.GetAllBranchs().subscribe({
-      next:(res)=>{
-        this.allBrnaches = res.data.items
-      }
-    })
-  }
-
-  getCityByRegion(regionId:string):void{
-    this._ReigonandcityService.GetCityByRegionId(regionId).subscribe({
-      next:(res)=>{
-        this.allCity = res
-      }
-    })
-  }
-
-  branchForm:FormGroup = this._FormBuilder.group({
-    CompanyId:[''],
-    RegionId:[''],
-    CityId:[''],
-    Address:[''],
-    FullName:[''],
-    Email:[''],
-    Password:[''],
-    PhoneNumber:[''],
-    IBAN:[''],
-  })
-
-  submitBranchForm():void{
-    let data = this.branchForm.value
-    data.CompanyId = this.companyId
-    let formData = new FormData()
-    formData.append('CompanyId', data.CompanyId),
-    formData.append('RegionId', data.RegionId),
-    formData.append('CityId', data.CityId),
-    formData.append('Address', data.Address),
-    formData.append('FullName', data.FullName),
-    formData.append('Email', data.Email),
-    formData.append('Password', data.Password),
-    formData.append('PhoneNumber', data.PhoneNumber),
-    formData.append('IBAN', data.IBAN)
-
-    this._BranchService.CreateBranch(formData).subscribe({
-      next:(res)=>{
-        console.log(res);
-      }
-    })
-
-  }
+  // Menu Option In Table
   selectedRowId: number | null = null;
-
   toggleMenu(rowId: number) {
     if (this.selectedRowId === rowId) {
       this.selectedRowId = null;
@@ -243,19 +263,26 @@ export class BranchesComponent implements OnInit{
     }
   }
 
+  // CheckBox Main Branch Toggle
+  isChecked:boolean = false
+  toggleChecked():void{
+    if(this.isChecked){
+      this.isChecked = false
+    } else {
+      this.isChecked = true
+    }
+  }
+
   /* Download Table With PDF */
   open:boolean = false
   openList():void{
     if(this.open){
       this.open = false
-      console.log(this.open);
 
     } else {
       this.open = true
-      console.log(this.open);
     }
   }
-
 
   @ViewChild('table') template!:ElementRef
   downloadPDF():void{
@@ -286,14 +313,4 @@ export class BranchesComponent implements OnInit{
     // Export the workbook to Excel file
     XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
   }
-
-  isChecked:boolean = false
-  toggleChecked():void{
-    if(this.isChecked){
-      this.isChecked = false
-    } else {
-      this.isChecked = true
-    }
-  }
-
 }
