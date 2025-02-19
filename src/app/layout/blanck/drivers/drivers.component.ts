@@ -1,17 +1,65 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { TableComponent } from '../../../../assets/share/table/table.component';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import * as XLSX from 'xlsx';
+import { DriverService } from './core/service/driver.service';
 
 @Component({
   selector: 'app-drivers',
   standalone: true,
-  imports: [FormsModule, TableComponent, HeaderComponent],
+  imports: [FormsModule, TableComponent, HeaderComponent, ReactiveFormsModule],
   templateUrl: './drivers.component.html',
   styleUrl: './drivers.component.scss'
 })
-export class DriversComponent {
+export class DriversComponent implements OnInit{
+  private readonly _FormBuilder = inject(FormBuilder)
+  private readonly _DriverService = inject(DriverService)
+
+  branchId:string | null = localStorage.getItem('branchId')
+  allDrivers:any[] = []
+
+  ngOnInit(): void {
+    this.getAllDrivers()
+  }
+
+  getAllDrivers():void{
+    this._DriverService.GetAllDrivers(this.branchId).subscribe({
+      next:(res)=>{
+        this.allDrivers = res.data.items
+        console.log(this.allDrivers);
+      }
+    })
+  }
+
+  driverForm:FormGroup = this._FormBuilder.group({
+    branchId:[''],
+    fullName:[''],
+    phoneNumber:[''],
+    license:[''],
+    licenseDegree:['']
+  })
+
+  submitDriverForm():void{
+    let data = this.driverForm.value
+    data.branchId = this.branchId
+    this._DriverService.CreateDriver(data).subscribe({
+      next:(res)=>{
+        console.log(res);
+      }
+    })
+  }
+
+  DeleteDriver(id:string):void{
+    this._DriverService.DeleteDriver(id).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.getAllDrivers()
+      }
+    })
+  }
+
+
   data = {
     title:'Drivers',
     items:[

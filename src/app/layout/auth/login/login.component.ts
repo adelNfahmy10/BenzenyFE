@@ -31,6 +31,7 @@ export class LoginComponent {
         localStorage.setItem('userName', res.data.fullName)
         localStorage.setItem('companyId', res.data.companyId)
         localStorage.setItem('companyName', res.data.companyName)
+        localStorage.setItem('branchId', res.data.branchId)
         this._Router.navigate(['/home'])
       },
       error:(err)=>{

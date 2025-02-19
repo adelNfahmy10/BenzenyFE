@@ -157,64 +157,25 @@
           </div>
         </div>
 
-        <form class="row g-2">
+        <form class="row g-2" [formGroup]="driverForm" (ngSubmit)="submitDriverForm()">
           <div class="col-md-6">
-            <label for="ttile">Branch name</label>
-            <input type="text" name="title" id="title" class="form-control" placeholder="Branch Name...">
+            <label for="fullName">Driver Name</label>
+            <input type="text" formControlName="fullName" name="fullName" id="fullName" class="form-control" placeholder="Driver Name...">
           </div>
 
           <div class="col-md-6">
-            <label for="Region">Region Id</label>
-            <select name="regionId" id="regionId" class="form-select">
-              <option value="">Select Region...</option>
-              <option value="1">Region 1</option>
-              <option value="2">Region 2</option>
-            </select>
+            <label for="phone">Phone Number</label>
+            <input type="tel" formControlName="phoneNumber" name="phone" id="phone" class="form-control" placeholder="Phone Number...">
           </div>
 
           <div class="col-md-6">
-            <label for="packageId">IBAN</label>
-            <input type="text" name="packageId" id="packageId" class="form-control" placeholder="SA_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _">
+            <label for="License">License</label>
+            <input type="text" formControlName="license" name="License" id="License" class="form-control" placeholder="License...">
           </div>
 
           <div class="col-md-6">
-            <label for="companyId">City</label>
-            <select name="companyId" id="companyId" class="form-select">
-              <option value="">Select City...</option>
-              <option value="1">City 1</option>
-              <option value="2">City 2</option>
-            </select>
-          </div>
-
-          <div class="col-md-6">
-            <div class="row g-2">
-              <div class="col-12">
-                <label for="balance">Email</label>
-                <input type="text" name="balance" id="balance" class="form-control" placeholder="Email...">
-              </div>
-              <div class="col-12">
-                <label for="balance">Phone Number</label>
-                <div class="d-flex justify-content-center align-items-center">
-                  <h5 class="code-num h-100 py-2 px-3 rounded-start-3">+966</h5>
-                  <input type="tel" name="balance" id="balance" class="form-control rounded-0 rounded-end-3 shadow-none border-0" placeholder="Phone...">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <label for="address">Address</label>
-            <textarea class="form-control" name="address" id="address" rows="4" cols="5" placeholder="Address..."></textarea>
-          </div>
-
-          <div class="col-12">
-            <div class="d-flex justify-content-start align-items-center gap-2">
-              <label for="main">Is Main Branch</label>
-              <label class="switch">
-                <input type="checkbox" (change)="toggleChecked()">
-                <span class="slider"></span>
-              </label>
-            </div>
+            <label for="licenseDegree">License Degree</label>
+            <input type="text" formControlName="licenseDegree" name="licenseDegree" id="licenseDegree" class="form-control" placeholder="LicenseDegree...">
           </div>
 
           <div class="col-12">
