@@ -33,6 +33,7 @@ export const headerInterceptor: HttpInterceptorFn = (req, next) => {
 
               // إرسال الطلب مع التوكن الجديد
               return next(updatedReq);
+
             } else {
               // إذا لم يتم تجديد التوكن بشكل صحيح
               return throwError(() => new Error('Unable to refresh token.'));

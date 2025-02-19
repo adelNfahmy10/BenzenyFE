@@ -94,7 +94,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let branch of filteredData | paginate: { itemsPerPage: 3, currentPage: page } ; let i = index">
+                      <tr *ngFor="let branch of filteredData  | paginate: { itemsPerPage:pageSize, currentPage: currentPage, totalItems:branchCount} ; let i = index">
                           <td class="text-table">
                             {{ i + 1 }}
                           </td>
@@ -199,7 +199,7 @@
                 </table>
 
                 <!-- Pagination Controls -->
-                <pagination-controls (pageChange)="page = $event" class="d-flex justify-content-center my-pagination"></pagination-controls>
+                <pagination-controls (pageChange)="onPageChange($event)" class="d-flex justify-content-center my-pagination"></pagination-controls>
               </div>
             </div>
           </div>
@@ -334,7 +334,6 @@
             </div>
           </div>
         </form>
-
       </div>
     </div>
   </div>
