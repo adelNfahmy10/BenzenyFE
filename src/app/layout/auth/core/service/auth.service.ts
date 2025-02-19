@@ -17,5 +17,9 @@ export class AuthService {
     return this._HttpClient.post(`${environment.baseURL}api/Auth/v1/Register/register`,data)
   }
 
+  refreshToken(data:any):Observable<any>{
+    return this._HttpClient.post(`${environment.baseURL}api/Auth/v1/RefreshToken/refresh`,data)
+  }
+
 
 }
