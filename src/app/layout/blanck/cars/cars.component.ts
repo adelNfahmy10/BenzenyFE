@@ -1,17 +1,81 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { TableComponent } from "../../../../assets/share/table/table.component";
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import * as XLSX from 'xlsx';
+import { CarService } from './core/service/car.service';
 
 @Component({
   selector: 'app-cars',
   standalone: true,
-  imports: [FormsModule, TableComponent, HeaderComponent],
+  imports: [FormsModule, TableComponent, HeaderComponent, ReactiveFormsModule],
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.scss'
 })
-export class CarsComponent {
+export class CarsComponent implements OnInit{
+  private readonly _FormBuilder = inject(FormBuilder)
+  private readonly _CarService = inject(CarService)
+
+  allCars:any[] = []
+  branchId:string | null = localStorage.getItem('branchId')
+
+  ngOnInit(): void {
+    this.getAllCars()
+  }
+
+  getAllCars():void{
+    this._CarService.GetAllCars(this.branchId).subscribe({
+      next:(res)=>{
+        this.allCars = res
+        console.log(this.allCars);
+      }
+    })
+  }
+
+  carForm:FormGroup = this._FormBuilder.group({
+    model:[''],
+    carNumber:[''],
+    color:[''],
+    cardNum:[''],
+    licenseDate:[''],
+    branchId:[''],
+    driversId:[''],
+  })
+
+  submitCarForm():void{
+    let data = this.carForm.value
+    data.branchId = this.branchId
+    data.cardNum = data.model
+    data.driversId = [this.branchId]
+
+    let formData = new FormData()
+    formData.append('branchId', data.branchId)
+    formData.append('model', data.model)
+    formData.append('carNumber', data.carNumber)
+    formData.append('color', data.color)
+    formData.append('cardNum', data.cardNum)
+    formData.append('licenseDate', data.licenseDate)
+    formData.append('driversId', data.driversId)
+    this._CarService.CreateCar(data).subscribe({
+      next:(res)=>{
+        this.getAllCars()
+      }
+    })
+  }
+
+  DeleteCar(id:string):void{
+    this._CarService.DeleteCar(id).subscribe({
+      next:(res)=>{
+        this.getAllCars()
+      }
+    })
+  }
+
+
+
+
+
+
   data = {
     title:'Vehicles',
     items:[
