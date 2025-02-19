@@ -24,14 +24,19 @@ export class BranchesComponent implements OnInit{
   private readonly _ReigonandcityService = inject(ReigonandcityService)
 
   /* All Properties */
-  page = 1;
+  allPage:number = 1;
+  currentPage:number = 1
+  pageSize:number = 1
   selectAll = false;
   companyId:string | null = localStorage.getItem("companyId")
   allBrnaches:any[] = []
   allRegions:any[] = []
   allCity:any[] = []
   branchCount:string = ''
-
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.changePagePagination(page);  // استدعاء الدالة لجلب البيانات للصفحة الجديدة
+  }
   /* OnInit Functions */
   ngOnInit(): void {
     this.getAllRegions()
@@ -44,6 +49,17 @@ export class BranchesComponent implements OnInit{
       next:(res)=>{
         this.allBrnaches = res.data.items
         this.branchCount = res.data.totalCount
+        this.allPage = Math.ceil(res.data.totalCount / res.data.pageSize)
+        this.currentPage = res.data.pageNumber
+        this.pageSize = res.data.pageSize
+      }
+    })
+  }
+
+  changePagePagination(page:number):void{
+    this._BranchService.GetAllBranchs(page).subscribe({
+      next:(res)=>{
+        this.allBrnaches = res.data.items
       }
     })
   }
@@ -101,6 +117,7 @@ export class BranchesComponent implements OnInit{
 
     this._BranchService.CreateBranch(formData).subscribe({
       next:(res)=>{
+        this.branchForm.reset()
         this.getAllBranches()
       }
     })
