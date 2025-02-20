@@ -13,8 +13,8 @@ import { HeaderComponent } from "../../../../assets/share/header/header.componen
   styleUrl: './balance.component.scss'
 })
 export class BalanceComponent {
+  title:string = 'Balance'
   data = {
-    title:'Balance',
     items:[
       { id: '646464156', vehicleModel: 'KIA', plate: '597- KSA', driverName: 'Sayed',driverPhone:'+966513122',petrolType:'92',branch:'Madinah',totalBalance:'50 SAR',status:'Active', selected: false },
       { id: '646464157', vehicleModel: 'MARC', plate: '523- KSA', driverName: 'Eslam',driverPhone:'+96624123',petrolType:'72',branch:'Makkah',totalBalance:'50 SAR',status:'Active', selected: false },

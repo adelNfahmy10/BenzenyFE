@@ -15,7 +15,7 @@
     <div class="row g-1 main-bg pt-1 pb-2 px-2 rounded-5 mt-1">
       <div class="col-lg-6">
         <div class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr" data-bs-toggle="modal" data-bs-target="#exampleModal-addBranch"data-bs-toggle="modal" data-bs-target="#exampleModal-add">
-          <h5>Add {{data.title}}</h5>
+          <h5>Add {{title}}</h5>
           <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 0.5C8.02219 0.5 6.08879 1.08649 4.4443 2.1853C2.79981 3.28412 1.51809 4.8459 0.761209 6.67317C0.00433286 8.50043 -0.193701 10.5111 0.192152 12.4509C0.578004 14.3907 1.53041 16.1725 2.92894 17.5711C4.32746 18.9696 6.10929 19.922 8.0491 20.3079C9.98891 20.6937 11.9996 20.4957 13.8268 19.7388C15.6541 18.9819 17.2159 17.7002 18.3147 16.0557C19.4135 14.4112 20 12.4778 20 10.5C19.9971 7.84872 18.9426 5.30684 17.0679 3.4321C15.1932 1.55736 12.6513 0.502868 10 0.5ZM13.3333 11.3333H10.8333V13.8333C10.8333 14.0543 10.7455 14.2663 10.5893 14.4226C10.433 14.5789 10.221 14.6667 10 14.6667C9.77899 14.6667 9.56703 14.5789 9.41075 14.4226C9.25447 14.2663 9.16667 14.0543 9.16667 13.8333V11.3333H6.66667C6.44566 11.3333 6.2337 11.2455 6.07742 11.0893C5.92113 10.933 5.83334 10.721 5.83334 10.5C5.83334 10.279 5.92113 10.067 6.07742 9.91074C6.2337 9.75447 6.44566 9.66667 6.66667 9.66667H9.16667V7.16667C9.16667 6.94565 9.25447 6.73369 9.41075 6.57741C9.56703 6.42113 9.77899 6.33333 10 6.33333C10.221 6.33333 10.433 6.42113 10.5893 6.57741C10.7455 6.73369 10.8333 6.94565 10.8333 7.16667V9.66667H13.3333C13.5544 9.66667 13.7663 9.75447 13.9226 9.91074C14.0789 10.067 14.1667 10.279 14.1667 10.5C14.1667 10.721 14.0789 10.933 13.9226 11.0893C13.7663 11.2455 13.5544 11.3333 13.3333 11.3333Z" fill="#F97C21"/>
           </svg>
@@ -78,68 +78,103 @@
                 </tr>
             </thead> -->
             <tbody>
-                <tr *ngFor="let row of filteredData | paginate: { itemsPerPage: 3, currentPage: page }"
-                    [ngClass]="{'main-bg': row.selected}"
-                    (click)="toggleRowSelection(row)">
-                    <td>
-                      <div class="d-flex justify-content-center align-items-center mt-2">
-                        <input type="checkbox" [(ngModel)]="row.selected" class="form-check-input" />
-                      </div>
-                    </td>
-                    <td>
-                     <div class="d-flex flex-column justify-content-center align-items-start">
-                      <span class="muted">ID</span>
-                      <p class="text-table">{{ row.id }}</p>
-                     </div>
-                    </td>
-                    <td>
-                      <div class="d-flex flex-column justify-content-center align-items-start">
-                        <span class="muted">Vehicle model</span>
-                        <p class="text-table">{{ row.vehicleModel }}</p>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex flex-column justify-content-center align-items-start">
-                        <span class="muted">Plate</span>
-                        <p class="text-table">{{ row.plate }}</p>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex flex-column justify-content-center align-items-start">
-                        <span class="muted">driver name</span>
-                        <p class="text-table">{{ row.driverName }}</p>
-                      </div>
-                    </td>
-                    <td>
+              @for(row of filteredData | paginate: { itemsPerPage: 3, currentPage: page } ; track $index){
+                <tr [ngClass]="{'main-bg': row.selected}">
+                  <td (click)="toggleRowSelection(row)">
+                    <div class="d-flex justify-content-center align-items-center mt-2">
+                      <input type="checkbox" [(ngModel)]="row.selected" class="form-check-input"/>
+                    </div>
+                  </td>
+                  <td (click)="toggleRowSelection(row)">
+                  <div class="d-flex flex-column justify-content-center align-items-start">
+                    <span class="muted">ID</span>
+                    <p class="text-table">{{ $index + 1 }}</p>
+                  </div>
+                  </td>
+                  <td (click)="toggleRowSelection(row)">
+                    <div class="d-flex flex-column justify-content-center align-items-start">
+                      <span class="muted">{{row.fullName ? 'Driver Name': 'Model'}}</span>
+                      <p class="text-table">{{ row.fullName ? row.fullName : row.vehicleModel }}</p>
+                    </div>
+                  </td>
+                  <td (click)="toggleRowSelection(row)">
+                    <div class="d-flex flex-column justify-content-center align-items-start">
+                      <span class="muted">{{row.license ? 'License': 'Plate'}}</span>
+                      <p class="text-table">{{ row.license ? row.license : row.plate }}</p>
+                    </div>
+                  </td>
+                  <td (click)="toggleRowSelection(row)">
+                    <div class="d-flex flex-column justify-content-center align-items-start">
+                      <span class="muted">{{row.licenseDegree ? 'License Degree': 'Driver Name'}}</span>
+                      <p class="text-table">{{ row.licenseDegree ? row.licenseDegree : row.driverName }}</p>
+                    </div>
+                  </td>
+                  @if(row.branch){
+                    <td (click)="toggleRowSelection(row)">
                       <div class="d-flex flex-column justify-content-center align-items-start">
                         <span class="muted">Petrol Type</span>
                         <p class="text-table">{{ row.driverPhone }}</p>
                       </div>
                     </td>
-                    <td>
+                    <td (click)="toggleRowSelection(row)">
                       <div class="d-flex flex-column justify-content-center align-items-start">
                         <span class="muted">Branch</span>
                         <p class="text-table">{{ row.branch }}</p>
                       </div>
                     </td>
-                    <td>
+                    <td (click)="toggleRowSelection(row)">
                       <div class="d-flex flex-column justify-content-center align-items-start">
                         <span class="muted">Total Balance</span>
                         <p class="text-table">{{ row.totalBalance }}</p>
                       </div>
                     </td>
-                    <td>
+                    <td (click)="toggleRowSelection(row)">
                       <div class="d-flex flex-column justify-content-center align-items-start">
                         <span class="muted">Status</span>
                         <p class="text-table">{{ row.status }}</p>
                       </div>
                     </td>
-                    <td>
-                      <div class="d-flex justify-content-center align-items-center mt-3">
-                        <i class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
-                      </div>
-                    </td>
+                  }
+                  <td>
+                    <div class="d-flex justify-content-center align-items-center mt-3 position-relative">
+                      <i (click)="toggleMenu(row.id)" class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
+                      <ul *ngIf="selectedRowId === row.id" class="list-group animate__animated action-list z-3">
+                        <li class="list-group-item px-2 cr">
+                          <div class="d-flex justify-content-start align-items-center gap-1">
+                            <svg width="15" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_920_9260)">
+                              <path d="M8.3125 6.804L5.83333 9.28317C5.61575 9.50017 5.31533 9.625 5.0085 9.625H4.66667V9.28317C4.66667 8.97167 4.788 8.67883 5.0085 8.45833L7.48767 5.97917L8.3125 6.804ZM8.92092 4.54592L8.3125 5.15433L9.13733 5.97917L9.74575 5.37075C9.97325 5.14325 9.97325 4.77342 9.74575 4.54592C9.52525 4.32483 9.14083 4.32483 8.92092 4.54592ZM14 2.91667V11.0833C14 12.6916 12.6916 14 11.0833 14H2.91667C1.30842 14 0 12.6916 0 11.0833V2.91667C0 1.30842 1.30842 0 2.91667 0H11.0833C12.6916 0 14 1.30842 14 2.91667ZM10.5712 3.72108C9.90967 3.06017 8.757 3.06017 8.09608 3.72108L4.18367 7.6335C3.74325 8.07392 3.5 8.66017 3.5 9.28317V10.2083C3.5 10.5309 3.76133 10.7917 4.08333 10.7917H5.0085C5.6315 10.7917 6.21775 10.549 6.65817 10.108L10.5706 6.19558C11.2531 5.51308 11.2537 4.40358 10.5712 3.72108Z" fill="#8B8B8B"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_920_9260">
+                              <rect width="14" height="14" fill="white"/>
+                              </clipPath>
+                              </defs>
+                            </svg>
+                            <span class="muted">Driver Activation</span>
+                          </div>
+                        </li>
+                        <li class="list-group-item px-2 cr">
+                          <div class="d-flex justify-content-start align-items-center gap-1">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_920_9284)">
+                              <path d="M12.8333 2.33333H10.4411C10.1698 1.00392 8.99206 0 7.58331 0H6.41665C5.00848 0 3.83015 1.00392 3.5589 2.33333H1.16665C0.844646 2.33333 0.583313 2.59408 0.583313 2.91667C0.583313 3.23925 0.844646 3.5 1.16665 3.5H1.66831L2.42431 11.3628C2.56898 12.8666 3.81731 14 5.32756 14H8.66831C10.1809 14 11.4292 12.8642 11.5721 11.3587L12.3165 3.5H12.8327C13.1547 3.5 13.4161 3.23925 13.4161 2.91667C13.4161 2.59408 13.1553 2.33333 12.8333 2.33333ZM6.41665 1.16667H7.58331C8.34281 1.16667 8.98448 1.65608 9.22598 2.33333H4.77456C5.01606 1.65608 5.65773 1.16667 6.41723 1.16667H6.41665ZM9.1624 9.50425C9.39048 9.73233 9.39048 10.101 9.1624 10.3291C9.04865 10.4428 8.89931 10.5 8.74998 10.5C8.60065 10.5 8.45131 10.4428 8.33756 10.3291L6.99998 8.9915L5.6624 10.3291C5.54865 10.4428 5.39931 10.5 5.24998 10.5C5.10065 10.5 4.95131 10.4428 4.83756 10.3291C4.60948 10.101 4.60948 9.73233 4.83756 9.50425L6.17515 8.16667L4.83756 6.82908C4.60948 6.601 4.60948 6.23233 4.83756 6.00425C5.06565 5.77617 5.43431 5.77617 5.6624 6.00425L6.99998 7.34183L8.33756 6.00425C8.56565 5.77617 8.93431 5.77617 9.1624 6.00425C9.39048 6.23233 9.39048 6.601 9.1624 6.82908L7.82481 8.16667L9.1624 9.50425Z" fill="#F00000"/>
+                              </g>
+                              <defs>
+                              <clipPath id="clip0_920_9284">
+                              <rect width="14" height="14" fill="white"/>
+                              </clipPath>
+                              </defs>
+                            </svg>
+                            <span class="muted delete-text">Delete Driver</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
                 </tr>
+              }
+
             </tbody>
         </table>
 

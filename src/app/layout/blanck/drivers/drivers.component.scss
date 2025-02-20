@@ -122,11 +122,10 @@ input, .code-num, select, textarea{
 }
 
 input:checked + .slider {
-  background-color: $mainColor;
+  background-color: $mainColor !important;
 }
-
 input:checked + .slider:before {
-  transform: translateX(200%);
+  transform: translateX(200%) !important;
 }
 .muted{
   font-size: 10px;
@@ -134,5 +133,7 @@ input:checked + .slider:before {
     color: #f00 !important;
   }
 }
-
-
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: $mainColor !important;
+  color: #fff !important ;
+}
