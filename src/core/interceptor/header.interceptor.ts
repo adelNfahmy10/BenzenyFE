@@ -27,14 +27,13 @@ export const headerInterceptor: HttpInterceptorFn = (req, next) => {
         return _AuthService.refreshToken(data).pipe(
           switchMap((res: any) => {
             if (res && res.data) {
-              let newToken = localStorage.setItem('token', res.data.accessToken);
+              localStorage.setItem('token', res.data.accessToken);
 
               const updatedReq = req.clone({
-                setHeaders: { Authorization: `Bearer ${newToken}` },
+                setHeaders: { Authorization: `Bearer ${res.data.accessToken}` },
               });
 
               return next(updatedReq);
-
             } else {
               return throwError(() => new Error('Unable to refresh token.'));
             }

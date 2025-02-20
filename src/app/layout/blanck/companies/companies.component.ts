@@ -10,12 +10,13 @@ import { BranchService } from '../branches/core/service/branch.service';
 import { ReigonandcityService } from '../../../../core/services/reigons/reigonandcity.service';
 import { AuthService } from '../../auth/core/service/auth.service';
 import { CompanyService } from './core/service/company.service';
+import { NgClass, NgIf } from '@angular/common';
 Chart.register(...registerables)
 
 @Component({
   selector: 'app-companies',
   standalone: true,
-  imports: [ViewallComponent, BtnaddComponent, RouterLink, FormsModule, HeaderComponent, RouterLink, ReactiveFormsModule],
+  imports: [ViewallComponent, BtnaddComponent, RouterLink, FormsModule, HeaderComponent, RouterLink, ReactiveFormsModule, NgIf],
   templateUrl: './companies.component.html',
   styleUrl: './companies.component.scss'
 })

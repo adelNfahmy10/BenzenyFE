@@ -49,6 +49,25 @@ $mainColor: #f79320;
   border: 1px solid $mainColor;
 }
 
+.muted{
+  font-size: 10px;
+  &.delete-text{
+    color: #f00 !important;
+  }
+}
+
+.action-list{
+  position: absolute;
+  top: 100%;
+  right: 55%;
+  li{
+    transition: all .3s;
+    width: 152px;
+    &:hover{
+      background-color: #eee;
+    }
+  }
+}
 
 label, input::placeholder{
   color: #4C4C4C;
