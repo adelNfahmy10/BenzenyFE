@@ -131,15 +131,14 @@
           </div>
         </div>
 
-
+        <!-- Balance Table -->
         <div class="col-12 animate__animated animate__fadeInUp">
-          <!-- Balance Table -->
           <div class="col-12 animate__animated animate__fadeInUp z-2">
             <div class="bg-white rounded-3 shadow">
               <div class="table-responsive" #table>
                 <table class="table table-hover overflow-x-scroll table-striped">
                     <tbody>
-                      @for(row of filteredData | paginate: { itemsPerPage: 5, currentPage: page } ; track $index){
+                      @for(row of allCars | paginate: { itemsPerPage: 5, currentPage: page } ; track $index){
                         <tr [ngClass]="{'main-bg': row.selected}">
                           <td (click)="toggleRowSelection(row)">
                             <div class="d-flex justify-content-center align-items-center mt-2">
@@ -154,20 +153,43 @@
                           </td>
                           <td (click)="toggleRowSelection(row)">
                             <div class="d-flex flex-column justify-content-center align-items-start">
+                              <span class="muted">Model</span>
+                              <p class="text-table">{{ row.model }}</p>
+                            </div>
+                          </td>
+
+                          <td (click)="toggleRowSelection(row)">
+                            <div class="d-flex flex-column justify-content-center align-items-start">
+                              <span class="muted">Plate</span>
+                              <p class="text-table">{{ row.carNumber }}</p>
+                            </div>
+                          </td>
+
+                          <td (click)="toggleRowSelection(row)">
+                            <div class="d-flex flex-column justify-content-center align-items-start">
+                              <span class="muted">Color</span>
+                              <p class="text-table">{{ row.color }}</p>
+                            </div>
+                          </td>
+
+                          <td (click)="toggleRowSelection(row)">
+                            <div class="d-flex flex-column justify-content-center align-items-start">
+                              <span class="muted">License Date</span>
+                              <p class="text-table">{{ row.licenseDate }}</p>
+                            </div>
+                          </td>
+
+                          <td (click)="toggleRowSelection(row)">
+                            <div class="d-flex flex-column justify-content-center align-items-start">
                               <span class="muted">Driver Name</span>
-                              <p class="text-table">{{ row.fullName }}</p>
+                              <p class="text-table">{{ row.driverName ?? 'UnKnown' }}</p>
                             </div>
                           </td>
+
                           <td (click)="toggleRowSelection(row)">
                             <div class="d-flex flex-column justify-content-center align-items-start">
-                              <span class="muted">License</span>
-                              <p class="text-table">{{ row.license }}</p>
-                            </div>
-                          </td>
-                          <td (click)="toggleRowSelection(row)">
-                            <div class="d-flex flex-column justify-content-center align-items-start">
-                              <span class="muted">License Degree</span>
-                              <p class="text-table">{{ row.licenseDegree }}</p>
+                              <span class="muted">Pertol Type</span>
+                              <p class="text-table">{{ row.pertolType ?? 'UnKnown'  }}</p>
                             </div>
                           </td>
                           <td>
@@ -209,7 +231,6 @@
                           </td>
                         </tr>
                       }
-
                     </tbody>
                 </table>
 
@@ -304,9 +325,34 @@
           </div>
 
           <div class="col-md-6">
+            <label for="petrolType">petrolType</label>
+            <input type="number" formControlName="petrolType" name="petrolType" id="petrolType" class="form-control" placeholder="Plate...">
+          </div>
+
+          <div class="col-md-6">
             <label for="licenseDate">License Date</label>
             <input type="date" formControlName="licenseDate" name="licenseDate" id="licenseDate" class="form-control" placeholder="License Date...">
           </div>
+
+          <div class="col-md-6">
+            <div class="d-flex">
+              <div formArrayName="driversId" class="d-flex flex-column gap-2">
+                <div *ngFor="let driver of drivers.controls; let i = index" class="d-flex gap-2">
+                  <select name="driverId" id="driverId" class="form-select" [formControlName]="i">
+                    <option value="" selected disabled>Select Driver...</option>
+                    @for(driver of allDrivers;track $index){
+                      <option [value]="driver.id">{{driver.fullName}}</option>
+                    }
+                  </select>
+                  @if(i > 0){
+                    <button type="button" class="btn btn-danger btn-sm" (click)="removeDriver(i)">Remove</button>
+                  }
+                </div>
+              </div>
+              <button type="button" class="btn btn-success" (click)="addDriver()">Add Driver</button>
+            </div>
+          </div>
+
 
           <div class="col-12">
             <div class="d-flex justify-content-end align-items-center gap-2">

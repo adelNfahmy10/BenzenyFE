@@ -32,7 +32,11 @@ export class LoginComponent {
         localStorage.setItem('companyId', res.data.companyId)
         localStorage.setItem('companyName', res.data.companyName)
         localStorage.setItem('branchId', res.data.branchId)
-        this._Router.navigate(['/home'])
+        if(localStorage.getItem('branchId')){
+          this._Router.navigate(['/balance'])
+        } else{
+          this._Router.navigate(['/home'])
+        }
       },
       error:(err)=>{
         console.log(err);
