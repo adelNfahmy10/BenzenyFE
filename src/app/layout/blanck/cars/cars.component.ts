@@ -1,18 +1,19 @@
 import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { TableComponent } from "../../../../assets/share/table/table.component";
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import * as XLSX from 'xlsx';
 import { CarService } from './core/service/car.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { isPlatformBrowser, NgClass } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DriverService } from '../drivers/core/service/driver.service';
 
 @Component({
   selector: 'app-cars',
   standalone: true,
-  imports: [FormsModule, TableComponent, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgClass],
+  imports: [FormsModule, TableComponent, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgClass, NgFor, NgIf],
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.scss'
 })
@@ -20,20 +21,32 @@ export class CarsComponent implements OnInit{
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _CarService = inject(CarService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
+  private readonly _DriverService = inject(DriverService)
 
   allCars:any[] = []
-  title:string = 'Vehicles'
+  allDrivers:any[] = []
   branchId:string | null = localStorage.getItem('branchId')
+  userId:string | null = localStorage.getItem('userId')
 
   ngOnInit(): void {
     this.getAllCars()
+    this.getAllDriver()
+    this.addDriver()
   }
 
   getAllCars():void{
     this._CarService.GetAllCars(this.branchId).subscribe({
       next:(res)=>{
-        this.allCars = res.items
+        this.allCars = res.data.items
         console.log(this.allCars);
+      }
+    })
+  }
+
+  getAllDriver():void{
+    this._DriverService.GetAllDrivers(this.branchId).subscribe({
+      next:(res)=>{
+        this.allDrivers = res.data.items
       }
     })
   }
@@ -45,26 +58,38 @@ export class CarsComponent implements OnInit{
     cardNum:[''],
     licenseDate:[''],
     branchId:[''],
-    driversId:[''],
+    petrolType:[''],
+    driversId:this._FormBuilder.array([]),
   })
+
+
+  get drivers():FormArray {
+    return this.carForm.get('driversId') as FormArray;
+  }
+
+  addDriver() {
+    const driverControl = this._FormBuilder.control('');
+    this.drivers.push(driverControl);
+    this.drivers.controls.forEach((item)=>{
+      console.log(item.value);
+    })
+  }
+
+  removeDriver(index: number) {
+    this.drivers.removeAt(index);
+    console.log('Driver removed');
+  }
 
   submitCarForm():void{
     let data = this.carForm.value
     data.branchId = this.branchId
     data.cardNum = data.model
-    data.driversId = [this.branchId]
+    data.createdBy = this.userId
 
-    let formData = new FormData()
-    formData.append('branchId', data.branchId)
-    formData.append('model', data.model)
-    formData.append('carNumber', data.carNumber)
-    formData.append('color', data.color)
-    formData.append('cardNum', data.cardNum)
-    formData.append('licenseDate', data.licenseDate)
-    formData.append('driversId', data.driversId)
     this._CarService.CreateCar(data).subscribe({
       next:(res)=>{
         this.getAllCars()
+        this.carForm.reset()
       }
     })
   }
@@ -73,6 +98,7 @@ export class CarsComponent implements OnInit{
     this._CarService.DeleteCar(id).subscribe({
       next:(res)=>{
         this.getAllCars()
+        console.log(res);
       }
     })
   }
