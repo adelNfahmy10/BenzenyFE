@@ -1,8 +1,7 @@
-import { isPlatformBrowser, NgClass, NgFor } from '@angular/common';
-import { Component, ElementRef, inject, Input, PLATFORM_ID, ViewChild } from '@angular/core';
+import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, inject, Input, OnChanges, OnInit, Output, PLATFORM_ID, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ViewallComponent } from "../buttons/viewall/viewall.component";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
@@ -10,13 +9,15 @@ import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [FormsModule, NgxPaginationModule, NgFor, NgClass],
+  imports: [FormsModule, NgxPaginationModule, NgClass, NgIf],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
-export class TableComponent {
+export class TableComponent{
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
-  @Input() data!:any
+  @Input() data:any[] = []
+  @Input() title:string = ''
+
   page = 1;
   selectAll = false;
 
@@ -27,8 +28,8 @@ export class TableComponent {
 
   // Filtering the data based on search input
   get filteredData() {
-    return this.data.items.filter((row:any[]) =>
-      Object.values(row).some((value:any) => value.toString().toLowerCase().includes(this.filterText.toLowerCase()))
+    return this.data.filter((row) =>
+      row.fullName.toLowerCase().includes(this.filterText.toLowerCase())
     );
   }
 
@@ -44,7 +45,7 @@ export class TableComponent {
 
   // Toggle Select All checkbox
   toggleSelectAll() {
-    this.data.items.forEach((row:any) => row.selected = this.selectAll);
+    this.data.forEach((row:any) => row.selected = this.selectAll);
   }
 
   // Sorting function
@@ -57,7 +58,7 @@ export class TableComponent {
       this.sortOrder = 'asc';
     }
 
-    this.data.items.sort((a:any, b:any) => {
+    this.data.sort((a:any, b:any) => {
       const aValue = a[column];
       const bValue = b[column];
 
@@ -110,4 +111,15 @@ export class TableComponent {
     // Export the workbook to Excel file
     XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
   }
+
+  // Menu Option In Table
+  selectedRowId: number | null = null;
+  toggleMenu(rowId: number) {
+    if (this.selectedRowId === rowId) {
+      this.selectedRowId = null;
+    } else {
+      this.selectedRowId = rowId;
+    }
+  }
+
 }

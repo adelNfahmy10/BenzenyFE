@@ -1,8 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { inject, PLATFORM_ID } from '@angular/core';
+import { inject } from '@angular/core';
 import { AuthService } from '../../app/layout/auth/core/service/auth.service';
 import { catchError, switchMap, throwError } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
 
 export const headerInterceptor: HttpInterceptorFn = (req, next) => {
   const _AuthService = inject(AuthService)
