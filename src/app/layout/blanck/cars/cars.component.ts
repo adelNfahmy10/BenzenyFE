@@ -1,5 +1,4 @@
 import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
-import { TableComponent } from "../../../../assets/share/table/table.component";
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import * as XLSX from 'xlsx';
@@ -13,7 +12,7 @@ import { DriverService } from '../drivers/core/service/driver.service';
 @Component({
   selector: 'app-cars',
   standalone: true,
-  imports: [FormsModule, TableComponent, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgClass, NgFor, NgIf],
+  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgClass, NgFor, NgIf],
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.scss'
 })
@@ -25,6 +24,7 @@ export class CarsComponent implements OnInit{
 
   allCars:any[] = []
   allDrivers:any[] = []
+  title:string = ''
   branchId:string | null = localStorage.getItem('branchId')
   userId:string | null = localStorage.getItem('userId')
 
