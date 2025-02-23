@@ -1,24 +1,26 @@
 import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
-import { TableComponent } from '../../../../assets/share/table/table.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import * as XLSX from 'xlsx';
 import { DriverService } from './core/service/driver.service';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { isPlatformBrowser, NgClass, NgIf } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-drivers',
   standalone: true,
-  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule,NgClass, NgIf],
+  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule,NgClass, NgIf, NgFor, NgxDropzoneModule],
   templateUrl: './drivers.component.html',
   styleUrl: './drivers.component.scss'
 })
 export class DriversComponent implements OnInit{
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _DriverService = inject(DriverService)
+  private readonly _ToastrService = inject(ToastrService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
 
   branchId:string | null = null
@@ -75,9 +77,22 @@ export class DriversComponent implements OnInit{
   }
 
   @ViewChild('table') template!:ElementRef
-  downloadExcel():void{
+  downloadTableExcel():void{
     // Create a workbook and sheet from the HTML table
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
+
+    // Create a new workbook with the worksheet
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    // Export the workbook to Excel file
+    XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
+  }
+
+  @ViewChild('template') tableTemplate!:ElementRef
+  downloadTemplateExcel():void{
+    // Create a workbook and sheet from the HTML table
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.tableTemplate.nativeElement);
 
     // Create a new workbook with the worksheet
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -185,5 +200,31 @@ export class DriversComponent implements OnInit{
     } else {
       this.selectedRowId = rowId;
     }
+  }
+
+  files: File[] = [];
+  onSelect(event:any) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+    console.log(this.files[0]);
+  }
+  onRemove(event:any) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  uploadFileExcel():void{
+    let formData = new FormData
+    formData.append('BranchId', this.branchId!),
+    // formData.append('File ', this.files[0])
+    this.files.forEach((item, index:number)=>{
+      formData.append(`File`, item)
+    })
+
+    this._DriverService.ImportDrivers(formData).subscribe({
+      next:(res)=>{
+        this._ToastrService.success(res.msg)
+      }
+    })
   }
 }

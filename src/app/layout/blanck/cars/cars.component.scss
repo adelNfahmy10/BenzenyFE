@@ -149,3 +149,11 @@ input:checked + .slider:before {
     color: #fff;
   }
 }
+.download-template{
+  border: 1px solid $mainColor;
+  color: $mainColor;
+  &:hover{
+    background-color: $mainColor;
+    color: #fff;
+  }
+}

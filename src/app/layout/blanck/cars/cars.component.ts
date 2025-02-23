@@ -9,11 +9,12 @@ import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DriverService } from '../drivers/core/service/driver.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @Component({
   selector: 'app-cars',
   standalone: true,
-  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgClass, NgFor, NgIf],
+  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgClass, NgFor, NgIf, NgxDropzoneModule],
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.scss'
 })
@@ -76,7 +77,7 @@ export class CarsComponent implements OnInit{
     cardNum:[''],
     licenseDate:[''],
     branchId:[''],
-    pertroltype:[''],
+    petrolType:[''],
     driversId:this._FormBuilder.array([]),
   })
 
@@ -229,5 +230,44 @@ export class CarsComponent implements OnInit{
     } else {
       this.selectedRowId = rowId;
     }
+  }
+
+  @ViewChild('template') tableTemplate!:ElementRef
+  downloadTemplateExcel():void{
+    // Create a workbook and sheet from the HTML table
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.tableTemplate.nativeElement);
+
+    // Create a new workbook with the worksheet
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    // Export the workbook to Excel file
+    XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
+  }
+
+  files: File[] = [];
+  onSelect(event:any) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+    console.log(this.files[0]);
+  }
+  onRemove(event:any) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  uploadFileExcel():void{
+    let formData = new FormData
+    formData.append('BranchId', this.branchId!),
+    // formData.append('File ', this.files[0])
+    this.files.forEach((item, index:number)=>{
+      formData.append(`File`, item)
+    })
+
+    this._CarService.ImportCars(formData).subscribe({
+      next:(res)=>{
+        this._ToastrService.success(res.msg)
+      }
+    })
   }
 }
