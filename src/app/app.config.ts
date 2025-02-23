@@ -8,11 +8,12 @@ import { provideToastr } from 'ngx-toastr';
 import { headerInterceptor } from '../core/interceptor/header.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from '../core/interceptor/loading.interceptor';
+import { errorInterceptor } from '../core/interceptor/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withViewTransitions(), withInMemoryScrolling({scrollPositionRestoration:'top'})),
     provideClientHydration(),
-    provideHttpClient(withFetch(), withInterceptors([headerInterceptor, loadingInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([headerInterceptor, loadingInterceptor, errorInterceptor])),
     provideAnimations(),
     provideToastr(),
     importProvidersFrom(NgxSpinnerModule)
