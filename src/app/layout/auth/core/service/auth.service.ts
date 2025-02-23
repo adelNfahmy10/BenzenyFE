@@ -16,10 +16,10 @@ export class AuthService {
   register(data:any):Observable<any>{
     return this._HttpClient.post(`${environment.baseURL}api/Auth/v1/Register/register`,data)
   }
-
+  SwitchActiveUser(userId:any):Observable<any>{
+    return this._HttpClient.post(`${environment.baseURL}api/Auth/v1/SwitchActive/SwitchActive/${userId}`, {})
+  }
   refreshToken(data:any):Observable<any>{
     return this._HttpClient.post(`${environment.baseURL}api/Auth/v1/RefreshToken/refresh`,data)
   }
-
-
 }
