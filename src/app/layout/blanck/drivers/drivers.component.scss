@@ -137,3 +137,19 @@ input:checked + .slider:before {
   background: $mainColor !important;
   color: #fff !important ;
 }
+.download-template{
+  border: 1px solid $mainColor;
+  color: $mainColor;
+  &:hover{
+    background-color: $mainColor;
+    color: #fff;
+  }
+}
+.download-template{
+  border: 1px solid $mainColor;
+  color: $mainColor;
+  &:hover{
+    background-color: $mainColor;
+    color: #fff;
+  }
+}

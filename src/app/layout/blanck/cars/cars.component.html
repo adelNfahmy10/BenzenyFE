@@ -75,11 +75,11 @@
         </div>
 
         <div class="col-lg-2 animate__animated animate__fadeInDown">
-          <div class="data p-2 bg-white d-flex align-items-center justify-content-center gap-2 h-100 rounded-3 cr">
+          <div class="data p-2 bg-white d-flex align-items-center justify-content-center gap-2 h-100 rounded-3 cr" data-bs-toggle="modal" data-bs-target="#exampleModalUpload">
             <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15.09 26.25C15.09 19.82 20.32 14.58 26.75 14.58H19.46C17.05 14.58 15.09 12.62 15.09 10.21V0.04C14.85 0.02 14.62 0 14.38 0H7.8C3.77 0 0.5 3.27 0.5 7.29V27.71C0.5 31.73 3.77 35 7.8 35H19.06C16.63 32.86 15.09 29.74 15.09 26.25ZM6.68 29.4C6.84 29.73 6.61 30.1 6.24 30.1C6.06 30.1 5.89 30 5.81 29.83L5.28 28.79L4.77 29.83C4.68 30 4.51 30.1 4.33 30.1C4.04 30.1 3.84 29.88 3.84 29.62C3.84 29.55 3.86 29.47 3.89 29.4L4.74 27.7L3.89 26C3.73 25.68 3.97 25.29 4.33 25.29C4.51 25.29 4.68 25.4 4.77 25.56L5.28 26.6L5.81 25.56C5.89 25.4 6.06 25.29 6.24 25.29C6.61 25.29 6.84 25.68 6.68 26L5.83 27.7L6.68 29.4ZM9.09 30.1H7.81C7.54 30.1 7.33 29.89 7.33 29.62V25.77C7.33 25.51 7.54 25.29 7.81 25.29C8.08 25.29 8.3 25.51 8.3 25.77V29.14H9.09C9.36 29.14 9.58 29.36 9.58 29.62C9.58 29.88 9.36 30.1 9.09 30.1ZM12.85 28.88H12.84C12.73 29.59 12.11 30.1 11.38 30.1C10.98 30.1 10.6 29.99 10.27 29.77C10.04 29.62 10 29.29 10.2 29.09C10.29 29.01 10.4 28.96 10.51 28.96C10.59 28.96 10.66 28.99 10.74 29.03C10.92 29.14 11.15 29.21 11.38 29.21C11.74 29.21 12 28.96 12.04 28.73C12.09 28.4 11.67 28.2 11.55 28.15C11 27.93 10.5 27.68 10.49 27.68C10.07 27.39 9.88 26.94 9.94 26.45C10 25.94 10.35 25.53 10.82 25.37C11.33 25.2 11.79 25.32 12.12 25.49C12.36 25.61 12.43 25.93 12.26 26.15C12.14 26.31 11.93 26.36 11.74 26.29C11.56 26.2 11.31 26.15 11.06 26.23C10.81 26.32 10.75 26.5 10.75 26.58C10.75 26.85 10.95 26.92 11.01 26.95C11.18 27.03 11.49 27.17 11.83 27.31C12.71 27.66 12.93 28.35 12.85 28.88ZM26.75 17.5C21.92 17.5 18 21.42 18 26.25C18 31.08 21.92 35 26.75 35C31.58 35 35.5 31.08 35.5 26.25C35.5 21.42 31.59 17.5 26.75 17.5ZM31.03 25.46C30.83 25.94 30.36 26.25 29.85 26.25H28.21V30.62C28.21 31.43 27.56 32.08 26.75 32.08C25.94 32.08 25.29 31.43 25.29 30.62V26.25H23.66C23.14 26.25 22.67 25.94 22.47 25.46C22.27 24.98 22.38 24.43 22.75 24.07L24.94 21.88C25.94 20.88 27.56 20.88 28.56 21.88L30.75 24.07C31.12 24.43 31.23 24.99 31.03 25.46ZM26.68 8.07L21.6 2.99C20.56 1.95 19.33 1.18 18 0.67V10.21C18 11.01 18.66 11.67 19.46 11.67H29C28.49 10.34 27.72 9.11 26.68 8.07Z" fill="#F97C21"/>
             </svg>
-            <div class="d-flex flex-column gap-0" (click)="downloadExcel()">
+            <div class="d-flex flex-column gap-0">
               <span class="fw-bold">Upload</span>
               <span class="fw-bold">File</span>
             </div>
@@ -230,29 +230,6 @@
     </div>
 </section>
 
-
-<!-- Upload Table To Client-->
-<table class="d-none" #table>
-  <thead>
-    <tr>
-      <th>Model</th>
-      <th>Car Number</th>
-      <th>Color</th>
-      <th>Liecnies Date</th>
-      <th>Card Number</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-
-
 <!-- Modal Add Vehicles -->
 <div class="modal fade" id="exampleModal-add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -368,3 +345,75 @@
   </div>
 </div>
 
+
+<!-- Modal Upload File Excel-->
+<div class="modal fade" id="exampleModalUpload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h4>Please ensure that the Excel sheet contains the following columns:</h4>
+        <ul>
+          <li>Model</li>
+          <li>Car Number</li>
+          <li>Color</li>
+          <li>Pertrol Type</li>
+          <li>Card Number</li>
+        </ul>
+        <div>
+          <button class="btn download-template my-2" (click)="downloadTemplateExcel()">Download Template <i class="fa-solid fa-cloud-arrow-down"></i></button>
+          <ngx-dropzone (change)="onSelect($event)">
+            <ngx-dropzone-label class="main-color fs-2">Choose Files <i class="fa-solid fa-upload"></i></ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="d-flex justify-content-end align-items-center gap-2">
+          <button class="save-btn btn d-flex justify-content-center align-items-center gap-2" (click)="uploadFileExcel()">
+            <span>Save</span>
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_893_4557)">
+              <path d="M17.7083 25H9.375C4.20521 25 0 20.7937 0 15.625V7.29167C0 6.71667 0.465625 6.25 1.04167 6.25C1.61771 6.25 2.08333 6.71667 2.08333 7.29167V15.625C2.08333 19.6458 5.35521 22.9167 9.375 22.9167H17.7083C18.2844 22.9167 18.75 23.3833 18.75 23.9583C18.75 24.5333 18.2844 25 17.7083 25ZM17.7083 0H11.4583V5.20833H17.7083V0ZM25 6.52812V15.625C25 18.501 22.6677 20.8333 19.7917 20.8333H9.375C6.49896 20.8333 4.16667 18.501 4.16667 15.625V5.20833C4.16667 2.33646 6.50312 0 9.375 0V5.20833C9.375 6.35938 10.3073 7.29167 11.4583 7.29167H17.7083C18.8594 7.29167 19.7917 6.35938 19.7917 5.20833V0.288542C20.1354 0.444792 20.4552 0.655208 20.7229 0.925L24.0937 4.32604C24.674 4.91146 25 5.70312 25 6.52812ZM18.75 14.0625C18.75 12.049 17.1177 10.4167 15.1042 10.4167C13.0906 10.4167 11.4583 12.049 11.4583 14.0625C11.4583 16.076 13.0906 17.7083 15.1042 17.7083C17.1177 17.7083 18.75 16.076 18.75 14.0625ZM16.6667 14.0625C16.6667 14.925 15.9667 15.625 15.1042 15.625C14.2417 15.625 13.5417 14.925 13.5417 14.0625C13.5417 13.2 14.2417 12.5 15.1042 12.5C15.9667 12.5 16.6667 13.2 16.6667 14.0625Z"/>
+              <circle cx="15" cy="14" r="1" fill="#F97C21"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_893_4557">
+              <rect width="25" height="25" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>
+          </button>
+        </div>
+        <span data-bs-dismiss="modal"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Upload Table To Client-->
+<table class="d-none" #template>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Car Number</th>
+      <th>Color</th>
+      <th>Petrol Type</th>
+      <th>Liecnies Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ex. Model</td>
+      <td>Ex. SCV 123</td>
+      <td>Ex. Color</td>
+      <td>Ex. 95</td>
+      <td>YYYY-MM-DD</td>
+    </tr>
+  </tbody>
+</table>
