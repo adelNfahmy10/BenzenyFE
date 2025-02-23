@@ -1,46 +1,46 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { inject, PLATFORM_ID } from '@angular/core';
 import { AuthService } from '../../app/layout/auth/core/service/auth.service';
 import { catchError, switchMap, throwError } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 export const headerInterceptor: HttpInterceptorFn = (req, next) => {
+  const _PLATFORM_ID = inject(PLATFORM_ID)
   const _AuthService = inject(AuthService)
-  let token = localStorage.getItem('token')
-  let refreshToken = localStorage.getItem('refreshToken')
 
-  if(token !== null){
-    if(token) {
+  if(isPlatformBrowser(_PLATFORM_ID)){
+    if(localStorage.getItem('token') !== null){
       req = req.clone({
-        setHeaders: {Authorization: `Bearer ${token!}`}
+        setHeaders: {Authorization: `Bearer ${localStorage.getItem('token')}`}
       })
     }
   }
 
   return next(req).pipe(
     catchError((err) => {
-      if (token !== null && err.status === 401 || err.error?.msg === "Unauthorized") {
+      if (err.status === 401 || err.error?.msg === "Unauthorized") {
         let data = {
-          accessToken: token!,
-          refreshToken: refreshToken!
+          accessToken: localStorage.getItem('token'),
+          refreshToken: localStorage.getItem('refreshToken')
         };
-        return _AuthService.refreshToken(data).pipe(
-          switchMap((res: any) => {
-            if (res && res.data) {
-              localStorage.setItem('token', res.data.accessToken);
+       return _AuthService.refreshToken(data).pipe(
+        switchMap((res: any) => {
+          if (res && res.data) {
+            localStorage.setItem('token', res.data.accessToken);
 
-              const updatedReq = req.clone({
-                setHeaders: { Authorization: `Bearer ${res.data.accessToken}` },
-              });
+            const updatedReq = req.clone({
+              setHeaders: { Authorization: `Bearer ${res.data.accessToken}` },
+            });
 
-              return next(updatedReq);
-            } else {
-              return throwError(() => new Error('Unable to refresh token.'));
-            }
-          }),
-          catchError((refreshErr) => {
-            return throwError(() => new Error('Token refresh failed.'));
-          })
-        );
+            return next(updatedReq);
+          } else {
+            return throwError(() => new Error('Unable to refresh token.'));
+          }
+        }),
+        catchError((refreshErr) => {
+          return throwError(() => new Error('Token refresh failed.'));
+        })
+      );
       } else {
         return throwError(() => err);
       }

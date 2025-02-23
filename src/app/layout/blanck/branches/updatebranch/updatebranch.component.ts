@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BranchService } from '../core/service/branch.service';
 import { ReigonandcityService } from '../../../../../core/services/reigons/reigonandcity.service';
 import { ActivatedRoute } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-updatebranch',
@@ -17,13 +18,20 @@ export class UpdatebranchComponent implements OnInit{
   private readonly _BranchService = inject(BranchService)
   private readonly _ReigonandcityService = inject(ReigonandcityService)
   private readonly _ActivatedRoute = inject(ActivatedRoute)
+  private readonly _PLATFORM_ID = inject(PLATFORM_ID)
 
-  companyId:string | null = localStorage.getItem("companyId")
+  companyId:string | null = null
   allBrnaches:any[] = []
   allRegions:any[] = []
   allCity:any[] = []
   branch:any[] = []
   branchId:string = ''
+
+  constructor(){
+    if(isPlatformBrowser(this._PLATFORM_ID)){
+      this.companyId = localStorage.getItem("companyId")
+    }
+  }
 
   ngOnInit(): void {
     this.getBranchById()

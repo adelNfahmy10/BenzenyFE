@@ -21,11 +21,16 @@ export class DriversComponent implements OnInit{
   private readonly _DriverService = inject(DriverService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
 
-  branchId:string | null = localStorage.getItem('branchId')
-  userId:string | null = localStorage.getItem('userId')
+  branchId:string | null = null
+  userId:string | null = null
   allDrivers:any[] = []
   title:string = 'Drivers'
-
+  constructor(){
+    if(isPlatformBrowser(this._PLATFORM_ID)){
+      this.branchId = localStorage.getItem('branchId')
+      this.userId = localStorage.getItem('userId')
+    }
+  }
 
   ngOnInit(): void {
     this.getAllDrivers()

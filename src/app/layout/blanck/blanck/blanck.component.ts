@@ -1,5 +1,5 @@
-import { NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { isPlatformBrowser, NgClass } from '@angular/common';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -10,9 +10,17 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
   styleUrl: './blanck.component.scss'
 })
 export class BlanckComponent {
+  private readonly _PLATFORM_ID = inject(PLATFORM_ID)
   private readonly _Router = inject(Router)
-  userName:string | null = localStorage.getItem('userName')
-  branchId:string | null = localStorage.getItem('branchId')
+  userName:string | null = null
+  branchId:string | null = null
+
+  constructor(){
+    if(isPlatformBrowser(this._PLATFORM_ID)){
+      this.userName = localStorage.getItem('userName')
+      this.branchId = localStorage.getItem('branchId')
+    }
+  }
 
   open:Boolean = true
   slideNav():void{

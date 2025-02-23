@@ -25,8 +25,15 @@ export class CarsComponent implements OnInit{
   allCars:any[] = []
   allDrivers:any[] = []
   title:string = ''
-  branchId:string | null = localStorage.getItem('branchId')
-  userId:string | null = localStorage.getItem('userId')
+  branchId:string | null = null
+  userId:string | null = null
+
+  constructor(){
+    if(isPlatformBrowser(this._PLATFORM_ID)){
+      this.branchId = localStorage.getItem('branchId')
+      this.userId = localStorage.getItem('userId')
+    }
+  }
 
   ngOnInit(): void {
     this.getAllCars()
