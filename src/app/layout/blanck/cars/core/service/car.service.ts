@@ -12,8 +12,8 @@ export class CarService {
   // GetAllCars(pageNum:any = 1, pageSize:any = 10):Observable<any>{
   //   return this._HttpClient.get(`${environment.baseURL}api/Car/v1/GetAll/GetAllCars??pageNumber=${pageNum}&pageSize=${pageSize}`)
   // }
-  GetAllCars(branchId:any, pageNum:any = 1, pageSize:any = 10):Observable<any>{
-    return this._HttpClient.get(`${environment.baseURL}api/Car/v1/GetCarsInBranch/GetCarsInBranch/${branchId}?pageNumber=${pageNum}&pageSize=${pageSize}`)
+  GetAllCarsByBranchId(branchId:any, searchTerm:any = '', pageNum:any = 1, pageSize:any = 10):Observable<any>{
+    return this._HttpClient.get(`${environment.baseURL}api/Car/v1/GetCarsInBranch/GetCarsInBranch/${branchId}?searchTerm=${searchTerm}&pageNumber=${pageNum}&pageSize=${pageSize}`)
   }
 
   GetCarById(id:any):Observable<any>{
