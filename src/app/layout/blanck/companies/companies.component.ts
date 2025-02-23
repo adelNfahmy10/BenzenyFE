@@ -16,7 +16,7 @@ Chart.register(...registerables)
 @Component({
   selector: 'app-companies',
   standalone: true,
-  imports: [ViewallComponent, BtnaddComponent, RouterLink, FormsModule, HeaderComponent, RouterLink, ReactiveFormsModule, NgIf],
+  imports: [ViewallComponent, BtnaddComponent, RouterLink, FormsModule, HeaderComponent, RouterLink, ReactiveFormsModule, NgIf, NgClass],
   templateUrl: './companies.component.html',
   styleUrl: './companies.component.scss'
 })
@@ -49,7 +49,7 @@ export class CompaniesComponent implements OnInit{
     this.getAllUsersByCompanyId()
   }
   getAllBranches():void{
-    this._BranchService.GetAllBranchs().subscribe({
+    this._BranchService.GetAllBranchs(this.companyId).subscribe({
       next:(res)=>{
         this.allBranches = res.data.items
       }
@@ -149,6 +149,16 @@ export class CompaniesComponent implements OnInit{
   DeleteUserInCompany(userId:string):void{
     this._CompanyService.DeleteUserInCompany(this.companyId!,userId).subscribe({
       next:(res)=>{
+        this._ToastrService.error(res.msg)
+        this.getAllUsersByCompanyId()
+      }
+    })
+  }
+
+  switchActiveUser(userId:string):void{
+    this._AuthService.SwitchActiveUser(userId).subscribe({
+      next:(res)=>{
+        this._ToastrService.success(res.msg)
         this.getAllUsersByCompanyId()
       }
     })
