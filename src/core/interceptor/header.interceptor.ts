@@ -16,12 +16,11 @@ export const headerInterceptor: HttpInterceptorFn = (req, next) => {
     }
   }
 
-  return next(req).pipe(
-    catchError((err) => {
+  return next(req).pipe(catchError((err) => {
       if (err.status === 401 || err.error?.msg === "Unauthorized") {
         let data = {
-          accessToken: localStorage.getItem('token'),
-          refreshToken: localStorage.getItem('refreshToken')
+          accessToken: localStorage.getItem('token')!,
+          refreshToken: localStorage.getItem('refreshToken')!
         };
        return _AuthService.refreshToken(data).pipe(
         switchMap((res: any) => {
@@ -36,9 +35,6 @@ export const headerInterceptor: HttpInterceptorFn = (req, next) => {
           } else {
             return throwError(() => new Error('Unable to refresh token.'));
           }
-        }),
-        catchError((refreshErr) => {
-          return throwError(() => new Error('Token refresh failed.'));
         })
       );
       } else {
