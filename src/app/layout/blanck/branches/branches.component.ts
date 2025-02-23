@@ -28,11 +28,18 @@ export class BranchesComponent implements OnInit{
   currentPage:number = 1
   pageSize:number = 1
   selectAll = false;
-  companyId:string | null = localStorage.getItem("companyId")
+  companyId:string | null = null
   allBrnaches:any[] = []
   allRegions:any[] = []
   allCity:any[] = []
   branchCount:string = ''
+
+  constructor(){
+    if(isPlatformBrowser(this._PLATFORM_ID)){
+      this.companyId = localStorage.getItem("companyId")
+    }
+  }
+
   onPageChange(page: number): void {
     this.currentPage = page;
     this.changePagePagination(page);  // استدعاء الدالة لجلب البيانات للصفحة الجديدة

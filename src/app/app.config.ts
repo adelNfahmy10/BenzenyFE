@@ -6,12 +6,15 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { headerInterceptor } from '../core/interceptor/header.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { loadingInterceptor } from '../core/interceptor/loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withViewTransitions(), withInMemoryScrolling({scrollPositionRestoration:'top'})),
     provideClientHydration(),
-    provideHttpClient(withFetch(), withInterceptors([headerInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([headerInterceptor, loadingInterceptor])),
     provideAnimations(),
     provideToastr(),
+    importProvidersFrom(NgxSpinnerModule)
   ]
 };

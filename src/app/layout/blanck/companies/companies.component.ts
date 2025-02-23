@@ -10,7 +10,7 @@ import { BranchService } from '../branches/core/service/branch.service';
 import { ReigonandcityService } from '../../../../core/services/reigons/reigonandcity.service';
 import { AuthService } from '../../auth/core/service/auth.service';
 import { CompanyService } from './core/service/company.service';
-import { NgClass, NgIf } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgIf } from '@angular/common';
 Chart.register(...registerables)
 
 @Component({
@@ -27,13 +27,21 @@ export class CompaniesComponent implements OnInit{
   private readonly _BranchService = inject(BranchService)
   private readonly _ReigonandcityService = inject(ReigonandcityService)
   private readonly _AuthService = inject(AuthService)
+  private readonly _PLATFORM_ID = inject(PLATFORM_ID)
 
-  companyName:string | null = localStorage.getItem('companyName')
+  companyName:string | null = null
+  companyId:string | null = null
   allBranches:any[] = []
-  companyId:string | null = localStorage.getItem("companyId")
   allRegions:any[] = []
   allCity:any[] = []
   allUsers:any[] = []
+
+  constructor(){
+    if(isPlatformBrowser(this._PLATFORM_ID)){
+      this.companyName = localStorage.getItem('companyName')
+      this.companyId = localStorage.getItem("companyId")
+    }
+  }
 
   ngOnInit(): void {
     this.getAllBranches()

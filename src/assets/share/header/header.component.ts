@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent{
-  companyName:string | null = localStorage.getItem('companyName')
-  userName:string | null = localStorage.getItem('userName')
+  private readonly _PLATFORM_ID = inject(PLATFORM_ID)
+  companyName:string | null = null
+  userName:string | null = null
+
+  constructor(){
+    if(isPlatformBrowser(this._PLATFORM_ID)){
+      this.companyName = localStorage.getItem('companyName')
+      this.userName = localStorage.getItem('userName')
+    }
+  }
+
 }

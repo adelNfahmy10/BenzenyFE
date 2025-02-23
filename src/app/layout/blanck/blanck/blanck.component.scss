@@ -1,5 +1,4 @@
 $mainColor: #f79320;
-
 .nav,.components{
     min-height: 100vh;
     transition: all .3s;
@@ -29,15 +28,16 @@ $mainColor: #f79320;
             transition: all .3s;
             padding: 5px 10px;
             background-color: #eee;
-            color: #aaa;
             width: 46px;
             svg{
-              fill:#BEBEBE
+              fill:#BEBEBE;
+              transition: all .6s;
             }
             span{
                 opacity: 0;
                 display: none;
                 transition: all .6s;
+                color: #BEBEBE !important;
             }
             i{
                 font-size: 30px;
@@ -45,7 +45,12 @@ $mainColor: #f79320;
             }
             &.active, &:hover{
                 background-color: $mainColor;
-                color: #fff;
+                span{
+                  color: #fff !important;
+                }
+                svg{
+                  fill:#fff;
+                }
             }
             &.active svg{
               fill: #fff !important;
