@@ -138,3 +138,14 @@ input:checked + .slider:before {
   background: $mainColor !important;
   color: #fff !important ;
 }
+.add-driver-btn{
+  width: 35px;
+  height: 35px;
+  border: 1px solid $mainColor;
+  color: $mainColor;
+  transition: all .3s;
+  &:hover{
+    background-color: $mainColor;
+    color: #fff;
+  }
+}

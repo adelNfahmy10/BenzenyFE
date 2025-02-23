@@ -8,6 +8,7 @@ import html2canvas from 'html2canvas';
 import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DriverService } from '../drivers/core/service/driver.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cars',
@@ -21,12 +22,19 @@ export class CarsComponent implements OnInit{
   private readonly _CarService = inject(CarService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
   private readonly _DriverService = inject(DriverService)
+  private readonly _ToastrService = inject(ToastrService)
 
   allCars:any[] = []
   allDrivers:any[] = []
   title:string = ''
   branchId:string | null = null
   userId:string | null = null
+  allPage:number = 1;
+  currentPage:number = 1
+  pageSize:number = 1
+  carCount:number = 1
+  driverCount:number = 1
+  selectAll = false;
 
   constructor(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
@@ -42,10 +50,13 @@ export class CarsComponent implements OnInit{
   }
 
   getAllCars():void{
-    this._CarService.GetAllCars(this.branchId).subscribe({
+    this._CarService.GetAllCarsByBranchId(this.branchId).subscribe({
       next:(res)=>{
         this.allCars = res.data.items
-        console.log(this.allCars);
+        this.carCount = res.data.totalCount
+        this.allPage = Math.ceil(res.data.totalCount / res.data.pageSize)
+        this.currentPage = res.data.pageNumber
+        this.pageSize = res.data.pageSize
       }
     })
   }
@@ -65,10 +76,9 @@ export class CarsComponent implements OnInit{
     cardNum:[''],
     licenseDate:[''],
     branchId:[''],
-    petrolType:[''],
+    pertroltype:[''],
     driversId:this._FormBuilder.array([]),
   })
-
 
   get drivers():FormArray {
     return this.carForm.get('driversId') as FormArray;
@@ -77,14 +87,12 @@ export class CarsComponent implements OnInit{
   addDriver() {
     const driverControl = this._FormBuilder.control('');
     this.drivers.push(driverControl);
-    this.drivers.controls.forEach((item)=>{
-      console.log(item.value);
-    })
+    this.driverCount++
   }
 
   removeDriver(index: number) {
     this.drivers.removeAt(index);
-    console.log('Driver removed');
+    this.driverCount--
   }
 
   submitCarForm():void{
@@ -97,6 +105,9 @@ export class CarsComponent implements OnInit{
       next:(res)=>{
         this.getAllCars()
         this.carForm.reset()
+        this.drivers.clear()
+        this.addDriver()
+        this._ToastrService.success(res.msg)
       }
     })
   }
@@ -105,7 +116,6 @@ export class CarsComponent implements OnInit{
     this._CarService.DeleteCar(id).subscribe({
       next:(res)=>{
         this.getAllCars()
-        console.log(res);
       }
     })
   }
@@ -149,22 +159,18 @@ export class CarsComponent implements OnInit{
     }
   }
 
-
-
-
-  page = 1;
-  selectAll = false;
-
   // Sort column and order
-  filterText = '';
   sortColumn: string = '';
   sortOrder: 'asc' | 'desc' = 'asc';
 
   // Filtering the data based on search input
-  get filteredData() {
-    return this.allCars.filter((row) =>
-      row.fullName.toLowerCase().includes(this.filterText.toLowerCase())
-    );
+  filteredData(event:Event) {
+    const searchTerm = (event.target as HTMLInputElement).value;
+    this._CarService.GetAllCarsByBranchId(this.branchId, searchTerm).subscribe({
+      next:(res)=>{
+        this.allCars = res.data.items
+      }
+    })
   }
 
   // Check if the row is selected
