@@ -27,6 +27,12 @@ export class DriversComponent implements OnInit{
   userId:string | null = null
   allDrivers:any[] = []
   title:string = 'Drivers'
+  allPage:number = 1;
+  currentPage:number = 1
+  pageSize:number = 1
+  selectAll = false;
+  driverCount:string = ''
+
   constructor(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
       this.branchId = localStorage.getItem('branchId')
@@ -34,15 +40,33 @@ export class DriversComponent implements OnInit{
     }
   }
 
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.changePagePagination(page);
+  }
+
+  changePagePagination(page:number):void{
+    this._DriverService.GetDriversInBranch(this.branchId, '' , page).subscribe({
+      next:(res)=>{
+        this.allDrivers = res.data.items
+      }
+    })
+  }
+
+
+
   ngOnInit(): void {
     this.getAllDrivers()
   }
 
   getAllDrivers():void{
-    this._DriverService.GetAllDrivers(this.branchId).subscribe({
+    this._DriverService.GetDriversInBranch(this.branchId).subscribe({
       next:(res)=>{
         this.allDrivers = res.data.items
-        console.log(this.allDrivers);
+        this.driverCount = res.data.totalCount
+        this.allPage = Math.ceil(res.data.totalCount / res.data.pageSize)
+        this.currentPage = res.data.pageNumber
+        this.pageSize = res.data.pageSize
       }
     })
   }
@@ -64,6 +88,7 @@ export class DriversComponent implements OnInit{
       next:(res)=>{
         this.getAllDrivers()
         this.driverForm.reset()
+        this._ToastrService.success(res.msg)
       }
     })
   }
@@ -72,34 +97,25 @@ export class DriversComponent implements OnInit{
     this._DriverService.DeleteDriver(id).subscribe({
       next:(res)=>{
         this.getAllDrivers()
+        this._ToastrService.error(res.msg)
       }
     })
   }
 
   @ViewChild('table') template!:ElementRef
   downloadTableExcel():void{
-    // Create a workbook and sheet from the HTML table
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
-
-    // Create a new workbook with the worksheet
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    // Export the workbook to Excel file
-    XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
+    XLSX.writeFile(wb, 'table_data.xlsx');
   }
 
   @ViewChild('template') tableTemplate!:ElementRef
   downloadTemplateExcel():void{
-    // Create a workbook and sheet from the HTML table
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.tableTemplate.nativeElement);
-
-    // Create a new workbook with the worksheet
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    // Export the workbook to Excel file
-    XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
+    XLSX.writeFile(wb, 'table_data.xlsx');
   }
 
   downloadPDF():void{
@@ -128,9 +144,7 @@ export class DriversComponent implements OnInit{
     }
   }
 
-
   page = 1;
-  selectAll = false;
 
   // Sort column and order
   filterText = '';
@@ -138,12 +152,14 @@ export class DriversComponent implements OnInit{
   sortOrder: 'asc' | 'desc' = 'asc';
 
   // Filtering the data based on search input
-  get filteredData() {
-    return this.allDrivers.filter((row) =>
-      row.fullName.toLowerCase().includes(this.filterText.toLowerCase())
-    );
+  filteredData(event:Event) {
+    const searchTerm = (event.target as HTMLInputElement).value;
+    this._DriverService.GetDriversInBranch(this.branchId, searchTerm).subscribe({
+      next:(res)=>{
+        this.allDrivers = res.data.items
+      }
+    })
   }
-
   // Check if the row is selected
   isSelected(row: any) {
     return row.selected;

@@ -14,9 +14,9 @@
             </div>
         </div>
 
-        <div class="col-lg-6 animate__animated animate__fadeInDown">
+        <div class="col-lg-4 animate__animated animate__fadeInDown">
             <div class="row">
-                <div class="col-lg-4 details px-0">
+                <!-- <div class="col-lg-4 details px-0">
                     <div class="p-2 bg-white d-flex align-items-center justify-content-center gap-2 rounded-start-3">
                         <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="20.5" cy="20.5" r="20.5" fill="#F97C21"/>
@@ -32,10 +32,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="col-lg-4 details px-0">
-                    <div class="p-2 main-bg d-flex align-items-center justify-content-center gap-2">
+                <div class="col-lg-12 details px-0">
+                    <div class="p-2 main-bg d-flex align-items-center justify-content-center gap-2 rounded-3">
                         <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="20.5" cy="20.5" r="20.5" fill="white"/>
                             <path d="M7.60484 17.8551V15.1135C7.60484 14.6772 7.77902 14.2588 8.08906 13.9504C8.3991 13.6419 8.8196 13.4686 9.25806 13.4686C9.25806 13.4686 10.315 13.4686 10.3602 13.4686C11.0422 11.9606 11.8484 10.5114 12.7706 9.13577C13.3213 8.42328 14.0844 7.90239 14.9507 7.64764C16.8916 6.70892 24.7697 6.70892 26.7106 7.64764C27.5769 7.90239 28.34 8.42328 28.8907 9.13577C29.8129 10.5114 30.6191 11.9606 31.3011 13.4686C31.3463 13.4686 32.4032 13.4686 32.4032 13.4686C32.8417 13.4686 33.2622 13.6419 33.5722 13.9504C33.8823 14.2588 34.0565 14.6772 34.0565 15.1135V17.8551C29.6772 17.1982 25.2588 16.8319 20.8306 16.7585C16.4025 16.8319 11.9841 17.1982 7.60484 17.8551ZM34.0565 20.0736V22.2416C34.0565 23.405 33.592 24.5207 32.7652 25.3434C31.9384 26.166 30.8171 26.6281 29.6478 26.6281H12.0134C10.8442 26.6281 9.72286 26.166 8.89609 25.3434C8.06931 24.5207 7.60484 23.405 7.60484 22.2416V20.078C11.9835 19.4118 16.4019 19.0356 20.8306 18.9517C25.2594 19.0356 29.6777 19.4118 34.0565 20.078V20.0736ZM14.2177 23.3382C14.2177 23.0474 14.1016 22.7685 13.8949 22.5628C13.6882 22.3571 13.4079 22.2416 13.1156 22.2416C12.8233 22.2416 12.5429 22.3571 12.3363 22.5628C12.1296 22.7685 12.0134 23.0474 12.0134 23.3382C12.0134 23.6291 12.1296 23.908 12.3363 24.1137C12.5429 24.3193 12.8233 24.4349 13.1156 24.4349C13.4079 24.4349 13.6882 24.3193 13.8949 24.1137C14.1016 23.908 14.2177 23.6291 14.2177 23.3382ZM29.6478 23.3382C29.6478 23.0474 29.5317 22.7685 29.325 22.5628C29.1183 22.3571 28.838 22.2416 28.5457 22.2416C28.2534 22.2416 27.9731 22.3571 27.7664 22.5628C27.5597 22.7685 27.4435 23.0474 27.4435 23.3382C27.4435 23.6291 27.5597 23.908 27.7664 24.1137C27.9731 24.3193 28.2534 24.4349 28.5457 24.4349C28.838 24.4349 29.1183 24.3193 29.325 24.1137C29.5317 23.908 29.6478 23.6291 29.6478 23.3382ZM15.256 28.8214C15.9029 33.1575 9.225 33.1553 9.87306 28.8214H15.256ZM31.7882 28.8214C32.4352 33.1575 25.7573 33.1553 26.4053 28.8214H31.7882Z" fill="#F97C21"/>
@@ -44,7 +44,7 @@
                         <div>
                             <h5 class="text-white">Total Vehicles</h5>
                             <div class="d-flex justify-content-start align-items-center gap-1">
-                              <h3 class="text-white">200</h3>
+                              <h3 class="text-white">{{carCount}}</h3>
                               <svg class="mt-1" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9.5 0H2.5C1.12 0 0 1.12 0 2.5V9.5C0 10.88 1.12 12 2.5 12H9.5C10.88 12 12 10.88 12 9.5V2.5C12 1.12 10.88 0 9.5 0ZM3 2.5H6C6.275 2.5 6.5 2.725 6.5 3C6.5 3.275 6.275 3.5 6 3.5H3C2.725 3.5 2.5 3.275 2.5 3C2.5 2.725 2.725 2.5 3 2.5ZM3 4.5H7.5C7.775 4.5 8 4.725 8 5C8 5.275 7.775 5.5 7.5 5.5H3C2.725 5.5 2.5 5.275 2.5 5C2.5 4.725 2.725 4.5 3 4.5ZM4.5 9.5H3C2.725 9.5 2.5 9.275 2.5 9C2.5 8.725 2.725 8.5 3 8.5H4.5C4.775 8.5 5 8.725 5 9C5 9.275 4.775 9.5 4.5 9.5ZM9 7.5H3C2.725 7.5 2.5 7.275 2.5 7C2.5 6.725 2.725 6.5 3 6.5H9C9.275 6.5 9.5 6.725 9.5 7C9.5 7.275 9.275 7.5 9 7.5Z" fill="#fff"/>
                               </svg>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 details px-0">
+                <!-- <div class="col-lg-4 details px-0">
                     <div class="p-2 bg-dark d-flex align-items-center justify-content-center gap-2 rounded-end-3">
                         <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="20.5" cy="20.5" r="20.5" fill="white"/>
@@ -70,11 +70,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
-        <div class="col-lg-2 animate__animated animate__fadeInDown">
+        <div class="col-lg-4 animate__animated animate__fadeInDown">
           <div class="data p-2 bg-white d-flex align-items-center justify-content-center gap-2 h-100 rounded-3 cr" data-bs-toggle="modal" data-bs-target="#exampleModalUpload">
             <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15.09 26.25C15.09 19.82 20.32 14.58 26.75 14.58H19.46C17.05 14.58 15.09 12.62 15.09 10.21V0.04C14.85 0.02 14.62 0 14.38 0H7.8C3.77 0 0.5 3.27 0.5 7.29V27.71C0.5 31.73 3.77 35 7.8 35H19.06C16.63 32.86 15.09 29.74 15.09 26.25ZM6.68 29.4C6.84 29.73 6.61 30.1 6.24 30.1C6.06 30.1 5.89 30 5.81 29.83L5.28 28.79L4.77 29.83C4.68 30 4.51 30.1 4.33 30.1C4.04 30.1 3.84 29.88 3.84 29.62C3.84 29.55 3.86 29.47 3.89 29.4L4.74 27.7L3.89 26C3.73 25.68 3.97 25.29 4.33 25.29C4.51 25.29 4.68 25.4 4.77 25.56L5.28 26.6L5.81 25.56C5.89 25.4 6.06 25.29 6.24 25.29C6.61 25.29 6.84 25.68 6.68 26L5.83 27.7L6.68 29.4ZM9.09 30.1H7.81C7.54 30.1 7.33 29.89 7.33 29.62V25.77C7.33 25.51 7.54 25.29 7.81 25.29C8.08 25.29 8.3 25.51 8.3 25.77V29.14H9.09C9.36 29.14 9.58 29.36 9.58 29.62C9.58 29.88 9.36 30.1 9.09 30.1ZM12.85 28.88H12.84C12.73 29.59 12.11 30.1 11.38 30.1C10.98 30.1 10.6 29.99 10.27 29.77C10.04 29.62 10 29.29 10.2 29.09C10.29 29.01 10.4 28.96 10.51 28.96C10.59 28.96 10.66 28.99 10.74 29.03C10.92 29.14 11.15 29.21 11.38 29.21C11.74 29.21 12 28.96 12.04 28.73C12.09 28.4 11.67 28.2 11.55 28.15C11 27.93 10.5 27.68 10.49 27.68C10.07 27.39 9.88 26.94 9.94 26.45C10 25.94 10.35 25.53 10.82 25.37C11.33 25.2 11.79 25.32 12.12 25.49C12.36 25.61 12.43 25.93 12.26 26.15C12.14 26.31 11.93 26.36 11.74 26.29C11.56 26.2 11.31 26.15 11.06 26.23C10.81 26.32 10.75 26.5 10.75 26.58C10.75 26.85 10.95 26.92 11.01 26.95C11.18 27.03 11.49 27.17 11.83 27.31C12.71 27.66 12.93 28.35 12.85 28.88ZM26.75 17.5C21.92 17.5 18 21.42 18 26.25C18 31.08 21.92 35 26.75 35C31.58 35 35.5 31.08 35.5 26.25C35.5 21.42 31.59 17.5 26.75 17.5ZM31.03 25.46C30.83 25.94 30.36 26.25 29.85 26.25H28.21V30.62C28.21 31.43 27.56 32.08 26.75 32.08C25.94 32.08 25.29 31.43 25.29 30.62V26.25H23.66C23.14 26.25 22.67 25.94 22.47 25.46C22.27 24.98 22.38 24.43 22.75 24.07L24.94 21.88C25.94 20.88 27.56 20.88 28.56 21.88L30.75 24.07C31.12 24.43 31.23 24.99 31.03 25.46ZM26.68 8.07L21.6 2.99C20.56 1.95 19.33 1.18 18 0.67V10.21C18 11.01 18.66 11.67 19.46 11.67H29C28.49 10.34 27.72 9.11 26.68 8.07Z" fill="#F97C21"/>
@@ -98,7 +98,7 @@
         </div>
 
         <!-- Section Download -->
-        <div class="col-lg-4 animate__animated animate__fadeInRight">
+        <div class="col-lg-4 animate__animated animate__fadeInRight z-2">
           <div class="row g-1 main-bg pt-1 pb-2 px-2 rounded-5 mt-1">
             <div class="col-lg-6">
               <div class="bg-white gap-1 d-flex justify-content-center align-items-center rounded-5 py-2 cr" data-bs-toggle="modal" data-bs-target="#exampleModal-addBranch"data-bs-toggle="modal" data-bs-target="#exampleModal-add">
@@ -123,83 +123,83 @@
                 <ul class="list-group animate__animated download-list rounded-top-5" [ngClass]="{'animate__fadeInDown': open, 'd-none': !open}">
                   <li class="list-group-item border-0"></li>
                   <li class="list-group-item border-0"></li>
-                  <li (click)="downloadExcel()" class="list-group-item cr">Excel Sheet</li>
-                  <li (click)="downloadPDF()" class="list-group-item cr">PDF</li>
+                  <li (click)="downloadExcel()" class="text-success list-group-item cr"><i class="fa-solid fa-file-excel"></i> Excel Sheet</li>
+                  <li (click)="downloadPDF()" class="text-danger list-group-item cr"><i class="fa-solid fa-file-pdf"></i> PDF</li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Balance Table -->
-        <div class="col-12 animate__animated filteredData">
+        <!-- Car Table -->
+        <div class="col-12 animate__animated animate__fadeInUp z-3">
           <div class="col-12 animate__animated animate__fadeInUp z-2">
             <div class="bg-white rounded-3 shadow">
               <div class="table-responsive" #table>
                 <table class="table table-hover overflow-x-scroll table-striped">
                     <tbody>
-                      @for(row of allCars | paginate: { itemsPerPage:5, currentPage: currentPage, totalItems:carCount} ; track $index){
-                        <tr [ngClass]="{'main-bg': row.selected}">
-                          <td (click)="toggleRowSelection(row)">
+                      @for(car of allCars | paginate: { itemsPerPage:5, currentPage: currentPage, totalItems:carCount} ; track $index){
+                        <tr [ngClass]="{'main-bg': car.selected}">
+                          <td (click)="toggleRowSelection(car)">
                             <div class="d-flex justify-content-center align-items-center mt-2">
-                              <input type="checkbox" [(ngModel)]="row.selected" class="form-check-input"/>
+                              <input type="checkbox" [(ngModel)]="car.selected" class="form-check-input"/>
                             </div>
                           </td>
-                          <td (click)="toggleRowSelection(row)">
+                          <td (click)="toggleRowSelection(car)">
                           <div class="d-flex flex-column justify-content-center align-items-start">
                             <span class="muted">ID</span>
                             <p class="text-table">{{ $index + 1 }}</p>
                           </div>
                           </td>
-                          <td (click)="toggleRowSelection(row)">
+                          <td (click)="toggleRowSelection(car)">
                             <div class="d-flex flex-column justify-content-center align-items-start">
                               <span class="muted">Model</span>
-                              <p class="text-table">{{ row.model }}</p>
+                              <p class="text-table">{{ car.model }}</p>
                             </div>
                           </td>
 
-                          <td (click)="toggleRowSelection(row)">
+                          <td (click)="toggleRowSelection(car)">
                             <div class="d-flex flex-column justify-content-center align-items-start">
                               <span class="muted">Plate</span>
-                              <p class="text-table">{{ row.carNumber }}</p>
+                              <p class="text-table">{{ car.carNumber }}</p>
                             </div>
                           </td>
 
-                          <td (click)="toggleRowSelection(row)">
+                          <td (click)="toggleRowSelection(car)">
                             <div class="d-flex flex-column justify-content-center align-items-start">
                               <span class="muted">Color</span>
-                              <p class="text-table">{{ row.color }}</p>
+                              <p class="text-table">{{ car.color }}</p>
                             </div>
                           </td>
 
-                          <td (click)="toggleRowSelection(row)">
+                          <td (click)="toggleRowSelection(car)">
                             <div class="d-flex flex-column justify-content-center align-items-start">
                               <span class="muted">License Date</span>
-                              <p class="text-table">{{ row.licenseDate }}</p>
+                              <p class="text-table">{{ car.licenseDate }}</p>
                             </div>
                           </td>
 
-                          <td (click)="toggleRowSelection(row)">
+                          <td (click)="toggleRowSelection(car)">
                             <div class="d-flex flex-column justify-content-center align-items-start">
                               <span class="muted">Driver Name</span>
-                              @for(driver of row.driversName; track $index){
+                              @for(driver of car.driversName; track $index){
                                 <p class="text-table">{{ driver }}</p>
                               }
                             </div>
                           </td>
 
-                          <td (click)="toggleRowSelection(row)">
+                          <td (click)="toggleRowSelection(car)">
                             <div class="d-flex flex-column justify-content-center align-items-start">
-                              <span class="muted">Pertol Type</span>
-                              <p class="text-table">{{ row.pertolType ?? 'UnKnown'  }}</p>
+                              <span class="muted">Petrol Type</span>
+                              <p class="text-table">{{ car.petrolType ?? 'UnKnown'  }}</p>
                             </div>
                           </td>
                           <td>
                             <div class="d-flex justify-content-center align-items-center mt-3 position-relative">
-                              <i (click)="toggleMenu(row.id)" class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
-                              <ul *ngIf="selectedRowId === row.id" class="list-group animate__animated action-list z-3">
+                              <i (click)="toggleMenu(car.id)" class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
+                              <ul *ngIf="selectedRowId === car.id" class="list-group animate__animated action-list z-3">
                                 <li class="list-group-item px-2 cr">
-                                  <div class="d-flex justify-content-start align-items-center gap-1" (click)="DeleteCar(row.id)">
+                                  <div class="d-flex justify-content-start align-items-center gap-1" (click)="DeleteCar(car.id)">
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <g clip-path="url(#clip0_920_9284)">
                                       <path d="M12.8333 2.33333H10.4411C10.1698 1.00392 8.99206 0 7.58331 0H6.41665C5.00848 0 3.83015 1.00392 3.5589 2.33333H1.16665C0.844646 2.33333 0.583313 2.59408 0.583313 2.91667C0.583313 3.23925 0.844646 3.5 1.16665 3.5H1.66831L2.42431 11.3628C2.56898 12.8666 3.81731 14 5.32756 14H8.66831C10.1809 14 11.4292 12.8642 11.5721 11.3587L12.3165 3.5H12.8327C13.1547 3.5 13.4161 3.23925 13.4161 2.91667C13.4161 2.59408 13.1553 2.33333 12.8333 2.33333ZM6.41665 1.16667H7.58331C8.34281 1.16667 8.98448 1.65608 9.22598 2.33333H4.77456C5.01606 1.65608 5.65773 1.16667 6.41723 1.16667H6.41665ZM9.1624 9.50425C9.39048 9.73233 9.39048 10.101 9.1624 10.3291C9.04865 10.4428 8.89931 10.5 8.74998 10.5C8.60065 10.5 8.45131 10.4428 8.33756 10.3291L6.99998 8.9915L5.6624 10.3291C5.54865 10.4428 5.39931 10.5 5.24998 10.5C5.10065 10.5 4.95131 10.4428 4.83756 10.3291C4.60948 10.101 4.60948 9.73233 4.83756 9.50425L6.17515 8.16667L4.83756 6.82908C4.60948 6.601 4.60948 6.23233 4.83756 6.00425C5.06565 5.77617 5.43431 5.77617 5.6624 6.00425L6.99998 7.34183L8.33756 6.00425C8.56565 5.77617 8.93431 5.77617 9.1624 6.00425C9.39048 6.23233 9.39048 6.601 9.1624 6.82908L7.82481 8.16667L9.1624 9.50425Z" fill="#F00000"/>

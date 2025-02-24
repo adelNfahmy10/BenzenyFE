@@ -24,6 +24,13 @@ input, .code-num, select, textarea{
     font-weight: 200;
   }
 }
+.download-container{
+  .download-list{
+    position: absolute;
+    width: 100%;
+    top: 5px;
+  }
+}
 .code-num{
   position: relative;
   &::before{
@@ -90,13 +97,11 @@ input, .code-num, select, textarea{
   height: 20px;
   position: relative;
 }
-
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-
 .slider {
   position: absolute;
   cursor: pointer;

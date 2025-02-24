@@ -31,15 +31,12 @@ export class LoginComponent {
         localStorage.setItem('userName', res.data.fullName)
         localStorage.setItem('companyId', res.data.companyId)
         localStorage.setItem('companyName', res.data.companyName)
-        localStorage.setItem('branchId', res.data.branchId)
-        if(localStorage.getItem('branchId')){
+        if(res.data.branchId){
+          localStorage.setItem('branchId', res.data.branchId)
           this._Router.navigate(['/balance'])
         } else{
           this._Router.navigate(['/home'])
         }
-      },
-      error:(err)=>{
-        console.log(err);
       }
     })
   }

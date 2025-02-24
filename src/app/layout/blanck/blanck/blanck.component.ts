@@ -19,7 +19,6 @@ export class BlanckComponent {
     if(isPlatformBrowser(this._PLATFORM_ID)){
       this.userName = localStorage.getItem('userName')
       this.branchId = localStorage.getItem('branchId')
-      console.log(this.branchId);
     }
   }
 

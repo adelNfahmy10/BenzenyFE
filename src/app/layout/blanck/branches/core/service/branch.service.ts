@@ -13,8 +13,12 @@ export class BranchService {
     return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetAllBranches/GetAllBranches?pageNumber=${pageNum}&pageSize=${pageSize}`)
   }
 
+  GetAllCompanyBranches(companyId:any, searchTerm:any = '', pageNum:any = 1, pageSize:any = 10):Observable<any>{
+    return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetAllBranchesInCompany/GetAllBranchesInCompany/${companyId}?pageNumber=${pageNum}&pageSize=${pageSize}&searchTerm=${searchTerm}`)
+  }
+
   GetBranchById(id:any):Observable<any>{
-    return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetBranchById?id=${id}`)
+    return this._HttpClient.get(`${environment.baseURL}api/Branch/v1/GetBranchById/GetBranchById?id=${id}`)
   }
 
   CreateBranch(data:any):Observable<any>{

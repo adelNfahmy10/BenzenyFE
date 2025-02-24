@@ -35,7 +35,8 @@ export class CompaniesComponent implements OnInit{
   allRegions:any[] = []
   allCity:any[] = []
   allUsers:any[] = []
-
+  branchCount:number = 0
+  userCount:number = 0
   constructor(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
       this.companyName = localStorage.getItem('companyName')
@@ -49,9 +50,10 @@ export class CompaniesComponent implements OnInit{
     this.getAllUsersByCompanyId()
   }
   getAllBranches():void{
-    this._BranchService.GetAllBranchs(this.companyId).subscribe({
+    this._BranchService.GetAllCompanyBranches(this.companyId).subscribe({
       next:(res)=>{
         this.allBranches = res.data.items
+        this.branchCount = res.data.totalCount
       }
     })
   }
@@ -109,15 +111,13 @@ export class CompaniesComponent implements OnInit{
     })
 
   }
-
   getAllUsersByCompanyId():void{
     this._CompanyService.GetAllUserInCompanyById(this.companyId!).subscribe({
       next:(res)=>{
-        this.allUsers = res.data
+        this.allUsers = res.data.items
       }
     })
   }
-
   userForm:FormGroup = this._FormBuilder.group({
     CompanyId:[''],
     Username:[''],
@@ -126,7 +126,6 @@ export class CompaniesComponent implements OnInit{
     Email:[''],
     Password:['']
   })
-
   submitUserForm():void{
     let data = this.userForm.value
     data.CompanyId = this.companyId
@@ -145,7 +144,6 @@ export class CompaniesComponent implements OnInit{
       }
     })
   }
-
   DeleteUserInCompany(userId:string):void{
     this._CompanyService.DeleteUserInCompany(this.companyId!,userId).subscribe({
       next:(res)=>{
@@ -154,7 +152,6 @@ export class CompaniesComponent implements OnInit{
       }
     })
   }
-
   switchActiveUser(userId:string):void{
     this._AuthService.SwitchActiveUser(userId).subscribe({
       next:(res)=>{
@@ -163,7 +160,6 @@ export class CompaniesComponent implements OnInit{
       }
     })
   }
-
   selectedRowId: number | null = null;
   toggleMenu(rowId: number) {
     if (this.selectedRowId === rowId) {
@@ -190,9 +186,7 @@ export class CompaniesComponent implements OnInit{
     const textCopy = this.elementId.nativeElement.innerText;
     navigator.clipboard.writeText(textCopy)
     .then(() => {
-      this._ToastrService.success('ID Copied To Clipboard','Success',{
-        positionClass:'toast-bottom-right',
-      })
+      this._ToastrService.success('ID Copied To Clipboard')
     })
     .catch((err) => {
       this._ToastrService.success('Failed To Copy ID')
@@ -202,9 +196,7 @@ export class CompaniesComponent implements OnInit{
     const textCopy = this.elementIban.nativeElement.innerText;
     navigator.clipboard.writeText(textCopy)
     .then(() => {
-      this._ToastrService.success('IBAN Copied To Clipboard','Success',{
-        positionClass:'toast-bottom-right',
-      })
+      this._ToastrService.success('IBAN Copied To Clipboard')
     })
     .catch((err) => {
       this._ToastrService.success('Failed To Copy IBAN')

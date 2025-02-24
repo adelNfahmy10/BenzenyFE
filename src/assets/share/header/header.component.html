@@ -1,11 +1,9 @@
 <div class="head d-flex justify-content-between align-items-center">
   <div class="title">
-    <h5 class="m-0 subtitle">Welcome Superadmin : <span class="fw-bold">{{userName}}</span></h5>
-  </div>
-  <div class="lang">
-    <select name="lang" id="lang" class="form-select">
-      <option value="engilsh">English</option>
-      <option value="engilsh">العربية</option>
-    </select>
+    @if(branchId == null || branchId == 'null'){
+      <h5 class="m-0 subtitle">Welcome Superadmin : <span class="fw-bold">{{userName}}</span></h5>
+    } @else {
+      <h5 class="m-0 subtitle">Welcome : <span class="fw-bold">{{userName}}</span></h5>
+    }
   </div>
 </div>
