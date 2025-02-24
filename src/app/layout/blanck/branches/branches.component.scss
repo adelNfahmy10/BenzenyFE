@@ -200,15 +200,20 @@ input:checked + .slider:before {
     color: #f00 !important;
   }
 }
-
+.dis-active-btn{
+  width: fit-content;
+  border : none;
+  color: #6D6D6D;
+  background-color: #DCDCDC;
+}
+.active-btn{
+  width: fit-content;
+  border : none;
+  background-color: #008D7A;
+}
 .my-pagination ::ng-deep .ngx-pagination .current {
-  // transition: all .3s;
   background: $mainColor !important;
-  color: #fff !important  ;
-  // -webkit-transition: all .3s;
-  // -moz-transition: all .3s;
-  // -ms-transition: all .3s;
-  // -o-transition: all .3s;
+  color: #fff !important ;
 }
 ::-webkit-scrollbar {
   width: 1px;

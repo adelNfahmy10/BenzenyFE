@@ -63,7 +63,7 @@ export class CarsComponent implements OnInit{
   }
 
   getAllDriver():void{
-    this._DriverService.GetAllDrivers(this.branchId).subscribe({
+    this._DriverService.GetDriversInBranch(this.branchId).subscribe({
       next:(res)=>{
         this.allDrivers = res.data.items
       }

@@ -15,7 +15,7 @@ import { RegistarComponent } from './layout/auth/registar/registar.component';
 import { BlanckComponent } from './layout/blanck/blanck/blanck.component';
 import { DriversComponent } from './layout/blanck/drivers/drivers.component';
 import { BranchesComponent } from './layout/blanck/branches/branches.component';
-import { UpdatebranchComponent } from './layout/blanck/branches/updatebranch/updatebranch.component';
+import { BranchdetailsComponent } from './layout/blanck/branches/branchdetails/branchdetails.component';
 
 export const routes: Routes = [
   {path:'', component:AuthComponent, title:'login', children:[
@@ -28,7 +28,7 @@ export const routes: Routes = [
     {path:'home', component:DashboardComponent, title:'Home'},
     {path:'company', component:CompaniesComponent, title:'Company'},
     {path:'branch', component:BranchesComponent, title:'Branches'},
-    {path:'updatebranch/:id', component:UpdatebranchComponent, title:'Branche'},
+    {path:'details/:id', component:BranchdetailsComponent, title:'Branch'},
     {path:'balance', component:BalanceComponent, title:'Balance'},
     {path:'cars', component:CarsComponent, title:'Cars'},
     {path:'drivers', component:DriversComponent, title:'Drivers'},

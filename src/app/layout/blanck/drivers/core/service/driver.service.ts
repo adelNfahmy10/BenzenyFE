@@ -30,8 +30,8 @@ export class DriverService {
   }
 
   // Driver To Car APIs
-  GetDriversInBranch(id:any, pageNum:any = 1, pageSize:any = 10):Observable<any>{
-    return this._HttpClient.get(`${environment.baseURL}api/Driver/v1/GetDriversInBranch/GetDriversInBranch/${id}?pageNumber=${pageNum}&pageSize=${pageSize}`)
+  GetDriversInBranch(branchId:any,searchTerm:any = '', pageNum:any = 1, pageSize:any = 10):Observable<any>{
+    return this._HttpClient.get(`${environment.baseURL}api/Driver/v1/GetDriversInBranch/GetDriversInBranch/${branchId}?searchTerm=${searchTerm}&pageNumber=${pageNum}&pageSize=${pageSize}`)
   }
 
   AssignDriverToCar(data:any):Observable<any>{

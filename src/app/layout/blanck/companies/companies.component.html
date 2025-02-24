@@ -96,10 +96,27 @@
         </div>
       </div>
 
-      <div class="col-md-2 animate__animated animate__fadeInRight">
-        <div class="bg-white d-flex flex-column justify-content-center align-items-center gap-2 h-100 rounded-2">
-          <span class="muted">Status</span>
-          <button class="dis-active-btn">Active</button>
+      <div class="col-md-3 animate__animated animate__fadeInRight">
+        <div class="main-bg text-white d-flex justify-content-between align-items-center gap-2 rounded-3 p-3 h-100">
+          <div class="d-flex align-items-center gap-2">
+            <svg width="62" height="63" viewBox="0 0 62 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M-0.0491351 52.1661C-0.0626995 57.8652 4.56077 62.4999 10.2596 62.4999C15.9584 62.4999 20.604 57.8652 20.6175 52.1661C20.629 47.361 17.3397 43.3101 12.8913 42.1605L12.8921 41.8324C12.9023 37.5594 16.3877 34.0821 20.6606 34.0821L41.3272 34.0821C44.2335 34.0821 46.9199 33.1159 49.0834 31.4935L49.058 42.1605C44.6042 43.3101 41.2956 47.361 41.2842 52.1661C41.2706 57.8652 45.8941 62.4999 51.5929 62.4999C57.2918 62.4999 61.9373 57.8652 61.9509 52.1661C61.9623 47.361 58.673 43.3101 54.2247 42.1605L54.2754 20.8394C58.7292 19.6898 62.0378 15.639 62.0492 10.8338C62.0628 5.13474 57.4393 0.500056 51.7405 0.500056C46.0417 0.500057 41.3961 5.13474 41.3826 10.8338C41.3711 15.639 44.6604 19.6898 49.1088 20.8394L49.108 21.1675C49.0978 25.4405 45.6124 28.9178 41.3395 28.9178L20.6729 28.9178C13.5506 28.9178 7.74241 34.7125 7.72545 41.835L7.72467 42.1631C3.27086 43.3127 -0.0376983 47.361 -0.0491351 52.1661Z" fill="white"/>
+            </svg>
+            <h3>Total <br><span>Branch</span></h3>
+          </div>
+          <h1 class="text-white">{{branchCount}}</h1>
+        </div>
+      </div>
+
+      <div class="col-md-3 animate__animated animate__fadeInRight">
+        <div class="main-bg text-white d-flex justify-content-between align-items-center gap-2 rounded-3 p-3 h-100">
+          <div class="d-flex align-items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" fill="#fff" data-name="Layer 1" viewBox="0 0 24 24" width="60" height="60">
+              <path d="M12,16a4,4,0,1,1,4-4A4,4,0,0,1,12,16ZM5.683,16H1a1,1,0,0,1-1-1A6.022,6.022,0,0,1,5.131,9.084a1,1,0,0,1,1.1,1.266A6.009,6.009,0,0,0,6,12a5.937,5.937,0,0,0,.586,2.57,1,1,0,0,1-.9,1.43ZM17,24H7a1,1,0,0,1-1-1,6,6,0,0,1,12,0A1,1,0,0,1,17,24ZM18,8a4,4,0,1,1,4-4A4,4,0,0,1,18,8ZM6,8a4,4,0,1,1,4-4A4,4,0,0,1,6,8Zm17,8H18.317a1,1,0,0,1-.9-1.43A5.937,5.937,0,0,0,18,12a6.009,6.009,0,0,0-.236-1.65,1,1,0,0,1,1.105-1.266A6.022,6.022,0,0,1,24,15,1,1,0,0,1,23,16Z"/>
+            </svg>
+            <h3>Total <br><span>Users</span></h3>
+          </div>
+          <h1 class="text-white">{{allUsers.length}}</h1>
         </div>
       </div>
 
@@ -122,7 +139,7 @@
                 </tr>
               </thead>
               <tbody>
-                @for(branch of allBranches.slice(5) ; track $index){
+                @for(branch of allBranches.slice(0,5) ; track $index){
                   <tr>
                     <td class="text-table">{{$index + 1}}</td>
                     <td class="text-table">{{branch.branchName}}</td>
@@ -154,7 +171,7 @@
                   'active-btn': user.isActive,
                   'dis-active-btn': !user.isActive
                   }" class="cr" (click)="switchActiveUser(user.userId)">
-                  {{user.isActive ? 'Active': 'UnActive'}}
+                  {{user.isActive ? 'Active': 'DisActive'}}
                 </span>
                 <div class="position-relative">
                   <div class="cr position-relative z-2" (click)="toggleMenu(user.userId)">
@@ -417,7 +434,7 @@
             <input type="password" name="Password" id="Password" formControlName="Password" class="form-control" placeholder="Password...">
           </div>
 
-          <div class="col-12">
+          <!-- <div class="col-12">
             <div class="d-flex justify-content-start align-items-center gap-2">
               <label for="main">Is Main Branch</label>
               <label class="switch">
@@ -425,7 +442,7 @@
                 <span class="slider"></span>
               </label>
             </div>
-          </div>
+          </div> -->
 
           <div class="col-12">
             <div class="d-flex justify-content-end align-items-center gap-2">

@@ -1,4 +1,4 @@
-import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgIf } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import html2canvas from 'html2canvas';
@@ -8,11 +8,13 @@ import * as XLSX from 'xlsx';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import { BranchService } from './core/service/branch.service';
 import { ReigonandcityService } from '../../../../core/services/reigons/reigonandcity.service';
+import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-branches',
   standalone: true,
-  imports: [NgFor, FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent, NgIf],
+  imports: [ FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent, NgIf, RouterLink],
   templateUrl: './branches.component.html',
   styleUrl: './branches.component.scss'
 })
@@ -22,17 +24,22 @@ export class BranchesComponent implements OnInit{
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
   private readonly _BranchService = inject(BranchService)
   private readonly _ReigonandcityService = inject(ReigonandcityService)
+  private readonly _ToastrService = inject(ToastrService)
 
   /* All Properties */
   allPage:number = 1;
   currentPage:number = 1
   pageSize:number = 1
   selectAll = false;
+  branchCount:string = ''
   companyId:string | null = null
   allBrnaches:any[] = []
   allRegions:any[] = []
   allCity:any[] = []
-  branchCount:string = ''
+  getActiveBranch:any[] = []
+  getDisActiveBranch:any[] = []
+  activeCount:number = 0
+  disActiveCount:number = 0
 
   constructor(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
@@ -42,8 +49,17 @@ export class BranchesComponent implements OnInit{
 
   onPageChange(page: number): void {
     this.currentPage = page;
-    this.changePagePagination(page);  // استدعاء الدالة لجلب البيانات للصفحة الجديدة
+    this.changePagePagination(page);
   }
+
+  changePagePagination(page:number):void{
+    this._BranchService.GetAllCompanyBranches(this.companyId, '' , page).subscribe({
+      next:(res)=>{
+        this.allBrnaches = res.data.items
+      }
+    })
+  }
+
   /* OnInit Functions */
   ngOnInit(): void {
     this.getAllRegions()
@@ -52,21 +68,22 @@ export class BranchesComponent implements OnInit{
 
   /* All Branches */
   getAllBranches():void{
-    this._BranchService.GetAllBranchs().subscribe({
+    this._BranchService.GetAllCompanyBranches(this.companyId).subscribe({
       next:(res)=>{
         this.allBrnaches = res.data.items
         this.branchCount = res.data.totalCount
         this.allPage = Math.ceil(res.data.totalCount / res.data.pageSize)
         this.currentPage = res.data.pageNumber
         this.pageSize = res.data.pageSize
-      }
-    })
-  }
-
-  changePagePagination(page:number):void{
-    this._BranchService.GetAllBranchs(page).subscribe({
-      next:(res)=>{
-        this.allBrnaches = res.data.items
+        this.allBrnaches.forEach((active)=>{
+          if(active.isActive){
+            this.getActiveBranch.push(active)
+          } else {
+            this.getDisActiveBranch.push(active)
+          }
+        })
+        this.activeCount = this.getActiveBranch.length
+        this.disActiveCount = this.getDisActiveBranch.length
       }
     })
   }
@@ -126,6 +143,7 @@ export class BranchesComponent implements OnInit{
       next:(res)=>{
         this.branchForm.reset()
         this.getAllBranches()
+        this._ToastrService.success(res.msg)
       }
     })
   }
@@ -135,6 +153,7 @@ export class BranchesComponent implements OnInit{
     this._BranchService.DeleteBranch(branchId).subscribe({
       next:(res)=>{
         this.getAllBranches()
+        this._ToastrService.error(res.msg)
       }
     })
   }
@@ -144,9 +163,12 @@ export class BranchesComponent implements OnInit{
     this._BranchService.SwitchActive(branchId).subscribe({
       next:(res)=>{
         this.getAllBranches()
+        this._ToastrService.success(res.msg)
       }
     })
   }
+
+
 
   // Sort column and order
   filterText = '';
@@ -154,10 +176,14 @@ export class BranchesComponent implements OnInit{
   sortOrder: 'asc' | 'desc' = 'asc';
 
   // Filtering the data based on search input
-  get filteredData() {
-    return this.allBrnaches.filter((row:any[]) =>
-      Object.values(row).some((value:any) => value.toString().toLowerCase().includes(this.filterText.toLowerCase()))
-    );
+  // Filtering the data based on search input
+  filteredData(event:Event) {
+    const searchTerm = (event.target as HTMLInputElement).value;
+    this._BranchService.GetAllCompanyBranches(this.companyId, searchTerm).subscribe({
+      next:(res)=>{
+        this.allBrnaches = res.data.items
+      }
+    })
   }
 
   // Check if the row is selected
@@ -302,7 +328,6 @@ export class BranchesComponent implements OnInit{
   openList():void{
     if(this.open){
       this.open = false
-
     } else {
       this.open = true
     }
@@ -312,7 +337,6 @@ export class BranchesComponent implements OnInit{
   downloadPDF():void{
     if(isPlatformBrowser(this._PLATFORM_ID)){
       const data = this.template.nativeElement
-
       html2canvas(data).then(canvas => {
         const imgWidth = 208
         const pageHeight = 295
@@ -327,14 +351,9 @@ export class BranchesComponent implements OnInit{
   }
 
   downloadExcel():void{
-    // Create a workbook and sheet from the HTML table
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
-
-    // Create a new workbook with the worksheet
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    // Export the workbook to Excel file
     XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
   }
 }

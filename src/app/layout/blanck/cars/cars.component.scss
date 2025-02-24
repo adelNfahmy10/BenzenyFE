@@ -157,3 +157,10 @@ input:checked + .slider:before {
     color: #fff;
   }
 }
+.download-container{
+  .download-list{
+    position: absolute;
+    width: 100%;
+    top: 5px;
+  }
+}
