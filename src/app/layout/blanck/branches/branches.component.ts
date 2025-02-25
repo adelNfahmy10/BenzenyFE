@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-branches',
   standalone: true,
-  imports: [ FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent, NgIf, RouterLink],
+  imports: [ FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent, RouterLink],
   templateUrl: './branches.component.html',
   styleUrl: './branches.component.scss'
 })
@@ -29,7 +29,7 @@ export class BranchesComponent implements OnInit{
   /* All Properties */
   allPage:number = 1;
   currentPage:number = 1
-  pageSize:number = 1
+  pageSize:any  = 1
   selectAll = false;
   branchCount:string = ''
   companyId:string | null = null
@@ -59,6 +59,16 @@ export class BranchesComponent implements OnInit{
       }
     })
   }
+  onChangePageSize(event:Event):void{
+    let pageSize = (event.target as HTMLSelectElement).value
+    console.log(pageSize);
+    this._BranchService.GetAllCompanyBranches(this.companyId, '' , 1, pageSize).subscribe({
+      next:(res)=>{
+        this.pageSize = pageSize
+        this.allBrnaches = res.data.items
+      }
+    })
+  }
 
   /* OnInit Functions */
   ngOnInit(): void {
@@ -75,15 +85,8 @@ export class BranchesComponent implements OnInit{
         this.allPage = Math.ceil(res.data.totalCount / res.data.pageSize)
         this.currentPage = res.data.pageNumber
         this.pageSize = res.data.pageSize
-        this.allBrnaches.forEach((active)=>{
-          if(active.isActive){
-            this.getActiveBranch.push(active)
-          } else {
-            this.getDisActiveBranch.push(active)
-          }
-        })
-        this.activeCount = this.getActiveBranch.length
-        this.disActiveCount = this.getDisActiveBranch.length
+        this.activeCount = res.data.activeCount
+        this.disActiveCount = res.data.inActiveCount
       }
     })
   }
@@ -168,14 +171,6 @@ export class BranchesComponent implements OnInit{
     })
   }
 
-
-
-  // Sort column and order
-  filterText = '';
-  sortColumn: string = '';
-  sortOrder: 'asc' | 'desc' = 'asc';
-
-  // Filtering the data based on search input
   // Filtering the data based on search input
   filteredData(event:Event) {
     const searchTerm = (event.target as HTMLInputElement).value;
@@ -186,122 +181,16 @@ export class BranchesComponent implements OnInit{
     })
   }
 
-  // Check if the row is selected
-  isSelected(row: any) {
-    return row.selected;
+  activationBranches:any[] = []
+  // filter With Active or disActive
+  filterActivationBranch():void{
+    this.allBrnaches.filter((branch)=>{
+      if(branch.isActive){
+        this.activationBranches.push(branch)
+      }
+    })
+    console.log(this.activationBranches);
   }
-
-  // Toggle row selection
-  toggleRowSelection(row: any) {
-    row.selected = !row.selected;
-  }
-
-  // Toggle Select All checkbox
-  toggleSelectAll() {
-    this.allBrnaches.forEach((row:any) => row.selected = this.selectAll);
-  }
-
-  // Sorting function
-  sortTable(column: string) {
-    if (this.sortColumn === column) {
-      // Toggle sort order
-      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-    } else {
-      this.sortColumn = column;
-      this.sortOrder = 'asc';
-    }
-
-    this.allBrnaches.sort((a:any, b:any) => {
-      const aValue = a[column];
-      const bValue = b[column];
-
-      if (aValue < bValue) return this.sortOrder === 'asc' ? -1 : 1;
-      if (aValue > bValue) return this.sortOrder === 'asc' ? 1 : -1;
-      return 0;
-    });
-  }
-
-  // Filter Inputs
-  // filterBranachList:any[] = []
-  // filterByName(event:any){
-  //   let searchValue = event.target.value.toLowerCase()
-  //   if(searchValue){
-  //     console.log(searchValue);
-  //     this.filterBranachList = this.data.filter(name=>
-  //       name.branchName.toLowerCase().includes(searchValue)
-  //     )
-  //     console.log(this.filterBranachList);
-
-  //   } else {
-  //     this.filterBranachList = [...this.data]
-  //   }
-  // }
-  // filterByRegion(event:any){
-  //   let searchValue = event.target.value.toLowerCase()
-
-  //   if(searchValue){
-  //     this.filterBranachList = this.data.filter(region=>
-  //       region.region.toLowerCase().includes(searchValue)
-  //     )
-  //   } else {
-  //     this.filterBranachList = [...this.data]
-  //   }
-  // }
-  // filterByVehicles(event:any){
-  //   let searchValue = event.target.value.toLowerCase()
-
-  //   if(searchValue){
-  //     this.filterBranachList = this.data.filter(vehicle=>
-  //       vehicle.vehicles.toLowerCase().includes(searchValue)
-  //     )
-  //   } else {
-  //     this.filterBranachList = [...this.data]
-  //   }
-  // }
-  // filterByDrivers(event:any){
-  //   let searchValue = event.target.value.toLowerCase()
-
-  //   if(searchValue){
-  //     this.filterBranachList = this.data.filter(driver=>
-  //       driver.drivers.toLowerCase().includes(searchValue)
-  //     )
-  //   } else {
-  //     this.filterBranachList = [...this.data]
-  //   }
-  // }
-  // filterByIBAN(event:any){
-  //   let searchValue = event.target.value.toLowerCase()
-
-  //   if(searchValue){
-  //     this.filterBranachList = this.data.filter(iban=>
-  //       iban.iban.toLowerCase().includes(searchValue)
-  //     )
-  //   } else {
-  //     this.filterBranachList = [...this.data]
-  //   }
-  // }
-  // filterByStation(event:any){
-  //   let searchValue = event.target.value.toLowerCase()
-
-  //   if(searchValue){
-  //     this.filterBranachList = this.data.filter(station=>
-  //       station.station.toLowerCase().includes(searchValue)
-  //     )
-  //   } else {
-  //     this.filterBranachList = [...this.data]
-  //   }
-  // }
-  // filterByPetrolType(event:any){
-  //   let searchValue = event.target.value.toLowerCase()
-
-  //   if(searchValue){
-  //     this.filterBranachList = this.data.filter(petrolType=>
-  //       petrolType.petrolType.toLowerCase().includes(searchValue)
-  //     )
-  //   } else {
-  //     this.filterBranachList = [...this.data]
-  //   }
-  // }
 
   // Menu Option In Table
   selectedRowId: number | null = null;
@@ -314,14 +203,14 @@ export class BranchesComponent implements OnInit{
   }
 
   // CheckBox Main Branch Toggle
-  isChecked:boolean = false
-  toggleChecked():void{
-    if(this.isChecked){
-      this.isChecked = false
-    } else {
-      this.isChecked = true
-    }
-  }
+  // isChecked:boolean = false
+  // toggleChecked():void{
+  //   if(this.isChecked){
+  //     this.isChecked = false
+  //   } else {
+  //     this.isChecked = true
+  //   }
+  // }
 
   /* Download Table With PDF */
   open:boolean = false
