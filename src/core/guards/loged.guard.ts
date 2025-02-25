@@ -7,8 +7,13 @@ export const logedGuard: CanActivateFn = (route, state) => {
   const _PLATFORM_ID = inject(PLATFORM_ID)
 
   if(isPlatformBrowser(_PLATFORM_ID)){
+    let branchId = localStorage.getItem('branchId')
     if(localStorage.getItem('token') !== null){
-      _Router.navigate(['/home'])
+      if(!branchId){
+        _Router.navigate(['/home'])
+      } else {
+        _Router.navigate(['/balance'])
+      }
       return false
     } else {
       return true
