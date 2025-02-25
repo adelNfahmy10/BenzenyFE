@@ -2,25 +2,22 @@ $mainColor:#f79320;
 h1{
   font-size: 64px;
 }
-.search{
-  input{
-    border-color: $mainColor;
-  }
-  svg{
-    position: absolute;
-    top: 13px;
-    right: 20px;
-  }
-}
+// .search{
+//   input{
+//     border-color: $mainColor;
+//   }
+//   svg{
+//     position: absolute;
+//     top: 13px;
+//     right: 20px;
+//   }
+// }
 .download-container{
   .download-list{
     position: absolute;
     width: 100%;
     top: 5px;
   }
-}
-.text-table{
-  background:none
 }
 .action-list{
   position: absolute;
@@ -41,7 +38,7 @@ label, input::placeholder{
 label{
   font-weight: 600;
 }
-input, .code-num, select, textarea{
+input, .code-num, textarea{
   background: #F7F7F7;
   &::placeholder{
     font-weight: 200;
@@ -200,17 +197,7 @@ input:checked + .slider:before {
     color: #f00 !important;
   }
 }
-.dis-active-btn{
-  width: fit-content;
-  border : none;
-  color: #6D6D6D;
-  background-color: #DCDCDC;
-}
-.active-btn{
-  width: fit-content;
-  border : none;
-  background-color: #008D7A;
-}
+
 .my-pagination ::ng-deep .ngx-pagination .current {
   background: $mainColor !important;
   color: #fff !important ;
@@ -226,4 +213,67 @@ border-radius: 20px;
 ::-webkit-scrollbar-thumb {
 background: $mainColor;
 border-radius: 20px;
+}
+
+
+.table-head th{
+  background-color: #eee !important;
+}
+.add-btn{
+  border: 1px solid #f97b2190;
+  width: fit-content;
+  padding: 0 10px;
+  transition: all .3s;
+  h5{
+    color: $mainColor;
+    transition: all .3s;
+  }
+  svg{
+    fill: #F97C21;
+    transition: all .3s;
+  }
+  &:hover{
+    background-color: $mainColor;
+    h5{
+      color: #fff;
+    }
+    svg{
+      fill: #fff;
+    }
+
+  }
+}
+.search{
+  input{
+    width: 300px;
+    border: 1px solid #f97b2190;
+    background-color: #fff;
+    &::placeholder{
+      color: #B8B8B8;
+      font-weight: 300;
+    }
+    &:focus{
+      border-color:$mainColor !important;
+    }
+  }
+  svg{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    width: 20px;
+  }
+}
+
+.dis-active-btn{
+  width: fit-content;
+  border : none;
+  font-size: 12px;
+  background-color: #DCDCDC;
+}
+.active-btn{
+  width: fit-content;
+  border : none;
+  font-size: 12px;
+  background-color: #008d7a;
 }
