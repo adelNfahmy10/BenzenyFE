@@ -16,15 +16,17 @@ import { BlanckComponent } from './layout/blanck/blanck/blanck.component';
 import { DriversComponent } from './layout/blanck/drivers/drivers.component';
 import { BranchesComponent } from './layout/blanck/branches/branches.component';
 import { BranchdetailsComponent } from './layout/blanck/branches/branchdetails/branchdetails.component';
+import { logedGuard } from '../core/guards/loged.guard';
+import { authGuard } from '../core/guards/auth.guard';
 
 export const routes: Routes = [
-  {path:'', component:AuthComponent, title:'login', children:[
+  {path:'', component:AuthComponent, canActivate:[logedGuard] , title:'login', children:[
     {path:'', redirectTo:'login', pathMatch:'full'},
     {path:'login', component:LoginComponent, title:'Login'},
     {path:'register', component:RegistarComponent, title:'Register'},
   ]},
 
-  {path:'', component:BlanckComponent, title:'home', children:[
+  {path:'', component:BlanckComponent, canActivate:[authGuard], title:'home', children:[
     {path:'home', component:DashboardComponent, title:'Home'},
     {path:'company', component:CompaniesComponent, title:'Company'},
     {path:'branch', component:BranchesComponent, title:'Branches'},
