@@ -1,6 +1,6 @@
 <section class="py-4 register">
   <div class="container">
-    <form class="row g-3" [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
+    <form class="row g-3" [formGroup]="complateForm" (ngSubmit)="continueData()">
       <div class="col-12">
         <div class="d-flex justify-content-center aling-items-center gap-2">
           <svg width="55" height="86" viewBox="0 0 55 86" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,33 +31,37 @@
           <h1>Register</h1>
         </div>
       </div>
+
+      @if(companyData){
+        <div class="col-12">
+          <div class="shadow p-3 d-flex justify-content-around align-items-center rounded-3">
+            <h4 class="text-center">Company Name <br><span class="main-color">{{companyData.data.name}}</span></h4>
+            <h4 class="text-center">Company Email <br><span class="main-color">{{companyData.data.companyEmail}}</span></h4>
+            <h4 class="text-center">Company Phone <br><span class="main-color">{{companyData.data.companyPhone}}</span></h4>
+          </div>
+        </div>
+      }
       <div class="col-12">
-        <label for="fullName">Company Name</label>
-        <input formControlName="Name" type="text" class="form-control" name="fullName" id="fullName" placeholder="Enter Company Name...">
+        <label for="userName">Username</label>
+        <input type="text" formControlName="Username" class="form-control" name="userName" id="userName" placeholder="Enter User Name...">
       </div>
       <div class="col-12">
-        <label for="description">description</label>
-        <textarea formControlName="Description" class="form-control" name="description" id="description" placeholder="Enter Description..."></textarea>
+        <label for="fullName">Full Name</label>
+        <input type="text" formControlName="FullName" class="form-control" name="fullName" id="fullName" placeholder="Enter Full Name...">
       </div>
       <div class="col-12">
-        <label for="email">Company Email</label>
-        <input formControlName="CompanyEmail" type="email" class="form-control" name="email" id="email" placeholder="Enter Your Email...">
+        <label for="Mobile">Mobile</label>
+        <input type="tel" formControlName="Mobile" class="form-control" name="Mobile" id="Mobile" placeholder="Enter Your Phone...">
       </div>
       <div class="col-12">
-        <label for="phone">Company Phone</label>
-        <input formControlName="CompanyPhone" type="tel" class="form-control" name="phone" id="phone" placeholder="Enter Your Phone...">
+        <label for="Email">Email</label>
+        <input type="email" formControlName="Email" class="form-control" name="Email" id="Email" placeholder="Enter Your Email...">
+      </div>
+      <div class="col-12">
+        <label for="Password">Password</label>
+        <input type="password" formControlName="Password" class="form-control" name="Password" id="Password" placeholder="Enter Your Password...">
       </div>
 
-      <div class="col-12">
-        <label for="file">Attach Files</label>
-        <!-- in app.component.html -->
-        <ngx-dropzone (change)="onSelect($event)">
-          <ngx-dropzone-label class="main-color fs-2">Choose Files <i class="fa-solid fa-upload"></i></ngx-dropzone-label>
-          <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-          </ngx-dropzone-preview>
-        </ngx-dropzone>
-      </div>
       <div class="col-12">
         <div class="text-center">
           <button class="btn btn-success">Submit</button>
@@ -66,3 +70,5 @@
     </form>
   </div>
 </section>
+
+

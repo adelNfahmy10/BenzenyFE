@@ -18,12 +18,14 @@ import { BranchesComponent } from './layout/blanck/branches/branches.component';
 import { BranchdetailsComponent } from './layout/blanck/branches/branchdetails/branchdetails.component';
 import { logedGuard } from '../core/guards/loged.guard';
 import { authGuard } from '../core/guards/auth.guard';
+import { ContinueregistarComponent } from './layout/auth/registar/continueregistar/continueregistar.component';
 
 export const routes: Routes = [
   {path:'', component:AuthComponent, canActivate:[logedGuard] , title:'login', children:[
     {path:'', redirectTo:'login', pathMatch:'full'},
     {path:'login', component:LoginComponent, title:'Login'},
     {path:'register', component:RegistarComponent, title:'Register'},
+    {path:'contiuneRegistar/:companyId', component:ContinueregistarComponent, title:'Register'},
   ]},
 
   {path:'', component:BlanckComponent, canActivate:[authGuard], title:'home', children:[
