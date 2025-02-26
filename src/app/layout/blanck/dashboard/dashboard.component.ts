@@ -121,16 +121,24 @@ export class DashboardComponent implements OnInit{
   };
 
   /* Copy ID And IBAN */
-  @ViewChild('iban') elementIban!:ElementRef
+  @ViewChild('Id') elementId!:ElementRef
+  @ViewChild('Iban') elementIban!:ElementRef
   @ViewChild('ibanBranach') elementIbanBrnach!:ElementRef
-
+  copyId():void{
+    const textCopy = this.elementId.nativeElement.innerText;
+    navigator.clipboard.writeText(textCopy)
+    .then(() => {
+      this._ToastrService.success('ID Copied To Clipboard')
+    })
+    .catch((err) => {
+      this._ToastrService.success('Failed To Copy ID')
+    });
+  }
   copyIban():void{
     const textCopy = this.elementIban.nativeElement.innerText;
     navigator.clipboard.writeText(textCopy)
     .then(() => {
-      this._ToastrService.success('IBAN Copied To Clipboard','Success',{
-        positionClass:'toast-bottom-right',
-      })
+      this._ToastrService.success('IBAN Copied To Clipboard')
     })
     .catch((err) => {
       this._ToastrService.success('Failed To Copy IBAN')
@@ -148,6 +156,5 @@ export class DashboardComponent implements OnInit{
       this._ToastrService.success('Failed To Copy IBAN Branch')
     });
   }
-
 
 }
