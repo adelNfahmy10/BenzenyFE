@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-branches',
   standalone: true,
-  imports: [ FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent, RouterLink],
+  imports: [ FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent, RouterLink ],
   templateUrl: './branches.component.html',
   styleUrl: './branches.component.scss'
 })
@@ -47,29 +47,7 @@ export class BranchesComponent implements OnInit{
     }
   }
 
-  onPageChange(page: number): void {
-    this.currentPage = page;
-    this.changePagePagination(page);
-  }
-
-  changePagePagination(page:number):void{
-    this._BranchService.GetAllCompanyBranches(this.companyId, '' , page).subscribe({
-      next:(res)=>{
-        this.allBrnaches = res.data.items
-      }
-    })
-  }
-  onChangePageSize(event:Event):void{
-    let pageSize = (event.target as HTMLSelectElement).value
-    this._BranchService.GetAllCompanyBranches(this.companyId, '' , 1, pageSize).subscribe({
-      next:(res)=>{
-        this.pageSize = pageSize
-        this.allBrnaches = res.data.items
-      }
-    })
-  }
-
-  /* OnInit Functions */
+  /* OnInit Function */
   ngOnInit(): void {
     this.getAllRegions()
     this.getAllBranches()
@@ -180,25 +158,51 @@ export class BranchesComponent implements OnInit{
     })
   }
 
-  // Menu Option In Table
-  selectedRowId: number | null = null;
-  toggleMenu(rowId: number) {
-    if (this.selectedRowId === rowId) {
-      this.selectedRowId = null;
+  /* Sort Table */
+  sortColumn: string = '';
+  sortDirection: boolean = true;
+  sortTable(column: string): void {
+    if (this.sortColumn === column) {
+      this.sortDirection = !this.sortDirection;
     } else {
-      this.selectedRowId = rowId;
+      this.sortColumn = column;
+      this.sortDirection = true;
     }
+
+    this.allBrnaches.sort((a, b) => {
+      if (a[column] > b[column]) {
+        return this.sortDirection ? 1 : -1;
+      } else if (a[column] < b[column]) {
+        return this.sortDirection ? -1 : 1;
+      } else {
+        return 0;
+      }
+    });
   }
 
-  // CheckBox Main Branch Toggle
-  // isChecked:boolean = false
-  // toggleChecked():void{
-  //   if(this.isChecked){
-  //     this.isChecked = false
-  //   } else {
-  //     this.isChecked = true
-  //   }
-  // }
+  // Pagnation Pages
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.changePagePagination(page);
+  }
+
+  changePagePagination(page:number):void{
+    this._BranchService.GetAllCompanyBranches(this.companyId, '' , page).subscribe({
+      next:(res)=>{
+        this.allBrnaches = res.data.items
+      }
+    })
+  }
+
+  onChangePageSize(event:Event):void{
+    let pageSize = (event.target as HTMLSelectElement).value
+    this._BranchService.GetAllCompanyBranches(this.companyId, '' , 1, pageSize).subscribe({
+      next:(res)=>{
+        this.pageSize = pageSize
+        this.allBrnaches = res.data.items
+      }
+    })
+  }
 
   /* Download Table With PDF */
   open:boolean = false
@@ -234,26 +238,14 @@ export class BranchesComponent implements OnInit{
     XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
   }
 
-  sortColumn: string = ''; // العمود الذي يتم فرزه
-  sortDirection: boolean = true; // true للترتيب التصاعدي، false للتنازلي
+  // CheckBox Main Branch Toggle
+  // isChecked:boolean = false
+  // toggleChecked():void{
+  //   if(this.isChecked){
+  //     this.isChecked = false
+  //   } else {
+  //     this.isChecked = true
+  //   }
+  // }
 
-  sortTable(column: string): void {
-    if (this.sortColumn === column) {
-      // إذا تم النقر على نفس العمود، عكس الترتيب
-      this.sortDirection = !this.sortDirection;
-    } else {
-      this.sortColumn = column;
-      this.sortDirection = true; // افتراض الترتيب التصاعدي
-    }
-
-    this.allBrnaches.sort((a, b) => {
-      if (a[column] > b[column]) {
-        return this.sortDirection ? 1 : -1;
-      } else if (a[column] < b[column]) {
-        return this.sortDirection ? -1 : 1;
-      } else {
-        return 0;
-      }
-    });
-  }
 }
