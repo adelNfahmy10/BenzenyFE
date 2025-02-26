@@ -19,16 +19,16 @@ export class BranchdetailsComponent implements OnInit{
   private readonly _BranchService = inject(BranchService)
   private readonly _ActivatedRoute = inject(ActivatedRoute)
 
-  branchId!:any
-  allCars!:any
-  carCount!:any
-  allPage!:any
-  currentPage!:any
-  pageSize!:any
-  driverBranch!:any
-  carsCount!:any
-  driversCount!:any
-  companyId!:any
+  branchId:string | null = null
+  companyId:string | null = null
+  allCars:any[] = []
+  driverBranch:any[] = []
+  carCount:any = 0
+  allPage:any = 0
+  currentPage:any = 0
+  pageSize:any = 0
+  carsCount:any = 0
+  driversCount:any = 0
 
   constructor(){
     this.companyId = localStorage.getItem('companyId')
