@@ -61,7 +61,6 @@ export class BranchesComponent implements OnInit{
   }
   onChangePageSize(event:Event):void{
     let pageSize = (event.target as HTMLSelectElement).value
-    console.log(pageSize);
     this._BranchService.GetAllCompanyBranches(this.companyId, '' , 1, pageSize).subscribe({
       next:(res)=>{
         this.pageSize = pageSize
@@ -181,17 +180,6 @@ export class BranchesComponent implements OnInit{
     })
   }
 
-  activationBranches:any[] = []
-  // filter With Active or disActive
-  filterActivationBranch():void{
-    this.allBrnaches.filter((branch)=>{
-      if(branch.isActive){
-        this.activationBranches.push(branch)
-      }
-    })
-    console.log(this.activationBranches);
-  }
-
   // Menu Option In Table
   selectedRowId: number | null = null;
   toggleMenu(rowId: number) {
@@ -244,5 +232,28 @@ export class BranchesComponent implements OnInit{
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
+  }
+
+  sortColumn: string = ''; // العمود الذي يتم فرزه
+  sortDirection: boolean = true; // true للترتيب التصاعدي، false للتنازلي
+
+  sortTable(column: string): void {
+    if (this.sortColumn === column) {
+      // إذا تم النقر على نفس العمود، عكس الترتيب
+      this.sortDirection = !this.sortDirection;
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = true; // افتراض الترتيب التصاعدي
+    }
+
+    this.allBrnaches.sort((a, b) => {
+      if (a[column] > b[column]) {
+        return this.sortDirection ? 1 : -1;
+      } else if (a[column] < b[column]) {
+        return this.sortDirection ? -1 : 1;
+      } else {
+        return 0;
+      }
+    });
   }
 }

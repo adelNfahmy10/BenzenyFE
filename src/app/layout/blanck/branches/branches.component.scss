@@ -2,16 +2,7 @@ $mainColor:#f79320;
 h1{
   font-size: 64px;
 }
-// .search{
-//   input{
-//     border-color: $mainColor;
-//   }
-//   svg{
-//     position: absolute;
-//     top: 13px;
-//     right: 20px;
-//   }
-// }
+
 .download-container{
   .download-list{
     position: absolute;
@@ -264,6 +255,15 @@ border-radius: 20px;
     width: 20px;
   }
 }
+@media (max-width:567px) {
+  .search{
+    input{
+      width: 200px;
+      border: 1px solid #f97b2190;
+      background-color: #fff;
+    }
+  }
+}
 
 .dis-active-btn{
   width: fit-content;
@@ -276,4 +276,169 @@ border-radius: 20px;
   border : none;
   font-size: 12px;
   background-color: #008d7a;
+}
+
+.head-card-total{
+  position: relative;
+  background-image: linear-gradient(to right, #aaaaaa6b, #eee);
+  color: $mainColor;
+  height: 100%;
+  overflow: hidden;
+  transition: all .3s;
+  &::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -15%;
+    width: 50%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: $mainColor;
+    z-index: 1;
+    transition: all .3s;
+  }
+  h2{
+    position: relative;
+    z-index: 3;
+    margin-top: 22px;
+    font-size: 30px;
+    font-weight: 500;
+    svg{
+      fill: $mainColor;
+      transition: all .3s;
+    }
+  }
+  .count{
+    color: #fff;
+    position: absolute;
+    top: 5%;
+    right: 4%;
+    z-index: 2;
+    svg{
+      fill: #fff;
+    }
+    h3{
+      font-size: 30px;
+    }
+  }
+  &:hover{
+    color: #fff;
+    svg{
+      fill: #fff !important;
+    }
+  }
+  &:hover:before{
+    top: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
+.head-card{
+  position: relative;
+  background-image: linear-gradient(to right, #aaaaaa6b, #eee);
+  color: $mainColor;
+  height: 100%;
+  overflow: hidden;
+  transition: all .3s;
+  &::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -15%;
+    width: 50%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: $mainColor;
+    z-index: 1;
+    transition: all .3s;
+  }
+  h2{
+    position: relative;
+    z-index: 3;
+    margin-top: 22px;
+    font-size: 30px;
+    font-weight: 500;
+    svg{
+      fill: $mainColor;
+      transition: all .3s;
+    }
+  }
+  .count{
+    color: #fff;
+    position: absolute;
+    top: 5%;
+    right: 4%;
+    z-index: 2;
+    h3{
+      font-size: 30px;
+    }
+  }
+  &:hover{
+    color: #fff;
+    svg{
+      fill: #fff !important;
+    }
+  }
+  &:hover:before{
+    top: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
+.head-card-deActive{
+  position: relative;
+  background-image: linear-gradient(to right, #aaaaaa6b, #eee);
+  color: #222;
+  height: 100%;
+  overflow: hidden;
+  transition: all .3s;
+  &::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -15%;
+    width: 50%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #222;
+    z-index: 1;
+    transition: all .3s;
+  }
+  h2{
+    position: relative;
+    z-index: 3;
+    margin-top: 22px;
+    font-size: 28px;
+    font-weight: 500;
+    svg{
+      fill: #222;
+      transition: all .3s;
+    }
+  }
+  .count{
+    color: #fff;
+    position: absolute;
+    top: 5%;
+    right: 4%;
+    z-index: 2;
+    h3{
+      font-size: 30px;
+    }
+  }
+  &:hover{
+    color: #fff;
+    svg{
+      fill: #fff !important;
+    }
+  }
+  &:hover:before{
+    top: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 0;
+  }
 }
