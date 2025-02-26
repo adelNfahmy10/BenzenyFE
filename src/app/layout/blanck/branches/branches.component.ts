@@ -33,13 +33,15 @@ export class BranchesComponent implements OnInit{
   selectAll = false;
   branchCount:string = ''
   companyId:string | null = null
-  allBrnaches:any[] = []
+  allBranches:any[] = []
   allRegions:any[] = []
   allCity:any[] = []
   getActiveBranch:any[] = []
   getDisActiveBranch:any[] = []
   activeCount:number = 0
   disActiveCount:number = 0
+  totalCars:number = 0
+  totalDrivers:number = 0
 
   constructor(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
@@ -57,13 +59,17 @@ export class BranchesComponent implements OnInit{
   getAllBranches():void{
     this._BranchService.GetAllCompanyBranches(this.companyId).subscribe({
       next:(res)=>{
-        this.allBrnaches = res.data.items
+        this.allBranches = res.data.items[0].branchs
+        console.log(this.allBranches);
+
         this.branchCount = res.data.totalCount
         this.allPage = Math.ceil(res.data.totalCount / res.data.pageSize)
         this.currentPage = res.data.pageNumber
         this.pageSize = res.data.pageSize
         this.activeCount = res.data.activeCount
         this.disActiveCount = res.data.inActiveCount
+        this.totalDrivers = res.data.items[0].companyDriverCount
+        this.totalCars = res.data.items[0].companyCarCount
       }
     })
   }
@@ -153,7 +159,7 @@ export class BranchesComponent implements OnInit{
     const searchTerm = (event.target as HTMLInputElement).value;
     this._BranchService.GetAllCompanyBranches(this.companyId, searchTerm).subscribe({
       next:(res)=>{
-        this.allBrnaches = res.data.items
+        this.allBranches = res.data.items
       }
     })
   }
@@ -169,7 +175,7 @@ export class BranchesComponent implements OnInit{
       this.sortDirection = true;
     }
 
-    this.allBrnaches.sort((a, b) => {
+    this.allBranches.sort((a, b) => {
       if (a[column] > b[column]) {
         return this.sortDirection ? 1 : -1;
       } else if (a[column] < b[column]) {
@@ -189,7 +195,7 @@ export class BranchesComponent implements OnInit{
   changePagePagination(page:number):void{
     this._BranchService.GetAllCompanyBranches(this.companyId, '' , page).subscribe({
       next:(res)=>{
-        this.allBrnaches = res.data.items
+        this.allBranches = res.data.items
       }
     })
   }
@@ -199,7 +205,7 @@ export class BranchesComponent implements OnInit{
     this._BranchService.GetAllCompanyBranches(this.companyId, '' , 1, pageSize).subscribe({
       next:(res)=>{
         this.pageSize = pageSize
-        this.allBrnaches = res.data.items
+        this.allBranches = res.data.items
       }
     })
   }

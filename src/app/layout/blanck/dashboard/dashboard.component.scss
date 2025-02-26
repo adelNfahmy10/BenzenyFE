@@ -45,8 +45,96 @@ span:not(.main-color){
 }
 .chartBin{
     svg{
-        position: absolute;
-        top: 50%;
-        left: 45%;
+      position: absolute;
+      top: 50%;
+      left: 45%;
     }
+}
+
+@mixin button-style($bg-color) {
+  width: fit-content;
+  border: none;
+  font-size: 12px;
+  background-color: $bg-color;
+}
+.dis-active-btn {
+  @include button-style(#DCDCDC);
+}
+.active-btn {
+  @include button-style(#008d7a);
+}
+@mixin card-styles($bg-color, $text-color, $radius: 50%, $font-size: 30px) {
+  position: relative;
+  background-color: #fff;
+  color: $text-color;
+  height: 100%;
+  overflow: hidden;
+  transition: all .3s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -15%;
+    width: 50%;
+    height: 100%;
+    border-radius: $radius;
+    background-color: $bg-color;
+    z-index: 1;
+    transition: all .3s;
+  }
+
+  h2 {
+    position: relative;
+    z-index: 3;
+    margin-top: 22px;
+    font-weight: 500;
+    span{
+      color: $text-color;
+      transition: all .3s;
+      font-size: $font-size;
+    }
+    svg {
+      fill: $text-color;
+      transition: all .3s;
+    }
+  }
+
+  .count {
+    color: #fff;
+    position: absolute;
+    top: 5%;
+    right: 3%;
+    z-index: 2;
+
+    h3 {
+      font-size: 30px;
+    }
+
+    svg {
+      fill: #fff;
+    }
+  }
+
+  &:hover {
+    color: #fff;
+    h2{
+      span{
+        color: #fff;
+      }
+    }
+    svg {
+      fill: #fff !important;
+    }
+
+    &::before {
+      top: 0;
+      right: 0;
+      width: 100%;
+      border-radius: 0;
+    }
+  }
+}
+.head-card {
+  @include card-styles($mainColor, $mainColor);
 }

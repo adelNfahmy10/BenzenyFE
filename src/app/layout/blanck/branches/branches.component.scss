@@ -13,35 +13,53 @@ $mainColor:#f79320;
 }
 @mixin card-styles($bg-color, $text-color, $radius: 50%, $font-size: 30px) {
   position: relative;
-  background-image: linear-gradient(to right, #aaaaaa31, #eee);
+  // background-image: linear-gradient(to right, #aaaaaa31, #eee);
+  background-color: #fff;
   color: $text-color;
   height: 100%;
   overflow: hidden;
   transition: all .3s;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -15%;
-    width: 50%;
-    height: 100%;
-    border-radius: $radius;
-    background-color: $bg-color;
-    z-index: 1;
-    transition: all .3s;
+  .icon-head{
+    height: fit-content;
+    padding: 5px;
+    border: 1px dotted $mainColor;
   }
-
-  h2 {
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: -50%;
+  //   right: -15%;
+  //   width: 50%;
+  //   height: 100%;
+  //   border-radius: $radius;
+  //   background-color: $bg-color;
+  //   z-index: 1;
+  //   transition: all .3s;
+  // }
+  img{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 130px;
+    height: 100%;
+    object-fit: cover;
+  }
+  p{
+    color: #96a0b5;
+    font-size: 18px;
+    margin: 0;
+  }
+  h3 {
     position: relative;
-    z-index: 3;
-    margin-top: 22px;
+    // z-index: 3;
+    // margin-top: 22px;
     font-size: $font-size;
     font-weight: 500;
-    svg {
-      fill: $text-color;
-      transition: all .3s;
-    }
+    color: #222;
+    // svg {
+    //   fill: $text-color;
+    //   transition: all .3s;
+    // }
   }
 
   .count {
@@ -60,19 +78,19 @@ $mainColor:#f79320;
     }
   }
 
-  &:hover {
-    color: #fff;
-    svg {
-      fill: #fff !important;
-    }
+  // &:hover {
+  //   color: #fff;
+  //   svg {
+  //     fill: #fff !important;
+  //   }
 
-    &::before {
-      top: 0;
-      right: 0;
-      width: 100%;
-      border-radius: 0;
-    }
-  }
+  //   &::before {
+  //     top: 0;
+  //     right: 0;
+  //     width: 100%;
+  //     border-radius: 0;
+  //   }
+  // }
 }
 .head-card-total {
   @include card-styles($mainColor, $mainColor);
@@ -143,6 +161,33 @@ $mainColor:#f79320;
       border: 1px solid #f97b2190;
       background-color: #fff;
     }
+  }
+}
+i{
+  font-size: 25px !important;
+}
+.total{
+  i{
+    transform: rotate(180deg);
+  }
+}
+.active{
+  border-color: #41CBD8 !important;
+  i{
+    color: #41CBD8;
+  }
+}
+
+.dis-active{
+  border-color: #f00 !important;
+  i{
+    color: #f00;
+  }
+}
+.cars{
+  border-color: #A841B7 !important;
+  i{
+    color: #A841B7;
   }
 }
 
@@ -219,6 +264,21 @@ label, input::placeholder{
     fill: #fff;
   }
 }
+
+
+.car-drive{
+  position: relative;
+  &::before{
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 60%;
+    background-color: #eee;
+  }
+}
 // .switch {
 //   display: inline-block;
 //   width: 51px;
@@ -258,3 +318,4 @@ label, input::placeholder{
 // input:checked + .slider:before {
 //   transform: translateX(200%);
 // }
+
