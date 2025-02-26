@@ -60,8 +60,6 @@ export class BranchesComponent implements OnInit{
     this._BranchService.GetAllCompanyBranches(this.companyId).subscribe({
       next:(res)=>{
         this.allBranches = res.data.items[0].branchs
-        console.log(this.allBranches);
-
         this.branchCount = res.data.totalCount
         this.allPage = Math.ceil(res.data.totalCount / res.data.pageSize)
         this.currentPage = res.data.pageNumber
@@ -159,7 +157,7 @@ export class BranchesComponent implements OnInit{
     const searchTerm = (event.target as HTMLInputElement).value;
     this._BranchService.GetAllCompanyBranches(this.companyId, searchTerm).subscribe({
       next:(res)=>{
-        this.allBranches = res.data.items
+        this.allBranches = res.data.items[0].branchs
       }
     })
   }
@@ -195,7 +193,7 @@ export class BranchesComponent implements OnInit{
   changePagePagination(page:number):void{
     this._BranchService.GetAllCompanyBranches(this.companyId, '' , page).subscribe({
       next:(res)=>{
-        this.allBranches = res.data.items
+        this.allBranches = res.data.items[0].branchs
       }
     })
   }
@@ -205,7 +203,7 @@ export class BranchesComponent implements OnInit{
     this._BranchService.GetAllCompanyBranches(this.companyId, '' , 1, pageSize).subscribe({
       next:(res)=>{
         this.pageSize = pageSize
-        this.allBranches = res.data.items
+        this.allBranches = res.data.items[0].branchs
       }
     })
   }
