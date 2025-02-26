@@ -4,6 +4,7 @@ import { CarService } from '../../cars/core/service/car.service';
 import { DriverService } from '../../drivers/core/service/driver.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DatePipe } from '@angular/common';
+import { BranchService } from '../core/service/branch.service';
 
 @Component({
   selector: 'app-branchdetails',
@@ -15,6 +16,7 @@ import { DatePipe } from '@angular/common';
 export class BranchdetailsComponent implements OnInit{
   private readonly _CarService = inject(CarService)
   private readonly _DriverService = inject(DriverService)
+  private readonly _BranchService = inject(BranchService)
   private readonly _ActivatedRoute = inject(ActivatedRoute)
 
   branchId!:any
@@ -26,6 +28,11 @@ export class BranchdetailsComponent implements OnInit{
   driverBranch!:any
   carsCount!:any
   driversCount!:any
+  companyId!:any
+
+  constructor(){
+    this.companyId = localStorage.getItem('companyId')
+  }
 
   ngOnInit(): void {
     this.getBranchById()
@@ -71,6 +78,16 @@ export class BranchdetailsComponent implements OnInit{
       next:(res)=>{
         this.driverBranch = res.data.items
         this.driversCount = res.data.totalCount
+      }
+    })
+  }
+
+  onChangePageSize(event:Event):void{
+    let pageSize = (event.target as HTMLSelectElement).value
+    this._CarService.GetAllCarsByBranchId(this.branchId, '' , 1, pageSize).subscribe({
+      next:(res)=>{
+        this.pageSize = pageSize
+        this.allCars = res.data.items
       }
     })
   }
