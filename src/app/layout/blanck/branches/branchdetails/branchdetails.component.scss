@@ -1,4 +1,87 @@
 $mainColor:#f79320;
+// .head-card{
+//   position: relative;
+//   background-image: linear-gradient(to right, #aaaaaa6b, #eee);
+//   color: $mainColor;
+//   height: 100%;
+//   overflow: hidden;
+//   transition: all .3s;
+//   &::before{
+//     content: '';
+//     position: absolute;
+//     top: -50%;
+//     right: -15%;
+//     width: 50%;
+//     height: 100%;
+//     border-radius: 50%;
+//     background-color: $mainColor;
+//     z-index: 1;
+//     transition: all .3s;
+//   }
+//   h2{
+//     position: relative;
+//     z-index: 3;
+//     margin-top: 22px;
+//     font-size: 30px;
+//     font-weight: 500;
+//     svg{
+//       fill: $mainColor;
+//       transition: all .3s;
+//     }
+//   }
+//   .count{
+//     color: #fff;
+//     position: absolute;
+//     top: 5%;
+//     right: 4%;
+//     z-index: 2;
+//     h3{
+//       font-size: 30px;
+//     }
+//   }
+//   &:hover{
+//     color: #fff;
+//     svg{
+//       fill: #fff !important;
+//     }
+//   }
+//   &:hover:before{
+//     top: 0;
+//     right: 0;
+//     width: 100%;
+//     border-radius: 0;
+//   }
+// }
+/* #################################### Style Head Cards ####################################### */
+.head-card {
+  .icon-head{
+    height: fit-content;
+    border: 1px dotted;
+  }
+  img{
+    width: 130px;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(350%);
+  }
+  p{
+    color: #96a0b5;
+    font-size: 18px;
+  }
+  h3 {
+    font-weight: 500;
+    color: #222;
+  }
+}
+i{
+  font-size: 25px !important;
+}
+.cars,.drivers{
+  border-color: #ffbf00 !important;
+  i{
+    color: #ffbf00;
+  }
+}
 .my-pagination ::ng-deep .ngx-pagination .current {
   background: $mainColor !important;
   color: #fff !important ;
@@ -6,56 +89,74 @@ $mainColor:#f79320;
 .err-img{
   width: 300px;
 }
-.head-card{
-  position: relative;
-  background-image: linear-gradient(to right, #aaaaaa6b, #eee);
-  color: $mainColor;
-  height: 100%;
-  overflow: hidden;
+
+/* #################################### Style Table ####################################### */
+.table-head th{
+  background-color: #b5b5b570 !important;
+}
+.add-btn{
+  border: 1px solid #f97b2190;
+  width: fit-content;
+  padding: 0 10px;
   transition: all .3s;
-  &::before{
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -15%;
-    width: 50%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: $mainColor;
-    z-index: 1;
+  h5{
+    color: $mainColor;
     transition: all .3s;
   }
-  h2{
-    position: relative;
-    z-index: 3;
-    margin-top: 22px;
-    font-size: 30px;
-    font-weight: 500;
-    svg{
-      fill: $mainColor;
-      transition: all .3s;
-    }
-  }
-  .count{
-    color: #fff;
-    position: absolute;
-    top: 5%;
-    right: 4%;
-    z-index: 2;
-    h3{
-      font-size: 30px;
-    }
+  svg{
+    fill: #F97C21;
+    transition: all .3s;
   }
   &:hover{
-    color: #fff;
+    background-color: $mainColor;
+    h5{
+      color: #fff;
+    }
     svg{
-      fill: #fff !important;
+      fill: #fff;
+    }
+
+  }
+}
+@mixin button-style($bg-color) {
+  width: fit-content;
+  border: none;
+  font-size: 12px;
+  background-color: $bg-color;
+}
+.dis-active-btn {
+  @include button-style(#DCDCDC);
+}
+.active-btn {
+  @include button-style(#008d7a);
+}
+.search{
+  input{
+    width: 300px;
+    border: 1px solid #f97b2190;
+    &::placeholder{
+      color: #B8B8B8;
+      font-weight: 300;
+    }
+    &:focus{
+      border-color:$mainColor !important;
     }
   }
-  &:hover:before{
-    top: 0;
-    right: 0;
-    width: 100%;
-    border-radius: 0;
+  svg{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    width: 20px;
+    fill: $mainColor;
+  }
+}
+@media (max-width:567px) {
+  .search{
+    input{
+      width: 200px;
+      border: 1px solid #f97b2190;
+      background-color: #fff;
+    }
   }
 }

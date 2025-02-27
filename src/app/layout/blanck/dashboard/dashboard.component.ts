@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { ToastrService } from 'ngx-toastr';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
+import { borderTopLeftRadius } from 'html2canvas/dist/types/css/property-descriptors/border-radius';
 Chart.register(...registerables);
 
 @Component({
@@ -14,6 +15,10 @@ Chart.register(...registerables);
 })
 export class DashboardComponent implements OnInit{
   private readonly _ToastrService = inject(ToastrService)
+  companyName:string | null = null
+  constructor(){
+    this.companyName = localStorage.getItem('companyName')
+  }
 
   ngOnInit(): void {
     this.chartLine = new Chart('ChartLine', this.configLine)
@@ -63,13 +68,13 @@ export class DashboardComponent implements OnInit{
         {
           label:'Sales',
           barPercentage: 0.5,
-          barThickness: 6,
-          maxBarThickness: 8,
+          barThickness: 15,
+          maxBarThickness: 15,
           minBarLength: 2,
           data: [100 ,200, 400, 600],
           borderColor: '#F79320',
           backgroundColor:'#F79320',
-          // fill: true,
+          borderRadius: 20,
         },
       ]
     },
@@ -77,7 +82,7 @@ export class DashboardComponent implements OnInit{
       responsive: true,
       scales: {
           y: {
-              beginAtZero: true
+            beginAtZero: true
           }
       }
     },
