@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, PLATFORM_ID, RendererFactory2, signal, ViewChild, WritableSignal } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Chart , registerables } from 'chart.js';
 import { ViewallComponent } from "../../../../assets/share/buttons/viewall/viewall.component";
 import { BtnaddComponent } from "../../../../assets/share/buttons/btnadd/btnadd.component";
@@ -16,7 +16,7 @@ Chart.register(...registerables)
 @Component({
   selector: 'app-companies',
   standalone: true,
-  imports: [ViewallComponent, BtnaddComponent, RouterLink, FormsModule, HeaderComponent, RouterLink, ReactiveFormsModule, NgIf, NgClass],
+  imports: [ViewallComponent, BtnaddComponent, RouterLink, FormsModule, HeaderComponent, RouterLink, ReactiveFormsModule, NgClass],
   templateUrl: './companies.component.html',
   styleUrl: './companies.component.scss'
 })
@@ -43,7 +43,6 @@ export class CompaniesComponent implements OnInit{
       this.companyId = localStorage.getItem("companyId")
     }
   }
-
   ngOnInit(): void {
     this.getAllBranches()
     this.getAllRegions()
@@ -52,7 +51,7 @@ export class CompaniesComponent implements OnInit{
   getAllBranches():void{
     this._BranchService.GetAllCompanyBranches(this.companyId).subscribe({
       next:(res)=>{
-        this.allBranches = res.data.items
+        this.allBranches = res.data.items[0].branchs
         this.branchCount = res.data.totalCount
       }
     })
@@ -111,6 +110,8 @@ export class CompaniesComponent implements OnInit{
     })
 
   }
+
+
   getAllUsersByCompanyId():void{
     this._CompanyService.GetAllUserInCompanyById(this.companyId!).subscribe({
       next:(res)=>{
@@ -166,15 +167,6 @@ export class CompaniesComponent implements OnInit{
       this.selectedRowId = null;
     } else {
       this.selectedRowId = rowId;
-    }
-  }
-
-  isChecked:boolean = false
-  toggleChecked():void{
-    if(this.isChecked){
-      this.isChecked = false
-    } else {
-      this.isChecked = true
     }
   }
 

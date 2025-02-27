@@ -1,4 +1,10 @@
 $mainColor: #f79320;
+i{
+  font-size: 25px !important;
+}
+.fa-coins{
+  font-size: 40px !important;
+}
 .item{
     position: relative;
     display: flex;
@@ -51,90 +57,149 @@ span:not(.main-color){
     }
 }
 
-@mixin button-style($bg-color) {
-  width: fit-content;
-  border: none;
-  font-size: 12px;
-  background-color: $bg-color;
-}
-.dis-active-btn {
-  @include button-style(#DCDCDC);
-}
-.active-btn {
-  @include button-style(#008d7a);
-}
-@mixin card-styles($bg-color, $text-color, $radius: 50%, $font-size: 30px) {
-  position: relative;
-  background-color: #fff;
-  color: $text-color;
-  height: 100%;
-  overflow: hidden;
-  transition: all .3s;
+// @mixin button-style($bg-color) {
+//   width: fit-content;
+//   border: none;
+//   font-size: 12px;
+//   background-color: $bg-color;
+// }
+// .dis-active-btn {
+//   @include button-style(#DCDCDC);
+// }
+// .active-btn {
+//   @include button-style(#008d7a);
+// }
+// @mixin card-styles($bg-color, $text-color, $radius: 50%, $font-size: 30px) {
+//   position: relative;
+//   background-color: #fff;
+//   color: $text-color;
+//   height: 100%;
+//   overflow: hidden;
+//   transition: all .3s;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -15%;
-    width: 50%;
-    height: 100%;
-    border-radius: $radius;
-    background-color: $bg-color;
-    z-index: 1;
-    transition: all .3s;
-  }
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     top: -50%;
+//     right: -15%;
+//     width: 50%;
+//     height: 100%;
+//     border-radius: $radius;
+//     background-color: $bg-color;
+//     z-index: 1;
+//     transition: all .3s;
+//   }
 
-  h2 {
-    position: relative;
-    z-index: 3;
-    margin-top: 22px;
-    font-weight: 500;
-    span{
-      color: $text-color;
-      transition: all .3s;
-      font-size: $font-size;
-    }
-    svg {
-      fill: $text-color;
-      transition: all .3s;
-    }
-  }
+//   h2 {
+//     position: relative;
+//     z-index: 3;
+//     margin-top: 22px;
+//     font-weight: 500;
+//     span{
+//       color: $text-color;
+//       transition: all .3s;
+//       font-size: $font-size;
+//     }
+//     svg {
+//       fill: $text-color;
+//       transition: all .3s;
+//     }
+//   }
 
-  .count {
-    color: #fff;
-    position: absolute;
-    top: 5%;
-    right: 3%;
-    z-index: 2;
+//   .count {
+//     color: #fff;
+//     position: absolute;
+//     top: 5%;
+//     right: 3%;
+//     z-index: 2;
 
-    h3 {
-      font-size: 30px;
-    }
+//     h3 {
+//       font-size: 30px;
+//     }
 
-    svg {
-      fill: #fff;
-    }
-  }
+//     svg {
+//       fill: #fff;
+//     }
+//   }
 
-  &:hover {
-    color: #fff;
-    h2{
-      span{
-        color: #fff;
-      }
-    }
-    svg {
-      fill: #fff !important;
-    }
+//   &:hover {
+//     color: #fff;
+//     h2{
+//       span{
+//         color: #fff;
+//       }
+//     }
+//     svg {
+//       fill: #fff !important;
+//     }
 
-    &::before {
-      top: 0;
-      right: 0;
-      width: 100%;
-      border-radius: 0;
-    }
-  }
-}
+//     &::before {
+//       top: 0;
+//       right: 0;
+//       width: 100%;
+//       border-radius: 0;
+//     }
+//   }
+// }
+// .head-card {
+//   @include card-styles($mainColor, $mainColor);
+// }
+
+/* #################################### Style Head Cards ####################################### */
 .head-card {
-  @include card-styles($mainColor, $mainColor);
+  .icon-head{
+    height: fit-content;
+    border: 1px dotted;
+  }
+  img{
+    width: 130px;
+    height: 100%;
+    object-fit: cover;
+    border-bottom-right-radius: 10px;
+    filter: sepia(350%);
+  }
+  &.main-card{
+    img{
+      width: 200px;
+      right: 30px;
+      object-fit: cover;
+    }
+  }
+  p{
+    color: #96a0b5;
+    font-size: 18px;
+    .sar-balance{
+      font-size: 16px;
+    }
+  }
+  h3 {
+    font-weight: 500;
+    color: #222;
+  }
+  .info{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  &.card-balance{
+    background-image: url('../../../../assets/image/globe.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 85% center;
+    img{
+      filter: sepia(0) !important;
+      width: 80px;
+    }
+  }
+  &.card-fuel{
+    img{
+      filter: sepia(0) !important;
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+    }
+  }
+}
+.fa-code-branch {
+  transform: rotate(180deg);
 }

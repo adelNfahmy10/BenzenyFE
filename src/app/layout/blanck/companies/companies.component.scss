@@ -1,4 +1,59 @@
 $mainColor: #f79320;
+i{
+  font-size: 25px !important;
+}
+/* #################################### Style Head Cards ####################################### */
+.head-card {
+  .icon-head{
+    height: fit-content;
+    border: 1px dotted;
+  }
+  img{
+    width: 130px;
+    height: 100%;
+    object-fit: cover;
+    border-bottom-right-radius: 10px;
+    filter: sepia(350%);
+  }
+  &.main-card{
+    img{
+      width: 200px;
+      right: 30px;
+    }
+  }
+  p{
+    color: #96a0b5;
+    font-size: 18px;
+    .sar-balance{
+      font-size: 16px;
+    }
+  }
+  h3 {
+    font-weight: 500;
+    color: #222;
+  }
+  .info{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  &.card-balance{
+    background-image: url('../../../../assets/image/globe.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 85% center;
+    img{
+      filter: sepia(0) !important;
+      width: 80px;
+    }
+  }
+}
+.fa-code-branch {
+  transform: rotate(180deg);
+}
+
+
+/* #################################### Style Tables Branch And Users ####################################### */
 .barnches, .users{
   & > svg{
       position: absolute;
@@ -17,58 +72,17 @@ $mainColor: #f79320;
   }
 }
 
-.iban{
-  .iban-number{
-    font-weight: 800;
-  }
-  & > svg{
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-  @media (max-width: 576px) {
-    & > svg{
-        z-index: -1;
-    }
-  }
-}
 
-.taiba{
-  &::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    right:15px;
-    width: 2px;
-    height: 90%;
-    background-color: #c8c8c8;
-  }
-}
-
+/* #################################### Style Add Model ####################################### */
 .company-Info{
   border: 1px solid $mainColor;
 }
-
 .muted{
   font-size: 10px;
   &.delete-text{
     color: #f00 !important;
   }
 }
-
-.action-list{
-  position: absolute;
-  top: 100%;
-  right: 55%;
-  li{
-    transition: all .3s;
-    width: 152px;
-    &:hover{
-      background-color: #eee;
-    }
-  }
-}
-
 label, input::placeholder{
   color: #4C4C4C;
   font-size: 14px;
@@ -197,7 +211,6 @@ input, .code-num, select, textarea{
   width: 0;
   height: 0;
 }
-
 .slider {
   position: absolute;
   cursor: pointer;
@@ -209,7 +222,6 @@ input, .code-num, select, textarea{
   border-radius: 34px;
   transition: 0.4s;
 }
-
 .slider:before {
   content: "";
   position: absolute;
@@ -221,11 +233,9 @@ input, .code-num, select, textarea{
   background-color: white;
   transition: 0.4s;
 }
-
 input:checked + .slider {
   background-color: $mainColor;
 }
-
 input:checked + .slider:before {
   transform: translateX(200%);
 }
