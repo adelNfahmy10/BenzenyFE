@@ -24,9 +24,16 @@ export class RegistarComponent {
   onSelect(event:any) {
     this.files.push(...event.addedFiles);
   }
-
   onRemove(event:any) {
     this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  filesLogo: File[] = [];
+  onSelectLogo(event:any) {
+    this.filesLogo.push(...event.addedFiles);
+  }
+  onRemoveLogo(event:any) {
+    this.filesLogo.splice(this.filesLogo.indexOf(event), 1);
   }
 
   registerForm:FormGroup = this._FormBuilder.group({
@@ -34,16 +41,19 @@ export class RegistarComponent {
     Description: [''],
     CompanyEmail: [''],
     CompanyPhone: [''],
+    CompanyPicture: [''],
     Files: [''],
   })
   submitRegisterForm():void{
     let data = this.registerForm.value
-    data.Files = this.files
+    data.Files = this.files[0]
+    data.CompanyPicture = this.filesLogo[0]
     let formData = new FormData()
     formData.append('Name', data.Name)
     formData.append('Description', data.Description)
     formData.append('CompanyEmail', data.CompanyEmail)
     formData.append('CompanyPhone', data.CompanyPhone)
+    formData.append('CompanyPicture', data.CompanyPicture)
     formData.append('Files', data.Files)
 
     this._CompanyService.CreateCompany(formData).subscribe({

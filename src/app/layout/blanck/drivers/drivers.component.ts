@@ -4,7 +4,7 @@ import { HeaderComponent } from "../../../../assets/share/header/header.componen
 import * as XLSX from 'xlsx';
 import { DriverService } from './core/service/driver.service';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
+import { DatePipe, isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { NgxDropzoneModule } from 'ngx-dropzone';
@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-drivers',
   standalone: true,
-  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule,NgClass, NgIf, NgFor, NgxDropzoneModule],
+  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule,NgClass, NgIf, NgFor, NgxDropzoneModule ],
   templateUrl: './drivers.component.html',
   styleUrl: './drivers.component.scss'
 })
@@ -29,7 +29,7 @@ export class DriversComponent implements OnInit{
   title:string = 'Drivers'
   allPage:number = 1;
   currentPage:number = 1
-  pageSize:number = 1
+  pageSize:any = 1
   selectAll = false;
   driverCount:string = ''
 
@@ -102,7 +102,6 @@ export class DriversComponent implements OnInit{
     })
   }
 
-  @ViewChild('table') template!:ElementRef
   downloadTableExcel():void{
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -118,38 +117,6 @@ export class DriversComponent implements OnInit{
     XLSX.writeFile(wb, 'table_data.xlsx');
   }
 
-  downloadPDF():void{
-    if(isPlatformBrowser(this._PLATFORM_ID)){
-      const data = this.template.nativeElement
-
-      html2canvas(data).then(canvas => {
-        const imgWidth = 208
-        const pageHeight = 295
-        const imgHeight = (canvas.height * imgWidth) / canvas.width
-        const heightLeft = imgHeight
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        const contentDataURL = canvas.toDataURL('image/png')
-        pdf.addImage(contentDataURL, 'png', 0, 0, imgWidth, imgHeight)
-        pdf.save('table.pdf')
-      })
-    }
-  }
-
-  isChecked:boolean = false
-  toggleChecked():void{
-    if(this.isChecked){
-      this.isChecked = false
-    } else {
-      this.isChecked = true
-    }
-  }
-
-  page = 1;
-
-  // Sort column and order
-  filterText = '';
-  sortColumn: string = '';
-  sortOrder: 'asc' | 'desc' = 'asc';
 
   // Filtering the data based on search input
   filteredData(event:Event) {
@@ -173,26 +140,6 @@ export class DriversComponent implements OnInit{
   // Toggle Select All checkbox
   toggleSelectAll() {
     this.allDrivers.forEach((row:any) => row.selected = this.selectAll);
-  }
-
-  // Sorting function
-  sortTable(column: string) {
-    if (this.sortColumn === column) {
-      // Toggle sort order
-      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-    } else {
-      this.sortColumn = column;
-      this.sortOrder = 'asc';
-    }
-
-    this.allDrivers.sort((a:any, b:any) => {
-      const aValue = a[column];
-      const bValue = b[column];
-
-      if (aValue < bValue) return this.sortOrder === 'asc' ? -1 : 1;
-      if (aValue > bValue) return this.sortOrder === 'asc' ? 1 : -1;
-      return 0;
-    });
   }
 
   /* Download Table With PDF */
@@ -243,4 +190,62 @@ export class DriversComponent implements OnInit{
       }
     })
   }
+
+  /* Sort Table */
+  sortColumn: string = '';
+  sortDirection: boolean = true;
+  sortTable(column: string): void {
+    if (this.sortColumn === column) {
+      this.sortDirection = !this.sortDirection;
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = true;
+    }
+
+    this.allDrivers.sort((a, b) => {
+      if (a[column] > b[column]) {
+        return this.sortDirection ? 1 : -1;
+      } else if (a[column] < b[column]) {
+        return this.sortDirection ? -1 : 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+
+  onChangePageSize(event:Event):void{
+    let pageSize = (event.target as HTMLSelectElement).value
+    this._DriverService.GetDriversInBranch(this.branchId, '' , 1, pageSize).subscribe({
+      next:(res)=>{
+        this.pageSize = pageSize
+        this.allDrivers = res.data.items
+      }
+    })
+  }
+
+  @ViewChild('table') template!:ElementRef
+  downloadPDF():void{
+    if(isPlatformBrowser(this._PLATFORM_ID)){
+      const data = this.template.nativeElement
+      html2canvas(data).then(canvas => {
+        const imgWidth = 208
+        const pageHeight = 295
+        const imgHeight = (canvas.height * imgWidth) / canvas.width
+        const heightLeft = imgHeight
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const contentDataURL = canvas.toDataURL('image/png')
+        pdf.addImage(contentDataURL, 'png', 0, 0, imgWidth, imgHeight)
+        pdf.save('table.pdf')
+      })
+    }
+  }
+
+  downloadExcel():void{
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
+  }
+
 }
