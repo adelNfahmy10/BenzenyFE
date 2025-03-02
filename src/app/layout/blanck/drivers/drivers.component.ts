@@ -4,7 +4,7 @@ import { HeaderComponent } from "../../../../assets/share/header/header.componen
 import * as XLSX from 'xlsx';
 import { DriverService } from './core/service/driver.service';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { DatePipe, isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
+import { isPlatformBrowser, NgFor } from '@angular/common';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { NgxDropzoneModule } from 'ngx-dropzone';
@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-drivers',
   standalone: true,
-  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule,NgClass, NgIf, NgFor, NgxDropzoneModule ],
+  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgFor, NgxDropzoneModule  ],
   templateUrl: './drivers.component.html',
   styleUrl: './drivers.component.scss'
 })
