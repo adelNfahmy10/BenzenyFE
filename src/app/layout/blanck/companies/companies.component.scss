@@ -51,7 +51,17 @@ i{
 .fa-code-branch {
   transform: rotate(180deg);
 }
-
+.add-branch-btn{
+  width: 35px;
+  height: 35px;
+  border: 1px solid $mainColor;
+  color: $mainColor;
+  transition: all .3s;
+  &:hover{
+    background-color: $mainColor;
+    color: #fff;
+  }
+}
 
 /* #################################### Style Tables Branch And Users ####################################### */
 .barnches, .users{

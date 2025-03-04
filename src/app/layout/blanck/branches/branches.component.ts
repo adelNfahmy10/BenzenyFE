@@ -1,6 +1,6 @@
-import { isPlatformBrowser, NgClass, NgIf } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -10,11 +10,13 @@ import { BranchService } from './core/service/branch.service';
 import { ReigonandcityService } from '../../../../core/services/reigons/reigonandcity.service';
 import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
+import { CompanyService } from '../companies/core/service/company.service';
+import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-branches',
   standalone: true,
-  imports: [ FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent, RouterLink ],
+  imports: [ FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent, RouterLink, NgSelectModule, NgFor ],
   templateUrl: './branches.component.html',
   styleUrl: './branches.component.scss'
 })
@@ -23,6 +25,7 @@ export class BranchesComponent implements OnInit{
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
   private readonly _BranchService = inject(BranchService)
+  private readonly _CompanyService = inject(CompanyService)
   private readonly _ReigonandcityService = inject(ReigonandcityService)
   private readonly _ToastrService = inject(ToastrService)
 
@@ -38,11 +41,12 @@ export class BranchesComponent implements OnInit{
   allCity:any[] = []
   getActiveBranch:any[] = []
   getDisActiveBranch:any[] = []
+  allUsers:any[] = []
+  selectedUser:string = ''
   activeCount:number = 0
   disActiveCount:number = 0
   totalCars:number = 0
   totalDrivers:number = 0
-
   constructor(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
       this.companyId = localStorage.getItem("companyId")
@@ -53,6 +57,8 @@ export class BranchesComponent implements OnInit{
   ngOnInit(): void {
     this.getAllRegions()
     this.getAllBranches()
+    this.getAllUsersByCompanyId()
+    this.addUser()
   }
 
   /* All Branches */
@@ -95,6 +101,14 @@ export class BranchesComponent implements OnInit{
     })
   }
 
+  getAllUsersByCompanyId():void{
+    this._CompanyService.GetAllUserInCompanyById(this.companyId!).subscribe({
+      next:(res)=>{
+        this.allUsers = res.data.items
+      }
+    })
+  }
+
   /* Branch Form */
   branchForm:FormGroup = this._FormBuilder.group({
     CompanyId:[''],
@@ -106,7 +120,19 @@ export class BranchesComponent implements OnInit{
     Password:[''],
     PhoneNumber:[''],
     IBAN:[''],
+    UserIds: this._FormBuilder.array([]),
   })
+
+  get users():FormArray {
+    return this.branchForm.get('UserIds') as FormArray;
+  }
+  addUser(){
+    const userControl = this._FormBuilder.control('');
+    this.users.push(userControl);
+  }
+  removeUser(index: number) {
+    this.users.removeAt(index);
+  }
 
   /* Submit Branch Form */
   submitBranchForm():void{
@@ -122,14 +148,17 @@ export class BranchesComponent implements OnInit{
     formData.append('Password', data.Password),
     formData.append('PhoneNumber', data.PhoneNumber),
     formData.append('IBAN', data.IBAN)
+    formData.append('UserIds', JSON.stringify(data.UserIds));
 
-    this._BranchService.CreateBranch(formData).subscribe({
-      next:(res)=>{
-        this.branchForm.reset()
-        this.getAllBranches()
-        this._ToastrService.success(res.msg)
-      }
-    })
+    console.log(data);
+
+    // this._BranchService.CreateBranch(formData).subscribe({
+    //   next:(res)=>{
+    //     this.branchForm.reset()
+    //     this.getAllBranches()
+    //     this._ToastrService.success(res.msg)
+    //   }
+    // })
   }
 
   /* Delete Branch */

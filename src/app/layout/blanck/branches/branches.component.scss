@@ -124,7 +124,7 @@ i:not(.fa-circle-info){
 }
 
 /* #################################### Style Model Add ####################################### */
-input, .code-num, textarea{
+input, .code-num, textarea, select{
   background: #F7F7F7;
   &::placeholder{
     font-weight: 200;
@@ -208,6 +208,17 @@ label, input::placeholder{
     width: 2px;
     height: 60%;
     background-color: #eee;
+  }
+}
+.add-driver-btn{
+  width: 35px;
+  height: 35px;
+  border: 1px solid $mainColor;
+  color: $mainColor;
+  transition: all .3s;
+  &:hover{
+    background-color: $mainColor;
+    color: #fff;
   }
 }
 // .switch {

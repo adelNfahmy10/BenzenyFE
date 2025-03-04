@@ -3,20 +3,20 @@ import { Chart , registerables } from 'chart.js';
 import { ViewallComponent } from "../../../../assets/share/buttons/viewall/viewall.component";
 import { BtnaddComponent } from "../../../../assets/share/buttons/btnadd/btnadd.component";
 import { RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import { BranchService } from '../branches/core/service/branch.service';
 import { ReigonandcityService } from '../../../../core/services/reigons/reigonandcity.service';
 import { AuthService } from '../../auth/core/service/auth.service';
 import { CompanyService } from './core/service/company.service';
-import { isPlatformBrowser, NgClass, NgIf } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
 Chart.register(...registerables)
 
 @Component({
   selector: 'app-companies',
   standalone: true,
-  imports: [ViewallComponent, BtnaddComponent, RouterLink, FormsModule, HeaderComponent, RouterLink, ReactiveFormsModule, NgClass],
+  imports: [ViewallComponent, BtnaddComponent, RouterLink, FormsModule, HeaderComponent, RouterLink, ReactiveFormsModule, NgClass, NgFor],
   templateUrl: './companies.component.html',
   styleUrl: './companies.component.scss'
 })
@@ -47,6 +47,7 @@ export class CompaniesComponent implements OnInit{
     this.getAllBranches()
     this.getAllRegions()
     this.getAllUsersByCompanyId()
+    this.addUser()
   }
   getAllBranches():void{
     this._BranchService.GetAllCompanyBranches(this.companyId).subscribe({
@@ -84,10 +85,22 @@ export class CompaniesComponent implements OnInit{
     Password:[''],
     PhoneNumber:[''],
     IBAN:[''],
+    UserIds: this._FormBuilder.array([]),
   })
+  get users():FormArray {
+    return this.branchForm.get('UserIds') as FormArray;
+  }
+  addUser(){
+    const userControl = this._FormBuilder.control('');
+    this.users.push(userControl);
+  }
+  removeUser(index: number) {
+    this.users.removeAt(index);
+  }
   submitBranchForm():void{
     let data = this.branchForm.value
     data.CompanyId = this.companyId
+
     let formData = new FormData()
     formData.append('CompanyId', data.CompanyId),
     formData.append('RegionId', data.RegionId),
@@ -98,6 +111,9 @@ export class CompaniesComponent implements OnInit{
     formData.append('Password', data.Password),
     formData.append('PhoneNumber', data.PhoneNumber),
     formData.append('IBAN', data.IBAN)
+    data.UserIds.forEach((userId:any) => {
+      formData.append('UserIds', userId);
+    });
 
     this._BranchService.CreateBranch(formData).subscribe({
       next:(res)=>{
@@ -108,9 +124,7 @@ export class CompaniesComponent implements OnInit{
         })
       }
     })
-
   }
-
 
   getAllUsersByCompanyId():void{
     this._CompanyService.GetAllUserInCompanyById(this.companyId!).subscribe({
