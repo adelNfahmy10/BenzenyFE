@@ -236,3 +236,58 @@ input:checked + .slider:before {
     }
   }
 }
+/* #################################### Style Head Cards ####################################### */
+.head-card {
+  .icon-head{
+    height: fit-content;
+    border: 1px dotted;
+  }
+  img{
+    width: 130px;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(350%);
+  }
+  p{
+    color: #96a0b5;
+    font-size: 18px;
+  }
+  h3 {
+    font-weight: 500;
+    color: #222;
+  }
+}
+i:not(.fa-circle-info){
+  font-size: 25px !important;
+}
+
+
+.cars,.drivers{
+  border-color: #ffbf00 !important;
+  i{
+    color: #ffbf00;
+  }
+}
+
+.plate-table{
+  width: 70%;
+  height: 50%;
+  margin: 0 auto;
+  border: 4px solid #000;
+  td{
+    border: 4px solid #000;
+    width: 100px;
+    font-size: 26px;
+    font-weight: bold;
+  }
+  .row-ksa-img{
+    width: 30px;
+    span{
+      font-size: 18px;
+    }
+    img{
+      width: 60px;
+    }
+  }
+
+}

@@ -36,10 +36,19 @@ export class CarsComponent implements OnInit{
   carCount:number = 1
   driverCount:number = 1
   selectAll = false;
+  carNumberEn:string = ''
+  carNumberAr:string = ''
+  carLetterEn1:string = ''
+  carLetterEn2:string = ''
+  carLetterEn3:string = ''
+  carLetterAr1:string = ''
+  carLetterAr2:string = ''
+  carLetterAr3:string = ''
 
   constructor(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
-      this.branchId = localStorage.getItem('branchId')
+      // this.branchId = localStorage.getItem('branchId')
+      this.branchId = 'd8875c93-c7b4-41f1-6c2a-08dd4ffe81a5'
       this.userId = localStorage.getItem('userId')
     }
   }
@@ -98,7 +107,11 @@ export class CarsComponent implements OnInit{
 
   submitCarForm():void{
     let data = this.carForm.value
+    let carPaletEn = `${this.carNumberEn} ${this.carLetterEn1} ${this.carLetterEn2} ${this.carLetterEn3}`
+    let carPaletAr = `${this.carNumberAr} ${this.carLetterAr1} ${this.carLetterAr2} ${this.carLetterAr3}`
+    let carPalate = `${carPaletEn} / ${carPaletAr}`
     data.branchId = this.branchId
+    data.carNumber = carPalate
     data.cardNum = data.model
     data.createdBy = this.userId
 
@@ -109,6 +122,14 @@ export class CarsComponent implements OnInit{
         this.drivers.clear()
         this.addDriver()
         this._ToastrService.success(res.msg)
+        this.carNumberEn= ''
+        this.carNumberAr= ''
+        this.carLetterEn1= ''
+        this.carLetterEn2= ''
+        this.carLetterEn3= ''
+        this.carLetterAr1= ''
+        this.carLetterAr2= ''
+        this.carLetterAr3= ''
       }
     })
   }

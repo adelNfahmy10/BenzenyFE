@@ -229,3 +229,35 @@ input:checked + .slider:before {
     }
   }
 }
+/* #################################### Style Head Cards ####################################### */
+.head-card {
+  .icon-head{
+    height: fit-content;
+    border: 1px dotted;
+  }
+  img{
+    width: 130px;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(350%);
+  }
+  p{
+    color: #96a0b5;
+    font-size: 18px;
+  }
+  h3 {
+    font-weight: 500;
+    color: #222;
+  }
+}
+i:not(.fa-circle-info){
+  font-size: 25px !important;
+}
+
+
+.cars,.drivers{
+  border-color: #ffbf00 !important;
+  i{
+    color: #ffbf00;
+  }
+}
