@@ -337,10 +337,10 @@
         </div>
 
         <form class="row g-2" [formGroup]="branchForm" (ngSubmit)="submitBranchForm()">
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <label for="FullName">Branch Manager</label>
             <input type="text" name="FullName" id="FullName" formControlName="FullName" class="form-control" placeholder="Branch Name...">
-          </div>
+          </div> -->
 
           <div class="col-md-6">
             <label for="RegionId">Region Id</label>
@@ -352,10 +352,10 @@
             </select>
           </div>
 
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <label for="IBAN">IBAN</label>
             <input type="text" formControlName="IBAN" name="IBAN" id="IBAN" class="form-control" placeholder="SA_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _">
-          </div>
+          </div> -->
 
           <div class="col-md-6">
             <label for="CityId">City</label>
@@ -380,6 +380,26 @@
             <input class="form-control" formControlName="Address" name="Address" id="Address" placeholder="Address...">
           </div>
 
+          <div class="col-md-12">
+            <label for="users">Users</label>
+            <div class="d-flex gap-2">
+              <div formArrayName="UserIds" class="d-flex flex-column gap-2 w-100">
+                <div *ngFor="let user of users.controls; let i = index" class="d-flex gap-2 w-100">
+                  <select name="users" id="users" class="form-select" [formControlName]="i">
+                    <option value="" selected disabled>Select User...</option>
+                    @for(user of allUsers;track $index){
+                      <option [value]="user.userId">{{user.fullName}}</option>
+                    }
+                  </select>
+                  @if(i > 0){
+                    <span class="text-danger mt-2 cr" (click)="removeUser(i)"><i class="fa-solid fa-minus"></i></span>
+                  }
+                </div>
+              </div>
+              <span type="button" class="add-branch-btn d-flex justify-content-center align-items-center rounded-circle" (click)="addUser()"><i class="fa-solid fa-plus"></i></span>
+            </div>
+          </div>
+          <!--
           <div class="col-md-6">
             <label for="Email">Email</label>
             <input type="text" name="Email" id="Email" formControlName="Email" class="form-control" placeholder="Email...">
@@ -388,7 +408,7 @@
           <div class="col-md-6">
             <label for="Password">Password</label>
             <input type="password" name="Password" id="Password" formControlName="Password" class="form-control" placeholder="Password...">
-          </div>
+          </div> -->
 
           <!-- <div class="col-12">
             <div class="d-flex justify-content-start align-items-center gap-2">
@@ -466,7 +486,7 @@
             <label for="Email">Email</label>
             <input type="text" name="Email" id="Email" formControlName="Email" class="form-control" placeholder="Email...">
           </div>
-
+          <!--
           <div class="col-md-6">
             <label for="Username">User Name</label>
             <input type="text" name="Username" id="Username" formControlName="Username" class="form-control" placeholder="User Name...">
@@ -475,7 +495,7 @@
           <div class="col-md-6">
             <label for="Password">Password</label>
             <input type="password" name="Password" id="Password" formControlName="Password" class="form-control" placeholder="Password...">
-          </div>
+          </div> -->
 
           <div class="col-12">
             <div class="d-flex justify-content-end align-items-center gap-2">
