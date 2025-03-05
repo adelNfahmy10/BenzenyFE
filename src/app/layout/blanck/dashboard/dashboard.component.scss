@@ -1,151 +1,5 @@
 $mainColor: #f79320;
-i{
-  font-size: 25px !important;
-}
-.fa-coins{
-  font-size: 40px !important;
-}
-.item{
-    position: relative;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    &::before{
-        content: '';
-        position: absolute;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        right: 0;
-        width: 2px;
-        height: 50%;
-        background-color: $mainColor;
-    }
-    &:last-child::before{
-        content: none;
-    }
-    @media (max-width:768px) {
-        &::before{
-            content: '';
-            position: absolute;
-            top: 100%;
-            transform: translate(-25%, -70%);
-            width: 70%;
-            height: 3px;
-            background-color: $mainColor;
-        }
-    }
-}
-sub{
-    font-size: 14px;
-}
-
-span:not(.main-color){
-    font-size: 16px;
-    color: #ccc;
-}
-.modal-content{
-    background-image: linear-gradient(to left, #f7932028 10%, #fff 90%);
-}
-.company-Info{
-    border: 1px solid $mainColor;
-}
-.chartBin{
-    svg{
-      position: absolute;
-      top: 50%;
-      left: 45%;
-    }
-}
-
-// @mixin button-style($bg-color) {
-//   width: fit-content;
-//   border: none;
-//   font-size: 12px;
-//   background-color: $bg-color;
-// }
-// .dis-active-btn {
-//   @include button-style(#DCDCDC);
-// }
-// .active-btn {
-//   @include button-style(#008d7a);
-// }
-// @mixin card-styles($bg-color, $text-color, $radius: 50%, $font-size: 30px) {
-//   position: relative;
-//   background-color: #fff;
-//   color: $text-color;
-//   height: 100%;
-//   overflow: hidden;
-//   transition: all .3s;
-
-//   &::before {
-//     content: '';
-//     position: absolute;
-//     top: -50%;
-//     right: -15%;
-//     width: 50%;
-//     height: 100%;
-//     border-radius: $radius;
-//     background-color: $bg-color;
-//     z-index: 1;
-//     transition: all .3s;
-//   }
-
-//   h2 {
-//     position: relative;
-//     z-index: 3;
-//     margin-top: 22px;
-//     font-weight: 500;
-//     span{
-//       color: $text-color;
-//       transition: all .3s;
-//       font-size: $font-size;
-//     }
-//     svg {
-//       fill: $text-color;
-//       transition: all .3s;
-//     }
-//   }
-
-//   .count {
-//     color: #fff;
-//     position: absolute;
-//     top: 5%;
-//     right: 3%;
-//     z-index: 2;
-
-//     h3 {
-//       font-size: 30px;
-//     }
-
-//     svg {
-//       fill: #fff;
-//     }
-//   }
-
-//   &:hover {
-//     color: #fff;
-//     h2{
-//       span{
-//         color: #fff;
-//       }
-//     }
-//     svg {
-//       fill: #fff !important;
-//     }
-
-//     &::before {
-//       top: 0;
-//       right: 0;
-//       width: 100%;
-//       border-radius: 0;
-//     }
-//   }
-// }
-// .head-card {
-//   @include card-styles($mainColor, $mainColor);
-// }
-
-/* #################################### Style Head Cards ####################################### */
+/* #################################### Head Cards Style ####################################### */
 .head-card {
   .icon-head{
     height: fit-content;
@@ -200,6 +54,49 @@ span:not(.main-color){
     }
   }
 }
-.fa-code-branch {
-  transform: rotate(180deg);
+
+/* #################################### Global Style ####################################### */
+span:not(.main-color){
+  font-size: 16px;
+  color: #ccc;
+}
+.modal-content{
+  background-image: linear-gradient(to left, #f7932028 10%, #fff 90%);
+}
+.company-Info{
+  border: 1px solid $mainColor;
+}
+.chart-container{
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+  height: 400px;
+}
+@media (max-width:567px) {
+  .chart-container{
+    height: 100%;
+  }
+}
+
+/* #################################### Ads Style ####################################### */
+swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
