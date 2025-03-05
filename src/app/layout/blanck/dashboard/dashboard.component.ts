@@ -1,17 +1,17 @@
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ToastrService } from 'ngx-toastr';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
-import { borderTopLeftRadius } from 'html2canvas/dist/types/css/property-descriptors/border-radius';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, CarouselModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DashboardComponent implements OnInit{
   private readonly _ToastrService = inject(ToastrService)
@@ -21,76 +21,77 @@ export class DashboardComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.chartLine = new Chart('ChartLine', this.configLine)
+    // this.chartLine = new Chart('ChartLine', this.configLine)
     this.chartBar = new Chart('ChartBar', this.configBar)
     this.chartBin = new Chart('ChartBin', this.configBin)
   }
-  chartLine:any;
-  public configLine:any = {
-    type: 'line',
-    data: {
-      labels:['Sun', 'Mon', 'Tue', 'Wed', 'Fri','Sat'],
-        datasets: [
-          {
-            label:'Sales',
-            data: [100 ,200, 400, 600],
-            borderColor: '#F79320',
-            backgroundColor:'#F79320',
-            // fill: true,
-          },
-      ]
-    },
-    options: {
-      animations: {
-        tension: {
-          duration: 1000,
-          easing: 'linear',
-          from: 1,
-          to: 0,
-          loop: true
-        }
-      },
-      responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    },
-  };
+  // chartLine:any;
+  // public configLine:any = {
+  //   type: 'line',
+  //   data: {
+  //     labels:['Sun', 'Mon', 'Tue', 'Wed', 'Fri','Sat'],
+  //       datasets: [
+  //         {
+  //           label:'Sales',
+  //           data: [100 ,200, 400, 600],
+  //           borderColor: '#F79320',
+  //           backgroundColor:'#F79320',
+  //           // fill: true,
+  //         },
+  //     ]
+  //   },
+  //   options: {
+  //     animations: {
+  //       tension: {
+  //         duration: 1000,
+  //         easing: 'linear',
+  //         from: 1,
+  //         to: 0,
+  //         loop: true
+  //       }
+  //     },
+  //     responsive: true,
+  //       scales: {
+  //           y: {
+  //               beginAtZero: true
+  //           }
+  //       }
+  //   },
+  // };
 
   chartBar:any;
   public configBar:any = {
     type: 'bar',
     data: {
-      labels:['JAN', 'FEB', 'MAR', 'APR'],
+      labels:['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JULY', 'AUG'],
       datasets: [
         {
-          label:'Sales',
+          label:['Transactions'],
           barPercentage: 0.5,
-          barThickness: 15,
-          maxBarThickness: 15,
+          barThickness: 20,
+          maxBarThickness: 25,
+          minBarThickness: 10,
           minBarLength: 2,
-          data: [100 ,200, 400, 600],
+          data: [100 ,200, 600, 130, 240, 60, 400, 570],
           borderColor: '#F79320',
-          backgroundColor:'#F79320',
-          borderRadius: 20,
+          backgroundColor:['#F97C21', '#ADB2D4', '#C599B6', '#7B7B7B', '#D3E671', '#003092', '#A31D1D', '#4C7B8B'],
+          borderRadius:10,
         },
       ]
     },
     options: {
       responsive: true,
       scales: {
-          y: {
-            beginAtZero: true
-          }
+        y: {
+          beginAtZero: true
+        }
       }
     },
   };
 
   chartBin:any;
   public configBin:any = {
-    type: 'doughnut',
+    type: 'polarArea',
     data: {
       labels: [
         '#7B7B7B',
@@ -100,17 +101,15 @@ export class DashboardComponent implements OnInit{
       ],
       datasets: [
         {
-          label:'Sales',
+          label:'Balance',
           data: [100 ,200, 400, 600],
           backgroundColor: [
             '#7B7B7B',
-            '#DCDCDC',
-            '#F1F1F1',
+            '#ADB2D4',
+            '#C599B6',
             '#F97C21'
           ],
           hoverOffset: 3,
-          borderWidth: 5,
-          borderRadius:10
         },
       ]
     },
@@ -118,27 +117,15 @@ export class DashboardComponent implements OnInit{
       responsive: true,
       scales: {
           y: {
-              beginAtZero: true
+            beginAtZero: true
           }
       },
-      cutout:'60%',
     },
   };
 
   /* Copy ID And IBAN */
-  @ViewChild('Id') elementId!:ElementRef
   @ViewChild('Iban') elementIban!:ElementRef
   @ViewChild('ibanBranach') elementIbanBrnach!:ElementRef
-  copyId():void{
-    const textCopy = this.elementId.nativeElement.innerText;
-    navigator.clipboard.writeText(textCopy)
-    .then(() => {
-      this._ToastrService.success('ID Copied To Clipboard')
-    })
-    .catch((err) => {
-      this._ToastrService.success('Failed To Copy ID')
-    });
-  }
   copyIban():void{
     const textCopy = this.elementIban.nativeElement.innerText;
     navigator.clipboard.writeText(textCopy)
@@ -160,6 +147,32 @@ export class DashboardComponent implements OnInit{
     .catch((err) => {
       this._ToastrService.success('Failed To Copy IBAN Branch')
     });
+  }
+
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['', ''],
+    items:1,
+    // responsive: {
+    //   0: {
+    //     items: 1
+    //   },
+    //   400: {
+    //     items: 2
+    //   },
+    //   740: {
+    //     items: 3
+    //   },
+    //   940: {
+    //     items: 4
+    //   }
+    // },
+    nav: true
   }
 
 }
