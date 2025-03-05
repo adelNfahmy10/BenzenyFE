@@ -1,14 +1,34 @@
 $mainColor:#f79320;
-.action-list{
-  position: absolute;
-  top: 100%;
-  right: 55%;
-  li{
-    transition: all .3s;
-    width: 152px;
-    &:hover{
-      background-color: #eee;
-    }
+/* #################################### Style Head Cards ####################################### */
+.head-card {
+  .icon-head{
+    height: fit-content;
+    border: 1px dotted;
+  }
+  img{
+    width: 130px;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(350%);
+  }
+  p{
+    color: #96a0b5;
+    font-size: 18px;
+  }
+  h3 {
+    font-weight: 500;
+    color: #222;
+  }
+}
+i:not(.fa-circle-info){
+  font-size: 25px !important;
+}
+
+/* #################################### Form Style ####################################### */
+input, select{
+  background: #F7F7F7;
+  &::placeholder{
+    font-weight: 200;
   }
 }
 label, input::placeholder{
@@ -17,32 +37,6 @@ label, input::placeholder{
 }
 label{
   font-weight: 600;
-}
-input, .code-num, select, textarea{
-  background: #F7F7F7;
-  &::placeholder{
-    font-weight: 200;
-  }
-}
-.download-container{
-  .download-list{
-    position: absolute;
-    width: 100%;
-    top: 5px;
-  }
-}
-.code-num{
-  position: relative;
-  &::before{
-    content: '';
-    position: absolute;
-    top: 18%;
-    right: 0;
-    transform: translateX(-50%, -50%);
-    height: 70%;
-    width: 2px;
-    background-color: #CCC;
-  }
 }
 .modal-content{
   background-color: #F0F0F0;
@@ -91,65 +85,6 @@ input, .code-num, select, textarea{
     fill: #fff;
   }
 }
-.switch {
-  display: inline-block;
-  width: 51px;
-  height: 20px;
-  position: relative;
-}
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 34px;
-  transition: 0.4s;
-}
-
-.slider:before {
-  content: "";
-  position: absolute;
-  height: 20px;
-  width: 17px;
-  border-radius: 50%;
-  left: 0;
-  bottom: 0;
-  background-color: white;
-  transition: 0.4s;
-}
-
-input:checked + .slider {
-  background-color: $mainColor !important;
-}
-input:checked + .slider:before {
-  transform: translateX(200%) !important;
-}
-.muted{
-  font-size: 10px;
-  &.delete-text{
-    color: #f00 !important;
-  }
-}
-.my-pagination ::ng-deep .ngx-pagination .current {
-  background: $mainColor !important;
-  color: #fff !important ;
-}
-.download-template{
-  border: 1px solid $mainColor;
-  color: $mainColor;
-  &:hover{
-    background-color: $mainColor;
-    color: #fff;
-  }
-}
 .download-template{
   border: 1px solid $mainColor;
   color: $mainColor;
@@ -159,7 +94,7 @@ input:checked + .slider:before {
   }
 }
 
-/* #################################### Style Table ####################################### */
+/* #################################### Table Style ####################################### */
 .table-head th{
   background-color: #b5b5b570 !important;
 }
@@ -186,18 +121,6 @@ input:checked + .slider:before {
     }
 
   }
-}
-@mixin button-style($bg-color) {
-  width: fit-content;
-  border: none;
-  font-size: 12px;
-  background-color: $bg-color;
-}
-.dis-active-btn {
-  @include button-style(#DCDCDC);
-}
-.active-btn {
-  @include button-style(#008d7a);
 }
 .search{
   input{
@@ -229,35 +152,9 @@ input:checked + .slider:before {
     }
   }
 }
-/* #################################### Style Head Cards ####################################### */
-.head-card {
-  .icon-head{
-    height: fit-content;
-    border: 1px dotted;
-  }
-  img{
-    width: 130px;
-    height: 100%;
-    object-fit: cover;
-    filter: sepia(350%);
-  }
-  p{
-    color: #96a0b5;
-    font-size: 18px;
-  }
-  h3 {
-    font-weight: 500;
-    color: #222;
-  }
-}
-i:not(.fa-circle-info){
-  font-size: 25px !important;
-}
 
-
-.cars,.drivers{
-  border-color: #ffbf00 !important;
-  i{
-    color: #ffbf00;
-  }
+/* #################################### Pagination Style ####################################### */
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: $mainColor !important;
+  color: #fff !important ;
 }
