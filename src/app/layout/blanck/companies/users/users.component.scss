@@ -260,14 +260,3 @@ label, input::placeholder{
 // input:checked + .slider:before {
 //   transform: translateX(200%);
 // }
-.add-branch-btn{
-  width: 35px;
-  height: 35px;
-  border: 1px solid $mainColor;
-  color: $mainColor;
-  transition: all .3s;
-  &:hover{
-    background-color: $mainColor;
-    color: #fff;
-  }
-}
