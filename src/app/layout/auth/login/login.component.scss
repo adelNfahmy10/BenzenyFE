@@ -1,3 +1,84 @@
-.login{
-  background-image: linear-gradient(to left, #f7932028 10%, #fff 90%);
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+$mainColor:#F79320;
+section {
+  background: linear-gradient(to right, #f7932070, #f7932070), url('../../../../assets/image/login-bg.gif');
+  background-position: center center;
+  font-family: "Mulish", sans-serif;
+  h2{
+    font-family: "Bree Serif", serif;
+    font-size: 40px;
+  }
+  .right-content, .left-content{
+    padding: 40px;
+    border-top-right-radius: 200px;
+  }
+  .left{
+    // background-color: #ffffff7f !important;
+    background-color: #f7f7f7 !important;
+    .left-content{
+      border-bottom-left-radius: 200px;
+      color: #fff;
+      .logo{
+        width: 100px;
+        height: 100px;
+        background-color: #fff;
+        border-radius: 50%;
+      }
+      .btn-custom {
+        border: 1px solid white;
+        color: white;
+        background: transparent;
+        padding: 3px 20px;
+        border-radius: 25px;
+        transition: 0.3s;
+        width: 100%;
+        &:hover {
+          background: white;
+          color: $mainColor;
+        }
+      }
+    }
+  }
+  .right{
+    .right-content{
+      background-color: #f7f7f7 !important;
+      h2{
+        font-size: 60px;
+      }
+      p{
+        color: #222;
+      }
+      .input-field {
+        border-radius: 25px;
+        padding: 10px;
+        border: 1px solid #d8d8d8;
+        background-color: transparent;
+        &::placeholder{
+          font-size: 14px;
+          color: #c8c8c8;
+        }
+        &:focus{
+          background-color: #fff;
+        }
+      }
+      .btn-login {
+        background: #f79320f5;
+        color: white;
+        border-radius: 25px;
+        padding: 5px 10px;
+        width: 100%;
+        transition: 0.3s;
+        &:hover {
+          background: $mainColor;
+        }
+      }
+      .footer{
+        font-size: 12px;
+      }
+    }
+  }
 }
+
+
+
+
