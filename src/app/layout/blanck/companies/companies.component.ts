@@ -11,6 +11,8 @@ import { ReigonandcityService } from '../../../../core/services/reigons/reigonan
 import { AuthService } from '../../auth/core/service/auth.service';
 import { CompanyService } from './core/service/company.service';
 import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
+import { RegisteruserComponent } from '../../auth/registeruser/registeruser.component';
+import { UsersService } from '../../auth/core/service/users.service';
 Chart.register(...registerables)
 
 @Component({
@@ -26,7 +28,7 @@ export class CompaniesComponent implements OnInit{
   private readonly _ToastrService = inject(ToastrService)
   private readonly _BranchService = inject(BranchService)
   private readonly _ReigonandcityService = inject(ReigonandcityService)
-  private readonly _AuthService = inject(AuthService)
+  private readonly _UsersService = inject(UsersService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
 
   companyName:string | null = null
@@ -119,6 +121,7 @@ export class CompaniesComponent implements OnInit{
       next:(res)=>{
         this.getAllBranches()
         this.branchForm.reset()
+        this.users.clear()
         this._ToastrService.success(`${res.result}, ${res.msg}`,'Success',{
           positionClass:'toast-bottom-right',
         })
@@ -152,7 +155,7 @@ export class CompaniesComponent implements OnInit{
     formData.append('Email', data.Email),
     formData.append('Password', data.Password)
 
-    this._AuthService.register(formData).subscribe({
+    this._UsersService.addUser(formData).subscribe({
       next:(res)=>{
         this.getAllUsersByCompanyId()
         this.userForm.reset()
@@ -168,7 +171,7 @@ export class CompaniesComponent implements OnInit{
     })
   }
   switchActiveUser(userId:string):void{
-    this._AuthService.SwitchActiveUser(userId).subscribe({
+    this._UsersService.SwitchActiveUser(userId).subscribe({
       next:(res)=>{
         this._ToastrService.success(res.msg)
         this.getAllUsersByCompanyId()

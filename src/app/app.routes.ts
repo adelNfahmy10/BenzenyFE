@@ -19,6 +19,8 @@ import { BranchdetailsComponent } from './layout/blanck/branches/branchdetails/b
 import { logedGuard } from '../core/guards/loged.guard';
 import { authGuard } from '../core/guards/auth.guard';
 import { ContinueregistarComponent } from './layout/auth/registar/continueregistar/continueregistar.component';
+import { RegisteruserComponent } from './layout/auth/registeruser/registeruser.component';
+import { UsersComponent } from './layout/blanck/companies/users/users.component';
 
 export const routes: Routes = [
   {path:'', component:AuthComponent, canActivate:[logedGuard] , title:'login', children:[
@@ -31,6 +33,7 @@ export const routes: Routes = [
   {path:'', component:BlanckComponent, canActivate:[authGuard], title:'home', children:[
     {path:'home', component:DashboardComponent, title:'Home'},
     {path:'company', component:CompaniesComponent, title:'Company'},
+    {path:'users', component:UsersComponent, title:'Users'},
     {path:'branch', component:BranchesComponent, title:'Branches'},
     {path:'details/:id', component:BranchdetailsComponent, title:'Branch'},
     {path:'balance', component:BalanceComponent, title:'Balance'},
@@ -40,6 +43,7 @@ export const routes: Routes = [
     {path:'analytics', component:AnalyticsComponent, title:'analyics'},
     {path:'management', component:ManagementComponent, title:'Management'},
     {path:'setting', component:SettingsComponent, title:'Setting'},
+    {path:'userregister/:userId', component:RegisteruserComponent, title:'Register'},
     {path:'footer', component:FooterComponent, title:'footer'},
   ]},
   {path:'**', component:NotfoundComponent, title:'notfound'},

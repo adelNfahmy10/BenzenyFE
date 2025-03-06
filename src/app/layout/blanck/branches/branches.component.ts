@@ -11,7 +11,7 @@ import { ReigonandcityService } from '../../../../core/services/reigons/reigonan
 import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
 import { CompanyService } from '../companies/core/service/company.service';
-import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-branches',
@@ -134,10 +134,10 @@ export class BranchesComponent implements OnInit{
     this.users.removeAt(index);
   }
 
-  /* Submit Branch Form */
   submitBranchForm():void{
     let data = this.branchForm.value
     data.CompanyId = this.companyId
+
     let formData = new FormData()
     formData.append('CompanyId', data.CompanyId),
     formData.append('RegionId', data.RegionId),
@@ -148,18 +148,22 @@ export class BranchesComponent implements OnInit{
     formData.append('Password', data.Password),
     formData.append('PhoneNumber', data.PhoneNumber),
     formData.append('IBAN', data.IBAN)
-    formData.append('UserIds', JSON.stringify(data.UserIds));
+    data.UserIds.forEach((userId:any) => {
+      formData.append('UserIds', userId);
+    });
 
-    console.log(data);
-
-    // this._BranchService.CreateBranch(formData).subscribe({
-    //   next:(res)=>{
-    //     this.branchForm.reset()
-    //     this.getAllBranches()
-    //     this._ToastrService.success(res.msg)
-    //   }
-    // })
+    this._BranchService.CreateBranch(formData).subscribe({
+      next:(res)=>{
+        this.getAllBranches()
+        this.branchForm.reset()
+        this.users.clear()
+        this._ToastrService.success(`${res.result}, ${res.msg}`,'Success',{
+          positionClass:'toast-bottom-right',
+        })
+      }
+    })
   }
+
 
   /* Delete Branch */
   deleteBranch(branchId:string):void{

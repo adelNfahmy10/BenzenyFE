@@ -30,8 +30,8 @@ export class CompanyService {
   }
 
   /*########################################### Users APIs #########################################################*/
-  GetAllUserInCompanyById(companyId:string):Observable<any>{
-    return this._HttpClient.get(`${environment.baseURL}api/Company/v1/GetAllUserInCompany/GetAllUserInCompany/${companyId}`)
+  GetAllUserInCompanyById(companyId:string, searchTerm:any = '', pageNum:any = 1, pageSize:any = 10):Observable<any>{
+    return this._HttpClient.get(`${environment.baseURL}api/Company/v1/GetAllUserInCompany/GetAllUserInCompany/${companyId}?searchTerm=${searchTerm}&pageNumber=${pageNum}&pageSize=${pageSize}`)
   }
   DeleteUserInCompany(companyId:string, userId:string):Observable<any>{
     return this._HttpClient.delete(`${environment.baseURL}api/Company/v1/DeleteUserInCompany/DeleteUserInCompany/${companyId}/${userId}`)

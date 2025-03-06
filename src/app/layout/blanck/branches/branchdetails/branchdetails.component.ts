@@ -128,32 +128,23 @@ export class BranchdetailsComponent implements OnInit{
     })
   }
 
-    /* Download Table With PDF */
-    open:boolean = false
-    openList():void{
-      if(this.open){
-        this.open = false
-      } else {
-        this.open = true
-      }
-    }
 
-    @ViewChild('table') template!:ElementRef
-    downloadPDF():void{
-      if(isPlatformBrowser(this._PLATFORM_ID)){
-        const data = this.template.nativeElement
-        html2canvas(data).then(canvas => {
-          const imgWidth = 208
-          const pageHeight = 295
-          const imgHeight = (canvas.height * imgWidth) / canvas.width
-          const heightLeft = imgHeight
-          const pdf = new jsPDF('p', 'mm', 'a4');
-          const contentDataURL = canvas.toDataURL('image/png')
-          pdf.addImage(contentDataURL, 'png', 0, 0, imgWidth, imgHeight)
-          pdf.save('table.pdf')
-        })
-      }
+  @ViewChild('table') template!:ElementRef
+  downloadPDF():void{
+    if(isPlatformBrowser(this._PLATFORM_ID)){
+      const data = this.template.nativeElement
+      html2canvas(data).then(canvas => {
+        const imgWidth = 208
+        const pageHeight = 295
+        const imgHeight = (canvas.height * imgWidth) / canvas.width
+        const heightLeft = imgHeight
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const contentDataURL = canvas.toDataURL('image/png')
+        pdf.addImage(contentDataURL, 'png', 0, 0, imgWidth, imgHeight)
+        pdf.save('table.pdf')
+      })
     }
+  }
 
     downloadExcel():void{
       const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);

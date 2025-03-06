@@ -1,0 +1,269 @@
+<section>
+  <div>
+    <div class="row g-3">
+      <!-- Header Page -->
+      <div class="col-12 animate__animated animate__fadeInDown">
+        <app-header></app-header>
+      </div>
+
+      <!-- Section Total Branches -->
+      <div class="col-12 animate__animated animate__fadeInDown">
+        <div class="row g-2">
+          <div class="col-md-4">
+            <div class="head-card position-relative bg-white main-color h-100 total d-flex justify-content-between aling-items-center rounded-3 py-2 ps-4 pe-5">
+              <div class="d-flex flex-column justify-content-center align-items-center">
+                <p class="m-0">Total Users</p>
+                <h3>
+                  {{userCount}}
+                </h3>
+              </div>
+              <div class="icon-head p-1 rounded-2 mt-4">
+                <i class="fa-solid fa-code-branch"></i>
+              </div>
+              <img src="https://mannatthemes.com/approx/default/assets/images/extra/corner.png" class="position-absolute bottom-0 end-0" alt="">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="head-card position-relative bg-white main-color h-100 d-flex justify-content-between aling-items-center rounded-3 py-3 ps-4 pe-5">
+              <div class="d-flex flex-column justify-content-center align-items-center">
+                <p class="m-0">Active</p>
+                <h3>
+                  {{activeCount}}
+                </h3>
+              </div>
+              <div class="icon-head p-1 active d-flex justify-content-center aling-items-center rounded-2 mt-3">
+                <i class="fa-regular fa-circle-check"></i>
+              </div>
+              <img src="https://mannatthemes.com/approx/default/assets/images/extra/corner.png" class="position-absolute bottom-0 end-0" alt="">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="head-card position-relative bg-white main-color h-100 dis-active d-flex justify-content-between aling-items-center rounded-3 py-3 ps-4 pe-5">
+              <div class="d-flex flex-column justify-content-center align-items-center">
+                <p class="m-0">InActive</p>
+                <h3>
+                  {{disActiveCount}}
+                </h3>
+              </div>
+              <div class="icon-head p-1 d-flex justify-content-center aling-items-center rounded-2 mt-3">
+                <i class="fa-regular fa-circle-xmark"></i>
+              </div>
+              <img src="https://mannatthemes.com/approx/default/assets/images/extra/corner.png"  class="position-absolute bottom-0 end-0" alt="">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Section Tabel -->
+      <div class="col-12 animate__animated animate__fadeInUp z-2">
+        <div class="bg-white rounded-3 p-4">
+          <div class="d-flex justify-content-between align-items-center gap-3 mb-3 flex-wrap">
+            <div class="d-flex gap-3">
+              <div class="search position-relative">
+                <input type="search" (input)="filteredData($event)" class="form-control bg-white rounded-2" placeholder="Search... ">
+                <svg width="30" height="31" viewBox="0 0 30 31" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.5081 25.5129C15.3929 25.5167 18.1895 24.5185 20.4201 22.689L27.8808 30.1489C28.3776 30.6288 29.1692 30.615 29.649 30.1182C30.117 29.6335 30.117 28.8652 29.649 28.3805L22.1896 20.9194C26.5593 15.5706 25.766 7.69188 20.4177 3.32182C15.0693 -1.04824 7.19128 -0.254835 2.82159 5.09394C-1.54811 10.4427 -0.754773 18.3214 4.59356 22.6915C6.82738 24.5167 9.62347 25.5135 12.5081 25.5129Z"/>
+                  <path d="M22.5 12.9998C22.5 18.5231 18.0228 23.0006 12.5 23.0006C6.97715 23.0006 2.5 18.5231 2.5 12.9998C2.5 7.4765 6.97715 2.99897 12.5 2.99897C18.0228 2.99897 22.5 7.4765 22.5 12.9998Z" fill="white"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center gap-3">
+              <div class="add-btn d-flex justify-content-start align-items-center gap-1 rounded-2 py-2 cr" data-bs-toggle="modal" data-bs-target="#exampleModal-add-user">
+                <svg width="20" height="21" viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 0.5C8.02219 0.5 6.08879 1.08649 4.4443 2.1853C2.79981 3.28412 1.51809 4.8459 0.761209 6.67317C0.00433286 8.50043 -0.193701 10.5111 0.192152 12.4509C0.578004 14.3907 1.53041 16.1725 2.92894 17.5711C4.32746 18.9696 6.10929 19.922 8.0491 20.3079C9.98891 20.6937 11.9996 20.4957 13.8268 19.7388C15.6541 18.9819 17.2159 17.7002 18.3147 16.0557C19.4135 14.4112 20 12.4778 20 10.5C19.9971 7.84872 18.9426 5.30684 17.0679 3.4321C15.1932 1.55736 12.6513 0.502868 10 0.5ZM13.3333 11.3333H10.8333V13.8333C10.8333 14.0543 10.7455 14.2663 10.5893 14.4226C10.433 14.5789 10.221 14.6667 10 14.6667C9.77899 14.6667 9.56703 14.5789 9.41075 14.4226C9.25447 14.2663 9.16667 14.0543 9.16667 13.8333V11.3333H6.66667C6.44566 11.3333 6.2337 11.2455 6.07742 11.0893C5.92113 10.933 5.83334 10.721 5.83334 10.5C5.83334 10.279 5.92113 10.067 6.07742 9.91074C6.2337 9.75447 6.44566 9.66667 6.66667 9.66667H9.16667V7.16667C9.16667 6.94565 9.25447 6.73369 9.41075 6.57741C9.56703 6.42113 9.77899 6.33333 10 6.33333C10.221 6.33333 10.433 6.42113 10.5893 6.57741C10.7455 6.73369 10.8333 6.94565 10.8333 7.16667V9.66667H13.3333C13.5544 9.66667 13.7663 9.75447 13.9226 9.91074C14.0789 10.067 14.1667 10.279 14.1667 10.5C14.1667 10.721 14.0789 10.933 13.9226 11.0893C13.7663 11.2455 13.5544 11.3333 13.3333 11.3333Z"/>
+                </svg>
+                <h5 class="mb-0">Add Users</h5>
+              </div>
+              <div>
+                <i (click)="downloadExcel()" class=" text-success fa-solid fa-file-excel fs-3 cr"></i>
+              </div>
+              <div>
+                <i (click)="downloadPDF()" class="text-danger fa-solid fa-file-pdf fs-3 cr"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped text-center" #table>
+              <thead class="table-head">
+                <tr>
+                  <th class="fw-medium cr" (click)="sortTable('index')">#</th>
+                  <th class="fw-medium cr" (click)="sortTable('fullName')">Full Name</th>
+                  <th class="fw-medium cr" (click)="sortTable('email')">Email</th>
+                  <th class="fw-medium cr" (click)="sortTable('mobile')">Mobile</th>
+                  <th class="fw-medium cr" (click)="sortTable('userRoles')">Roles</th>
+                  <th class="fw-medium cr" (click)="sortTable('isActive')">Status</th>
+                  <th class="fw-medium cr">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for(user of allUsers | paginate: { itemsPerPage:pageSize , currentPage: currentPage, totalItems:userCount} ; track $index){
+                  <tr>
+                    <td>
+                      {{ $index + 1 }}
+                    </td>
+                    <td>
+                      {{ user.fullName }}
+                    </td>
+                    <td>
+                      {{ user.email }}
+                    </td>
+                    <td>
+                      {{ user.mobile || 'unknown' }}
+                    </td>
+                    <td>
+                      <ul>
+                        @for(role of user.userRoles; track $index){
+                          <li>{{role}}</li>
+                        }
+                      </ul>
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-center align-items-center">
+                        <span [ngClass]="{
+                          'active-btn': user.isActive,
+                          'dis-active-btn': !user.isActive
+                          }" class="cr rounded-2" (click)="switchActiveUser(user.userId)">
+                          {{user.isActive ? 'Active': 'DeActive'}}
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-center align-items-center gap-2 mt-1">
+                        <i [routerLink]="['/details/' + user.userId]" class="text-secondary fa-solid fa-circle-info cr"></i>
+                        <div class="d-flex justify-content-center align-items-center" (click)="DeleteUserInCompany(user.userId)">
+                          <svg class="cr" width="16" height="16" viewBox="0 0 14 14" fill="#f00" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_920_9284)">
+                            <path d="M12.8333 2.33333H10.4411C10.1698 1.00392 8.99206 0 7.58331 0H6.41665C5.00848 0 3.83015 1.00392 3.5589 2.33333H1.16665C0.844646 2.33333 0.583313 2.59408 0.583313 2.91667C0.583313 3.23925 0.844646 3.5 1.16665 3.5H1.66831L2.42431 11.3628C2.56898 12.8666 3.81731 14 5.32756 14H8.66831C10.1809 14 11.4292 12.8642 11.5721 11.3587L12.3165 3.5H12.8327C13.1547 3.5 13.4161 3.23925 13.4161 2.91667C13.4161 2.59408 13.1553 2.33333 12.8333 2.33333ZM6.41665 1.16667H7.58331C8.34281 1.16667 8.98448 1.65608 9.22598 2.33333H4.77456C5.01606 1.65608 5.65773 1.16667 6.41723 1.16667H6.41665ZM9.1624 9.50425C9.39048 9.73233 9.39048 10.101 9.1624 10.3291C9.04865 10.4428 8.89931 10.5 8.74998 10.5C8.60065 10.5 8.45131 10.4428 8.33756 10.3291L6.99998 8.9915L5.6624 10.3291C5.54865 10.4428 5.39931 10.5 5.24998 10.5C5.10065 10.5 4.95131 10.4428 4.83756 10.3291C4.60948 10.101 4.60948 9.73233 4.83756 9.50425L6.17515 8.16667L4.83756 6.82908C4.60948 6.601 4.60948 6.23233 4.83756 6.00425C5.06565 5.77617 5.43431 5.77617 5.6624 6.00425L6.99998 7.34183L8.33756 6.00425C8.56565 5.77617 8.93431 5.77617 9.1624 6.00425C9.39048 6.23233 9.39048 6.601 9.1624 6.82908L7.82481 8.16667L9.1624 9.50425Z"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_920_9284">
+                            <rect width="14" height="14" fill="white"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <select name="pageSize" id="pageSize" class="form-select py-1" (change)="onChangePageSize($event)">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  <option value="10000">All</option>
+                </select>
+              </div>
+
+              <div>
+                <pagination-controls (pageChange)="onPageChange($event)" class="d-flex justify-content-start my-pagination"></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Add User -->
+<div class="modal fade" id="exampleModal-add-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content p-3">
+      <div class="modal-header justify-content-end border-0 py-0 pt-2">
+        <svg class="cr" data-bs-dismiss="modal" width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_893_6942)">
+          <path d="M18.5 0C8.29879 0 0 8.29879 0 18.5C0 28.7012 8.29879 37 18.5 37C28.7012 37 37 28.7012 37 18.5C37 8.29879 28.7012 0 18.5 0ZM25.846 24.8285C26.3949 25.4807 26.3116 26.4535 25.661 27.0007C25.3712 27.2443 25.0182 27.363 24.6682 27.363C24.2288 27.363 23.7925 27.1765 23.4873 26.8157L18.5 20.8927L13.5127 26.8157C13.209 27.1765 12.7727 27.363 12.3318 27.363C11.9818 27.363 11.6288 27.2443 11.339 27.0007C10.6884 26.4535 10.6036 25.4807 11.154 24.8285L16.4835 18.5L11.154 12.1715C10.6051 11.5193 10.6884 10.5465 11.339 9.99925C11.9911 9.44887 12.9654 9.53521 13.5112 10.1842L18.4985 16.1073L23.4858 10.1842C24.0315 9.53675 25.0058 9.44887 25.658 9.99925C26.3085 10.5465 26.3933 11.5193 25.843 12.1715L20.5134 18.5L25.843 24.8285H25.846Z" fill="#F79320"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_893_6942">
+          <rect width="37" height="37" fill="white"/>
+          </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <div class="modal-body d-flex flex-column gap-3 px-4 pt-0">
+        <div class="d-flex align-items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" fill="#F79320" data-name="Layer 1" viewBox="0 0 24 24" width="60" height="60">
+            <path d="M12,16a4,4,0,1,1,4-4A4,4,0,0,1,12,16ZM5.683,16H1a1,1,0,0,1-1-1A6.022,6.022,0,0,1,5.131,9.084a1,1,0,0,1,1.1,1.266A6.009,6.009,0,0,0,6,12a5.937,5.937,0,0,0,.586,2.57,1,1,0,0,1-.9,1.43ZM17,24H7a1,1,0,0,1-1-1,6,6,0,0,1,12,0A1,1,0,0,1,17,24ZM18,8a4,4,0,1,1,4-4A4,4,0,0,1,18,8ZM6,8a4,4,0,1,1,4-4A4,4,0,0,1,6,8Zm17,8H18.317a1,1,0,0,1-.9-1.43A5.937,5.937,0,0,0,18,12a6.009,6.009,0,0,0-.236-1.65,1,1,0,0,1,1.105-1.266A6.022,6.022,0,0,1,24,15,1,1,0,0,1,23,16Z"/>
+          </svg>
+          <h3>Add User</h3>
+        </div>
+
+        <form class="row g-2" [formGroup]="userForm" (ngSubmit)="submitUserForm()">
+          <div class="col-12">
+            <label for="fullName">Full Name</label>
+            <input type="text" name="fullName" id="fullName" formControlName="fullName" class="form-control" placeholder="Full Name...">
+          </div>
+
+          <div class="col-md-6">
+            <label for="mobile">Phone Number</label>
+            <div class="d-flex justify-content-center align-items-center">
+              <h5 class="code-num h-100 py-2 px-3 rounded-start-3">+966</h5>
+              <input type="tel" name="mobile" id="mobile" formControlName="mobile" class="form-control rounded-0 rounded-end-3 shadow-none border-0" placeholder="Phone...">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="Email">Email</label>
+            <input type="email" name="email" id="email" formControlName="email" class="form-control" placeholder="Email...">
+          </div>
+
+          <div class="col-md-12">
+            <label for="Roles">Roles</label>
+            <div class="row">
+              @for(role of allRoles; track $index){
+                <div class="col-1">
+                  <div class="d-flex justify-content-center align-items-center gap-2">
+                    <label [for]="role.name + $index">{{role.name}}</label>
+                    <input type="checkbox" class="form-check-input" (change)="toggleRoleSelection(role, $event)">
+                  </div>
+                </div>
+              }
+            </div>
+
+          </div>
+          <!--
+          <div class="col-md-6">
+            <label for="Username">User Name</label>
+            <input type="text" name="Username" id="Username" formControlName="Username" class="form-control" placeholder="User Name...">
+          </div>
+
+          <div class="col-md-6">
+            <label for="Password">Password</label>
+            <input type="password" name="Password" id="Password" formControlName="Password" class="form-control" placeholder="Password...">
+          </div> -->
+
+          <div class="col-12">
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <button class="save-btn btn d-flex justify-content-center align-items-center gap-2">
+                <span>Save</span>
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_893_4557)">
+                  <path d="M17.7083 25H9.375C4.20521 25 0 20.7937 0 15.625V7.29167C0 6.71667 0.465625 6.25 1.04167 6.25C1.61771 6.25 2.08333 6.71667 2.08333 7.29167V15.625C2.08333 19.6458 5.35521 22.9167 9.375 22.9167H17.7083C18.2844 22.9167 18.75 23.3833 18.75 23.9583C18.75 24.5333 18.2844 25 17.7083 25ZM17.7083 0H11.4583V5.20833H17.7083V0ZM25 6.52812V15.625C25 18.501 22.6677 20.8333 19.7917 20.8333H9.375C6.49896 20.8333 4.16667 18.501 4.16667 15.625V5.20833C4.16667 2.33646 6.50312 0 9.375 0V5.20833C9.375 6.35938 10.3073 7.29167 11.4583 7.29167H17.7083C18.8594 7.29167 19.7917 6.35938 19.7917 5.20833V0.288542C20.1354 0.444792 20.4552 0.655208 20.7229 0.925L24.0937 4.32604C24.674 4.91146 25 5.70312 25 6.52812ZM18.75 14.0625C18.75 12.049 17.1177 10.4167 15.1042 10.4167C13.0906 10.4167 11.4583 12.049 11.4583 14.0625C11.4583 16.076 13.0906 17.7083 15.1042 17.7083C17.1177 17.7083 18.75 16.076 18.75 14.0625ZM16.6667 14.0625C16.6667 14.925 15.9667 15.625 15.1042 15.625C14.2417 15.625 13.5417 14.925 13.5417 14.0625C13.5417 13.2 14.2417 12.5 15.1042 12.5C15.9667 12.5 16.6667 13.2 16.6667 14.0625Z"/>
+                  <circle cx="15" cy="14" r="1" fill="#F97C21"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_893_4557">
+                  <rect width="25" height="25" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
