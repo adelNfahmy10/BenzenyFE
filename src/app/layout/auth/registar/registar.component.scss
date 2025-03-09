@@ -8,7 +8,6 @@ section {
   background: linear-gradient(to right, $gradientColor, $gradientColor), url('../../../../assets/image/login-bg.gif') !important;
   background-position: center;
   font-family: "Mulish", sans-serif;
-  overflow: visible;
 
   .filed-container {
     min-height: 100vh;
@@ -19,7 +18,7 @@ section {
     }
 
     .right-content, .left-content {
-      padding: 2.7rem 3rem .5rem 3rem;
+      padding: 2.7rem 3rem .5rem 2rem;
     }
 
     .left {
@@ -55,11 +54,10 @@ section {
         z-index: 2;
         top: 0;
         right: 61%;
-        min-height: 100vh;
+        height:100%;
         width: 100%;
         transform: rotate(-90deg);
         fill: $secondaryColor;
-
         @media (max-width: 991px) {
           display: none;
         }

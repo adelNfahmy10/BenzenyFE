@@ -48,9 +48,9 @@
             <h2>Register</h2>
             <p>Create Your Account, It's Free and Only Takes a Minute</p>
           </div>
-          <form class="row g-4" [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
+          <form class="row" [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
             <div class="col-md-3 text-center">
-              <img [src]="registerForm.get('ViewCompanyPicture')?.value" class="logo-company cr" data-bs-toggle="modal" data-bs-target="#logoModel" />
+              <img [src]="registerForm.get('ViewCompanyPicture')?.value" class="logo-company cr " data-bs-toggle="modal" data-bs-target="#logoModel" />
             </div>
 
             <div class="col-md-9">
@@ -97,9 +97,9 @@
                 </div>
             </div>
 
-            <div class="col-12">
+            <div class="col-12 mt-3">
               <button class="btn btn-signup">SignUp</button>
-              <p class="text-center mt-3 footer">Copyright © All Rights Reserved Benzeny App</p>
+              <p class="text-center mt-4 footer">Copyright © All Rights Reserved Benzeny App</p>
             </div>
           </form>
         </div>
