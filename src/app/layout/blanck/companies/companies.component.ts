@@ -12,7 +12,7 @@ import { AuthService } from '../../auth/core/service/auth.service';
 import { CompanyService } from './core/service/company.service';
 import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
 import { RegisteruserComponent } from '../../auth/registeruser/registeruser.component';
-import { UsersService } from '../../auth/core/service/users.service';
+import { UsersService } from './core/service/users.service';
 Chart.register(...registerables)
 
 @Component({

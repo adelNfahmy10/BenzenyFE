@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HeaderComponent } from '../../../../../assets/share/header/header.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { UsersService } from '../../../auth/core/service/users.service';
+import { UsersService } from '../core/service/users.service';
 import { RolesService } from '../../../../../core/services/roles.service';
 
 @Component({
