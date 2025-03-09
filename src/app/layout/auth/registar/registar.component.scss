@@ -1,18 +1,164 @@
-section{
-  background: linear-gradient(to right, #f7932070, #f7932070), url('../../../../assets/image/login-bg.gif');
-  background-position: center center;
-  min-height: 100vh;
-}
-.register{
-  backdrop-filter: blur(5px);
-  color: #fff;
-  .logo{
-    width: 100px;
-    height: 100px;
-    background-color: #ffffffa4;
-    border-radius: 50%;
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+$mainColor: #F79320;
+$secondaryColor: #f7f7f7;
+$gradientColor: #f7932070;
+
+section {
+  background: linear-gradient(to right, $gradientColor, $gradientColor), url('../../../../assets/image/login-bg.gif') !important;
+  background-position: center;
+  font-family: "Mulish", sans-serif;
+
+  .filed-container {
+    min-height: 100vh;
+    overflow: hidden;
+    h2 {
+      font-family: "Bree Serif", serif;
+      font-size: 2.5rem;
+    }
+
+    .right-content, .left-content {
+      padding: 2.7rem 3rem .5rem 2rem;
+    }
+
+    .left {
+      position: relative;
+      z-index: 33;
+
+      .left-content {
+        .logo {
+          width: 8rem;
+          height: 8rem;
+          background-color: rgba($secondaryColor, 0.65);
+          border-radius: 50%;
+        }
+
+        .btn-custom {
+          background: transparent;
+          padding: 0.2rem 1.25rem;
+          transition: 0.3s;
+          width: 12.5rem;
+
+          &:hover {
+            background: white;
+            color: $mainColor !important;
+          }
+        }
+      }
+    }
+
+    .right {
+      position: relative;
+      .wave {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 61%;
+        height:100%;
+        width: 100%;
+        transform: rotate(-90deg);
+        fill: $secondaryColor;
+        @media (max-width: 991px) {
+          display: none;
+        }
+      }
+
+      .right-content {
+        background: linear-gradient(to right, $secondaryColor 0% 60%, rgba(255, 255, 255, 0.68) 90% 100%) !important;
+
+        @media (max-width: 991px) {
+          background: linear-gradient(to bottom, $secondaryColor 0% 60%, rgba(255, 255, 255, 0.68) 90% 100%) !important;
+        }
+
+        h2 {
+          font-size: 3.75rem;
+        }
+
+        p {
+          color: #222;
+        }
+
+        form {
+          position: relative;
+          z-index: 2;
+          height: 100%;
+
+          .input-field {
+            border-radius: 1.5625rem;
+            padding: 0.625rem;
+            padding-top: 15px;
+            border: none !important;
+            border-bottom: 1px solid #d8d8d8 !important;
+            background-color: transparent;
+            margin-bottom: 1.2rem;
+            transition: background-color 0.3s;
+
+            &::placeholder {
+              font-size: 0.875rem;
+              color: #8f8f8f;
+            }
+
+            &:focus,&:not(:placeholder-shown) {
+              box-shadow: 0 4px 2px #f7932062 !important;
+              background-color: #ffffffde;
+            }
+          }
+          .icon-company, .icon-email, .icon-desc, .icon-phone{
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all .3s;
+            pointer-events: none;
+            img {
+              width: 20px;
+              height: 20px;
+            }
+            span {
+              font-size: 0.875rem;
+              color: #8f8f8f;
+            }
+          }
+          .input-field:focus ~ .icon-company,
+          .input-field:not(:placeholder-shown) ~ .icon-company,
+          .input-field:focus ~ .icon-email,
+          .input-field:not(:placeholder-shown) ~ .icon-email,
+          .input-field:focus ~ .icon-desc,
+          .input-field:not(:placeholder-shown) ~ .icon-desc,
+          .input-field:focus ~ .icon-phone,
+          .input-field:not(:placeholder-shown) ~ .icon-phone {
+            top: 0;
+            left: 0;
+          }
+          .logo-company{
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+          }
+
+          ngx-dropzone {
+            background-color: transparent;
+            height: fit-content;
+          }
+
+          .btn-signup {
+            background: rgba($mainColor, 0.96);
+            color: white;
+            border-radius: 1.5625rem;
+            padding: 0.3125rem 0.625rem;
+            width: 100%;
+            transition: all 0.3s;
+
+            &:hover {
+              background: $mainColor;
+            }
+          }
+
+          .footer {
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
   }
-}
-ngx-dropzone{
-  height: fit-content;
 }
