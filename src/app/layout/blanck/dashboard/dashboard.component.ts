@@ -16,60 +16,32 @@ Chart.register(...registerables);
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DashboardComponent implements OnInit{
+  // Injection Services
   private readonly _ToastrService = inject(ToastrService)
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _CompanyService = inject(CompanyService)
 
+  // Global Properties
   companyName:string = ''
   companyId:string = ''
   companyData:any = {}
   edit:boolean = true
 
+  // Get Local Storage Data
   constructor(){
     this.companyName = localStorage.getItem('companyName')!
     this.companyId = localStorage.getItem('companyId')!
   }
 
+  // Run Charts And Funtions When Project Load
   ngOnInit(): void {
     // this.chartLine = new Chart('ChartLine', this.configLine)
     this.chartBar = new Chart('ChartBar', this.configBar)
     this.chartBin = new Chart('ChartBin', this.configBin)
     this.getCompanyById()
   }
-  // chartLine:any;
-  // public configLine:any = {
-  //   type: 'line',
-  //   data: {
-  //     labels:['Sun', 'Mon', 'Tue', 'Wed', 'Fri','Sat'],
-  //       datasets: [
-  //         {
-  //           label:'Sales',
-  //           data: [100 ,200, 400, 600],
-  //           borderColor: '#F79320',
-  //           backgroundColor:'#F79320',
-  //           // fill: true,
-  //         },
-  //     ]
-  //   },
-  //   options: {
-  //     animations: {
-  //       tension: {
-  //         duration: 1000,
-  //         easing: 'linear',
-  //         from: 1,
-  //         to: 0,
-  //         loop: true
-  //       }
-  //     },
-  //     responsive: true,
-  //       scales: {
-  //           y: {
-  //               beginAtZero: true
-  //           }
-  //       }
-  //   },
-  // };
 
+  // Get Data Company By ID
   getCompanyById():void{
     this._CompanyService.GetCompanyById(this.companyId).subscribe({
       next:(res)=>{
@@ -79,6 +51,7 @@ export class DashboardComponent implements OnInit{
     })
   }
 
+  // Charts Options
   chartBar:any;
   public configBar:any = {
     type: 'bar',
@@ -143,6 +116,42 @@ export class DashboardComponent implements OnInit{
     },
   };
 
+  // chartLine:any;
+  // public configLine:any = {
+  //   type: 'line',
+  //   data: {
+  //     labels:['Sun', 'Mon', 'Tue', 'Wed', 'Fri','Sat'],
+  //       datasets: [
+  //         {
+  //           label:'Sales',
+  //           data: [100 ,200, 400, 600],
+  //           borderColor: '#F79320',
+  //           backgroundColor:'#F79320',
+  //           // fill: true,
+  //         },
+  //     ]
+  //   },
+  //   options: {
+  //     animations: {
+  //       tension: {
+  //         duration: 1000,
+  //         easing: 'linear',
+  //         from: 1,
+  //         to: 0,
+  //         loop: true
+  //       }
+  //     },
+  //     responsive: true,
+  //       scales: {
+  //           y: {
+  //               beginAtZero: true
+  //           }
+  //       }
+  //   },
+  // };
+
+  // Slider Owl Carousel Options
+
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -157,16 +166,7 @@ export class DashboardComponent implements OnInit{
     nav: false
   }
 
-  enableFormFields() {
-    if (this.edit) {
-      this.companyForm.enable();
-      this.edit = false
-    } else {
-      this.companyForm.disable();
-      this.edit = true
-    }
-  }
-
+  // Form Company To Update
   companyForm: FormGroup = this._FormBuilder.group({
     Id: [{ value: '', disabled: true }],
     Name: [{ value: '', disabled: true }],
@@ -175,10 +175,18 @@ export class DashboardComponent implements OnInit{
     CompanyPhone: [{ value: '', disabled: true }],
     Vat: [{ value: '', disabled: true }],
   });
-
   updateCompany():void{
     let data = this.companyForm.value
     console.log(data);
+  }
+  enableFormFields() {
+    if (this.edit) {
+      this.companyForm.enable();
+      this.edit = false
+    } else {
+      this.companyForm.disable();
+      this.edit = true
+    }
   }
 
   /* Copy ID And IBAN */

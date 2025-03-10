@@ -8,10 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import { BranchService } from '../branches/core/service/branch.service';
 import { ReigonandcityService } from '../../../../core/services/reigons/reigonandcity.service';
-import { AuthService } from '../../auth/core/service/auth.service';
 import { CompanyService } from './core/service/company.service';
 import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
-import { RegisteruserComponent } from '../../auth/registeruser/registeruser.component';
 import { UsersService } from './core/service/users.service';
 Chart.register(...registerables)
 
@@ -23,6 +21,7 @@ Chart.register(...registerables)
   styleUrl: './companies.component.scss'
 })
 export class CompaniesComponent implements OnInit{
+  // Inject Services
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _CompanyService = inject(CompanyService)
   private readonly _ToastrService = inject(ToastrService)
@@ -31,26 +30,36 @@ export class CompaniesComponent implements OnInit{
   private readonly _UsersService = inject(UsersService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
 
-  companyName:string | null = null
-  companyId:string | null = null
+  // Global Properties
+  companyName:string = ''
+  companyId:string = ''
   allBranches:any[] = []
   allRegions:any[] = []
   allCity:any[] = []
   allUsers:any[] = []
+  companyData:any = {}
   branchCount:number = 0
   userCount:number = 0
+  edit:boolean = true
+
+  // Get Local Storage Data
   constructor(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
-      this.companyName = localStorage.getItem('companyName')
-      this.companyId = localStorage.getItem("companyId")
+      this.companyName = localStorage.getItem('companyName')!
+      this.companyId = localStorage.getItem("companyId")!
     }
   }
+
+  // Run Funtions When Project Load
   ngOnInit(): void {
     this.getAllBranches()
     this.getAllRegions()
     this.getAllUsersByCompanyId()
     this.addUser()
+    this.getCompanyById()
   }
+
+  // Get All Branches
   getAllBranches():void{
     this._BranchService.GetAllCompanyBranches(this.companyId).subscribe({
       next:(res)=>{
@@ -59,10 +68,24 @@ export class CompaniesComponent implements OnInit{
       }
     })
   }
+
+  // Get Data Company By ID
+  getCompanyById():void{
+    this._CompanyService.GetCompanyById(this.companyId).subscribe({
+      next:(res)=>{
+        this.companyData = res.data
+        console.log(this.companyData);
+      }
+    })
+  }
+
+  // Select Regions To Get RegionsID
   onRegionsChange(event:Event):void{
     let selectId = (event.target as HTMLSelectElement).value
     this.getCityByRegion(selectId)
   }
+
+  // Get All Regions
   getAllRegions():void{
     this._ReigonandcityService.GetAllRegions().subscribe({
       next:(res)=>{
@@ -70,6 +93,8 @@ export class CompaniesComponent implements OnInit{
       }
     })
   }
+
+  // Get All City By RegionID
   getCityByRegion(regionId:string):void{
     this._ReigonandcityService.GetCityByRegionId(regionId).subscribe({
       next:(res)=>{
@@ -77,6 +102,17 @@ export class CompaniesComponent implements OnInit{
       }
     })
   }
+
+  // Get Users By CompanyID
+  getAllUsersByCompanyId():void{
+    this._CompanyService.GetAllUserInCompanyById(this.companyId!).subscribe({
+      next:(res)=>{
+        this.allUsers = res.data.items
+      }
+    })
+  }
+
+  // Form Branch To Create
   branchForm:FormGroup = this._FormBuilder.group({
     CompanyId:[''],
     RegionId:[''],
@@ -129,13 +165,7 @@ export class CompaniesComponent implements OnInit{
     })
   }
 
-  getAllUsersByCompanyId():void{
-    this._CompanyService.GetAllUserInCompanyById(this.companyId!).subscribe({
-      next:(res)=>{
-        this.allUsers = res.data.items
-      }
-    })
-  }
+  // Form User To Create
   userForm:FormGroup = this._FormBuilder.group({
     CompanyId:[''],
     Username:[''],
@@ -178,37 +208,43 @@ export class CompaniesComponent implements OnInit{
       }
     })
   }
-  selectedRowId: number | null = null;
-  toggleMenu(rowId: number) {
-    if (this.selectedRowId === rowId) {
-      this.selectedRowId = null;
+
+  // Form Company To Update
+  companyForm: FormGroup = this._FormBuilder.group({
+    Id: [{ value: '', disabled: true }],
+    Name: [{ value: '', disabled: true }],
+    Description: [{ value: '', disabled: true }],
+    CompanyEmail: [{ value: '', disabled: true }],
+    CompanyPhone: [{ value: '', disabled: true }],
+    Vat: [{ value: '', disabled: true }],
+  });
+  updateCompany():void{
+    let data = this.companyForm.value
+    console.log(data);
+  }
+  enableFormFields() {
+    if (this.edit) {
+      this.companyForm.enable();
+      this.edit = false
     } else {
-      this.selectedRowId = rowId;
+      this.companyForm.disable();
+      this.edit = true
     }
   }
 
   /* Copy ID And IBAN */
-  @ViewChild('Id') elementId!:ElementRef
-  @ViewChild('Iban') elementIban!:ElementRef
   @ViewChild('ibanBranach') elementIbanBrnach!:ElementRef
-  copyId():void{
-    const textCopy = this.elementId.nativeElement.innerText;
-    navigator.clipboard.writeText(textCopy)
+  copyIban(iban: string): void {
+    if (!iban || iban === 'Soon') {
+      this._ToastrService.warning('No IBAN available to copy');
+      return;
+    }
+    navigator.clipboard.writeText(iban)
     .then(() => {
-      this._ToastrService.success('ID Copied To Clipboard')
+      this._ToastrService.success('IBAN Copied To Clipboard');
     })
-    .catch((err) => {
-      this._ToastrService.success('Failed To Copy ID')
-    });
-  }
-  copyIban():void{
-    const textCopy = this.elementIban.nativeElement.innerText;
-    navigator.clipboard.writeText(textCopy)
-    .then(() => {
-      this._ToastrService.success('IBAN Copied To Clipboard')
-    })
-    .catch((err) => {
-      this._ToastrService.success('Failed To Copy IBAN')
+    .catch(() => {
+      this._ToastrService.error('Failed To Copy IBAN');
     });
   }
   copyIbanBranches():void{

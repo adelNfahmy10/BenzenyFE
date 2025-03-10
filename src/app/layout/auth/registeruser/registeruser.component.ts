@@ -45,15 +45,12 @@ export class RegisteruserComponent implements OnInit{
   submitUserForm():void{
     let data = this.userForm.value
     data.id = this.userId
-    let formData = new FormData()
 
     this._UsersService.updateUser(data.id, data).subscribe({
       next:(res)=>{
         console.log(res);
         this._ToastrService.success(res.msg)
-        // ROLES
-        // this._Router.navigate(['/driver'])
-        // this._Router.navigate(['/balance'])
+        this._Router.navigate(['/login'])
       }
     })
   }
