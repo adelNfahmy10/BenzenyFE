@@ -55,48 +55,71 @@ $mainColor: #f79320;
   }
 }
 
-/* #################################### Global Style ####################################### */
-span:not(.main-color){
-  font-size: 16px;
-  color: #ccc;
-}
-.modal-content{
-  background-image: linear-gradient(to left, #f7932028 10%, #fff 90%);
-}
-.company-Info{
-  border: 1px solid $mainColor;
-}
+/* #################################### Chart Style ####################################### */
 .chart-container{
   display: flex;
   justify-content: center;
   align-items: start;
   width: 100%;
   height: 400px;
+
 }
 @media (max-width:567px) {
   .chart-container{
     height: 100%;
   }
 }
-
 /* #################################### Ads Style ####################################### */
-swiper-container {
-  width: 100%;
-  height: 100%;
+owl-carousel-o{
+  position: relative;
+  img{
+    height: 230px;
+    object-fit: cover;
+  }
+  .overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f793206d;
+  }
 }
 
-swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* #################################### Model Company Info ####################################### */
+.modal-content{
+  background-image: linear-gradient(to left, #f7932028 10%, #fff 90%);
+}
+.company-Info {
+  box-shadow: 0 0 5px 5px #f793206e;
+  border: none;
+  label{
+    font-size: 0.875rem;
+    color: #8f8f8f;
+    img{
+      width: 20px;
+    }
+  }
+  input, textarea{
+    border: none;
+    box-shadow: 0 4px 3px #f7932039;
+    border-radius: 20px;
+  }
+  .btn-custom {
+    background-color: #fff;
+    color: $mainColor;
+    border: 1px solid $mainColor;
+    padding: 0.2rem 1.25rem;
+    transition: 0.3s;
+    width: 12.5rem;
+    &:hover {
+      background-color: $mainColor;
+      color: #fff;
+    }
+  }
+}
+span:not(.main-color){
+  font-size: 16px;
+  color: #ccc;
 }
 
-swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
