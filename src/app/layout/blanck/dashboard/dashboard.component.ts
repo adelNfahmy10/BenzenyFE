@@ -3,27 +3,38 @@ import { Chart, registerables } from 'chart.js';
 import { ToastrService } from 'ngx-toastr';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { CompanyService } from '../companies/core/service/company.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [HeaderComponent, CarouselModule],
+  imports: [HeaderComponent, CarouselModule, ReactiveFormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DashboardComponent implements OnInit{
   private readonly _ToastrService = inject(ToastrService)
-  companyName:string | null = null
+  private readonly _FormBuilder = inject(FormBuilder)
+  private readonly _CompanyService = inject(CompanyService)
+
+  companyName:string = ''
+  companyId:string = ''
+  companyData:any = {}
+  edit:boolean = true
+
   constructor(){
-    this.companyName = localStorage.getItem('companyName')
+    this.companyName = localStorage.getItem('companyName')!
+    this.companyId = localStorage.getItem('companyId')!
   }
 
   ngOnInit(): void {
     // this.chartLine = new Chart('ChartLine', this.configLine)
     this.chartBar = new Chart('ChartBar', this.configBar)
     this.chartBin = new Chart('ChartBin', this.configBin)
+    this.getCompanyById()
   }
   // chartLine:any;
   // public configLine:any = {
@@ -58,6 +69,15 @@ export class DashboardComponent implements OnInit{
   //       }
   //   },
   // };
+
+  getCompanyById():void{
+    this._CompanyService.GetCompanyById(this.companyId).subscribe({
+      next:(res)=>{
+        this.companyData = res.data
+        console.log(this.companyData);
+      }
+    })
+  }
 
   chartBar:any;
   public configBar:any = {
@@ -123,17 +143,57 @@ export class DashboardComponent implements OnInit{
     },
   };
 
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    autoplay:true,
+    autoplayHoverPause:true,
+    autoplayTimeout:3000,
+    dots: false,
+    navSpeed: 700,
+    items:1,
+    nav: false
+  }
+
+  enableFormFields() {
+    if (this.edit) {
+      this.companyForm.enable();
+      this.edit = false
+    } else {
+      this.companyForm.disable();
+      this.edit = true
+    }
+  }
+
+  companyForm: FormGroup = this._FormBuilder.group({
+    Id: [{ value: '', disabled: true }],
+    Name: [{ value: '', disabled: true }],
+    Description: [{ value: '', disabled: true }],
+    CompanyEmail: [{ value: '', disabled: true }],
+    CompanyPhone: [{ value: '', disabled: true }],
+    Vat: [{ value: '', disabled: true }],
+  });
+
+  updateCompany():void{
+    let data = this.companyForm.value
+    console.log(data);
+  }
+
   /* Copy ID And IBAN */
-  @ViewChild('Iban') elementIban!:ElementRef
   @ViewChild('ibanBranach') elementIbanBrnach!:ElementRef
-  copyIban():void{
-    const textCopy = this.elementIban.nativeElement.innerText;
-    navigator.clipboard.writeText(textCopy)
+  copyIban(iban: string): void {
+    if (!iban || iban === 'Soon') {
+      this._ToastrService.warning('No IBAN available to copy');
+      return;
+    }
+    navigator.clipboard.writeText(iban)
     .then(() => {
-      this._ToastrService.success('IBAN Copied To Clipboard')
+      this._ToastrService.success('IBAN Copied To Clipboard');
     })
-    .catch((err) => {
-      this._ToastrService.success('Failed To Copy IBAN')
+    .catch(() => {
+      this._ToastrService.error('Failed To Copy IBAN');
     });
   }
   copyIbanBranches():void{
@@ -148,31 +208,4 @@ export class DashboardComponent implements OnInit{
       this._ToastrService.success('Failed To Copy IBAN Branch')
     });
   }
-
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    navText: ['', ''],
-    items:1,
-    // responsive: {
-    //   0: {
-    //     items: 1
-    //   },
-    //   400: {
-    //     items: 2
-    //   },
-    //   740: {
-    //     items: 3
-    //   },
-    //   940: {
-    //     items: 4
-    //   }
-    // },
-    nav: true
-  }
-
 }
