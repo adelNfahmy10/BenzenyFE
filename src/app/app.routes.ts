@@ -28,6 +28,7 @@ export const routes: Routes = [
     {path:'login', component:LoginComponent, title:'Login'},
     {path:'register', component:RegistarComponent, title:'Register'},
     {path:'contiuneRegistar/:companyId', component:ContinueregistarComponent, title:'Register'},
+    {path:'registeruser/:userId', component:RegisteruserComponent, title:'Register'},
   ]},
 
   {path:'', component:BlanckComponent, canActivate:[authGuard], title:'home', children:[
@@ -43,7 +44,6 @@ export const routes: Routes = [
     {path:'analytics', component:AnalyticsComponent, title:'analyics'},
     {path:'management', component:ManagementComponent, title:'Management'},
     {path:'setting', component:SettingsComponent, title:'Setting'},
-    {path:'registeruser/:userId', component:RegisteruserComponent, title:'Register'},
     {path:'footer', component:FooterComponent, title:'footer'},
   ]},
   {path:'**', component:NotfoundComponent, title:'notfound'},
