@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UsersService } from '../../blanck/companies/core/service/users.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registeruser',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './registeruser.component.html',
   styleUrl: './registeruser.component.scss'
 })

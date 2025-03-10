@@ -4,76 +4,124 @@ section {
   background: linear-gradient(to right, #f7932070, #f7932070), url('../../../../assets/image/login-bg.gif');
   background-position: center center;
   font-family: "Mulish", sans-serif;
-  h2{
-    font-family: "Bree Serif", serif;
-    font-size: 40px;
-  }
-  .right-content, .left-content{
-    padding: 40px;
-    border-top-right-radius: 200px;
-  }
-  .left{
-    // background-color: #ffffff7f !important;
-    background-color: #f7f7f7 !important;
-    .left-content{
-      border-bottom-left-radius: 200px;
-      color: #fff;
-      .logo{
-        width: 100px;
-        height: 100px;
-        background-color: #fff;
-        border-radius: 50%;
-      }
-      .btn-custom {
-        border: 1px solid white;
-        color: white;
-        background: transparent;
-        padding: 3px 20px;
-        border-radius: 25px;
-        transition: 0.3s;
-        width: 100%;
-        &:hover {
-          background: white;
-          color: $mainColor;
+  .filed-container {
+    min-height: 100vh;
+    overflow: hidden;
+    h2{
+      font-family: "Bree Serif", serif;
+      font-size: 40px;
+    }
+    .right-content, .left-content{
+      padding: 40px;
+      border-top-right-radius: 200px;
+    }
+    .left{
+      background-color: #f7f7f7 !important;
+      .left-content{
+        border-bottom-left-radius: 200px;
+        color: #fff;
+        .logo{
+          width: 100px;
+          height: 100px;
+          background-color: #fff;
+          border-radius: 50%;
+        }
+        .btn-custom {
+          background: transparent;
+          padding: 0.2rem 1.25rem;
+          transition: 0.3s;
+          width: 12.5rem;
+
+          &:hover {
+            background: white;
+            color: $mainColor !important;
+          }
         }
       }
     }
-  }
-  .right{
-    .right-content{
-      background-color: #f7f7f7 !important;
-      h2{
-        font-size: 60px;
-      }
-      p{
-        color: #222;
-      }
-      .input-field {
-        border-radius: 25px;
-        padding: 10px;
-        border: 1px solid #d8d8d8;
-        background-color: transparent;
-        &::placeholder{
-          font-size: 14px;
-          color: #c8c8c8;
+    .right{
+      .right-content{
+        background-color: #f7f7f7 !important;
+
+        h2 {
+          font-size: 3.75rem;
         }
-        &:focus{
-          background-color: #fff;
+
+        p {
+          color: #222;
         }
-      }
-      .btn-login {
-        background: #f79320f5;
-        color: white;
-        border-radius: 25px;
-        padding: 5px 10px;
-        width: 100%;
-        transition: 0.3s;
-        &:hover {
-          background: $mainColor;
+
+        form {
+          position: relative;
+          z-index: 2;
+          height: 100%;
+
+          .input-field {
+            border-radius: 1.5625rem;
+            padding: 0.625rem;
+            padding-top: 15px;
+            border: none !important;
+            border-bottom: 1px solid #d8d8d8 !important;
+            background-color: transparent;
+            transition: background-color 0.3s;
+
+            &::placeholder {
+              font-size: 0.875rem;
+              color: #8f8f8f;
+            }
+
+            &:focus,&:not(:placeholder-shown) {
+              box-shadow: 0 4px 2px #f7932062 !important;
+              background-color: #ffffffde;
+            }
+          }
+          .icon-username,.icon-fullname, .icon-phone, .icon-email, .icon-password{
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all .3s;
+            pointer-events: none;
+            img {
+              width: 20px;
+              height: 20px;
+            }
+            span {
+              font-size: 0.875rem;
+              color: #8f8f8f;
+            }
+          }
+          .input-field:focus ~ .icon-username,
+          .input-field:not(:placeholder-shown) ~ .icon-username,
+          .input-field:focus ~ .icon-password,
+          .input-field:not(:placeholder-shown) ~ .icon-password {
+            top: 0;
+            left: 0;
+          }
+          .logo-company{
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+          }
+          .btn-login {
+            background: rgba($mainColor, 0.96);
+            color: white;
+            border-radius: 1.5625rem;
+            padding: 0.3125rem 0.625rem;
+            width: 100%;
+            transition: all 0.3s;
+
+            &:hover {
+              background: $mainColor;
+            }
+          }
+          .signup-link{
+            color: $mainColor;
+          }
+          .footer {
+            font-size: 0.75rem;
+          }
         }
-      }
-      .footer{
-        font-size: 12px;
       }
     }
   }
