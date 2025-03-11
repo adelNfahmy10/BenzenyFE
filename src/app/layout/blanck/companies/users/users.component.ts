@@ -85,7 +85,7 @@ export class UsersComponent {
   }
 }
 
- /* Branch Form */
+ /* User Form */
  userForm:FormGroup = this._FormBuilder.group({
    CompanyId:[''],
    fullName:[''],
@@ -94,7 +94,7 @@ export class UsersComponent {
    roles: this._FormBuilder.array([]),
   })
 
- /* Submit Branch Form */
+ /* Submit User Form */
  submitUserForm():void{
   let data = this.userForm.value
   data.CompanyId = this.companyId

@@ -67,34 +67,26 @@ i{
 .barnches, .users{
   overflow: hidden;
   & > svg{
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
   }
-  .dis-active-btn,.active-btn{
+  @mixin button-style($bg-color, $color) {
     width: 70px;
     font-size: 12px;
-    color: #6D6D6D;
-    background-color: #DCDCDC;
+    color: $color;
+    background-color: $bg-color;
   }
-  .active-btn{
-    color: #35cf80;
-    font-weight: bold;
-    background-color: #D9F8E8;
+  .dis-active-btn {
+    @include button-style(#DCDCDC, #6D6D6D);
+  }
+  .active-btn {
+    @include button-style(#D9F8E8, #35cf80);
   }
 }
 
-/* #################################### Add Model Style ####################################### */
-.company-Info{
-  border: 1px solid $mainColor;
-}
-.muted{
-  font-size: 10px;
-  &.delete-text{
-    color: #f00 !important;
-  }
-}
+/* #################################### Model Style ####################################### */
 label, input::placeholder{
   color: #4C4C4C;
   font-size: 14px;
@@ -120,9 +112,6 @@ input, .code-num, select, textarea{
     width: 2px;
     background-color: #CCC;
   }
-}
-.modal-content{
-  background-color: #F0F0F0;
 }
 .save-btn{
   width: 143px;
@@ -169,6 +158,23 @@ input, .code-num, select, textarea{
     fill: #fff;
   }
 }
+.add-users-btn{
+  width: 36px;
+  height: 36px;
+  border: 2px solid $mainColor;
+  transition: all .3s;
+  i{
+    font-weight: 500;
+    transition: all .3s;
+    color: $mainColor;
+  }
+  &:hover{
+    background-color: $mainColor;
+    i{
+      color: #fff;
+    }
+  }
+}
 
 /* #################################### Model Company Info ####################################### */
 .modal-content{
@@ -176,7 +182,6 @@ input, .code-num, select, textarea{
 }
 .company-Info {
   box-shadow: 0 0 5px 5px #f793206e;
-  border: none;
   label{
     font-size: 0.875rem;
     color: #8f8f8f;
