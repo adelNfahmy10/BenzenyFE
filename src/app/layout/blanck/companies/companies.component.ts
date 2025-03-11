@@ -11,6 +11,7 @@ import { ReigonandcityService } from '../../../../core/services/reigons/reigonan
 import { CompanyService } from './core/service/company.service';
 import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
 import { UsersService } from './core/service/users.service';
+import { RolesService } from '../../../../core/services/roles.service';
 Chart.register(...registerables)
 
 @Component({
@@ -28,6 +29,7 @@ export class CompaniesComponent implements OnInit{
   private readonly _BranchService = inject(BranchService)
   private readonly _ReigonandcityService = inject(ReigonandcityService)
   private readonly _UsersService = inject(UsersService)
+  private readonly _RolesService = inject(RolesService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
 
   // Global Properties
@@ -37,6 +39,8 @@ export class CompaniesComponent implements OnInit{
   allRegions:any[] = []
   allCity:any[] = []
   allUsers:any[] = []
+  allRoles:any[] = []
+  selectedRoles: string[] = [];
   companyData:any = {}
   branchCount:number = 0
   userCount:number = 0
@@ -57,6 +61,7 @@ export class CompaniesComponent implements OnInit{
     this.getAllUsersByCompanyId()
     this.addUser()
     this.getCompanyById()
+    this.getAllRoles()
   }
 
   // Get All Branches
@@ -110,6 +115,23 @@ export class CompaniesComponent implements OnInit{
         this.allUsers = res.data.items
       }
     })
+  }
+
+  // Get All Roles
+  getAllRoles():void{
+    this._RolesService.getAllRoles().subscribe({
+      next:(res)=>{
+        this.allRoles = res.data
+      }
+    })
+  }
+  toggleRoleSelection(role: any, event: any) {
+    if (event.target.checked) {
+      this.selectedRoles.push(role.name);
+      console.log(this.selectedRoles);
+    } else {
+      this.selectedRoles = this.selectedRoles.filter(r => r !== role.name);
+    }
   }
 
   // Form Branch To Create
@@ -168,30 +190,45 @@ export class CompaniesComponent implements OnInit{
   // Form User To Create
   userForm:FormGroup = this._FormBuilder.group({
     CompanyId:[''],
-    Username:[''],
-    FullName:[''],
-    Mobile :[''],
-    Email:[''],
-    Password:['']
+    fullName:[''],
+    email:[''],
+    mobile:[''],
+    roles: this._FormBuilder.array([]),
   })
+  /* Submit User Form */
   submitUserForm():void{
     let data = this.userForm.value
     data.CompanyId = this.companyId
-    let formData = new FormData()
-    formData.append('CompanyId', data.CompanyId),
-    formData.append('Username', data.Username),
-    formData.append('FullName', data.FullName),
-    formData.append('Mobile', data.Mobile),
-    formData.append('Email', data.Email),
-    formData.append('Password', data.Password)
+    data.roles = this.selectedRoles
 
-    this._UsersService.addUser(formData).subscribe({
+    this._UsersService.addUser(data).subscribe({
       next:(res)=>{
-        this.getAllUsersByCompanyId()
-        this.userForm.reset()
+      this.getAllUsersByCompanyId()
+      this._ToastrService.success(res.msg)
       }
     })
   }
+
+  // submitUserForm():void{
+  //   let data = this.userForm.value
+  //   data.CompanyId = this.companyId
+  //   data.roles = this.selectedRoles
+  //   let formData = new FormData()
+  //   formData.append('CompanyId', data.CompanyId),
+  //   formData.append('Username', data.Username),
+  //   formData.append('FullName', data.FullName),
+  //   formData.append('Mobile', data.Mobile),
+  //   formData.append('Email', data.Email),
+  //   formData.append('Password', data.Password)
+  //   formData.append('Password', data.Password)
+
+  //   this._UsersService.addUser(formData).subscribe({
+  //     next:(res)=>{
+  //       this.getAllUsersByCompanyId()
+  //       this.userForm.reset()
+  //     }
+  //   })
+  // }
   DeleteUserInCompany(userId:string):void{
     this._CompanyService.DeleteUserInCompany(this.companyId!,userId).subscribe({
       next:(res)=>{
