@@ -48,9 +48,9 @@
             <h2>Register</h2>
             <p>Create Your Account, It's Free and Only Takes a Minute</p>
           </div>
-          <form class="row overflow-hidden" [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
+          <form class="row" [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
             <div class="col-md-3 text-center animate__animated animate__fadeInLeft">
-              <img [src]="registerForm.get('ViewCompanyPicture')?.value" class="logo-company cr " data-bs-toggle="modal" data-bs-target="#logoModel" />
+              <img [src]="registerForm.get('ViewCompanyPicture')?.value" class="logo-company cr" data-bs-toggle="modal" data-bs-target="#logoModel" />
             </div>
 
             <div class="col-md-9 animate__animated animate__fadeInRight">

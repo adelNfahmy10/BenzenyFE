@@ -13,13 +13,13 @@ $mainColor: #f79320;
 .navbar{
     align-items: start;
     & > span{
-        color: #fff;
-        position: absolute;
-        left: 100%;
-        background-color: $mainColor;
-        padding: 10px;
-        border-top-right-radius: 50%;
-        border-bottom-right-radius: 50%;
+      color: #fff;
+      position: absolute;
+      left: 100%;
+      background-color: $mainColor;
+      padding: 10px;
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
     }
     .list{
         transition: all .3s;
@@ -32,6 +32,11 @@ $mainColor: #f79320;
             svg{
               fill:#BEBEBE;
               transition: all .6s;
+            }
+            .fa-rectangle-ad{
+              color: #BEBEBE;
+              transition: all .6s;
+              font-size: 23px;
             }
             span{
                 opacity: 0;
@@ -51,8 +56,11 @@ $mainColor: #f79320;
                 svg{
                   fill:#fff;
                 }
+                .fa-rectangle-ad{
+                  color: #fff;
+                }
             }
-            &.active svg{
+            &.active svg,&.active .fa-rectangle-ad{
               fill: #fff !important;
             }
         }

@@ -1,0 +1,22 @@
+<section class="gallery" id="gallery">
+  <app-header></app-header>
+  <div class="gallery-box mt-3">
+    <div class="row g-3">
+      @for(ad of ads; track $index){
+        <div class="col-lg-4 col-md-6 col-12 animate__animated animate__fadeInUp cr">
+          <div class="box">
+            <div class="image-gallery">
+              <img [src]="ad.image" class="w-100">
+            </div>
+            <div class="overlay-gallery">
+              <div class="lay-content">
+                <h4>{{ad.title}}</h4>
+                <p>{{ad.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

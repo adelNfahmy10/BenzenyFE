@@ -1,0 +1,38 @@
+*{
+  transition: all .3s;
+}
+.gallery{
+  .gallery-box{
+    .box{
+      border-radius: 5px;
+      position: relative;
+      overflow: hidden;
+      .overlay-gallery{
+        position: absolute;
+        bottom: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #00000094;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .lay-content{
+          text-align: center;
+          padding: 15px;
+        }
+      }
+      &:hover{
+        transform: scale(1.1);
+        .overlay-gallery{
+          bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+
+
+/* End Section Gallery */
