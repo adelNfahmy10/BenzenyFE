@@ -1,12 +1,12 @@
 import { isPlatformBrowser, NgClass } from '@angular/common';
 import { Component, ElementRef, inject, PLATFORM_ID, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 import { CompanyService } from '../core/service/company.service';
 import { ToastrService } from 'ngx-toastr';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HeaderComponent } from '../../../../../assets/share/header/header.component';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -16,7 +16,7 @@ import { RolesService } from '../../../../../core/services/roles.service';
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent, RouterLink, NgSelectModule],
+  imports: [FormsModule, NgxPaginationModule, ReactiveFormsModule, NgClass, HeaderComponent, NgSelectModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
@@ -27,6 +27,7 @@ export class UsersComponent {
  private readonly _CompanyService = inject(CompanyService)
  private readonly _UsersService = inject(UsersService)
  private readonly _RolesService = inject(RolesService)
+ private readonly _ActivatedRoute = inject(ActivatedRoute)
  private readonly _ToastrService = inject(ToastrService)
 
  /* All Properties */
@@ -108,7 +109,7 @@ export class UsersComponent {
   })
  }
 
- /* Delete Branch */
+ /* Delete User */
  DeleteUserInCompany(userId:string):void{
   this._CompanyService.DeleteUserInCompany(this.companyId!,userId).subscribe({
     next:(res)=>{
@@ -118,7 +119,37 @@ export class UsersComponent {
   })
 }
 
- /* Switch Active Branches */
+UpdateUserForm:FormGroup = this._FormBuilder.group({
+  CompanyId:[''],
+  fullName:[''],
+  email:[''],
+  mobile:[''],
+  roles: this._FormBuilder.array([]),
+ })
+getUserDataById(userId:string ):void{
+  this._UsersService.getUserById(userId).subscribe({
+    next:(res)=>{
+      console.log(res.data);
+      let user = res.data
+      this.UpdateUserForm.patchValue({
+        fullName: user.fullName,
+        email: user.email,
+        mobile: user.fullName,
+      })
+    }
+  })
+}
+
+updateUser(userId:any):void{
+  let data = this.UpdateUserForm.value
+  this._UsersService.updateUser(userId, data).subscribe({
+    next:(res)=>{
+      console.log(res);
+    }
+  })
+}
+
+ /* Switch Active Users */
  switchActiveUser(userId:string):void{
   this._UsersService.SwitchActiveUser(userId).subscribe({
     next:(res)=>{

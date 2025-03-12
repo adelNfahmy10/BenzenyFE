@@ -61,19 +61,19 @@ export class RegistarComponent {
     formData.append('ViewCompanyPicture', data.CompanyPicture)
     formData.append('Files', data.Files)
 
-    // this._CompanyService.CreateCompany(formData).subscribe({
-    //   next:(res)=>{
-    //     this.companyId = res.data.id
-    //     Swal.fire({
-    //       title: 'Thank you for joining',
-    //       text: 'Please wait until we send you an email to complete your details.',
-    //       position: 'center',
-    //       confirmButtonText: 'Done',
-    //       icon: 'success'
-    //     })
-    //     this.registerForm.reset()
-    //   }
-    // })
+    this._CompanyService.CreateCompany(formData).subscribe({
+      next:(res)=>{
+        this.companyId = res.data.id
+        Swal.fire({
+          title: 'Thank you for joining',
+          text: 'Please wait until we send you an email to complete your details.',
+          position: 'center',
+          confirmButtonText: 'Done',
+          icon: 'success'
+        })
+        this.registerForm.reset()
+      }
+    })
   }
 
 
