@@ -35,6 +35,7 @@ export class UsersComponent {
  allUsers:any[] = []
  allRoles:any[] = []
  userCount:string = ''
+ userId:string = ''
  activeCount:number = 0
  disActiveCount:number = 0
  allPage:number = 1;
@@ -87,7 +88,7 @@ export class UsersComponent {
 }
 
  /* User Form */
- userForm:FormGroup = this._FormBuilder.group({
+  userForm:FormGroup = this._FormBuilder.group({
    CompanyId:[''],
    fullName:[''],
    email:[''],
@@ -125,11 +126,12 @@ UpdateUserForm:FormGroup = this._FormBuilder.group({
   email:[''],
   mobile:[''],
   roles: this._FormBuilder.array([]),
- })
-getUserDataById(userId:string ):void{
+})
+
+getUserDataById(userId:string):void{
+  this.userId = userId
   this._UsersService.getUserById(userId).subscribe({
     next:(res)=>{
-      console.log(res.data);
       let user = res.data
       this.UpdateUserForm.patchValue({
         fullName: user.fullName,
@@ -140,11 +142,13 @@ getUserDataById(userId:string ):void{
   })
 }
 
-updateUser(userId:any):void{
+submitUpdateUser():void{
   let data = this.UpdateUserForm.value
-  this._UsersService.updateUser(userId, data).subscribe({
+  data.id = this.userId
+  this._UsersService.updateUser(this.userId , data).subscribe({
     next:(res)=>{
       console.log(res);
+      this.getAllUsers()
     }
   })
 }
