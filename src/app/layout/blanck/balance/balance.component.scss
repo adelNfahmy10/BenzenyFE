@@ -1,167 +1,22 @@
-$mainColor: #f79320;
-.details{
-  position: relative;
-  &::before{
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    right: 0;
-    width: 2px;
-    height: 50%;
-    background-color: #ddd;
+/* #################################### Style Head Cards ####################################### */
+$mainColor:#F79320;
+.head-card {
+  .icon-head{
+    height: fit-content;
+    border: 1px dotted $mainColor;
   }
-  &:first-child::before{
-    content: none;
+  img{
+    width: 130px;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(350%);
   }
-  &:last-child::before{
-    content: none;
+  p{
+    color: #96a0b5;
+    font-size: 18px;
   }
-  @media (max-width:991px) {
-    &::before{
-      content: '';
-      position: absolute;
-      top: 100%;
-      transform: translate(-25%, -70%);
-      width: 70%;
-      height: 3px;
-      background-color: #ddd;
-    }
-  }
-}
-
-.action-list{
-  position: absolute;
-  top: 100%;
-  right: 55%;
-  li{
-    transition: all .3s;
-    width: 152px;
-    &:hover{
-      background-color: #eee;
-    }
-  }
-}
-label, input::placeholder{
-  color: #4C4C4C;
-  font-size: 14px;
-}
-label{
-  font-weight: 600;
-}
-input, .code-num, select, textarea{
-  background: #F7F7F7;
-  &::placeholder{
-    font-weight: 200;
-  }
-}
-.code-num{
-  position: relative;
-  &::before{
-    content: '';
-    position: absolute;
-    top: 18%;
-    right: 0;
-    transform: translateX(-50%, -50%);
-    height: 70%;
-    width: 2px;
-    background-color: #CCC;
-  }
-}
-.modal-content{
-  background-color: #F0F0F0;
-}
-.save-btn{
-  width: 143px;
-  height: 41px;
-  padding: 6px 29px 6px 30px;
-  color: #F97C21;
-  font-size: 20px;
-  font-weight: 700;
-  border-radius: 63px;
-  border: 1px solid #F97C21;
-  background: #FFF;
-  position: relative;
-  overflow: hidden;
-  span, svg{
-    z-index: 3;
-    transition: all .3s;
-  }
-  &::before{
-    content: '';
-    position: absolute;
-    top: 45%;
-    left: 67%;
-    background-color: $mainColor;
-    width: 0;
-    height: 0;
-    border-radius: 63px;
-    transition: all .3s;
-  }
-  &:hover::before{
-    top: 0;
-    left: 0;
-    width: 101%;
-    height: 101%;
-  }
-  &:hover span{
-    color: #fff;
-  }
-  svg{
-    fill: $mainColor;
-    transition: all .3s;
-  }
-  &:hover svg{
-    fill: #fff;
-  }
-}
-.switch {
-  display: inline-block;
-  width: 51px;
-  height: 20px;
-  position: relative;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 34px;
-  transition: 0.4s;
-}
-
-.slider:before {
-  content: "";
-  position: absolute;
-  height: 20px;
-  width: 17px;
-  border-radius: 50%;
-  left: 0;
-  bottom: 0;
-  background-color: white;
-  transition: 0.4s;
-}
-
-input:checked + .slider {
-  background-color: $mainColor;
-}
-
-input:checked + .slider:before {
-  transform: translateX(200%);
-}
-.muted{
-  font-size: 10px;
-  &.delete-text{
-    color: #f00 !important;
+  h4 {
+    font-weight: 500;
+    color: #222;
   }
 }

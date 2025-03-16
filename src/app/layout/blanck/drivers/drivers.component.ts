@@ -35,8 +35,7 @@ export class DriversComponent implements OnInit{
 
   constructor(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
-      // this.branchId = localStorage.getItem('branchId')
-      this.branchId = 'd8875c93-c7b4-41f1-6c2a-08dd4ffe81a5'
+      this.branchId = localStorage.getItem('branchId')
       this.userId = localStorage.getItem('userId')
     }
   }

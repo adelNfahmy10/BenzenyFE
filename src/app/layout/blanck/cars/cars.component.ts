@@ -33,8 +33,8 @@ export class CarsComponent implements OnInit{
   allPage:number = 1;
   currentPage:number = 1
   pageSize:any = 1
-  carCount:number = 1
-  driverCount:number = 1
+  carCount:number = 0
+  driverCount:number = 0
   selectAll = false;
   carNumberEn:string = ''
   carNumberAr:string = ''
@@ -47,8 +47,7 @@ export class CarsComponent implements OnInit{
 
   constructor(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
-      // this.branchId = localStorage.getItem('branchId')
-      this.branchId = 'd8875c93-c7b4-41f1-6c2a-08dd4ffe81a5'
+      this.branchId = localStorage.getItem('branchId')
       this.userId = localStorage.getItem('userId')
     }
   }

@@ -257,27 +257,27 @@
             </div>
 
             <div class="col-12">
-              <label class="d-flex align-items-center gap-1 mb-1" for="companyName"><img src="../../../../assets/image/icon-auth/icon-company.png" alt=""> Company Name</label>
+              <label class="d-flex align-items-center gap-1 mb-1" for="companyName"><img src="./assets/image/icon-auth/icon-company.png" alt=""> Company Name</label>
               <input type="text" formControlName="Name" [value]="companyData.name" name="companyName" id="companyName" class="form-control" placeholder="Enter Company Name...">
             </div>
 
             <div class="col-12">
-              <label class="d-flex align-items-center gap-1 mb-1" for="email"><img src="../../../../assets/image/icon-auth/icon-email.png" alt=""> Email</label>
+              <label class="d-flex align-items-center gap-1 mb-1" for="email"><img src="./assets/image/icon-auth/icon-email.png" alt=""> Email</label>
               <input type="email" formControlName="CompanyEmail" [value]="companyData.companyEmail" name="email" id="email" class="form-control" placeholder="Enter Your Email...">
             </div>
 
             <div class="col-12">
-              <label class="d-flex align-items-center gap-1 mb-1" for="number"><img src="../../../../assets/image/icon-auth/icon-phone.png" alt=""> Phone Number</label>
+              <label class="d-flex align-items-center gap-1 mb-1" for="number"><img src="./assets/image/icon-auth/icon-phone.png" alt=""> Phone Number</label>
               <input type="tel" formControlName="CompanyPhone" [value]="companyData.companyPhone" name="number" id="number" class="form-control" placeholder="Enter Your Phone...">
             </div>
 
             <div class="col-12">
-              <label class="d-flex align-items-center gap-1 mb-1" for="vat"><img src="../../../../assets/image/icon-auth/icon-vat.png" alt=""> Vat</label>
+              <label class="d-flex align-items-center gap-1 mb-1" for="vat"><img src="./assets/image/icon-auth/icon-vat.png" alt=""> Vat</label>
               <input type="text" formControlName="Vat" name="vat" id="vat" class="form-control" placeholder="Enter Your Vat...">
             </div>
 
             <div class="col-12">
-              <label class="d-flex align-items-center gap-1 mb-1" for="description"><img src="../../../../assets/image/icon-auth/icon-desc.png" alt=""> Description</label>
+              <label class="d-flex align-items-center gap-1 mb-1" for="description"><img src="./assets/image/icon-auth/icon-desc.png" alt=""> Description</label>
               <textarea type="text" formControlName="Description" [value]="companyData.description" name="description" id="description" class="form-control" placeholder="Enter Description..."></textarea>
             </div>
 
@@ -336,11 +336,6 @@
         </div>
 
         <form class="row g-2" [formGroup]="branchForm" (ngSubmit)="submitBranchForm()">
-          <!-- <div class="col-md-6">
-            <label for="FullName">Branch Manager</label>
-            <input type="text" name="FullName" id="FullName" formControlName="FullName" class="form-control" placeholder="Branch Name...">
-          </div> -->
-
           <div class="col-md-6">
             <label for="RegionId">Region Id</label>
             <select name="RegionId" id="RegionId" class="form-select" formControlName="RegionId" (change)="onRegionsChange($event)">
@@ -350,11 +345,6 @@
               }
             </select>
           </div>
-
-          <!-- <div class="col-md-6">
-            <label for="IBAN">IBAN</label>
-            <input type="text" formControlName="IBAN" name="IBAN" id="IBAN" class="form-control" placeholder="SA_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _">
-          </div> -->
 
           <div class="col-md-6">
             <label for="CityId">City</label>
@@ -398,16 +388,7 @@
               <span type="button" class="d-flex justify-content-center align-items-center rounded-circle add-users-btn" (click)="addUser()"><i class="fa-solid fa-plus"></i></span>
             </div>
           </div>
-          <!--
-          <div class="col-md-6">
-            <label for="Email">Email</label>
-            <input type="text" name="Email" id="Email" formControlName="Email" class="form-control" placeholder="Email...">
-          </div>
 
-          <div class="col-md-6">
-            <label for="Password">Password</label>
-            <input type="password" name="Password" id="Password" formControlName="Password" class="form-control" placeholder="Password...">
-          </div> -->
           <div class="col-12">
             <div class="d-flex justify-content-end align-items-center gap-2">
               <button class="save-btn btn d-flex justify-content-center align-items-center gap-2">
