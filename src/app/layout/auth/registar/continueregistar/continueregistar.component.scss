@@ -87,6 +87,7 @@ section {
             border-radius: 1.5625rem;
             padding: 0.625rem;
             padding-top: 15px;
+            margin-bottom: 25px;
             border: none !important;
             border-bottom: 1px solid #d8d8d8 !important;
             background-color: transparent;
@@ -123,7 +124,7 @@ section {
           .input-field:focus ~ .icon-fullname,
           .input-field:not(:placeholder-shown) ~ .icon-fullname,
           .input-field:focus ~ .icon-phone,
-          .input-field:not(:placeholder-shown) ~ .icon-phone
+          .input-field:not(:placeholder-shown) ~ .icon-phone,
           .input-field:focus ~ .icon-email,
           .input-field:not(:placeholder-shown) ~ .icon-email,
           .input-field:focus ~ .icon-password,

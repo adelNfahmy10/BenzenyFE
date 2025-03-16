@@ -315,16 +315,11 @@
           <div class="col-md-12">
             <label for="Roles">Roles</label>
             <div class="row">
-              @for (role of allRoles; track $index) {
+              @for(role of allRoles; track $index){
                 <div class="col-1">
                   <div class="d-flex justify-content-center align-items-center gap-2">
-                    <label [for]="role.name + $index">{{ role.name }}</label>
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      [formControlName]="$index"
-                      (change)="toggleRoleSelection(role, $event)"
-                    >
+                    <label [for]="role.name + $index">{{role.name}}</label>
+                    <input type="checkbox" class="form-check-input" (change)="toggleRoleSelection(role, $event)">
                   </div>
                 </div>
               }
