@@ -46,53 +46,48 @@
             <h2>Register</h2>
             <p>Create Your Account, It's Free and Only Takes a Minute</p>
           </div>
-          <form class="row" [formGroup]="complateForm" (ngSubmit)="continueData()">
-            <!-- <div class="col-md-3 text-center">
-              <img [src]="registerForm.get('ViewCompanyPicture')?.value" class="logo-company cr " data-bs-toggle="modal" data-bs-target="#logoModel" />
-            </div> -->
-
-            <div class="col-12 animate__animated animate__fadeInRight">
-                <div class="position-relative input-container">
-                  <input formControlName="Username" type="text" class="form-control input-field" name="userName" id="userName" placeholder=" ">
-                  <div class="icon-username d-flex justify-content-start align-items-center gap-1 w-100">
-                    <img src="../../../../../assets/image/icon-auth/icon-username.png" alt="">
-                    <span>Username</span>
-                  </div>
-                </div>
-
-                <div class="position-relative input-container">
-                  <input type="text" formControlName="FullName" class="form-control input-field" name="FullName" id="FullName" placeholder=" ">
-                  <div class="icon-fullname d-flex justify-content-start align-items-center gap-1 w-100">
-                    <img src="../../../../../assets/image/icon-auth/icon-fullname.png" alt="">
-                    <span>Full Name</span>
-                  </div>
-                </div>
-
-                <div class="position-relative input-container">
-                  <input formControlName="Mobile" type="tel" class="form-control input-field" name="Mobile" id="Mobile" placeholder=" ">
-                  <div class="icon-phone d-flex justify-content-start align-items-center gap-1 w-100">
-                    <img src="../../../../../assets/image/icon-auth/icon-phone.png" alt="">
-                    <span>Mobile</span>
-                  </div>
-                </div>
-
-                <div class="position-relative input-container">
-                  <input formControlName="Email" type="email" class="form-control input-field" name="Email" id="Email" placeholder=" ">
-                  <div class="icon-email d-flex justify-content-start align-items-center gap-1 w-100">
-                    <img src="../../../../../assets/image/icon-auth/icon-email.png" alt="">
-                    <span>Email</span>
-                  </div>
-                </div>
-                <div class="position-relative input-container">
-                  <input formControlName="Password" type="password" class="form-control input-field" name="Password" id="Password" placeholder=" ">
-                  <div class="icon-password d-flex justify-content-start align-items-center gap-1 w-100">
-                    <img src="../../../../../assets/image/icon-auth/icon-password.png" alt="">
-                    <span>Password</span>
-                  </div>
-                </div>
+          <form class="animate__animated animate__fadeInUp" [formGroup]="complateForm" (ngSubmit)="continueData()">
+            <div class="position-relative input-container">
+              <input formControlName="Username" type="text" class="form-control input-field" name="userName" id="userName" placeholder=" ">
+              <div class="icon-username d-flex justify-content-start align-items-center gap-1 w-100">
+                <img src="./assets/image/icon-auth/icon-username.png" alt="">
+                <span>Username</span>
+              </div>
             </div>
 
-            <div class="col-12 mt-3 animate__animated animate__fadeInUp">
+            <div class="position-relative input-container">
+              <input type="text" formControlName="FullName" class="form-control input-field" name="FullName" id="FullName" placeholder=" ">
+              <div class="icon-fullname d-flex justify-content-start align-items-center gap-1 w-100">
+                <img src="./assets/image/icon-auth/icon-fullname.png" alt="">
+                <span>Full Name</span>
+              </div>
+            </div>
+
+            <div class="position-relative input-container">
+              <input formControlName="Mobile" type="tel" class="form-control input-field" name="Mobile" id="Mobile" placeholder=" ">
+              <div class="icon-phone d-flex justify-content-start align-items-center gap-1 w-100">
+                <img src="./assets/image/icon-auth/icon-phone.png" alt="">
+                <span>Mobile</span>
+              </div>
+            </div>
+
+            <div class="position-relative input-container">
+              <input formControlName="Email" type="email" class="form-control input-field" name="Email" id="Email" placeholder=" ">
+              <div class="icon-email d-flex justify-content-start align-items-center gap-1 w-100">
+                <img src="./assets/image/icon-auth/icon-email.png" alt="">
+                <span>Email</span>
+              </div>
+            </div>
+
+            <div class="position-relative input-container">
+              <input formControlName="Password" type="password" class="form-control input-field" name="Password" id="Password" placeholder=" ">
+              <div class="icon-password d-flex justify-content-start align-items-center gap-1 w-100">
+                <img src="./assets/image/icon-auth/icon-password.png" alt="">
+                <span>Password</span>
+              </div>
+            </div>
+
+            <div>
               <button class="btn btn-signup">SignUp</button>
               <p class="text-center mt-4 footer">Copyright © All Rights Reserved Benzeny App</p>
             </div>

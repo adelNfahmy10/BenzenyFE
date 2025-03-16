@@ -79,13 +79,12 @@ export class UsersComponent {
  }
 
  toggleRoleSelection(role: any, event: any) {
-  if (event.target.checked) {
-    this.selectedRoles.push(role.name);
-    console.log(this.selectedRoles);
-  } else {
-    this.selectedRoles = this.selectedRoles.filter(r => r !== role.name);
+    if (event.target.checked) {
+      this.selectedRoles.push(role.name);
+    } else {
+      this.selectedRoles = this.selectedRoles.filter(r => r !== role.name);
+    }
   }
-}
 
  /* User Form */
   userForm:FormGroup = this._FormBuilder.group({
@@ -105,6 +104,8 @@ export class UsersComponent {
   this._UsersService.addUser(data).subscribe({
     next:(res)=>{
     this.getAllUsers()
+    this.userForm.reset()
+    this.selectedRoles = []
     this._ToastrService.success(res.msg)
     }
   })
@@ -121,7 +122,8 @@ export class UsersComponent {
 }
 
 UpdateUserForm:FormGroup = this._FormBuilder.group({
-  CompanyId:[''],
+  id:[''],
+  companyId:[''],
   fullName:[''],
   email:[''],
   mobile:[''],
@@ -145,10 +147,15 @@ getUserDataById(userId:string):void{
 submitUpdateUser():void{
   let data = this.UpdateUserForm.value
   data.id = this.userId
+  data.companyId = this.companyId
+  data.roles = this.selectedRoles
+  console.log(data);
   this._UsersService.updateUser(this.userId , data).subscribe({
     next:(res)=>{
       console.log(res);
       this.getAllUsers()
+      this.UpdateUserForm.reset
+      this.selectedRoles = []
     }
   })
 }
