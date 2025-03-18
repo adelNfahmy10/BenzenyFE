@@ -127,7 +127,7 @@ UpdateUserForm:FormGroup = this._FormBuilder.group({
   fullName:[''],
   email:[''],
   mobile:[''],
-  roles: this._FormBuilder.array([]),
+  userRoles: this._FormBuilder.array([]),
 })
 
 getUserDataById(userId:string):void{
@@ -148,8 +148,7 @@ submitUpdateUser():void{
   let data = this.UpdateUserForm.value
   data.id = this.userId
   data.companyId = this.companyId
-  data.roles = this.selectedRoles
-  console.log(data);
+  data.userRoles = this.selectedRoles
   this._UsersService.updateUser(this.userId , data).subscribe({
     next:(res)=>{
       console.log(res);
