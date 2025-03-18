@@ -161,8 +161,10 @@ input[type="checkbox"]{
 ::-webkit-scrollbar-track {
   background: #eee;
   border-radius: 20px;
+  width: 10px;
 }
 ::-webkit-scrollbar-thumb {
   background: $mainColor;
   border-radius: 20px;
+  width: 10px;
 }
