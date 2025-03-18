@@ -1,12 +1,20 @@
-*{
-  transition: all .3s;
-}
+$mainColor:#F97C21;
+
 .gallery{
   .gallery-box{
     .box{
       border-radius: 5px;
       position: relative;
       overflow: hidden;
+      transition: all .3s;
+      .x-mark{
+        top: 20px;
+        right: 20px;
+        width: 20px;
+        height: 20px;
+        background-color: $mainColor;
+        display: none !important;
+      }
       .overlay-gallery{
         position: absolute;
         bottom: -100%;
@@ -18,6 +26,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: all .3s;
         .lay-content{
           text-align: center;
           padding: 15px;
@@ -28,8 +37,64 @@
         .overlay-gallery{
           bottom: 0;
         }
+        .x-mark{
+          display: flex !important;
+        }
       }
     }
+  }
+}
+.save-btn{
+  width: 143px;
+  height: 41px;
+  padding: 6px 29px 6px 30px;
+  color: #F97C21;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 63px;
+  border: 1px solid #F97C21;
+  background: #FFF;
+  position: relative;
+  overflow: hidden;
+  span, svg{
+    z-index: 3;
+    transition: all .3s;
+  }
+  &::before{
+    content: '';
+    position: absolute;
+    top: 45%;
+    left: 67%;
+    background-color: $mainColor;
+    width: 0;
+    height: 0;
+    border-radius: 63px;
+    transition: all .3s;
+  }
+  &:hover::before{
+    top: 0;
+    left: 0;
+    width: 101%;
+    height: 101%;
+  }
+  &:hover span{
+    color: #fff;
+  }
+  svg{
+    fill: $mainColor;
+    transition: all .3s;
+  }
+  &:hover svg{
+    fill: #fff;
+  }
+}
+.add-ads-btn{
+  background-color: transparent;
+  color: $mainColor;
+  border: 1px solid $mainColor;
+  &:hover{
+    background-color: $mainColor;
+    color: #fff;
   }
 }
 
