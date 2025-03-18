@@ -45,39 +45,35 @@ export class ContinueregistarComponent implements OnInit{
   }
 
   continueData():void{
-    let data = this.complateForm.value
-    data.id = this.companyId
-    console.log(data);
+    let oldData = this.companyData.data
+    let newData = this.complateForm.value
+    let data = {
+      ...oldData,
+      ...newData
+    }
 
-    // let oldData = this.companyData.data
-    // let newData = this.complateForm.value
-    // let data = {
-    //   ...oldData,
-    //   ...newData
-    // }
+    let formData = new FormData
+    formData.append('Id', data.id),
+    formData.append('Name', data.name),
+    formData.append('Description', data.description),
+    formData.append('CompanyEmail', data.companyEmail),
+    formData.append('CompanyPhone', data.companyPhone),
+    formData.append('Username', data.Username),
+    formData.append('FullName', data.FullName),
+    formData.append('Email', data.Email),
+    formData.append('Mobile', data.Mobile),
+    formData.append('Password', data.Password)
 
-    // let formData = new FormData
-    // formData.append('Id', data.id),
-    // formData.append('Name', data.name),
-    // formData.append('Description', data.description),
-    // formData.append('CompanyEmail', data.companyEmail),
-    // formData.append('CompanyPhone', data.companyPhone),
-    // formData.append('Username', data.Username),
-    // formData.append('FullName', data.FullName),
-    // formData.append('Email', data.Email),
-    // formData.append('Mobile', data.Mobile),
-    // formData.append('Password', data.Password)
-
-    // this._CompanyService.UpdateCompany(data.id ,formData).subscribe({
-    //   next:(res)=>{
-    //     localStorage.setItem('token', res.data.accessToken)
-    //     localStorage.setItem('refreshToken', res.data.refresh)
-    //     localStorage.setItem('userId', res.data.userId)
-    //     localStorage.setItem('userName', res.data.fullname)
-    //     localStorage.setItem('companyId', res.data.id)
-    //     localStorage.setItem('companyName', res.data.name)
-    //     this._Router.navigate(['/home'])
-    //   }
-    // })
+    this._CompanyService.UpdateCompany(data.id ,formData).subscribe({
+      next:(res)=>{
+        localStorage.setItem('token', res.data.accessToken)
+        localStorage.setItem('refreshToken', res.data.refresh)
+        localStorage.setItem('userId', res.data.userId)
+        localStorage.setItem('userName', res.data.fullname)
+        localStorage.setItem('companyId', res.data.id)
+        localStorage.setItem('companyName', res.data.name)
+        this._Router.navigate(['/home'])
+      }
+    })
   }
 }

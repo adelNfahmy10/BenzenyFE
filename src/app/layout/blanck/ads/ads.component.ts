@@ -36,13 +36,13 @@ export class AdsComponent implements OnInit{
     this._AdsService.GetAllAds().subscribe({
       next:(res)=>{
         this.allAds = res.data
-        console.log(this.allAds);
       }
     })
   }
 
   adsForm:FormGroup = this._FormBuilder.group({
     Name:[],
+    Url:[],
     CreatedBy:[],
     Image:[],
   })
