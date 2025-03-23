@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, PLATFORM_ID, signal, ViewChild, WritableSignal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CarService } from '../../cars/core/service/car.service';
 import { DriverService } from '../../drivers/core/service/driver.service';
@@ -23,109 +23,95 @@ export class BranchdetailsComponent implements OnInit{
   private readonly _ActivatedRoute = inject(ActivatedRoute)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
 
-  branchId:string | null = null
-  companyId:string | null = null
-  allCars:any[] = []
-  driverBranch:any[] = []
-  allPage:any = 0
-  currentPage:any = 0
-  pageSize:any = 0
-  totalCars:any = 0
-  totalDrivers:any = 0
-
-  constructor(){
-    this.companyId = localStorage.getItem('companyId')
-  }
+  branchId: WritableSignal<string> = signal('');
+  companyId: WritableSignal<string> = signal(localStorage.getItem('companyId') || '');
+  allCars: WritableSignal<any[]> = signal([]);
+  driverBranch: WritableSignal<any[]> = signal([]);
+  allPage: WritableSignal<number> = signal(0);
+  currentPage: WritableSignal<number> = signal(0);
+  pageSize: WritableSignal<number> = signal(0);
+  totalCars: WritableSignal<number> = signal(0);
+  totalDrivers: WritableSignal<number> = signal(0);
 
   ngOnInit(): void {
     this.getBranchById()
   }
 
   getBranchById():void{
-    this._ActivatedRoute.paramMap.subscribe({
-      next:(params)=>{
-        this.branchId = params.get('id')
-        this.getAllCars()
-        this.getAllDrivers()
-      }
-    })
+    this._ActivatedRoute.paramMap.subscribe(params => {
+      this.branchId.set(params.get('id')!);
+      this.getAllCars();
+      this.getAllDrivers();
+    });
   }
 
   getAllCars():void{
-    this._CarService.GetAllCarsByBranchId(this.branchId).subscribe({
-      next:(res)=>{
-        this.allCars = res.data.items
-        this.totalCars = res.data.totalCount
-        this.allPage = Math.ceil(res.data.totalCount / res.data.pageSize)
-        this.currentPage = res.data.pageNumber
-        this.pageSize = res.data.pageSize
-      }
-    })
+    this._CarService.GetAllCarsByBranchId(this.branchId()).subscribe(res => {
+      this.allCars.set(res.data.items);
+      this.totalCars.set(res.data.totalCount);
+      this.allPage.set(Math.ceil(res.data.totalCount / res.data.pageSize));
+      this.currentPage.set(res.data.pageNumber);
+      this.pageSize.set(res.data.pageSize);
+    });
   }
 
   getAllDrivers():void{
-    this._DriverService.GetDriversInBranch(this.branchId).subscribe({
-      next:(res)=>{
-        this.driverBranch = res.data.items
-        this.totalDrivers = res.data.totalCount
-      }
-    })
+    this._DriverService.GetDriversInBranch(this.branchId()).subscribe(res => {
+      this.driverBranch.set(res.data.items);
+      this.totalDrivers.set(res.data.totalCount);
+    });
   }
 
   // Filtering the data based on search input
   filteredData(event:Event) {
     const searchTerm = (event.target as HTMLInputElement).value;
-    this._CarService.GetAllCarsByBranchId(this.branchId, searchTerm).subscribe({
-      next:(res)=>{
-        this.allCars = res.data.items
-      }
-    })
+    this._CarService.GetAllCarsByBranchId(this.branchId(), searchTerm).subscribe(res => {
+      this.allCars.set(res.data.items);
+    });
   }
 
   /* Sort Table */
-  sortColumn: string = '';
-  sortDirection: boolean = true;
+  sortColumn: WritableSignal<string> = signal('');
+  sortDirection: WritableSignal<boolean> = signal(true);
   sortTable(column: string): void {
-    if (this.sortColumn === column) {
-      this.sortDirection = !this.sortDirection;
+    if (this.sortColumn() === column) {
+      this.sortDirection.set(!this.sortDirection());
     } else {
-      this.sortColumn = column;
-      this.sortDirection = true;
+      this.sortColumn.set(column);
+      this.sortDirection.set(true);
     }
 
-    this.allCars.sort((a, b) => {
-      if (a[column] > b[column]) {
-        return this.sortDirection ? 1 : -1;
-      } else if (a[column] < b[column]) {
-        return this.sortDirection ? -1 : 1;
-      } else {
-        return 0;
-      }
-    });
+    this.allCars.update(cars =>
+      [...cars].sort((a, b) => {
+        if (a[column] > b[column]) {
+          return this.sortDirection() ? 1 : -1;
+        } else if (a[column] < b[column]) {
+          return this.sortDirection() ? -1 : 1;
+        } else {
+          return 0;
+        }
+      })
+    );
   }
 
   // Pagnation Pages
   onPageChange(page: number): void {
-    this.currentPage = page;
+    this.currentPage.set(page);
     this.changePagePagination(page);
   }
 
   changePagePagination(page:number):void{
-    this._CarService.GetAllCarsByBranchId(this.branchId, '' , page).subscribe({
-      next:(res)=>{
-        this.allCars = res.data.items
-      }
-    })
+    this._CarService.GetAllCarsByBranchId(this.branchId(), '', page).subscribe(res => {
+      this.allCars.set(res.data.items);
+    });
   }
 
   onChangePageSize(event:Event):void{
-    let pageSize = (event.target as HTMLSelectElement).value
-    this._CarService.GetAllCarsByBranchId(this.branchId, '' , 1, pageSize).subscribe({
-      next:(res)=>{
-        this.pageSize = pageSize
-        this.allCars = res.data.items
-      }
-    })
+    const pageSize = (event.target as HTMLSelectElement).value;
+    this._CarService.GetAllCarsByBranchId(this.branchId(), '', 1, pageSize).subscribe(res => {
+      this.pageSize.set(Number(pageSize));
+      this.allCars.set(res.data.items);
+    });
   }
 
 
@@ -146,10 +132,10 @@ export class BranchdetailsComponent implements OnInit{
     }
   }
 
-    downloadExcel():void{
-      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
-      const wb: XLSX.WorkBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-      XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
-    }
+  downloadExcel():void{
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, 'table_data.xlsx');
+  }
 }

@@ -10,7 +10,7 @@
         <div class="d-flex flex-column justify-content-center align-items-center">
           <p class="m-0">Total Drivers</p>
           <h3>
-            {{driverCount}}
+            {{driverCount()}}
           </h3>
         </div>
         <div class="icon-head p-1 rounded-2 mt-3">
@@ -82,7 +82,7 @@
                 </tr>
               </thead>
               <tbody>
-                @for(driver of allDrivers | paginate: { itemsPerPage:pageSize , currentPage: currentPage, totalItems:driverCount} ; track $index){
+                @for(driver of allDrivers() | paginate: { itemsPerPage:pageSize() , currentPage: currentPage(), totalItems:driverCount()} ; track $index){
                   <tr>
                     <td>
                       {{ $index + 1 }}
@@ -236,7 +236,7 @@
           <button class="btn download-template my-2" (click)="downloadTemplateExcel()">Download Template <i class="fa-solid fa-cloud-arrow-down"></i></button>
           <ngx-dropzone (change)="onSelect($event)">
             <ngx-dropzone-label class="main-color fs-2">Choose Files <i class="fa-solid fa-upload"></i></ngx-dropzone-label>
-            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-preview *ngFor="let f of files()" [removable]="true" (removed)="onRemove(f)">
               <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
             </ngx-dropzone-preview>
           </ngx-dropzone>

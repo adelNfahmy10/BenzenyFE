@@ -8,7 +8,7 @@
             <div class="d-flex flex-column justify-content-center align-items-center">
               <p class="m-0">Total Drivers</p>
               <h3>
-                {{totalDrivers}}
+                {{totalDrivers()}}
               </h3>
             </div>
             <div class="icon-head p-1 drivers d-flex justify-content-center align-items-center rounded-2 mt-3">
@@ -23,7 +23,7 @@
             <div class="d-flex flex-column justify-content-center align-items-center">
               <p class="m-0">Total Vehicles</p>
               <h3>
-                {{totalCars}}
+                {{totalCars()}}
               </h3>
             </div>
             <div class="icon-head p-1 cars d-flex justify-content-center align-items-center rounded-2 mt-3">
@@ -81,7 +81,7 @@
                 </tr>
               </thead>
               <tbody>
-                @for(car of allCars | paginate: { itemsPerPage:pageSize , currentPage: currentPage, totalItems:totalCars} ; track $index){
+                @for(car of allCars() | paginate: { itemsPerPage:pageSize() , currentPage: currentPage(), totalItems:totalCars()} ; track $index){
                   <tr>
                     <td>
                       {{ $index + 1 }}

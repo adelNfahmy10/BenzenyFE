@@ -11,7 +11,7 @@
         <div class="d-flex flex-column justify-content-center align-items-center">
           <p class="m-0">Total Vehicles</p>
           <h3>
-            {{carCount}}
+            {{carCount()}}
           </h3>
         </div>
         <div class="icon-head p-1 rounded-2 mt-3">
@@ -85,7 +85,7 @@
               </tr>
             </thead>
             <tbody>
-              @for(car of allCars | paginate: { itemsPerPage:pageSize , currentPage: currentPage, totalItems:carCount} ; track $index){
+              @for(car of allCars() | paginate: { itemsPerPage:pageSize() , currentPage: currentPage(), totalItems:carCount()} ; track $index){
                 <tr>
                   <td>
                     {{ $index + 1 }}
@@ -214,7 +214,7 @@
                         <div *ngFor="let driver of drivers.controls; let i = index" class="d-flex gap-2">
                           <select name="driverId" id="driverId" class="form-select" [formControlName]="i">
                             <option value="" selected disabled>Select Driver...</option>
-                            @for(driver of allDrivers;track $index){
+                            @for(driver of allDrivers();track $index){
                               <option [value]="driver.id">{{driver.fullName}}</option>
                             }
                           </select>
@@ -223,7 +223,7 @@
                           }
                         </div>
                       </div>
-                      @if(driverCount <= 2){
+                      @if(driverCount() <= 2){
                         <span type="button" class="add-car-btn d-flex justify-content-center align-items-center rounded-circle" (click)="addDriver()"><i class="fa-solid fa-plus"></i></span>
                       }
                     </div>
@@ -265,10 +265,10 @@
                   <tbody>
                     <tr>
                       <td>
-                        {{carNumberEn}}
+                        {{carNumberEn()}}
                       </td>
                       <td>
-                        {{carLetterEn1}} {{carLetterEn2}} {{carLetterEn3}}
+                        {{carLetterEn1()}} {{carLetterEn2()}} {{carLetterEn3()}}
                       </td>
                       <td class="row-ksa-img" rowspan="2">
                         <div class="d-flex flex-column justify-content-center align-items-center">
@@ -283,8 +283,8 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>{{carNumberAr}}</td>
-                      <td>{{carLetterAr1}} {{carLetterAr2}} {{carLetterAr3}}</td>
+                      <td>{{carNumberAr()}}</td>
+                      <td>{{carLetterAr1()}} {{carLetterAr2()}} {{carLetterAr3()}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -337,7 +337,7 @@
           <button class="btn download-template my-2" (click)="downloadTemplateExcel()">Download Template <i class="fa-solid fa-cloud-arrow-down"></i></button>
           <ngx-dropzone (change)="onSelect($event)">
             <ngx-dropzone-label class="main-color fs-2">Choose Files <i class="fa-solid fa-upload"></i></ngx-dropzone-label>
-            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-preview *ngFor="let f of files()" [removable]="true" (removed)="onRemove(f)">
                 <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
             </ngx-dropzone-preview>
           </ngx-dropzone>

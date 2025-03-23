@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, PLATFORM_ID, signal, ViewChild, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import * as XLSX from 'xlsx';
@@ -23,52 +23,33 @@ export class DriversComponent implements OnInit{
   private readonly _ToastrService = inject(ToastrService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
 
-  branchId:string | null = null
-  userId:string | null = null
-  allDrivers:any[] = []
-  title:string = 'Drivers'
-  allPage:number = 1;
-  currentPage:number = 1
-  pageSize:any = 1
-  selectAll = false;
-  driverCount:string = ''
-
-  constructor(){
-    if(isPlatformBrowser(this._PLATFORM_ID)){
-      this.branchId = localStorage.getItem('branchId')
-      this.userId = localStorage.getItem('userId')
-    }
-  }
-
-  onPageChange(page: number): void {
-    this.currentPage = page;
-    this.changePagePagination(page);
-  }
-
-  changePagePagination(page:number):void{
-    this._DriverService.GetDriversInBranch(this.branchId, '' , page).subscribe({
-      next:(res)=>{
-        this.allDrivers = res.data.items
-      }
-    })
-  }
-
-
+  branchId: WritableSignal<string | null> = signal(localStorage.getItem('branchId'));
+  userId: WritableSignal<string | null> = signal(localStorage.getItem('userId'));
+  allDrivers: WritableSignal<any[]> = signal([]);
+  title: WritableSignal<string> = signal('Drivers');
+  allPage: WritableSignal<number> = signal(1);
+  currentPage: WritableSignal<number> = signal(1);
+  pageSize: WritableSignal<number> = signal(1);
+  selectAll: WritableSignal<boolean> = signal(false);
+  driverCount: WritableSignal<string> = signal('');
+  files: WritableSignal<File[]> = signal([]);
+  sortColumn: WritableSignal<string> = signal('');
+  sortDirection: WritableSignal<boolean> = signal(true);
 
   ngOnInit(): void {
     this.getAllDrivers()
   }
 
   getAllDrivers():void{
-    this._DriverService.GetDriversInBranch(this.branchId).subscribe({
-      next:(res)=>{
-        this.allDrivers = res.data.items
-        this.driverCount = res.data.totalCount
-        this.allPage = Math.ceil(res.data.totalCount / res.data.pageSize)
-        this.currentPage = res.data.pageNumber
-        this.pageSize = res.data.pageSize
+    this._DriverService.GetDriversInBranch(this.branchId()).subscribe({
+      next: (res) => {
+        this.allDrivers.set(res.data.items);
+        this.driverCount.set(res.data.totalCount);
+        this.allPage.set(Math.ceil(res.data.totalCount / res.data.pageSize));
+        this.currentPage.set(res.data.pageNumber);
+        this.pageSize.set(res.data.pageSize);
       }
-    })
+    });
   }
 
   driverForm:FormGroup = this._FormBuilder.group({
@@ -81,147 +62,103 @@ export class DriversComponent implements OnInit{
   })
 
   submitDriverForm():void{
-    let data = this.driverForm.value
-    data.branchId = this.branchId
-    data.createdBy = this.userId
+    let data = this.driverForm.value;
+    data.branchId = this.branchId();
+    data.createdBy = this.userId();
     this._DriverService.CreateDriver(data).subscribe({
-      next:(res)=>{
-        this.getAllDrivers()
-        this.driverForm.reset()
-        this._ToastrService.success(res.msg)
-      }
-    })
-  }
-
-  DeleteDriver(id:any):void{
-    this._DriverService.DeleteDriver(id).subscribe({
-      next:(res)=>{
-        this.getAllDrivers()
-        this._ToastrService.error(res.msg)
-      }
-    })
-  }
-
-  downloadTableExcel():void{
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    XLSX.writeFile(wb, 'table_data.xlsx');
-  }
-
-  @ViewChild('template') tableTemplate!:ElementRef
-  downloadTemplateExcel():void{
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.tableTemplate.nativeElement);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    XLSX.writeFile(wb, 'table_data.xlsx');
-  }
-
-
-  // Filtering the data based on search input
-  filteredData(event:Event) {
-    const searchTerm = (event.target as HTMLInputElement).value;
-    this._DriverService.GetDriversInBranch(this.branchId, searchTerm).subscribe({
-      next:(res)=>{
-        this.allDrivers = res.data.items
-      }
-    })
-  }
-  // Check if the row is selected
-  isSelected(row: any) {
-    return row.selected;
-  }
-
-  // Toggle row selection
-  toggleRowSelection(row: any) {
-    row.selected = !row.selected;
-  }
-
-  // Toggle Select All checkbox
-  toggleSelectAll() {
-    this.allDrivers.forEach((row:any) => row.selected = this.selectAll);
-  }
-
-  /* Download Table With PDF */
-  open:boolean = false
-  openList():void{
-    if(this.open){
-      this.open = false
-      console.log(this.open);
-
-    } else {
-      this.open = true
-      console.log(this.open);
-    }
-  }
-
-  // Menu Option In Table
-  selectedRowId: number | null = null;
-  toggleMenu(rowId: number) {
-    if (this.selectedRowId === rowId) {
-      this.selectedRowId = null;
-    } else {
-      this.selectedRowId = rowId;
-    }
-  }
-
-  files: File[] = [];
-  onSelect(event:any) {
-    console.log(event);
-    this.files.push(...event.addedFiles);
-    console.log(this.files[0]);
-  }
-  onRemove(event:any) {
-    console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
-  }
-
-  uploadFileExcel():void{
-    let formData = new FormData
-    formData.append('BranchId', this.branchId!),
-    // formData.append('File ', this.files[0])
-    this.files.forEach((item, index:number)=>{
-      formData.append(`File`, item)
-    })
-
-    this._DriverService.ImportDrivers(formData).subscribe({
-      next:(res)=>{
-        this._ToastrService.success(res.msg)
-      }
-    })
-  }
-
-  /* Sort Table */
-  sortColumn: string = '';
-  sortDirection: boolean = true;
-  sortTable(column: string): void {
-    if (this.sortColumn === column) {
-      this.sortDirection = !this.sortDirection;
-    } else {
-      this.sortColumn = column;
-      this.sortDirection = true;
-    }
-
-    this.allDrivers.sort((a, b) => {
-      if (a[column] > b[column]) {
-        return this.sortDirection ? 1 : -1;
-      } else if (a[column] < b[column]) {
-        return this.sortDirection ? -1 : 1;
-      } else {
-        return 0;
+      next: (res) => {
+        this.getAllDrivers();
+        this.driverForm.reset();
+        this._ToastrService.success(res.msg);
       }
     });
   }
 
+  DeleteDriver(id:any):void{
+    this._DriverService.DeleteDriver(id).subscribe({
+      next: (res) => {
+        this.getAllDrivers();
+        this._ToastrService.error(res.msg);
+      }
+    });
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage.set(page);
+    this.changePagePagination(page);
+  }
+
+  changePagePagination(page:number):void{
+    this._DriverService.GetDriversInBranch(this.branchId(), '', page).subscribe({
+      next: (res) => {
+        this.allDrivers.set(res.data.items);
+      }
+    });
+  }
+
+  // Filtering the data based on search input
+  filteredData(event:Event) {
+    const searchTerm = (event.target as HTMLInputElement).value;
+    this._DriverService.GetDriversInBranch(this.branchId(), searchTerm).subscribe({
+      next: (res) => {
+        this.allDrivers.set(res.data.items);
+      }
+    });
+  }
+
+  onSelect(event:any) {
+    this.files.update((prev) => [...prev, ...event.addedFiles]);
+
+  }
+  onRemove(event:any) {
+    this.files.update((prev) => prev.filter((file) => file !== event));
+  }
+
+  uploadFileExcel():void{
+    let formData = new FormData();
+    formData.append('BranchId', this.branchId()!);
+    this.files().forEach((item) => {
+      formData.append('File', item);
+    });
+
+    this._DriverService.ImportDrivers(formData).subscribe({
+      next: (res) => {
+        this._ToastrService.success(res.msg);
+      }
+    });
+  }
+
+  /* Sort Table */
+  sortTable(column: string): void {
+    if (this.sortColumn() === column) {
+      this.sortDirection.set(!this.sortDirection());
+    } else {
+      this.sortColumn.set(column);
+      this.sortDirection.set(true);
+    }
+
+    this.allDrivers.update(drivers =>
+      [...drivers].sort((a, b) => {
+        if (a[column] > b[column]) {
+          return this.sortDirection() ? 1 : -1;
+        } else if (a[column] < b[column]) {
+          return this.sortDirection() ? -1 : 1;
+        } else {
+          return 0;
+        }
+      })
+    );
+  }
+
 
   onChangePageSize(event:Event):void{
-    let pageSize = (event.target as HTMLSelectElement).value
-    this._DriverService.GetDriversInBranch(this.branchId, '' , 1, pageSize).subscribe({
-      next:(res)=>{
-        this.pageSize = pageSize
-        this.allDrivers = res.data.items
+    let pageSize = +(event.target as HTMLSelectElement).value;
+    this._DriverService.GetDriversInBranch(this.branchId(), '', 1, pageSize).subscribe({
+      next: (res) => {
+        this.pageSize.set(pageSize);
+        this.allDrivers.set(res.data.items);
       }
-    })
+    });
   }
 
   @ViewChild('table') template!:ElementRef
@@ -247,5 +184,21 @@ export class DriversComponent implements OnInit{
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
   }
+
+  downloadTableExcel():void{
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, 'table_data.xlsx');
+  }
+
+  @ViewChild('template') tableTemplate!:ElementRef
+  downloadTemplateExcel():void{
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.tableTemplate.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, 'table_data.xlsx');
+  }
+
 
 }

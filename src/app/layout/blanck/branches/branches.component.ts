@@ -1,5 +1,5 @@
 import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, PLATFORM_ID, signal, ViewChild, WritableSignal } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -30,28 +30,23 @@ export class BranchesComponent implements OnInit{
   private readonly _ToastrService = inject(ToastrService)
 
   /* All Properties */
-  allPage:number = 1;
-  currentPage:number = 1
-  pageSize:any  = 1
-  selectAll = false;
-  branchCount:string = ''
-  companyId:string | null = null
-  allBranches:any[] = []
-  allRegions:any[] = []
-  allCity:any[] = []
-  getActiveBranch:any[] = []
-  getDisActiveBranch:any[] = []
-  allUsers:any[] = []
-  selectedUser:string = ''
-  activeCount:number = 0
-  disActiveCount:number = 0
-  totalCars:number = 0
-  totalDrivers:number = 0
-  constructor(){
-    if(isPlatformBrowser(this._PLATFORM_ID)){
-      this.companyId = localStorage.getItem("companyId")
-    }
-  }
+  companyId: WritableSignal<string> = signal(localStorage.getItem("companyId") || '');
+  allPage: WritableSignal<number> = signal(1);
+  currentPage: WritableSignal<number> = signal(1);
+  pageSize: WritableSignal<number> = signal(1);
+  selectAll: WritableSignal<boolean> = signal(false);
+  branchCount: WritableSignal<string> = signal('');
+  allBranches: WritableSignal<any[]> = signal([]);
+  allRegions: WritableSignal<any[]> = signal([]);
+  allCity: WritableSignal<any[]> = signal([]);
+  getActiveBranch: WritableSignal<any[]> = signal([]);
+  getDisActiveBranch: WritableSignal<any[]> = signal([]);
+  allUsers: WritableSignal<any[]> = signal([]);
+  selectedUser: WritableSignal<string> = signal('');
+  activeCount: WritableSignal<number> = signal(0);
+  disActiveCount: WritableSignal<number> = signal(0);
+  totalCars: WritableSignal<number> = signal(0);
+  totalDrivers: WritableSignal<number> = signal(0);
 
   /* OnInit Function */
   ngOnInit(): void {
@@ -65,48 +60,48 @@ export class BranchesComponent implements OnInit{
   getAllBranches():void{
     this._BranchService.GetAllCompanyBranches(this.companyId).subscribe({
       next:(res)=>{
-        this.allBranches = res.data.items[0].branchs
-        this.branchCount = res.data.totalCount
-        this.allPage = Math.ceil(res.data.totalCount / res.data.pageSize)
-        this.currentPage = res.data.pageNumber
-        this.pageSize = res.data.pageSize
-        this.activeCount = res.data.activeCount
-        this.disActiveCount = res.data.inActiveCount
-        this.totalDrivers = res.data.items[0].companyDriverCount
-        this.totalCars = res.data.items[0].companyCarCount
+        this.allBranches.set(res.data.items[0].branchs);
+        this.branchCount.set(res.data.totalCount);
+        this.allPage.set(Math.ceil(res.data.totalCount / res.data.pageSize));
+        this.currentPage.set(res.data.pageNumber);
+        this.pageSize.set(res.data.pageSize);
+        this.activeCount.set(res.data.activeCount);
+        this.disActiveCount.set(res.data.inActiveCount);
+        this.totalDrivers.set(res.data.items[0].companyDriverCount);
+        this.totalCars.set(res.data.items[0].companyCarCount);
       }
     })
   }
 
   /* All Regions */
   onRegionsChange(event:Event):void{
-    let selectId = (event.target as HTMLSelectElement).value
-    this.getCityByRegion(selectId)
+    let selectId = (event.target as HTMLSelectElement).value;
+    this.getCityByRegion(selectId);
   }
 
   getAllRegions():void{
     this._ReigonandcityService.GetAllRegions().subscribe({
-      next:(res)=>{
-        this.allRegions = res.data.items
+      next: (res) => {
+        this.allRegions.set(res.data.items);
       }
-    })
+    });
   }
 
   /* All City */
   getCityByRegion(regionId:string):void{
     this._ReigonandcityService.GetCityByRegionId(regionId).subscribe({
-      next:(res)=>{
-        this.allCity = res
+      next: (res) => {
+        this.allCity.set(res);
       }
-    })
+    });
   }
 
   getAllUsersByCompanyId():void{
-    this._CompanyService.GetAllUserInCompanyById(this.companyId!).subscribe({
-      next:(res)=>{
-        this.allUsers = res.data.items
+    this._CompanyService.GetAllUserInCompanyById(this.companyId()).subscribe({
+      next: (res) => {
+        this.allUsers.set(res.data.items);
       }
-    })
+    });
   }
 
   /* Branch Form */
@@ -135,91 +130,88 @@ export class BranchesComponent implements OnInit{
   }
 
   submitBranchForm():void{
-    let data = this.branchForm.value
-    data.CompanyId = this.companyId
+ let data = this.branchForm.value;
+  data.CompanyId = this.companyId();
 
-    let formData = new FormData()
-    formData.append('CompanyId', data.CompanyId),
-    formData.append('RegionId', data.RegionId),
-    formData.append('CityId', data.CityId),
-    formData.append('Address', data.Address),
-    formData.append('FullName', data.FullName),
-    formData.append('Email', data.Email),
-    formData.append('Password', data.Password),
-    formData.append('PhoneNumber', data.PhoneNumber),
-    formData.append('IBAN', data.IBAN)
-    data.UserIds.forEach((userId:any) => {
-      formData.append('UserIds', userId);
-    });
+  let formData = new FormData();
+  Object.keys(data).forEach((key) => {
+    if (key !== 'UserIds') {
+      formData.append(key, data[key]);
+    }
+  });
+  data.UserIds.forEach((userId: any) => {
+    formData.append('UserIds', userId);
+  });
 
-    this._BranchService.CreateBranch(formData).subscribe({
-      next:(res)=>{
-        this.getAllBranches()
-        this.branchForm.reset()
-        this.users.clear()
-        this._ToastrService.success(`${res.result}, ${res.msg}`,'Success',{
-          positionClass:'toast-bottom-right',
-        })
+  this._BranchService.CreateBranch(formData).subscribe({
+    next: (res) => {
+        this.getAllBranches();
+        this.branchForm.reset();
+        this.users.clear();
+        this._ToastrService.success(`${res.result}, ${res.msg}`);
       }
-    })
+    });
   }
 
 
   /* Delete Branch */
   deleteBranch(branchId:string):void{
     this._BranchService.DeleteBranch(branchId).subscribe({
-      next:(res)=>{
-        this.getAllBranches()
-        this._ToastrService.error(res.msg)
+      next: (res) => {
+        this.getAllBranches();
+        this._ToastrService.error(res.msg);
       }
-    })
+    });
   }
 
   /* Switch Active Branches */
   switchActiveBranch(branchId:string):void{
     this._BranchService.SwitchActive(branchId).subscribe({
-      next:(res)=>{
-        this.getAllBranches()
-        this._ToastrService.success(res.msg)
+      next: (res) => {
+        this.getAllBranches();
+        this._ToastrService.success(res.msg);
       }
-    })
+    });
   }
 
   // Filtering the data based on search input
   filteredData(event:Event) {
     const searchTerm = (event.target as HTMLInputElement).value;
-    this._BranchService.GetAllCompanyBranches(this.companyId, searchTerm).subscribe({
-      next:(res)=>{
-        this.allBranches = res.data.items[0].branchs
-      }
-    })
-  }
-
-  /* Sort Table */
-  sortColumn: string = '';
-  sortDirection: boolean = true;
-  sortTable(column: string): void {
-    if (this.sortColumn === column) {
-      this.sortDirection = !this.sortDirection;
-    } else {
-      this.sortColumn = column;
-      this.sortDirection = true;
-    }
-
-    this.allBranches.sort((a, b) => {
-      if (a[column] > b[column]) {
-        return this.sortDirection ? 1 : -1;
-      } else if (a[column] < b[column]) {
-        return this.sortDirection ? -1 : 1;
-      } else {
-        return 0;
+    this._BranchService.GetAllCompanyBranches(this.companyId(), searchTerm).subscribe({
+      next: (res) => {
+        this.allBranches.set(res.data.items[0].branchs);
       }
     });
   }
 
+  /* Sort Table */
+  sortColumn: WritableSignal<string> = signal('');
+  sortDirection: WritableSignal<boolean> = signal(true);
+
+  sortTable(column: string): void {
+    if (this.sortColumn() === column) {
+      this.sortDirection.set(!this.sortDirection());
+    } else {
+      this.sortColumn.set(column);
+      this.sortDirection.set(true);
+    }
+
+    this.allBranches.update(branches =>
+      [...branches].sort((a, b) => {
+        if (a[column] > b[column]) {
+          return this.sortDirection() ? 1 : -1;
+        } else if (a[column] < b[column]) {
+          return this.sortDirection() ? -1 : 1;
+        } else {
+          return 0;
+        }
+      })
+    );
+  }
+
   // Pagnation Pages
   onPageChange(page: number): void {
-    this.currentPage = page;
+    this.currentPage.set(page) ;
     this.changePagePagination(page);
   }
 
@@ -232,10 +224,10 @@ export class BranchesComponent implements OnInit{
   }
 
   onChangePageSize(event:Event):void{
-    let pageSize = (event.target as HTMLSelectElement).value
+    let pageSize = +(event.target as HTMLSelectElement).value
     this._BranchService.GetAllCompanyBranches(this.companyId, '' , 1, pageSize).subscribe({
       next:(res)=>{
-        this.pageSize = pageSize
+        this.pageSize.set(pageSize)
         this.allBranches = res.data.items[0].branchs
       }
     })
@@ -272,17 +264,6 @@ export class BranchesComponent implements OnInit{
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.template.nativeElement);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
+    XLSX.writeFile(wb, 'table_data.xlsx');
   }
-
-  // CheckBox Main Branch Toggle
-  // isChecked:boolean = false
-  // toggleChecked():void{
-  //   if(this.isChecked){
-  //     this.isChecked = false
-  //   } else {
-  //     this.isChecked = true
-  //   }
-  // }
-
 }

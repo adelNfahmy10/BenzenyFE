@@ -14,7 +14,7 @@
               <div class="d-flex flex-column justify-content-center align-items-center">
                 <p class="m-0">Total Users</p>
                 <h3>
-                  {{userCount}}
+                  {{userCount()}}
                 </h3>
               </div>
               <div class="icon-head p-1 rounded-2 mt-4">
@@ -29,7 +29,7 @@
               <div class="d-flex flex-column justify-content-center align-items-center">
                 <p class="m-0">Active</p>
                 <h3>
-                  {{activeCount}}
+                  {{activeCount()}}
                 </h3>
               </div>
               <div class="icon-head p-1 active d-flex justify-content-center aling-items-center rounded-2 mt-3">
@@ -44,7 +44,7 @@
               <div class="d-flex flex-column justify-content-center align-items-center">
                 <p class="m-0">InActive</p>
                 <h3>
-                  {{disActiveCount}}
+                  {{disActiveCount()}}
                 </h3>
               </div>
               <div class="icon-head p-1 d-flex justify-content-center aling-items-center rounded-2 mt-3">
@@ -101,7 +101,7 @@
                 </tr>
               </thead>
               <tbody>
-                @for(user of allUsers | paginate: { itemsPerPage:pageSize , currentPage: currentPage, totalItems:userCount} ; track $index){
+                @for(user of allUsers() | paginate: { itemsPerPage:pageSize() , currentPage: currentPage(), totalItems:userCount()} ; track $index){
                   <tr>
                     <td>
                       {{ $index + 1 }}
@@ -234,7 +234,7 @@
           <div class="col-md-12">
             <label for="Roles">Roles</label>
             <div class="row">
-              @for(role of allRoles; track $index){
+              @for(role of allRoles(); track $index){
                 <div class="col-1">
                   <div class="d-flex justify-content-center align-items-center gap-2">
                     <label [for]="role.name + $index">{{role.name}}</label>
@@ -315,7 +315,7 @@
           <div class="col-md-12">
             <label for="Roles">Roles</label>
             <div class="row">
-              @for(role of allRoles; track $index){
+              @for(role of allRoles(); track $index){
                 <div class="col-1">
                   <div class="d-flex justify-content-center align-items-center gap-2">
                     <label [for]="role.name + $index">{{role.name}}</label>

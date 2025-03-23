@@ -14,7 +14,7 @@
               <div class="d-flex flex-column justify-content-center align-items-center">
                 <p class="m-0">Total Branch</p>
                 <h3>
-                  {{branchCount}}
+                  {{branchCount()}}
                 </h3>
               </div>
               <div class="icon-head p-1 rounded-2 mt-4">
@@ -29,7 +29,7 @@
               <div class="d-flex flex-column justify-content-center align-items-center">
                 <p class="m-0">Active</p>
                 <h3>
-                  {{activeCount}}
+                  {{activeCount()}}
                 </h3>
               </div>
               <div class="icon-head p-1 active d-flex justify-content-center aling-items-center rounded-2 mt-3">
@@ -44,7 +44,7 @@
               <div class="d-flex flex-column justify-content-center align-items-center">
                 <p class="m-0">InActive</p>
                 <h3>
-                  {{disActiveCount}}
+                  {{disActiveCount()}}
                 </h3>
               </div>
               <div class="icon-head p-1 d-flex justify-content-center aling-items-center rounded-2 mt-3">
@@ -132,7 +132,7 @@
                 </tr>
               </thead>
               <tbody>
-                @for(branch of allBranches | paginate: { itemsPerPage:pageSize , currentPage: currentPage, totalItems:branchCount} ; track $index){
+                @for(branch of allBranches() | paginate: { itemsPerPage:pageSize() , currentPage: currentPage(), totalItems:branchCount()} ; track $index){
                   <tr>
                     <td>
                       {{ $index + 1 }}
@@ -261,7 +261,7 @@
             <label for="RegionId">Region Id</label>
             <select name="RegionId" id="RegionId" class="form-select" formControlName="RegionId" (change)="onRegionsChange($event)">
               <option value="">Select Region...</option>
-              @for(region of allRegions; track $index){
+              @for(region of allRegions(); track $index){
                 <option [value]="region.id">{{region.title}}</option>
               }
             </select>
@@ -276,7 +276,7 @@
             <label for="CityId">City</label>
             <select name="CityId" id="CityId" class="form-select" formControlName="CityId">
               <option value="">Select City...</option>
-              @for(city of allCity; track $index){
+              @for(city of allCity(); track $index){
                 <option [value]="city.id">{{city.name}}</option>
               }
             </select>
@@ -302,7 +302,7 @@
                 <div *ngFor="let user of users.controls; let i = index" class="d-flex gap-2 w-100">
                   <select name="users" id="users" class="form-select" [formControlName]="i">
                     <option value="" selected disabled>Select User...</option>
-                    @for(user of allUsers;track $index){
+                    @for(user of allUsers();track $index){
                       <option [value]="user.userId">{{user.fullName}}</option>
                     }
                   </select>
