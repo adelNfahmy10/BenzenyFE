@@ -26,7 +26,7 @@
                   </clipPath>
                   </defs>
                 </svg>
-                <h2 class="m-0 fw-bold">{{companyName}}</h2>
+                <h2 class="m-0 fw-bold">{{companyName()}}</h2>
                 <div class="d-flex justify-content-center align-items-start gap-2 cr z-3" (click)="copyIban('SA03  8000  0000  6080  1016  7519')">
                   <p #Iban>SA03  8000  0000  6080  1016  7519</p>
                   <svg class="mt-1" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +62,7 @@
               <div class="d-flex flex-column justify-content-center align-items-center">
                 <p class="m-0">Total Branch</p>
                 <h3>
-                  {{branchCount || 0}}
+                  {{branchCount() || 0}}
                 </h3>
               </div>
               <div class="icon-head p-1 rounded-2 mt-4">
@@ -109,7 +109,7 @@
                 </tr>
               </thead>
               <tbody>
-                @for(branch of allBranches.slice(0,5) ; track $index){
+                @for(branch of allBranches().slice(0,5) ; track $index){
                   <tr>
                     <td>
                       {{ $index + 1 }}
@@ -146,7 +146,7 @@
         <div class="users p-3 h-100 bg-white rounded-2">
           <h3><i class="fa-solid fa-users main-color me-1 mb-2"></i>Users</h3>
           <ul class="d-flex flex-column position-relative z-3 gap-2 p-0 mt-2">
-            @for(user of allUsers.slice(0,5); track $index){
+            @for(user of allUsers().slice(0,5); track $index){
             <li class="d-flex justify-content-between align-items-center gap-2 flex-wrap border border-1 p-2 rounded-3">
               <h5>{{user.fullName}}</h5>
               <div class="d-flex justify-content-center align-items-center gap-3">
@@ -213,7 +213,7 @@
               </clipPath>
               </defs>
             </svg>
-            <h4 class="main-color">{{companyName}}</h4>
+            <h4 class="main-color">{{companyName()}}</h4>
           </div>
 
           <div class="d-flex flex-column gap-3">
@@ -258,17 +258,17 @@
 
             <div class="col-12">
               <label class="d-flex align-items-center gap-1 mb-1" for="companyName"><img src="./assets/image/icon-auth/icon-company.png" alt=""> Company Name</label>
-              <input type="text" formControlName="Name" [value]="companyData.name" name="companyName" id="companyName" class="form-control" placeholder="Enter Company Name...">
+              <input type="text" formControlName="Name" [value]="companyData().name" name="companyName" id="companyName" class="form-control" placeholder="Enter Company Name...">
             </div>
 
             <div class="col-12">
               <label class="d-flex align-items-center gap-1 mb-1" for="email"><img src="./assets/image/icon-auth/icon-email.png" alt=""> Email</label>
-              <input type="email" formControlName="CompanyEmail" [value]="companyData.companyEmail" name="email" id="email" class="form-control" placeholder="Enter Your Email...">
+              <input type="email" formControlName="CompanyEmail" [value]="companyData().companyEmail" name="email" id="email" class="form-control" placeholder="Enter Your Email...">
             </div>
 
             <div class="col-12">
               <label class="d-flex align-items-center gap-1 mb-1" for="number"><img src="./assets/image/icon-auth/icon-phone.png" alt=""> Phone Number</label>
-              <input type="tel" formControlName="CompanyPhone" [value]="companyData.companyPhone" name="number" id="number" class="form-control" placeholder="Enter Your Phone...">
+              <input type="tel" formControlName="CompanyPhone" [value]="companyData().companyPhone" name="number" id="number" class="form-control" placeholder="Enter Your Phone...">
             </div>
 
             <div class="col-12">
@@ -278,7 +278,7 @@
 
             <div class="col-12">
               <label class="d-flex align-items-center gap-1 mb-1" for="description"><img src="./assets/image/icon-auth/icon-desc.png" alt=""> Description</label>
-              <textarea type="text" formControlName="Description" [value]="companyData.description" name="description" id="description" class="form-control" placeholder="Enter Description..."></textarea>
+              <textarea type="text" formControlName="Description" [value]="companyData().description" name="description" id="description" class="form-control" placeholder="Enter Description..."></textarea>
             </div>
 
             <div class="col-12">
@@ -340,7 +340,7 @@
             <label for="RegionId">Region Id</label>
             <select name="RegionId" id="RegionId" class="form-select" formControlName="RegionId" (change)="onRegionsChange($event)">
               <option value="">Select Region...</option>
-              @for(region of allRegions; track $index){
+              @for(region of allRegions(); track $index){
                 <option [value]="region.id">{{region.title}}</option>
               }
             </select>
@@ -350,7 +350,7 @@
             <label for="CityId">City</label>
             <select name="CityId" id="CityId" class="form-select" formControlName="CityId">
               <option value="">Select City...</option>
-              @for(city of allCity; track $index){
+              @for(city of allCity(); track $index){
                 <option [value]="city.id">{{city.name}}</option>
               }
             </select>
@@ -376,7 +376,7 @@
                 <div *ngFor="let user of users.controls; let i = index" class="d-flex gap-2 w-100">
                   <select name="users" id="users" class="form-select" [formControlName]="i">
                     <option value="" selected disabled>Select User...</option>
-                    @for(user of allUsers;track $index){
+                    @for(user of allUsers();track $index){
                       <option [value]="user.userId">{{user.fullName}}</option>
                     }
                   </select>
@@ -459,7 +459,7 @@
           <div class="col-md-12">
             <label for="Roles">Roles</label>
             <div class="row">
-              @for(role of allRoles; track $index){
+              @for(role of allRoles(); track $index){
                 <div class="col-1">
                   <div class="d-flex justify-content-center align-items-center gap-2">
                     <label [for]="role.name + $index">{{role.name}}</label>

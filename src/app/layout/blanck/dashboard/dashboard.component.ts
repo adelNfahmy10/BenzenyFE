@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ToastrService } from 'ngx-toastr';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
@@ -22,33 +22,26 @@ export class DashboardComponent implements OnInit{
   private readonly _CompanyService = inject(CompanyService)
 
   // Global Properties
-  companyName:string = ''
-  companyId:string = ''
-  companyData:any = {}
-  edit:boolean = true
-
-  // Get Local Storage Data
-  constructor(){
-    this.companyName = localStorage.getItem('companyName')!
-    this.companyId = localStorage.getItem('companyId')!
-  }
+  companyName: WritableSignal<string> = signal(localStorage.getItem('companyName') || '');
+  companyId: WritableSignal<string> = signal(localStorage.getItem('companyId') || '');
+  companyData: WritableSignal<any> = signal({});
+  edit: WritableSignal<boolean> = signal(true);
 
   // Run Charts And Funtions When Project Load
   ngOnInit(): void {
     // this.chartLine = new Chart('ChartLine', this.configLine)
-    this.chartBar = new Chart('ChartBar', this.configBar)
-    this.chartBin = new Chart('ChartBin', this.configBin)
-    this.getCompanyById()
+    this.chartBar = new Chart('ChartBar', this.configBar);
+    this.chartBin = new Chart('ChartBin', this.configBin);
+    this.getCompanyById();
   }
 
   // Get Data Company By ID
   getCompanyById():void{
-    this._CompanyService.GetCompanyById(this.companyId).subscribe({
-      next:(res)=>{
-        this.companyData = res.data
-        console.log(this.companyData);
+    this._CompanyService.GetCompanyById(this.companyId()).subscribe({
+      next: (res) => {
+        this.companyData.set(res.data);
       }
-    })
+    });
   }
 
   // Charts Options
@@ -177,16 +170,10 @@ export class DashboardComponent implements OnInit{
   });
   updateCompany():void{
     let data = this.companyForm.value
-    console.log(data);
   }
   enableFormFields() {
-    if (this.edit) {
-      this.companyForm.enable();
-      this.edit = false
-    } else {
-      this.companyForm.disable();
-      this.edit = true
-    }
+    this.edit.set(!this.edit());
+    this.edit() ? this.companyForm.disable() : this.companyForm.enable();
   }
 
   /* Copy ID And IBAN */
