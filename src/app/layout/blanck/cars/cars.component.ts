@@ -120,9 +120,11 @@ export class CarsComponent implements OnInit{
         this.carLetterEn1.set('');
         this.carLetterEn2.set('');
         this.carLetterEn3.set('');
+        this.carNumberEn.set('');
         this.carLetterAr1.set('');
         this.carLetterAr2.set('');
         this.carLetterAr3.set('');
+        this.carNumberAr.set('');
       }
     });
   }
@@ -245,6 +247,8 @@ export class CarsComponent implements OnInit{
     this._CarService.ImportCars(formData).subscribe({
       next: (res) => {
         this._ToastrService.success(res.msg);
+        this.files.set([])
+        this.getAllCars()
       }
     });
   }

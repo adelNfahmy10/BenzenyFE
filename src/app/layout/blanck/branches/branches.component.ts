@@ -58,7 +58,7 @@ export class BranchesComponent implements OnInit{
 
   /* All Branches */
   getAllBranches():void{
-    this._BranchService.GetAllCompanyBranches(this.companyId).subscribe({
+    this._BranchService.GetAllCompanyBranches(this.companyId()).subscribe({
       next:(res)=>{
         this.allBranches.set(res.data.items[0].branchs);
         this.branchCount.set(res.data.totalCount);
@@ -216,7 +216,7 @@ export class BranchesComponent implements OnInit{
   }
 
   changePagePagination(page:number):void{
-    this._BranchService.GetAllCompanyBranches(this.companyId, '' , page).subscribe({
+    this._BranchService.GetAllCompanyBranches(this.companyId(), '' , page).subscribe({
       next:(res)=>{
         this.allBranches = res.data.items[0].branchs
       }
@@ -225,7 +225,7 @@ export class BranchesComponent implements OnInit{
 
   onChangePageSize(event:Event):void{
     let pageSize = +(event.target as HTMLSelectElement).value
-    this._BranchService.GetAllCompanyBranches(this.companyId, '' , 1, pageSize).subscribe({
+    this._BranchService.GetAllCompanyBranches(this.companyId(), '' , 1, pageSize).subscribe({
       next:(res)=>{
         this.pageSize.set(pageSize)
         this.allBranches = res.data.items[0].branchs
