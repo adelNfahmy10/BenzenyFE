@@ -9,7 +9,7 @@ import { HeaderComponent } from "../../../../assets/share/header/header.componen
 import { BranchService } from '../branches/core/service/branch.service';
 import { ReigonandcityService } from '../../../../core/services/reigons/reigonandcity.service';
 import { CompanyService } from './core/service/company.service';
-import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { UsersService } from './core/service/users.service';
 import { RolesService } from '../../../../core/services/roles.service';
 Chart.register(...registerables)
@@ -95,6 +95,7 @@ export class CompaniesComponent implements OnInit{
   getAllUsersByCompanyId():void{
     this._CompanyService.GetAllUserInCompanyById(this.companyId()).subscribe(res => {
       this.allUsers.set(res.data.items);
+      this.userCount.set(res.data.totalCount)
     });
   }
 
