@@ -22,10 +22,10 @@ export class AdsService {
   }
 
   SoftDeleteAds(id:any):Observable<any>{
-    return this._HttpClient.get(`${environment.baseURL}api/Advertiesment/v1/SoftDelete/SoftDelete/${id}`)
+    return this._HttpClient.delete(`${environment.baseURL}api/Advertiesment/v1/SoftDelete/SoftDelete/${id}`)
   }
 
   HardDeleteAds(id:any):Observable<any>{
-    return this._HttpClient.get(`${environment.baseURL}api/Advertiesment/v1/HardDelete/HardDelete/${id}`)
+    return this._HttpClient.delete(`${environment.baseURL}api/Advertiesment/v1/HardDelete/HardDelete/${id}`)
   }
 }

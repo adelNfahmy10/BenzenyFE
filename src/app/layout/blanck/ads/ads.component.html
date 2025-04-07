@@ -15,17 +15,17 @@
         <div class="modal-body">
           <form class="row g-2" [formGroup]="adsForm">
             <div class="col-12">
-              <label for="Name">Ads Name</label>
+              <label for="Name">ADS Name</label>
               <input type="text" class="form-control" formControlName="Name" name="Name" id="Name" placeholder="Name">
             </div>
 
             <div class="col-12">
-              <label for="URL">Order Now</label>
-              <input type="text" class="form-control" formControlName="Url" name="Url" id="Url" placeholder="Name">
+              <label for="URL">URL ADS</label>
+              <input type="text" class="form-control" formControlName="Url" name="Url" id="Url" placeholder="URL ADS">
             </div>
 
             <div class="col-12">
-              <label for="Name">Ads Image</label>
+              <label for="Name">ADS Image</label>
               <input type="file" class="form-control" name="Name" id="Name" (change)="onFileSelected($event)">
             </div>
           </form>
@@ -54,7 +54,7 @@
 
   <div class="gallery-box mt-3">
     <div class="row g-3">
-      @for(ad of ads(); track $index){
+      @for(ad of allAds(); track $index){
         <div class="col-lg-4 col-md-6 col-12 animate__animated animate__fadeInUp overflow-hidden">
           <div class="box">
             <div class="image-gallery">
@@ -63,7 +63,7 @@
             <div class="overlay-gallery">
               <div class="lay-content">
                 <h4>{{ad.Name}}</h4>
-                <p>{{ad.description}}</p>
+                <p>{{ad.url}}</p>
               </div>
             </div>
             <div class="x-mark position-absolute d-flex justify-content-center align-items-center text-white rounded-circle cr" (click)="deleteAds(ad.id)">

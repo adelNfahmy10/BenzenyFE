@@ -52,6 +52,7 @@ export class AdsComponent implements OnInit{
     let formData = new FormData();
 
     formData.append('Name', data.Name);
+    formData.append('Url', data.Url);
     formData.append('CreatedBy', this.userId()!);
     formData.append('Image', this.selectedFile()!);
 
