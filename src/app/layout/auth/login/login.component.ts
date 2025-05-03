@@ -22,7 +22,6 @@ export class LoginComponent {
 
   submitLoginForm():void{
     let data = this.loginForm.value
-
     this._AuthService.login(data).subscribe({
       next:(res)=>{
         localStorage.setItem('token', res.data.accessToken)

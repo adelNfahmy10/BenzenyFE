@@ -76,35 +76,32 @@ export class RegistarComponent {
     })
   }
 
+  imageChangedEvent: Event | null = null;
+  croppedImage: SafeUrl  = '';
 
+  constructor(
+    private sanitizer: DomSanitizer
+  ) {
+  }
 
+  fileChangeEvent(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
 
-    imageChangedEvent: Event | null = null;
-    croppedImage: SafeUrl  = '';
+      reader.onload = (e) => {
+        const imageBase64 = e.target?.result;
+        this.registerForm.get('CompanyPicture')?.setValue(file);
+        this.registerForm.get('ViewCompanyPicture')?.setValue(imageBase64);
+      };
 
-    constructor(
-      private sanitizer: DomSanitizer
-    ) {
+      reader.readAsDataURL(file);
+      this.imageChangedEvent = event;
     }
-
-    fileChangeEvent(event: Event): void {
-      const input = event.target as HTMLInputElement;
-      if (input.files && input.files.length > 0) {
-        const file = input.files[0]; // اختيار أول ملف فقط
-        const reader = new FileReader();
-
-        reader.onload = (e) => {
-          const imageBase64 = e.target?.result;
-          this.registerForm.get('CompanyPicture')?.setValue(file);
-          this.registerForm.get('ViewCompanyPicture')?.setValue(imageBase64);
-        };
-
-        reader.readAsDataURL(file);
-        this.imageChangedEvent = event;
-      }
-    }
-    imageCropped(event: ImageCroppedEvent) {
-      this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl!);
-      this.registerForm.get('ViewCompanyPicture')?.setValue(this.croppedImage)
-    }
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl!);
+    this.registerForm.get('ViewCompanyPicture')?.setValue(this.croppedImage)
+  }
 }
