@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{$ as o,Nb as r,Wb as a,ub as n,vb as i}from"./chunk-7WC6KEWX.mjs";import"./chunk-VVCT4QZE.mjs";var m=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=o({type:e,selectors:[["app-footer"]],standalone:!0,features:[a],decls:4,vars:0,consts:[[1,"bg-dark","text-center","h-100","text-white","p-2"],[1,"container"]],template:function(t,s){t&1&&(n(0,"section",0)(1,"div",1)(2,"p"),r(3,"CopyRight TC Cmopany"),i()()())}})}}return e})();export{m as FooterComponent};

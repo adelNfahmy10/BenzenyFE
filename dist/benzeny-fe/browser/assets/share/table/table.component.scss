@@ -1,0 +1,85 @@
+$mainColor: #f79320;
+.search{
+  input{
+    border-color: $mainColor;
+    &::placeholder{
+      color: #B8B8B8;
+      font-weight: 300;
+    }
+  }
+  svg{
+    position: absolute;
+    top: 13px;
+    right: 20px;
+  }
+}
+
+.download-container{
+  .download-list{
+    position: absolute;
+    width: 100%;
+    top: 5px;
+  }
+}
+
+.table {
+  th, td{
+    cursor: pointer;
+  }
+}
+
+input[type="checkbox"]{
+  background-color: transparent;
+  border: 1px solid #949494;
+  width: 20px;
+  height: 20px;
+  &:checked {
+    background-color: $mainColor;
+    border-color: $mainColor;
+  }
+}
+
+.action-list{
+  position: absolute;
+  top: 100%;
+  right: 55%;
+  li{
+    transition: all .3s;
+    width: 152px;
+    &:hover{
+      background-color: #eee;
+    }
+  }
+}
+
+.muted{
+  font-size: 10px;
+  &.delete-text{
+    color: #f00 !important;
+  }
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+  // transition: all .3s;
+  background: $mainColor !important;
+  color: #fff !important  ;
+  // -webkit-transition: all .3s;
+  // -moz-transition: all .3s;
+  // -ms-transition: all .3s;
+  // -o-transition: all .3s;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #eee;
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb {
+  background: $mainColor;
+  border-radius: 20px;
+}

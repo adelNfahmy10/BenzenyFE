@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{$ as n,Nb as m,Wb as i,ub as a,vb as o}from"./chunk-7WC6KEWX.mjs";import"./chunk-VVCT4QZE.mjs";var c=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=n({type:e,selectors:[["app-management"]],standalone:!0,features:[i],decls:2,vars:0,template:function(t,p){t&1&&(a(0,"p"),m(1,"management works!"),o())}})}}return e})();export{c as ManagementComponent};
