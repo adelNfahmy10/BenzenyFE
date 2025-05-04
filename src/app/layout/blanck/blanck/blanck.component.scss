@@ -47,17 +47,15 @@ $mainColor: #f79320;
             i{
                 font-size: 30px;
                 transition: all .6s;
+                color: #BEBEBE;
             }
             &.active, &:hover{
                 background-color: $mainColor;
-                span{
+                span, i{
                   color: #fff !important;
                 }
                 svg{
                   fill:#fff;
-                }
-                .fa-rectangle-ad{
-                  color: #fff;
                 }
             }
             &.active svg,&.active .fa-rectangle-ad{

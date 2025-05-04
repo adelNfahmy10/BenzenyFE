@@ -22,13 +22,9 @@ export class BlanckComponent {
     }
   }
 
-  open:Boolean = true
+  open:Boolean = false
   slideNav():void{
-    if(this.open){
-      this.open = false
-    } else {
-      this.open = true
-    }
+    this.open = !this.open;
   }
 
   logout():void{

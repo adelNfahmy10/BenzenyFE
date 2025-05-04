@@ -2,7 +2,7 @@
   <div class="d-flex w-100">
     <div [ngClass]="{
       'slide': !open,
-      }" class="nav position-sticky h-100 top-0 bg-white z-3 animate__animated animate__fadeInLeft">
+      }" class="nav position-fixed h-100 top-0 bg-white z-3 animate__animated animate__fadeInLeft">
       <nav class="navbar p-3 pb-0 position-relative">
         <span class="setting position-absolute cr"  (click)="slideNav()">
           <i class="fa-solid fa-gear"></i>
@@ -38,6 +38,10 @@
 
           <ul class="list-unstyled list p-2 d-flex flex-column gap-2">
             @if(!branchId){
+              <li class="active d-flex align-items-center gap-2 cr rounded-3" routerLink="/dashboard" routerLinkActive="active">
+                <i class="fa-solid fa-chart-simple"></i>
+                <span>Dashboard</span>
+              </li>
               <li class="active d-flex align-items-center gap-2 cr rounded-3" routerLink="/home" routerLinkActive="active">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M21.6167 5.75407V2.18591C21.6167 1.65701 21.1883 1.22775 20.6583 1.22775C20.1284 1.22775 19.7 1.65701 19.7 2.18591V4.4529L14.7138 1.08882C13.0856 -0.0092217 10.9811 -0.0092217 9.35287 1.08882L2.64453 5.61514C1.32299 6.50718 0.533325 7.99136 0.533325 9.58669V18.4745C0.533325 21.1162 2.68287 23.2653 5.32499 23.2653H7.24166C7.77162 23.2653 8.19999 22.836 8.19999 22.3071V13.6838C8.19999 13.1558 8.62932 12.7256 9.15833 12.7256H14.9083C15.4373 12.7256 15.8667 13.1558 15.8667 13.6838V22.3071C15.8667 22.836 16.295 23.2653 16.825 23.2653H18.7417C21.3838 23.2653 23.5333 21.1162 23.5333 18.4745V9.58669C23.5333 8.07185 22.8203 6.65665 21.6167 5.75407Z"/>
@@ -104,7 +108,7 @@
         </div>
       </nav>
     </div>
-    <div class="components w-100 my-4 container-fluid ps-5">
+    <div class="components w-100 my-4 container-fluid">
       <router-outlet></router-outlet>
     </div>
   </div>

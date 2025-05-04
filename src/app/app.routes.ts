@@ -43,6 +43,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     title: 'home',
     children: [
+      { path: 'dashboard', loadComponent: () => import('./layout/blanck/benzeny-dashboard/benzeny-dashboard.component').then(m => m.BenzenyDashboardComponent), title: 'Dashboard' },
       { path: 'home', loadComponent: () => import('./layout/blanck/dashboard/dashboard.component').then(m => m.DashboardComponent), title: 'Home' },
       { path: 'company', loadComponent: () => import('./layout/blanck/companies/companies.component').then(m => m.CompaniesComponent), title: 'Company' },
       { path: 'users', loadComponent: () => import('./layout/blanck/companies/users/users.component').then(m => m.UsersComponent), title: 'Users' },
