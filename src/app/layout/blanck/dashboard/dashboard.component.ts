@@ -170,6 +170,13 @@ export class DashboardComponent implements OnInit{
   });
   updateCompany():void{
     let data = this.companyForm.value
+    data.Id = this.companyId()
+    this._CompanyService.UpdateCompany(this.companyId(), data).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this._ToastrService.success('Update Company Is Successfully!')
+      }
+    })
   }
   enableFormFields() {
     this.edit.set(!this.edit());
