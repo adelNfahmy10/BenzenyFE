@@ -58,7 +58,7 @@ export class CompaniesComponent implements OnInit{
 
   // Get All Branches
   getAllBranches():void{
-    this._BranchService.GetAllCompanyBranches(this.companyId()).subscribe(res => {
+    this._BranchService.GetAllBranchesInCompany(this.companyId()).subscribe(res => {
       this.allBranches.set(res.data.items[0].branchs);
       this.branchCount.set(res.data.totalCount);
     });
@@ -102,7 +102,9 @@ export class CompaniesComponent implements OnInit{
   // Get All Roles
   getAllRoles():void{
     this._RolesService.getAllRoles().subscribe(res => {
-      this.allRoles.set(res.data);
+      // this.allRoles.set(res.data);
+      this.allRoles.set(res.data.filter((role: any) => role.name !== "Benzeny"));
+
     });
   }
   toggleRoleSelection(role: any, event: any) {

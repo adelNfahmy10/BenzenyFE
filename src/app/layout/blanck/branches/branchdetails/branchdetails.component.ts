@@ -1,5 +1,5 @@
 import { Component, ElementRef, inject, OnInit, PLATFORM_ID, signal, ViewChild, WritableSignal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CarService } from '../../cars/core/service/car.service';
 import { DriverService } from '../../drivers/core/service/driver.service';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -12,7 +12,7 @@ import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-branchdetails',
   standalone: true,
-  imports: [NgxPaginationModule, DatePipe ],
+  imports: [NgxPaginationModule, DatePipe, RouterLink],
   templateUrl: './branchdetails.component.html',
   styleUrl: './branchdetails.component.scss'
 })

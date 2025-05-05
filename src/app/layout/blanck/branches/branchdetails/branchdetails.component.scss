@@ -1,57 +1,13 @@
 $mainColor:#f79320;
-// .head-card{
-//   position: relative;
-//   background-image: linear-gradient(to right, #aaaaaa6b, #eee);
-//   color: $mainColor;
-//   height: 100%;
-//   overflow: hidden;
-//   transition: all .3s;
-//   &::before{
-//     content: '';
-//     position: absolute;
-//     top: -50%;
-//     right: -15%;
-//     width: 50%;
-//     height: 100%;
-//     border-radius: 50%;
-//     background-color: $mainColor;
-//     z-index: 1;
-//     transition: all .3s;
-//   }
-//   h2{
-//     position: relative;
-//     z-index: 3;
-//     margin-top: 22px;
-//     font-size: 30px;
-//     font-weight: 500;
-//     svg{
-//       fill: $mainColor;
-//       transition: all .3s;
-//     }
-//   }
-//   .count{
-//     color: #fff;
-//     position: absolute;
-//     top: 5%;
-//     right: 4%;
-//     z-index: 2;
-//     h3{
-//       font-size: 30px;
-//     }
-//   }
-//   &:hover{
-//     color: #fff;
-//     svg{
-//       fill: #fff !important;
-//     }
-//   }
-//   &:hover:before{
-//     top: 0;
-//     right: 0;
-//     width: 100%;
-//     border-radius: 0;
-//   }
-// }
+.go-back{
+  color: $mainColor;
+  span{
+    font-size: 13px;
+  }
+  i{
+    font-size: 20px;
+  }
+}
 /* #################################### Style Head Cards ####################################### */
 .head-card {
   .icon-head{

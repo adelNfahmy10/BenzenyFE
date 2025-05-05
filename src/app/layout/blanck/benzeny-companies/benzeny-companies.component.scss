@@ -1,0 +1,75 @@
+$mainColor:#f79320;
+/* #################################### Style Head Cards ####################################### */
+.head-card {
+  .icon-head{
+    height: fit-content;
+    border: 1px dotted;
+  }
+  img{
+    width: 130px;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(350%);
+  }
+  p{
+    color: #96a0b5;
+    font-size: 18px;
+  }
+  h3 {
+    font-weight: 500;
+    color: #222;
+  }
+}
+i:not(.fa-circle-info){
+  font-size: 25px !important;
+}
+
+/* #################################### Form Style ####################################### */
+input{
+  background: #F7F7F7;
+  &::placeholder{
+    font-weight: 200;
+  }
+}
+input::placeholder{
+  color: #4C4C4C;
+  font-size: 14px;
+}
+
+/* #################################### Table Style ####################################### */
+.search{
+  input{
+    width: 300px;
+    border: 1px solid #f97b2190;
+    &::placeholder{
+      color: #B8B8B8;
+      font-weight: 300;
+    }
+    &:focus{
+      border-color:$mainColor !important;
+    }
+  }
+  svg{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    width: 20px;
+    fill: $mainColor;
+  }
+}
+@media (max-width:567px) {
+  .search{
+    input{
+      width: 200px;
+      border: 1px solid #f97b2190;
+      background-color: #fff;
+    }
+  }
+}
+
+/* #################################### Pagination Style ####################################### */
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: $mainColor !important;
+  color: #fff !important ;
+}

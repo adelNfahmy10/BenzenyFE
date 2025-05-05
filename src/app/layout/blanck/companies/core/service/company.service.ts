@@ -9,11 +9,11 @@ import { environment } from '../../../../../../assets/environment/environment';
 export class CompanyService {
   private readonly _HttpClient = inject(HttpClient)
 
-  GetAllCompanies():Observable<any>{
-    return this._HttpClient.get(`${environment.baseURL}api/Company/v1/GetAll/GetAllCompanies`)
+  GetAllCompanies(searchTerm:any = '', pageNum:any = 1, pageSize:any = 10):Observable<any>{
+    return this._HttpClient.get(`${environment.baseURL}api/Company/v1/GetAll/GetAllCompanies?searchTerm=${searchTerm}&pageNumber=${pageNum}&pageSize=${pageSize}`)
   }
 
-  GetCompanyById(companyId:string):Observable<any>{
+  GetCompanyById(companyId:string | null):Observable<any>{
     return this._HttpClient.get(`${environment.baseURL}api/Company/v1/GetById/${companyId}`)
   }
 

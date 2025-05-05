@@ -1,0 +1,73 @@
+$mainColor:#f79320;
+i:not(.fa-circle-info){
+  font-size: 30px;
+}
+.go-back{
+  color: $mainColor;
+  span{
+    font-size: 13px;
+  }
+  i{
+    font-size: 20px;
+  }
+}
+
+.head-card {
+  .icon-head{
+    height: fit-content;
+    border: 1px dotted;
+  }
+  img{
+    width: 130px;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(350%);
+  }
+  p{
+    color: #96a0b5;
+    font-size: 14px;
+    span{
+      font-weight: bold;
+      color: #222222b5;
+    }
+  }
+  h3 {
+    font-weight: 500;
+    color: #222;
+  }
+}
+.search{
+  input{
+    width: 300px;
+    border: 1px solid #f97b2190;
+    &::placeholder{
+      color: #B8B8B8;
+      font-weight: 300;
+    }
+    &:focus{
+      border-color:$mainColor !important;
+    }
+  }
+  svg{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    width: 20px;
+    fill: $mainColor;
+  }
+}
+@media (max-width:567px) {
+  .search{
+    input{
+      width: 200px;
+      border: 1px solid #f97b2190;
+      background-color: #fff;
+    }
+  }
+}
+/* #################################### Pagination Style ####################################### */
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: $mainColor !important;
+  color: #fff !important ;
+}

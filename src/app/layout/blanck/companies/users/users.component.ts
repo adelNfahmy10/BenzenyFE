@@ -68,7 +68,8 @@ export class UsersComponent {
  getAllRoles():void{
   this._RolesService.getAllRoles().subscribe({
     next: (res) => {
-      this.allRoles.set(res.data);
+      // this.allRoles.set(res.data);
+      this.allRoles.set(res.data.filter((role: any) => role.name !== "Benzeny"));
     }
   });
  }
