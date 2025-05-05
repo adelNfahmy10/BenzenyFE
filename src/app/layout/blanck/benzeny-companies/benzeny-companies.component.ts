@@ -161,4 +161,18 @@ export class BenzenyCompaniesComponent {
     XLSX.writeFile(wb, 'table_data.xlsx');
   }
 
+  copyIban(iban: string): void {
+    if (!iban || iban === 'Soon') {
+      this._ToastrService.warning('No IBAN available to copy');
+      return;
+    }
+    navigator.clipboard.writeText(iban)
+    .then(() => {
+      this._ToastrService.success('IBAN Copied To Clipboard');
+    })
+    .catch(() => {
+      this._ToastrService.error('Failed To Copy IBAN');
+    });
+  }
+
 }

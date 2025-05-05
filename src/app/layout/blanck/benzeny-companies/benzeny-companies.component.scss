@@ -10,15 +10,32 @@ $mainColor:#f79320;
     height: 100%;
     object-fit: cover;
     filter: sepia(350%);
+    &.companyLogo{
+      width: 200px;
+      filter: sepia(0);
+    }
+    &.logo-balance{
+      width: 80px;
+      filter: sepia(0);
+
+    }
   }
   p{
     color: #96a0b5;
     font-size: 18px;
   }
-  h3 {
+  h4 {
     font-weight: 500;
-    color: #222;
+    font-size: 24px;
+    &.iban-num{
+      font-size: 18px;
+      transition: all .3s;
+      &:hover{
+        color: $mainColor;
+      }
+    }
   }
+
 }
 i:not(.fa-circle-info){
   font-size: 25px !important;
