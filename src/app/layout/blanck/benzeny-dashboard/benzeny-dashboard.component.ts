@@ -1,6 +1,7 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import { Chart, registerables } from 'chart.js';
+import { CompanyService } from '../companies/core/service/company.service';
 Chart.register(...registerables);
 
 @Component({
@@ -11,7 +12,9 @@ Chart.register(...registerables);
   styleUrl: './benzeny-dashboard.component.scss',
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
-export class BenzenyDashboardComponent {
+export class BenzenyDashboardComponent implements OnInit{
+  private readonly _CompanyService = inject(CompanyService)
+
   // Run Charts And Funtions When Project Load
   ngOnInit(): void {
     // this.chartLine = new Chart('ChartLine', this.configLine)
@@ -19,6 +22,21 @@ export class BenzenyDashboardComponent {
     this.chartBarCompany = new Chart('chartBarCompany', this.configBarCompany);
     this.chartBinBalance = new Chart('chartBinBalance', this.configBinBalance);
     this.chartLineFuel = new Chart('chartLineFuel', this.configLineFuel);
+
+    this.getallCompanies()
+  }
+
+  allCompanies: WritableSignal<any[]> = signal([]);
+  companyCount: WritableSignal<string> = signal('');
+
+
+  getallCompanies():void{
+    this._CompanyService.GetAllCompanies().subscribe({
+      next:(res)=>{
+        this.allCompanies.set(res.data.items);
+        this.companyCount.set(res.data.totalCount);
+      }
+    })
   }
 
 
@@ -61,7 +79,7 @@ export class BenzenyDashboardComponent {
       labels:['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JULY', 'AUG'],
       datasets: [
         {
-          label:['Transactions'],
+          label:['Comppanies'],
           barPercentage: 0.5,
           barThickness: 20,
           maxBarThickness: 25,
@@ -119,6 +137,7 @@ export class BenzenyDashboardComponent {
     },
   };
 
+  // Charts Fuel Options
   chartLineFuel:any;
   public configLineFuel:any = {
     type: 'line',
