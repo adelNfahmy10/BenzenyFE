@@ -37,19 +37,40 @@
         </div>
       </div>
 
+
       <div class="col-md-4 animate__animated animate__fadeInDown">
-        <div class="head-card position-relative bg-white main-color h-100 total d-flex justify-content-between aling-items-center rounded-3 py-2 ps-4 pe-5">
-          <div class="d-flex flex-column justify-content-center align-items-center">
-            <p class="m-0 fs-5">Total Branches</p>
-            <h3>
-              {{companyData.branches.length}}
-            </h3>
+        <div class="row g-2">
+          <div class="col-12">
+            <div class="head-card position-relative bg-white main-color h-100 total d-flex justify-content-between aling-items-center rounded-3 py-2 ps-4 pe-5">
+              <div class="d-flex flex-column justify-content-center align-items-start">
+                <p class="m-0">Total Users</p>
+                <h3>
+                  {{10}}
+                </h3>
+              </div>
+              <div class="icon-head p-1 rounded-2">
+                <i class="fa-solid fa-users"></i>
+              </div>
+              <img loading="lazy" src="assets/image/corner-img.png" class="position-absolute bottom-0 end-0" alt="">
+            </div>
           </div>
-          <div class="icon-head p-1 rounded-2 mt-5">
-            <i class="fa-solid fa-code-branch"></i>
+
+          <div class="col-12">
+            <div class="head-card position-relative bg-white main-color h-100 total d-flex justify-content-between aling-items-center rounded-3 py-2 ps-4 pe-5">
+              <div class="d-flex flex-column justify-content-start align-items-start">
+                <p class="m-0">Total Branches</p>
+                <h3>
+                  {{companyData.branches.length}}
+                </h3>
+              </div>
+              <div class="icon-head p-1 rounded-2">
+                <i class="fa-solid fa-code-branch"></i>
+              </div>
+              <img loading="lazy" src="assets/image/corner-img.png" class="position-absolute bottom-0 end-0" alt="">
+            </div>
           </div>
-          <img loading="lazy" src="assets/image/corner-img.png" class="position-absolute bottom-0 end-0" alt="">
         </div>
+
       </div>
 
       <div class="col-12 animate__animated animate__fadeInUp">

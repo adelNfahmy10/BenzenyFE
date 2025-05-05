@@ -51,7 +51,6 @@ export class BenzenyCompaniesComponent {
         this.pageSize.set(res.data.pageSize);
       }
     })
-
   }
 
   deleteCompnay(id:any):void{
