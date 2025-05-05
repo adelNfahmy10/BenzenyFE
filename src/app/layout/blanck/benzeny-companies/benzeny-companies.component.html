@@ -1,0 +1,107 @@
+<section>
+  <div class="row g-4">
+    <div class="col-12 animate__animated animate__fadeInDown">
+      <app-header></app-header>
+    </div>
+
+    <div class="col-md-4 animate__animated animate__fadeInDown">
+      <div class="head-card position-relative bg-white main-color h-100 total d-flex justify-content-between aling-items-center rounded-3 py-2 ps-4 pe-5">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <p class="m-0">Total Companies</p>
+          <h3>
+            {{companyCount()}}
+          </h3>
+        </div>
+        <div class="icon-head p-1 rounded-2 mt-3">
+          <svg width="27" height="27" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.5 17C12.8123 17 9 13.1877 9 8.5C9 3.81225 12.8123 0 17.5 0C22.1878 0 26 3.81225 26 8.5C26 13.1877 22.1878 17 17.5 17ZM17.5 19.8333C10.2708 19.8333 4.21875 25.2478 3.424 32.4275C3.38008 32.8284 3.509 33.2279 3.77675 33.5282C4.04592 33.8286 4.42983 34 4.83217 34H8.99858C8.99858 29.3123 12.8108 25.5 17.4986 25.5C22.1863 25.5 25.9986 29.3123 25.9986 34H30.165C30.5673 34 30.9513 33.8286 31.2204 33.5282C31.4882 33.2279 31.6171 32.8284 31.5732 32.4275C30.7784 25.2478 24.7264 19.8333 17.4972 19.8333H17.5ZM17.5 28.3333C14.3748 28.3333 11.8333 30.8748 11.8333 34H23.1667C23.1667 30.8748 20.6252 28.3333 17.5 28.3333Z" fill="#F97C21"/>
+          </svg>
+        </div>
+        <img loading="lazy" src="assets/image/corner-img.png" class="position-absolute bottom-0 end-0" alt="">
+      </div>
+    </div>
+
+    <div class="col-12 animate__animated animate__fadeInUp">
+      <div class="col-12 animate__animated animate__fadeInUp z-2">
+        <div class="bg-white rounded-3 p-4">
+          <div class="d-flex justify-content-between align-items-center gap-3 mb-3 flex-wrap">
+            <div class="d-flex gap-3">
+              <div class="search position-relative">
+                <input type="search" (input)="filteredData($event)" class="form-control bg-white rounded-2" placeholder="Search... ">
+                <svg width="30" height="31" viewBox="0 0 30 31" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.5081 25.5129C15.3929 25.5167 18.1895 24.5185 20.4201 22.689L27.8808 30.1489C28.3776 30.6288 29.1692 30.615 29.649 30.1182C30.117 29.6335 30.117 28.8652 29.649 28.3805L22.1896 20.9194C26.5593 15.5706 25.766 7.69188 20.4177 3.32182C15.0693 -1.04824 7.19128 -0.254835 2.82159 5.09394C-1.54811 10.4427 -0.754773 18.3214 4.59356 22.6915C6.82738 24.5167 9.62347 25.5135 12.5081 25.5129Z"/>
+                    <path d="M22.5 12.9998C22.5 18.5231 18.0228 23.0006 12.5 23.0006C6.97715 23.0006 2.5 18.5231 2.5 12.9998C2.5 7.4765 6.97715 2.99897 12.5 2.99897C18.0228 2.99897 22.5 7.4765 22.5 12.9998Z" fill="white"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped text-center" #table>
+              <thead class="table-head">
+                <tr>
+                  <th class="fw-medium cr" (click)="sortTable('index')">#</th>
+                  <th class="fw-medium cr" (click)="sortTable('name')">Company Name</th>
+                  <th class="fw-medium cr" (click)="sortTable('companyEmail')">Company Email</th>
+                  <th class="fw-medium cr" (click)="sortTable('companyPhone')">Company Phone</th>
+                  <th class="fw-medium cr">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for(company of allCompanies() | paginate: { itemsPerPage:pageSize() , currentPage: currentPage(), totalItems:companyCount()} ; track $index){
+                  <tr>
+                    <td>
+                      {{ $index + 1 }}
+                    </td>
+                    <td>
+                      {{ company.name }}
+                    </td>
+                    <td>
+                      {{ company.companyEmail }}
+                    </td>
+                    <td>
+                      {{ company.companyPhone }}
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-center align-items-center gap-2 mt-1">
+                        <i [routerLink]="['/company-details/' + company.id]" class="text-secondary fa-solid fa-circle-info cr"></i>
+                        <div class="d-flex justify-content-center align-items-center" (click)="deleteCompnay(company.id)">
+                          <svg class="cr" width="16" height="16" viewBox="0 0 14 14" fill="#f00" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_920_9284)">
+                            <path d="M12.8333 2.33333H10.4411C10.1698 1.00392 8.99206 0 7.58331 0H6.41665C5.00848 0 3.83015 1.00392 3.5589 2.33333H1.16665C0.844646 2.33333 0.583313 2.59408 0.583313 2.91667C0.583313 3.23925 0.844646 3.5 1.16665 3.5H1.66831L2.42431 11.3628C2.56898 12.8666 3.81731 14 5.32756 14H8.66831C10.1809 14 11.4292 12.8642 11.5721 11.3587L12.3165 3.5H12.8327C13.1547 3.5 13.4161 3.23925 13.4161 2.91667C13.4161 2.59408 13.1553 2.33333 12.8333 2.33333ZM6.41665 1.16667H7.58331C8.34281 1.16667 8.98448 1.65608 9.22598 2.33333H4.77456C5.01606 1.65608 5.65773 1.16667 6.41723 1.16667H6.41665ZM9.1624 9.50425C9.39048 9.73233 9.39048 10.101 9.1624 10.3291C9.04865 10.4428 8.89931 10.5 8.74998 10.5C8.60065 10.5 8.45131 10.4428 8.33756 10.3291L6.99998 8.9915L5.6624 10.3291C5.54865 10.4428 5.39931 10.5 5.24998 10.5C5.10065 10.5 4.95131 10.4428 4.83756 10.3291C4.60948 10.101 4.60948 9.73233 4.83756 9.50425L6.17515 8.16667L4.83756 6.82908C4.60948 6.601 4.60948 6.23233 4.83756 6.00425C5.06565 5.77617 5.43431 5.77617 5.6624 6.00425L6.99998 7.34183L8.33756 6.00425C8.56565 5.77617 8.93431 5.77617 9.1624 6.00425C9.39048 6.23233 9.39048 6.601 9.1624 6.82908L7.82481 8.16667L9.1624 9.50425Z"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_920_9284">
+                            <rect width="14" height="14" fill="white"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <select name="pageSize" id="pageSize" class="form-select py-1" (change)="onChangePageSize($event)">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  <option value="10000">All</option>
+                </select>
+              </div>
+
+              <div>
+                <pagination-controls (pageChange)="onPageChange($event)" class="d-flex justify-content-start my-pagination"></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

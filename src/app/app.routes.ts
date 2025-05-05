@@ -43,7 +43,9 @@ export const routes: Routes = [
     canActivate: [authGuard],
     title: 'home',
     children: [
-      { path: 'dashboard', loadComponent: () => import('./layout/blanck/benzeny-dashboard/benzeny-dashboard.component').then(m => m.BenzenyDashboardComponent), title: 'Dashboard' },
+      { path: 'benzeny-dashboard', loadComponent: () => import('./layout/blanck/benzeny-dashboard/benzeny-dashboard.component').then(m => m.BenzenyDashboardComponent), title: 'Benzeny | Dashboard' },
+      { path: 'benzeny-companies', loadComponent: () => import('./layout/blanck/benzeny-companies/benzeny-companies.component').then(m => m.BenzenyCompaniesComponent), title: 'Benzeny | Companies' },
+      { path: 'company-details/:id', loadComponent: () => import('./layout/blanck/benzeny-companies/compnay-details/compnay-details.component').then(m => m.CompnayDetailsComponent), title: 'Benzeny | Companies-Details' },
       { path: 'home', loadComponent: () => import('./layout/blanck/dashboard/dashboard.component').then(m => m.DashboardComponent), title: 'Home' },
       { path: 'company', loadComponent: () => import('./layout/blanck/companies/companies.component').then(m => m.CompaniesComponent), title: 'Company' },
       { path: 'users', loadComponent: () => import('./layout/blanck/companies/users/users.component').then(m => m.UsersComponent), title: 'Users' },

@@ -14,11 +14,13 @@ export class BlanckComponent {
   private readonly _Router = inject(Router)
   userName:string | null = null
   branchId:string | null = null
+  role:string | null = null
 
   constructor(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
       this.userName = localStorage.getItem('userName')
       this.branchId = localStorage.getItem('branchId')
+      this.role = localStorage.getItem('role')
     }
   }
 
