@@ -103,7 +103,7 @@ export class CompaniesComponent implements OnInit{
   getAllRoles():void{
     this._RolesService.getAllRoles().subscribe(res => {
       // this.allRoles.set(res.data);
-      this.allRoles.set(res.data.filter((role: any) => role.name !== "Benzeny"));
+      this.allRoles.set(res.data.filter((role: any) => role.name !== "Super Admin"));
 
     });
   }

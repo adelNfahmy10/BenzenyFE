@@ -94,6 +94,7 @@
                   <th class="fw-medium cr" (click)="sortTable('name')">Company Name</th>
                   <th class="fw-medium cr" (click)="sortTable('companyEmail')">Company Email</th>
                   <th class="fw-medium cr" (click)="sortTable('companyPhone')">Company Phone</th>
+                  <th class="fw-medium cr" (click)="sortTable('isActive')">Status</th>
                   <th class="fw-medium cr">Actions</th>
                 </tr>
               </thead>
@@ -111,6 +112,9 @@
                     </td>
                     <td>
                       {{ company.companyPhone }}
+                    </td>
+                    <td>
+                      {{ company.isActive }}
                     </td>
                     <td>
                       <div class="d-flex justify-content-center align-items-center gap-2 mt-1">
