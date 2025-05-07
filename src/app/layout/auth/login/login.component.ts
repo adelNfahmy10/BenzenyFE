@@ -15,6 +15,8 @@ export class LoginComponent {
   private readonly _AuthService = inject(AuthService)
   private readonly _Router = inject(Router)
 
+  role:string | null = null
+
   loginForm:FormGroup = this._FormBuilder.group({
     username: [''],
     password: [''],
@@ -31,10 +33,13 @@ export class LoginComponent {
         localStorage.setItem('companyId', res.data.companyId)
         localStorage.setItem('companyName', res.data.companyName)
         localStorage.setItem('role', res.data.roles)
+        this.role = localStorage.getItem('role')
         if(res.data.branchId){
           localStorage.setItem('branchId', res.data.branchId)
           this._Router.navigate(['/balance'])
-        } else{
+        } else if(this.role == "Super Admin"){
+          this._Router.navigate(['/benzeny-dashboard'])
+        } else {
           this._Router.navigate(['/home'])
         }
       }
