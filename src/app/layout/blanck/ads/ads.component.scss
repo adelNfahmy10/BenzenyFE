@@ -28,8 +28,16 @@ $mainColor:#F97C21;
         align-items: center;
         transition: all .3s;
         .lay-content{
-          text-align: center;
-          padding: 15px;
+          a{
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-style: italic;
+            transition: all .3s;
+            &:hover{
+              color: $mainColor;
+            }
+          }
         }
       }
       &:hover{
