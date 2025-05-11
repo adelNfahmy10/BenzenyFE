@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{b as i}from"./chunk-VIHTXW4W.mjs";import"./chunk-MLCDT623.mjs";import"./chunk-RYDJKCN5.mjs";import"./chunk-ZSX2LC5G.mjs";import{Sb as r,Y as o,sb as n}from"./chunk-AAFKFLJC.mjs";import"./chunk-VVCT4QZE.mjs";var s=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=o({type:e,selectors:[["app-auth"]],standalone:!0,features:[r],decls:1,vars:0,template:function(t,p){t&1&&n(0,"router-outlet")},dependencies:[i]})}}return e})();export{s as AuthComponent};
