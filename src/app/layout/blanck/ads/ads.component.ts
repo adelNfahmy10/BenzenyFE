@@ -19,6 +19,7 @@ export class AdsComponent implements OnInit{
   private readonly _ToastrService = inject(ToastrService)
 
   userId: WritableSignal<string> = signal(localStorage.getItem('userId') || '');
+  role: WritableSignal<string> = signal(localStorage.getItem('role') || '');
   allAds: WritableSignal<any[]> = signal([]);
   selectedFile: WritableSignal<File | null> = signal(null);
 

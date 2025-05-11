@@ -5,6 +5,8 @@ import { HeaderComponent } from "../../../../assets/share/header/header.componen
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CompanyService } from '../companies/core/service/company.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { BranchService } from '../branches/core/service/branch.service';
+import { SwiperOptions } from 'swiper/types';
 Chart.register(...registerables);
 
 @Component({
@@ -20,19 +22,25 @@ export class DashboardComponent implements OnInit{
   private readonly _ToastrService = inject(ToastrService)
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _CompanyService = inject(CompanyService)
+  private readonly _BranchService = inject(BranchService)
 
   // Global Properties
   companyName: WritableSignal<string> = signal(localStorage.getItem('companyName') || '');
   companyId: WritableSignal<string> = signal(localStorage.getItem('companyId') || '');
   companyData: WritableSignal<any> = signal({});
+  branchCount: WritableSignal<string> = signal('');
+  branchActiveCount: WritableSignal<number> = signal(0);
+  branchDisActiveCount: WritableSignal<number> = signal(0);
+
   edit: WritableSignal<boolean> = signal(true);
 
   // Run Charts And Funtions When Project Load
   ngOnInit(): void {
-    // this.chartLine = new Chart('ChartLine', this.configLine)
+    this.chartLine = new Chart('ChartLine', this.configLine)
     this.chartBar = new Chart('ChartBar', this.configBar);
     this.chartBin = new Chart('ChartBin', this.configBin);
     this.getCompanyById();
+    this.getBrancheByCompanyId()
   }
 
   // Get Data Company By ID
@@ -42,6 +50,16 @@ export class DashboardComponent implements OnInit{
         this.companyData.set(res.data);
       }
     });
+  }
+
+  getBrancheByCompanyId():void{
+    this._BranchService.GetAllBranchesInCompany(this.companyId()).subscribe({
+      next:(res)=>{
+        this.branchCount.set(res.data.totalCount);
+        this.branchActiveCount.set(res.data.activeCount);
+        this.branchDisActiveCount.set(res.data.inActiveCount);
+      }
+    })
   }
 
   // Charts Options
@@ -54,14 +72,14 @@ export class DashboardComponent implements OnInit{
         {
           label:['Transactions'],
           barPercentage: 0.5,
-          barThickness: 20,
+          barThickness: 30,
           maxBarThickness: 25,
           minBarThickness: 10,
           minBarLength: 2,
           data: [100 ,200, 600, 130, 240, 60, 400, 570],
           borderColor: '#F79320',
-          backgroundColor:['#F97C21', '#ADB2D4', '#C599B6', '#7B7B7B', '#D3E671', '#003092', '#A31D1D', '#4C7B8B'],
-          borderRadius:10,
+          backgroundColor:['#F97C21'],
+          borderRadius:5,
         },
       ]
     },
@@ -110,54 +128,39 @@ export class DashboardComponent implements OnInit{
   };
 
   // chartLine:any;
-  // public configLine:any = {
-  //   type: 'line',
-  //   data: {
-  //     labels:['Sun', 'Mon', 'Tue', 'Wed', 'Fri','Sat'],
-  //       datasets: [
-  //         {
-  //           label:'Sales',
-  //           data: [100 ,200, 400, 600],
-  //           borderColor: '#F79320',
-  //           backgroundColor:'#F79320',
-  //           // fill: true,
-  //         },
-  //     ]
-  //   },
-  //   options: {
-  //     animations: {
-  //       tension: {
-  //         duration: 1000,
-  //         easing: 'linear',
-  //         from: 1,
-  //         to: 0,
-  //         loop: true
-  //       }
-  //     },
-  //     responsive: true,
-  //       scales: {
-  //           y: {
-  //               beginAtZero: true
-  //           }
-  //       }
-  //   },
-  // };
-
-  // Slider Owl Carousel Options
-
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    autoplay:true,
-    autoplayHoverPause:true,
-    autoplayTimeout:3000,
-    dots: false,
-    navSpeed: 700,
-    items:1,
-    nav: false
-  }
+  chartLine:any;
+  public configLine:any = {
+    type: 'line',
+    data: {
+      labels:['Sun', 'Mon', 'Tue', 'Wed', 'Fri','Sat'],
+        datasets: [
+          {
+            label:'Saving Money',
+            data: [100, 600, 400 ,500, 127, 423],
+            borderColor: '#F79320',
+            backgroundColor:'#F79320',
+            // fill: true,
+          },
+      ]
+    },
+    options: {
+      // animations: {
+      //   tension: {
+      //     duration: 1000,
+      //     easing: 'linear',
+      //     from: 1,
+      //     to: 0,
+      //     loop: true
+      //   }
+      // },
+      responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    },
+  };
 
   // Form Company To Update
   companyForm: FormGroup = this._FormBuilder.group({

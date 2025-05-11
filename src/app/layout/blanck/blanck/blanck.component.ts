@@ -1,11 +1,11 @@
-import { isPlatformBrowser, NgClass } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-blanck',
   standalone: true,
-  imports: [RouterOutlet, NgClass, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './blanck.component.html',
   styleUrl: './blanck.component.scss'
 })
@@ -24,11 +24,6 @@ export class BlanckComponent {
       this.branchId = localStorage.getItem('branchId')
       this.role = localStorage.getItem('role')
     }
-  }
-
-  open:Boolean = false
-  slideNav():void{
-    this.open = !this.open;
   }
 
   logout():void{
