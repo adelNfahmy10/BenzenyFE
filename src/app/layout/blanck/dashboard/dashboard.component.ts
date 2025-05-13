@@ -31,7 +31,6 @@ export class DashboardComponent implements OnInit{
   branchCount: WritableSignal<string> = signal('');
   branchActiveCount: WritableSignal<number> = signal(0);
   branchDisActiveCount: WritableSignal<number> = signal(0);
-
   edit: WritableSignal<boolean> = signal(true);
 
   // Run Charts And Funtions When Project Load

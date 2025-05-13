@@ -9,8 +9,6 @@ import { headerInterceptor } from '../core/interceptor/header.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from '../core/interceptor/loading.interceptor';
 import { errorInterceptor } from '../core/interceptor/error.interceptor';
-import { register } from 'swiper/element/bundle';
-register();
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withViewTransitions(), withInMemoryScrolling({scrollPositionRestoration:'top'})),
