@@ -131,7 +131,7 @@ export class DashboardComponent implements OnInit{
   public configLine:any = {
     type: 'line',
     data: {
-      labels:['Sun', 'Mon', 'Tue', 'Wed', 'Fri','Sat'],
+      labels:['Jan', 'Fab', 'Mar', 'May', 'Jun','Jul'],
         datasets: [
           {
             label:'Saving Money',
@@ -140,18 +140,16 @@ export class DashboardComponent implements OnInit{
             backgroundColor:'#F79320',
             // fill: true,
           },
-      ]
+          {
+            label:'Solar Money',
+            data: [50, 23, 230, 12, 76, 45],
+            borderColor: 'red',
+            backgroundColor:'red',
+            // fill: true,
+          },
+        ],
     },
     options: {
-      // animations: {
-      //   tension: {
-      //     duration: 1000,
-      //     easing: 'linear',
-      //     from: 1,
-      //     to: 0,
-      //     loop: true
-      //   }
-      // },
       responsive: true,
         scales: {
             y: {
