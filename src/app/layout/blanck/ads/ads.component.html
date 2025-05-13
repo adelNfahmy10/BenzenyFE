@@ -1,6 +1,6 @@
 <section class="gallery" id="gallery">
   <app-header></app-header>
-  @if(role() == 'Benzeny'){
+  @if(role() == 'Super Admin'){
     <!-- Modal -->
     <button type="button" class="btn add-ads-btn mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
       <i class="fa-solid fa-plus"></i>
@@ -67,7 +67,7 @@
                 <a class="cr" [href]="ad.url" target="_blank">{{ad.name}}</a>
               </div>
             </div>
-            @if(role() == 'Benzney'){
+            @if(role() == 'Super Admin'){
                <div class="x-mark position-absolute d-flex justify-content-center align-items-center text-white rounded-circle cr" (click)="deleteAds(ad.id)">
                   <i class="fa-solid fa-xmark"></i>
                 </div>
