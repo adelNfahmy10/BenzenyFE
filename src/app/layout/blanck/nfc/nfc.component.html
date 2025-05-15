@@ -1,0 +1,28 @@
+<section class="w-100">
+    <div class="container-fluid">
+      <div class="row g-3">
+        <!-- Header Page -->
+        <div class="col-12 animate__animated animate__fadeInDown">
+          <app-header></app-header>
+        </div>
+
+        <!-- Head Cards -->
+        <div class="col-md-3 animate__animated animate__fadeInDown">
+          <div class="head-card position-relative bg-white main-color h-100 total d-flex justify-content-between aling-items-center rounded-3 py-2 ps-4 pe-5">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+              <p class="m-0">Total NFCs</p>
+              <h4>500</h4>
+            </div>
+            <div class="icon-head rounded-2 mt-4 p-1">
+              <i class="fa-brands fa-nfc-directional fs-3"></i>
+            </div>
+            <img loading="lazy" src="assets/image/corner-img.png" class="position-absolute bottom-0 end-0" alt="Benzeny">
+          </div>
+        </div>
+
+        <div class="col-12">
+          <app-table [filteredData] = "data"></app-table>
+        </div>
+      </div>
+    </div>
+</section>

@@ -33,10 +33,13 @@ $mainColor: #f79320;
               fill:#BEBEBE;
               transition: all .6s;
             }
-            .fa-rectangle-ad{
+            .fa-rectangle-ad, .fa-nfc-directional{
               color: #BEBEBE;
               transition: all .6s;
               font-size: 23px;
+            }
+            .fa-nfc-directional{
+              font-size: 25px;
             }
             span{
                 opacity: 0;

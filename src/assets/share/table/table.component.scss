@@ -1,85 +1,71 @@
 $mainColor: #f79320;
+/* #################################### Style Table ####################################### */
+.table-head th{
+  background-color: #b5b5b570 !important;
+}
+.add-btn{
+  border: 1px solid #f97b2190;
+  width: fit-content;
+  padding: 0 10px;
+  transition: all .3s;
+  h5{
+    color: $mainColor;
+    transition: all .3s;
+  }
+  svg{
+    fill: #F97C21;
+    transition: all .3s;
+  }
+  &:hover{
+    background-color: $mainColor;
+    h5{
+      color: #fff;
+    }
+    svg{
+      fill: #fff;
+    }
+
+  }
+}
+@mixin button-style($bg-color) {
+  width: fit-content;
+  border: none;
+  font-size: 12px;
+  background-color: $bg-color;
+}
+.dis-active-btn {
+  @include button-style(#DCDCDC);
+}
+.active-btn {
+  @include button-style(#008d7a);
+}
 .search{
   input{
-    border-color: $mainColor;
+    width: 300px;
+    border: 1px solid #f97b2190;
     &::placeholder{
       color: #B8B8B8;
       font-weight: 300;
     }
+    &:focus{
+      border-color:$mainColor !important;
+    }
   }
   svg{
     position: absolute;
-    top: 13px;
-    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    width: 20px;
+    fill: $mainColor;
   }
 }
-
-.download-container{
-  .download-list{
-    position: absolute;
-    width: 100%;
-    top: 5px;
-  }
-}
-
-.table {
-  th, td{
-    cursor: pointer;
-  }
-}
-
-input[type="checkbox"]{
-  background-color: transparent;
-  border: 1px solid #949494;
-  width: 20px;
-  height: 20px;
-  &:checked {
-    background-color: $mainColor;
-    border-color: $mainColor;
-  }
-}
-
-.action-list{
-  position: absolute;
-  top: 100%;
-  right: 55%;
-  li{
-    transition: all .3s;
-    width: 152px;
-    &:hover{
-      background-color: #eee;
+@media (max-width:567px) {
+  .search{
+    input{
+      width: 200px;
+      border: 1px solid #f97b2190;
+      background-color: #fff;
     }
   }
-}
-
-.muted{
-  font-size: 10px;
-  &.delete-text{
-    color: #f00 !important;
-  }
-}
-
-.pagination-controls {
-  display: flex;
-  justify-content: center;
-}
-
-.my-pagination ::ng-deep .ngx-pagination .current {
-  // transition: all .3s;
-  background: $mainColor !important;
-  color: #fff !important  ;
-  // -webkit-transition: all .3s;
-  // -moz-transition: all .3s;
-  // -ms-transition: all .3s;
-  // -o-transition: all .3s;
-}
-
-
-::-webkit-scrollbar-track {
-  background: #eee;
-  border-radius: 20px;
-}
-::-webkit-scrollbar-thumb {
-  background: $mainColor;
-  border-radius: 20px;
 }

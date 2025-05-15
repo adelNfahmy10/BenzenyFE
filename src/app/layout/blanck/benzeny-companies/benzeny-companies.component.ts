@@ -3,7 +3,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import * as XLSX from 'xlsx';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { isPlatformBrowser, NgFor } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgFor } from '@angular/common';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { NgxDropzoneModule } from 'ngx-dropzone';
@@ -14,12 +14,11 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-benzeny-companies',
   standalone: true,
-  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgxDropzoneModule, RouterLink],
+  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgxDropzoneModule, RouterLink, NgClass],
   templateUrl: './benzeny-companies.component.html',
   styleUrl: './benzeny-companies.component.scss'
 })
 export class BenzenyCompaniesComponent {
-  private readonly _FormBuilder = inject(FormBuilder)
   private readonly _CompanyService = inject(CompanyService)
   private readonly _ToastrService = inject(ToastrService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
@@ -61,13 +60,22 @@ export class BenzenyCompaniesComponent {
       }
     })
   }
+
+  switchActiveCompany(companyId:string):void{
+    this._CompanyService.companySwitchActive(companyId).subscribe(res => {
+      this._ToastrService.success(res.msg);
+      this.getallCompanies();
+    });
+  }
+
+
   onPageChange(page: number): void {
     this.currentPage.set(page);
     this.changePagePagination(page);
   }
 
   changePagePagination(page:number):void{
-    this._CompanyService.GetAllCompanies("", 1, page).subscribe({
+    this._CompanyService.GetAllCompanies("", page, 10).subscribe({
       next:(res)=>{
         this.allCompanies.set(res.data.items);
         this.companyCount.set(res.data.totalCount);
@@ -113,7 +121,7 @@ export class BenzenyCompaniesComponent {
 
   onChangePageSize(event:Event):void{
     let pageSize = +(event.target as HTMLSelectElement).value;
-    this._CompanyService.GetAllCompanies(1, pageSize).subscribe({
+    this._CompanyService.GetAllCompanies('', 1, pageSize).subscribe({
       next: (res) => {
         this.pageSize.set(pageSize);
         this.allCompanies.set(res.data.items);
