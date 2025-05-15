@@ -100,7 +100,7 @@
               </thead>
               <tbody>
                 @for(company of allCompanies() | paginate: { itemsPerPage:pageSize() , currentPage: currentPage(), totalItems:companyCount()} ; track $index){
-                  <tr class="cr" [routerLink]="['/company-details/' + company.id]">
+                  <tr>
                     <td>
                       {{ $index + 1 }}
                     </td>
@@ -114,12 +114,17 @@
                       {{ company.companyPhone }}
                     </td>
                     <td>
-                      {{ company.isActive }}
+                      <span [ngClass]="{
+                        'active-btn': company.isActive,
+                        'dis-active-btn': !company.isActive
+                        }" class="cr rounded-2" (click)="switchActiveCompany(company.id)">
+                        {{company.isActive ? 'Active': 'DeActive'}}
+                      </span>
                     </td>
                     <td>
                       <div class="d-flex justify-content-center align-items-center gap-2 mt-1">
                         <i [routerLink]="['/company-details/' + company.id]" class="text-secondary fa-solid fa-circle-info cr"></i>
-                        <div class="d-flex justify-content-center align-items-center" (click)="deleteCompnay(company.id)">
+                        <!-- <div class="d-flex justify-content-center align-items-center" (click)="deleteCompnay(company.id)">
                           <svg class="cr" width="16" height="16" viewBox="0 0 14 14" fill="#f00" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_920_9284)">
                             <path d="M12.8333 2.33333H10.4411C10.1698 1.00392 8.99206 0 7.58331 0H6.41665C5.00848 0 3.83015 1.00392 3.5589 2.33333H1.16665C0.844646 2.33333 0.583313 2.59408 0.583313 2.91667C0.583313 3.23925 0.844646 3.5 1.16665 3.5H1.66831L2.42431 11.3628C2.56898 12.8666 3.81731 14 5.32756 14H8.66831C10.1809 14 11.4292 12.8642 11.5721 11.3587L12.3165 3.5H12.8327C13.1547 3.5 13.4161 3.23925 13.4161 2.91667C13.4161 2.59408 13.1553 2.33333 12.8333 2.33333ZM6.41665 1.16667H7.58331C8.34281 1.16667 8.98448 1.65608 9.22598 2.33333H4.77456C5.01606 1.65608 5.65773 1.16667 6.41723 1.16667H6.41665ZM9.1624 9.50425C9.39048 9.73233 9.39048 10.101 9.1624 10.3291C9.04865 10.4428 8.89931 10.5 8.74998 10.5C8.60065 10.5 8.45131 10.4428 8.33756 10.3291L6.99998 8.9915L5.6624 10.3291C5.54865 10.4428 5.39931 10.5 5.24998 10.5C5.10065 10.5 4.95131 10.4428 4.83756 10.3291C4.60948 10.101 4.60948 9.73233 4.83756 9.50425L6.17515 8.16667L4.83756 6.82908C4.60948 6.601 4.60948 6.23233 4.83756 6.00425C5.06565 5.77617 5.43431 5.77617 5.6624 6.00425L6.99998 7.34183L8.33756 6.00425C8.56565 5.77617 8.93431 5.77617 9.1624 6.00425C9.39048 6.23233 9.39048 6.601 9.1624 6.82908L7.82481 8.16667L9.1624 9.50425Z"/>
@@ -130,7 +135,7 @@
                             </clipPath>
                             </defs>
                           </svg>
-                        </div>
+                        </div> -->
                       </div>
                     </td>
                   </tr>

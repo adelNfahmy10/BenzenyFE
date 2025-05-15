@@ -52,6 +52,7 @@ export const routes: Routes = [
       { path: 'branch', loadComponent: () => import('./layout/blanck/branches/branches.component').then(m => m.BranchesComponent), title: 'Branches' },
       { path: 'details/:id', loadComponent: () => import('./layout/blanck/branches/branchdetails/branchdetails.component').then(m => m.BranchdetailsComponent), title: 'Branch' },
       { path: 'balance', loadComponent: () => import('./layout/blanck/balance/balance.component').then(m => m.BalanceComponent), title: 'Balance' },
+      { path: 'nfc', loadComponent: () => import('./layout/blanck/nfc/nfc.component').then(m => m.NfcComponent), title: 'NFCS' },
       { path: 'cars', loadComponent: () => import('./layout/blanck/cars/cars.component').then(m => m.CarsComponent), title: 'Cars' },
       { path: 'drivers', loadComponent: () => import('./layout/blanck/drivers/drivers.component').then(m => m.DriversComponent), title: 'Drivers' },
       { path: 'petrolstation', loadComponent: () => import('./layout/blanck/petrolstation/petrolstation.component').then(m => m.PetrolstationComponent), title: 'Petrol Stations' },

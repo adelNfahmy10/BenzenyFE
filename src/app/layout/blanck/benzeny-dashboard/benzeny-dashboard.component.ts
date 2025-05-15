@@ -2,12 +2,13 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, signal, WritableSign
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import { Chart, registerables } from 'chart.js';
 import { CompanyService } from '../companies/core/service/company.service';
+import { RouterLink } from '@angular/router';
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-benzeny-dashboard',
   standalone: true,
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, RouterLink],
   templateUrl: './benzeny-dashboard.component.html',
   styleUrl: './benzeny-dashboard.component.scss',
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
@@ -56,7 +57,7 @@ export class BenzenyDashboardComponent implements OnInit{
           minBarLength: 2,
           data: [100 ,200, 600, 130, 240, 60, 400, 570],
           borderColor: '#F79320',
-          backgroundColor:['#F97C21', '#ADB2D4', '#C599B6', '#7B7B7B', '#D3E671', '#003092', '#A31D1D', '#4C7B8B'],
+          backgroundColor:['#F97C21'],
           borderRadius:10,
         },
       ]
@@ -87,7 +88,7 @@ export class BenzenyDashboardComponent implements OnInit{
           minBarLength: 2,
           data: [100 ,200, 600, 130, 240, 60, 400, 570],
           borderColor: '#F79320',
-          backgroundColor:['#F97C21', '#ADB2D4', '#C599B6', '#7B7B7B', '#D3E671', '#003092', '#A31D1D', '#4C7B8B'],
+          backgroundColor:['#F97C21'],
           borderRadius:10,
         },
       ]
