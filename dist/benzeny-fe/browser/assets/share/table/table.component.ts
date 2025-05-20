@@ -9,78 +9,84 @@ import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [FormsModule, NgxPaginationModule, NgClass, NgIf],
+  imports: [FormsModule, NgxPaginationModule, NgClass, NgIf, NgFor],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
-export class TableComponent{
+export class TableComponent implements OnInit{
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
-  @Input() data:any[] = []
-  @Input() title:string = ''
+  @Input() displayedColumns: { key: string, label: string }[] = [];
+  @Input() filteredData: any[] = [];
 
-  page = 1;
-  selectAll = false;
+  ngOnInit(): void {
+    console.log(this.filteredData);
+    if(this.filteredData.length > 0) {
+      this.displayedColumns = Object.keys(this.filteredData[0])
+        .filter(key => key !== 'selected')
+        .map(key => ({
+          key,
+          label: this.formatLabel(key)
+        }));
+    }
+  }
+  formatLabel(key: string): string {
+    return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+  }
 
-  // Sort column and order
-  filterText = '';
+  selectAll: boolean = false;
   sortColumn: string = '';
   sortOrder: 'asc' | 'desc' = 'asc';
+  page: number = 1;
 
-  // Filtering the data based on search input
-  get filteredData() {
-    return this.data.filter((row) =>
-      row.fullName.toLowerCase().includes(this.filterText.toLowerCase())
-    );
+  toggleSelectAll() {
+    let listId: number[] = [];
+    this.filteredData.forEach(row => {
+      row.selected = this.selectAll
+      if(row.selected){
+        listId.push(row.id)
+      }
+    });
+    console.log(listId);
   }
 
-  // Check if the row is selected
-  isSelected(row: any) {
-    return row.selected;
-  }
-
-  // Toggle row selection
   toggleRowSelection(row: any) {
     row.selected = !row.selected;
+    let rowId = ''
+    if(row.selected){
+      rowId = row.id
+      console.log(rowId);
+    } else {
+      rowId = ''
+      console.log(rowId);
+    }
   }
 
-  // Toggle Select All checkbox
-  toggleSelectAll() {
-    this.data.forEach((row:any) => row.selected = this.selectAll);
-  }
-
-  // Sorting function
-  sortTable(column: string) {
-    if (this.sortColumn === column) {
-      // Toggle sort order
+  sortTable(columnKey: string) {
+    if (this.sortColumn === columnKey) {
       this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
     } else {
-      this.sortColumn = column;
+      this.sortColumn = columnKey;
       this.sortOrder = 'asc';
     }
 
-    this.data.sort((a:any, b:any) => {
-      const aValue = a[column];
-      const bValue = b[column];
-
-      if (aValue < bValue) return this.sortOrder === 'asc' ? -1 : 1;
-      if (aValue > bValue) return this.sortOrder === 'asc' ? 1 : -1;
-      return 0;
+    this.filteredData.sort((a, b) => {
+      const aValue = a[columnKey];
+      const bValue = b[columnKey];
+      return this.sortOrder === 'asc'
+        ? aValue > bValue ? 1 : -1
+        : aValue < bValue ? 1 : -1;
     });
   }
 
-  /* Download Table With PDF */
-  open:boolean = false
-  openList():void{
-    if(this.open){
-      this.open = false
-      console.log(this.open);
+  searchTerm: string = '';
 
-    } else {
-      this.open = true
-      console.log(this.open);
-    }
+  onSearch() {
+    console.log(this.searchTerm);
   }
 
+  fetchDataFromApi() {
+    console.log(this.searchTerm);
+  }
 
   @ViewChild('table') template!:ElementRef
   downloadPDF():void{
@@ -111,15 +117,4 @@ export class TableComponent{
     // Export the workbook to Excel file
     XLSX.writeFile(wb, 'table_data.xlsx'); // Download the file as 'table_data.xlsx'
   }
-
-  // Menu Option In Table
-  selectedRowId: number | null = null;
-  toggleMenu(rowId: number) {
-    if (this.selectedRowId === rowId) {
-      this.selectedRowId = null;
-    } else {
-      this.selectedRowId = rowId;
-    }
-  }
-
 }
