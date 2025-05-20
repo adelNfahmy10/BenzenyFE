@@ -45,9 +45,6 @@ i:not(.fa-circle-info){
   }
 }
 /* #################################### Table Style ####################################### */
-// .table-head th{
-//   background-color: #eee !important;
-// }
 .add-btn{
   border: 1px solid #f97b2190;
   width: fit-content;
@@ -102,7 +99,12 @@ i:not(.fa-circle-info){
     }
   }
 }
-
+.custom-checkbox{
+  accent-color: $mainColor;
+  color: #fff;
+  border: 1px solid $mainColor;
+  box-shadow: none !important;
+}
 /* #################################### Form Style ####################################### */
 label{
   font-weight: 600;

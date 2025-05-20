@@ -95,9 +95,12 @@ label{
 }
 
 /* #################################### Table Style ####################################### */
-// .table-head th{
-//   background-color: #eee !important;
-// }
+.custom-checkbox{
+  accent-color: $mainColor;
+  color: #fff;
+  border: 1px solid $mainColor;
+  box-shadow: none !important;
+}
 .add-btn{
   border: 1px solid #f97b2190;
   width: fit-content;
