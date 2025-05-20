@@ -54,6 +54,36 @@ export class CarsComponent implements OnInit{
     this.addDriver()
   }
 
+  selectedCarIds: number[] = [];
+  isSelected(carId: number): boolean {
+    return this.selectedCarIds.includes(carId);
+  }
+
+  toggleSelection(carId: number): void {
+    if (this.selectedCarIds.includes(carId)) {
+      this.selectedCarIds = this.selectedCarIds.filter(id => id !== carId);
+      console.log(this.selectedCarIds);
+    } else {
+      this.selectedCarIds.push(carId);
+      console.log(this.selectedCarIds);
+    }
+  }
+
+  isAllSelected(): boolean {
+    return this.allCars().length > 0 && this.allCars().every(car => this.selectedCarIds.includes(car.id));
+  }
+
+  toggleAllSelection(event: any): void {
+    if (event.target.checked) {
+      this.selectedCarIds = this.allCars().map(car => car.id);
+      console.log(this.selectedCarIds);
+
+    } else {
+      this.selectedCarIds = [];
+    }
+  }
+
+
   getAllCars():void{
     this._CarService.GetAllCarsByBranchId(this.branchId()).subscribe({
       next: (res) => {

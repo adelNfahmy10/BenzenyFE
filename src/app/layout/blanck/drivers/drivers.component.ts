@@ -4,16 +4,17 @@ import { HeaderComponent } from "../../../../assets/share/header/header.componen
 import * as XLSX from 'xlsx';
 import { DriverService } from './core/service/driver.service';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { isPlatformBrowser, NgFor } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgFor } from '@angular/common';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-drivers',
   standalone: true,
-  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgFor, NgxDropzoneModule  ],
+  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgFor, NgxDropzoneModule, NgClass, RouterLink],
   templateUrl: './drivers.component.html',
   styleUrl: './drivers.component.scss'
 })
@@ -38,6 +39,56 @@ export class DriversComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllDrivers()
+  }
+
+  selectedDriverIds: number[] = [];
+  isSelected(DriverId: number): boolean {
+    return this.selectedDriverIds.includes(DriverId);
+  }
+
+  toggleSelection(DriverId: number): void {
+    if (this.selectedDriverIds.includes(DriverId)) {
+      this.selectedDriverIds = this.selectedDriverIds.filter(id => id !== DriverId);
+      console.log(this.selectedDriverIds);
+    } else {
+      this.selectedDriverIds.push(DriverId);
+      console.log(this.selectedDriverIds);
+    }
+  }
+
+  isAllSelected(): boolean {
+    return this.allDrivers().length > 0 && this.allDrivers().every(Driver => this.selectedDriverIds.includes(Driver.id));
+  }
+
+  toggleAllSelection(event: any): void {
+    if (event.target.checked) {
+      this.selectedDriverIds = this.allDrivers().map(Driver => Driver.id);
+      console.log(this.selectedDriverIds);
+
+    } else {
+      this.selectedDriverIds = [];
+    }
+  }
+
+
+  limitVehical:boolean = false
+  showDays:boolean = false
+  selectDays(event:Event):void{
+    let selected = (event.target as HTMLSelectElement).value
+    if(selected == '2'){
+      this.showDays = true
+    } else {
+      this.showDays = false
+    }
+  }
+
+  selectLimit(event:Event):void{
+    let selected = (event.target as HTMLSelectElement).value
+    if(selected == '2'){
+      this.limitVehical = true
+    } else {
+      this.limitVehical = false
+    }
   }
 
   getAllDrivers():void{

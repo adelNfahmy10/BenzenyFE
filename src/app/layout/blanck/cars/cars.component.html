@@ -2,7 +2,6 @@
   <div class="row g-4">
     <div class="col-12 animate__animated animate__fadeInDown">
       <app-header></app-header>
-      <h1>Vehicles</h1>
     </div>
 
     <!-- Section Total Vehicles -->
@@ -74,7 +73,9 @@
           <table class="table table-striped text-center" #table>
             <thead class="table-head">
               <tr>
-                <th class="fw-medium cr" (click)="sortTable('index')">#</th>
+                <th>
+                  <input type="checkbox" class="custom-checkbox" [checked]="isAllSelected()" (change)="toggleAllSelection($event)">
+                </th>
                 <th class="fw-medium cr" (click)="sortTable('model')">Model</th>
                 <th class="fw-medium cr" (click)="sortTable('carNumber')">Plate</th>
                 <th class="fw-medium cr" (click)="sortTable('color')">Color</th>
@@ -88,7 +89,7 @@
               @for(car of allCars() | paginate: { itemsPerPage:pageSize() , currentPage: currentPage(), totalItems:carCount()} ; track $index){
                 <tr>
                   <td>
-                    {{ $index + 1 }}
+                    <input type="checkbox" [checked]="isAllSelected()" class="custom-checkbox" (change)="toggleSelection(car.id)">
                   </td>
                   <td>
                     {{ car.model }}

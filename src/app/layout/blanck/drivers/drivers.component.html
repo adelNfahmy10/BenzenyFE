@@ -22,6 +22,23 @@
       </div>
     </div>
 
+    <div class="col-md-4 animate__animated animate__fadeInDown cr" [routerLink]="['/balance']">
+      <div class="head-card position-relative bg-white main-color h-100 total d-flex justify-content-between aling-items-center rounded-3 py-2 ps-4 pe-5">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <p class="m-0">Total Balance</p>
+          <h3>
+            {{200}}<sub>SAR</sub>
+          </h3>
+        </div>
+        <div class="icon-head p-1 rounded-2 mt-3">
+          <svg width="27" height="27" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.5 17C12.8123 17 9 13.1877 9 8.5C9 3.81225 12.8123 0 17.5 0C22.1878 0 26 3.81225 26 8.5C26 13.1877 22.1878 17 17.5 17ZM17.5 19.8333C10.2708 19.8333 4.21875 25.2478 3.424 32.4275C3.38008 32.8284 3.509 33.2279 3.77675 33.5282C4.04592 33.8286 4.42983 34 4.83217 34H8.99858C8.99858 29.3123 12.8108 25.5 17.4986 25.5C22.1863 25.5 25.9986 29.3123 25.9986 34H30.165C30.5673 34 30.9513 33.8286 31.2204 33.5282C31.4882 33.2279 31.6171 32.8284 31.5732 32.4275C30.7784 25.2478 24.7264 19.8333 17.4972 19.8333H17.5ZM17.5 28.3333C14.3748 28.3333 11.8333 30.8748 11.8333 34H23.1667C23.1667 30.8748 20.6252 28.3333 17.5 28.3333Z" fill="#F97C21"/>
+          </svg>
+        </div>
+        <img loading="lazy" src="assets/image/corner-img.png" class="position-absolute bottom-0 end-0" alt="">
+      </div>
+    </div>
+
     <div class="col-md-4 animate__animated animate__fadeInDown">
       <div class="head-card cr position-relative bg-white main-color h-100 total d-flex justify-content-between aling-items-center rounded-3 py-2 ps-4 pe-5" data-bs-toggle="modal" data-bs-target="#exampleModalUpload">
         <div class="d-flex flex-column justify-content-center gap-0">
@@ -60,6 +77,12 @@
                 </svg>
                 <h5 class="mb-0">Add Driver</h5>
               </div>
+              <div class="add-btn d-flex justify-content-start align-items-center gap-1 rounded-2 py-2 cr" data-bs-toggle="modal" data-bs-target="#exampleModal-add-Balance">
+                <svg width="20" height="21" viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 0.5C8.02219 0.5 6.08879 1.08649 4.4443 2.1853C2.79981 3.28412 1.51809 4.8459 0.761209 6.67317C0.00433286 8.50043 -0.193701 10.5111 0.192152 12.4509C0.578004 14.3907 1.53041 16.1725 2.92894 17.5711C4.32746 18.9696 6.10929 19.922 8.0491 20.3079C9.98891 20.6937 11.9996 20.4957 13.8268 19.7388C15.6541 18.9819 17.2159 17.7002 18.3147 16.0557C19.4135 14.4112 20 12.4778 20 10.5C19.9971 7.84872 18.9426 5.30684 17.0679 3.4321C15.1932 1.55736 12.6513 0.502868 10 0.5ZM13.3333 11.3333H10.8333V13.8333C10.8333 14.0543 10.7455 14.2663 10.5893 14.4226C10.433 14.5789 10.221 14.6667 10 14.6667C9.77899 14.6667 9.56703 14.5789 9.41075 14.4226C9.25447 14.2663 9.16667 14.0543 9.16667 13.8333V11.3333H6.66667C6.44566 11.3333 6.2337 11.2455 6.07742 11.0893C5.92113 10.933 5.83334 10.721 5.83334 10.5C5.83334 10.279 5.92113 10.067 6.07742 9.91074C6.2337 9.75447 6.44566 9.66667 6.66667 9.66667H9.16667V7.16667C9.16667 6.94565 9.25447 6.73369 9.41075 6.57741C9.56703 6.42113 9.77899 6.33333 10 6.33333C10.221 6.33333 10.433 6.42113 10.5893 6.57741C10.7455 6.73369 10.8333 6.94565 10.8333 7.16667V9.66667H13.3333C13.5544 9.66667 13.7663 9.75447 13.9226 9.91074C14.0789 10.067 14.1667 10.279 14.1667 10.5C14.1667 10.721 14.0789 10.933 13.9226 11.0893C13.7663 11.2455 13.5544 11.3333 13.3333 11.3333Z"/>
+                </svg>
+                <h5 class="mb-0">Add Balance</h5>
+              </div>
               <div>
                 <i (click)="downloadExcel()" class=" text-success fa-solid fa-file-excel fs-3 cr"></i>
               </div>
@@ -73,7 +96,9 @@
             <table class="table table-striped text-center" #table>
               <thead class="table-head">
                 <tr>
-                  <th class="fw-medium cr" (click)="sortTable('index')">#</th>
+                  <th>
+                    <input type="checkbox" class="custom-checkbox" [checked]="isAllSelected()" (change)="toggleAllSelection($event)">
+                  </th>
                   <th class="fw-medium cr" (click)="sortTable('fullName')">Driver Name</th>
                   <th class="fw-medium cr" (click)="sortTable('phoneNumber')">Phone Number</th>
                   <th class="fw-medium cr" (click)="sortTable('license')">License</th>
@@ -85,7 +110,7 @@
                 @for(driver of allDrivers() | paginate: { itemsPerPage:pageSize() , currentPage: currentPage(), totalItems:driverCount()} ; track $index){
                   <tr>
                     <td>
-                      {{ $index + 1 }}
+                      <input type="checkbox" [checked]="isAllSelected()" class="custom-checkbox" (change)="toggleSelection(driver.id)">
                     </td>
                     <td>
                       {{ driver.fullName }}
@@ -101,7 +126,6 @@
                     </td>
                     <td>
                       <div class="d-flex justify-content-center align-items-center gap-2 mt-1">
-                        <!-- <i [routerLink]="['/details/' + branch.id]" class="text-secondary fa-solid fa-circle-info cr"></i> -->
                         <div class="d-flex justify-content-center align-items-center" (click)="DeleteDriver(driver.id)">
                           <svg class="cr" width="16" height="16" viewBox="0 0 14 14" fill="#f00" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_920_9284)">
@@ -190,6 +214,122 @@
             <label for="licenseDegree">License Degree</label>
             <input type="text" formControlName="licenseDegree" name="licenseDegree" id="licenseDegree" class="form-control" placeholder="LicenseDegree...">
           </div>
+
+          <div class="col-12">
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <button class="save-btn btn d-flex justify-content-center align-items-center gap-2">
+                <span>Save</span>
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_893_4557)">
+                  <path d="M17.7083 25H9.375C4.20521 25 0 20.7937 0 15.625V7.29167C0 6.71667 0.465625 6.25 1.04167 6.25C1.61771 6.25 2.08333 6.71667 2.08333 7.29167V15.625C2.08333 19.6458 5.35521 22.9167 9.375 22.9167H17.7083C18.2844 22.9167 18.75 23.3833 18.75 23.9583C18.75 24.5333 18.2844 25 17.7083 25ZM17.7083 0H11.4583V5.20833H17.7083V0ZM25 6.52812V15.625C25 18.501 22.6677 20.8333 19.7917 20.8333H9.375C6.49896 20.8333 4.16667 18.501 4.16667 15.625V5.20833C4.16667 2.33646 6.50312 0 9.375 0V5.20833C9.375 6.35938 10.3073 7.29167 11.4583 7.29167H17.7083C18.8594 7.29167 19.7917 6.35938 19.7917 5.20833V0.288542C20.1354 0.444792 20.4552 0.655208 20.7229 0.925L24.0937 4.32604C24.674 4.91146 25 5.70312 25 6.52812ZM18.75 14.0625C18.75 12.049 17.1177 10.4167 15.1042 10.4167C13.0906 10.4167 11.4583 12.049 11.4583 14.0625C11.4583 16.076 13.0906 17.7083 15.1042 17.7083C17.1177 17.7083 18.75 16.076 18.75 14.0625ZM16.6667 14.0625C16.6667 14.925 15.9667 15.625 15.1042 15.625C14.2417 15.625 13.5417 14.925 13.5417 14.0625C13.5417 13.2 14.2417 12.5 15.1042 12.5C15.9667 12.5 16.6667 13.2 16.6667 14.0625Z"/>
+                  <circle cx="15" cy="14" r="1" fill="#F97C21"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_893_4557">
+                  <rect width="25" height="25" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Add Balance -->
+<div class="modal fade" id="exampleModal-add-Balance" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content p-3">
+      <div class="modal-header justify-content-end border-0 py-0 pt-2">
+        <svg class="cr" data-bs-dismiss="modal" width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_893_6942)">
+          <path d="M18.5 0C8.29879 0 0 8.29879 0 18.5C0 28.7012 8.29879 37 18.5 37C28.7012 37 37 28.7012 37 18.5C37 8.29879 28.7012 0 18.5 0ZM25.846 24.8285C26.3949 25.4807 26.3116 26.4535 25.661 27.0007C25.3712 27.2443 25.0182 27.363 24.6682 27.363C24.2288 27.363 23.7925 27.1765 23.4873 26.8157L18.5 20.8927L13.5127 26.8157C13.209 27.1765 12.7727 27.363 12.3318 27.363C11.9818 27.363 11.6288 27.2443 11.339 27.0007C10.6884 26.4535 10.6036 25.4807 11.154 24.8285L16.4835 18.5L11.154 12.1715C10.6051 11.5193 10.6884 10.5465 11.339 9.99925C11.9911 9.44887 12.9654 9.53521 13.5112 10.1842L18.4985 16.1073L23.4858 10.1842C24.0315 9.53675 25.0058 9.44887 25.658 9.99925C26.3085 10.5465 26.3933 11.5193 25.843 12.1715L20.5134 18.5L25.843 24.8285H25.846Z" fill="#F79320"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_893_6942">
+          <rect width="37" height="37" fill="white"/>
+          </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <div class="modal-body d-flex flex-column gap-3 px-4 pt-0">
+        <div class="d-flex gap-2">
+          <svg _ngcontent-ng-c4209579288="" width="55" height="55" viewBox="0 0 53 55" fill="none" xmlns="http://www.w3.org/2000/svg"><path _ngcontent-ng-c4209579288="" d="M47.1667 42.8933C47.1667 46.3885 44.4588 49.2317 41.13 49.2317H11.8091C4.99461 49.2154 3.52166 39.0685 9.93776 36.899C17.7406 48.3987 35.202 48.3951 43.0014 36.899C45.4109 37.732 47.1667 40.0899 47.1667 42.8933ZM43.7172 23.8781C43.7172 33.8638 35.9799 41.9878 26.4696 41.9878C3.61997 41.0769 3.62687 6.67561 26.4696 5.76831C35.9799 5.76831 43.7172 13.8923 43.7172 23.8781ZM33.3686 27.5C33.3686 25.0389 31.6887 22.9545 29.3758 22.5506L24.1308 21.6343C22.256 21.2522 23.0252 18.3274 24.7448 18.4451H28.6566C29.2706 18.4451 29.8432 18.791 30.1519 19.3524C30.6297 20.2181 31.687 20.5169 32.508 20.0116C33.3341 19.5118 33.6152 18.4035 33.1375 17.5378C32.2147 15.8627 30.4969 14.8232 28.6566 14.8232H28.1943V13.0122C28.184 10.6435 24.7534 10.6453 24.7448 13.0122V14.8232C18.8203 14.7888 17.5284 24.0284 23.5634 25.2055L28.8083 26.1219C30.6832 26.504 29.9139 29.4287 28.1943 29.311H24.2826C23.6686 29.311 23.0959 28.9651 22.7872 28.4037C22.3095 27.538 21.2522 27.2392 20.4312 27.7445C19.605 28.2443 19.3239 29.3526 19.8017 30.2183C20.7244 31.8934 22.4423 32.9329 24.2826 32.9329H24.7448V34.7439C24.7552 37.1127 28.1857 37.1109 28.1943 34.7439V32.9329C31.0471 32.9329 33.3686 30.4954 33.3686 27.5Z" fill="#F79320"></path></svg>
+          <div>
+            <h4>Add</h4>
+            <h3>Balance</h3>
+          </div>
+        </div>
+
+        <form class="row g-2">
+          <div class="col-md-6">
+            <div class="d-flex align-items-center gap-2">
+              <svg width="40" height="40" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.5 17C12.8123 17 9 13.1877 9 8.5C9 3.81225 12.8123 0 17.5 0C22.1878 0 26 3.81225 26 8.5C26 13.1877 22.1878 17 17.5 17ZM17.5 19.8333C10.2708 19.8333 4.21875 25.2478 3.424 32.4275C3.38008 32.8284 3.509 33.2279 3.77675 33.5282C4.04592 33.8286 4.42983 34 4.83217 34H8.99858C8.99858 29.3123 12.8108 25.5 17.4986 25.5C22.1863 25.5 25.9986 29.3123 25.9986 34H30.165C30.5673 34 30.9513 33.8286 31.2204 33.5282C31.4882 33.2279 31.6171 32.8284 31.5732 32.4275C30.7784 25.2478 24.7264 19.8333 17.4972 19.8333H17.5ZM17.5 28.3333C14.3748 28.3333 11.8333 30.8748 11.8333 34H23.1667C23.1667 30.8748 20.6252 28.3333 17.5 28.3333Z" fill="#F97C21"/>
+              </svg>
+              <span class="fs-3">2 Driver(s)</span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="amount">Amount</label>
+            <input type="number" name="amount" id="amount" class="form-control" placeholder="Amount...">
+          </div>
+
+          <div class="col-12" [ngClass]="{'col-md-6': limitVehical}">
+            <select class="form-select" name="option-limit" id="option-limit" (change)="selectLimit($event)">
+              <option value="" selected disabled>Choose Limit</option>
+              <option value="1">This Time Only</option>
+              <option value="2">Set Vehicles Limit</option>
+            </select>
+          </div>
+
+          @if(limitVehical){
+            <div class="col-md-6">
+              <select class="form-select" name="limit" id="limit" (change)="selectDays($event)">
+                <option value="1" selected>Daily</option>
+                <option value="2">Weekly</option>
+                <option value="3">Monthly</option>
+              </select>
+            </div>
+          }
+
+          @if(showDays){
+            <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-2">
+                <div class="d-flex gap-1 align-items-center"><span>SAT</span> <input type="checkbox"></div>
+
+              </div>
+              <div class="col-md-2">
+                <div class="d-flex gap-1 align-items-center"><span>SUN</span> <input type="checkbox"></div>
+
+              </div>
+              <div class="col-md-2">
+                <div class="d-flex gap-1 align-items-center"><span>MON</span> <input type="checkbox"></div>
+
+              </div>
+              <div class="col-md-2">
+                <div class="d-flex gap-1 align-items-center"><span>THU</span> <input type="checkbox"></div>
+
+              </div>
+              <div class="col-md-2">
+                <div class="d-flex gap-1 align-items-center"><span>WEN</span> <input type="checkbox"></div>
+
+              </div>
+              <div class="col-md-2">
+                <div class="d-flex gap-1 align-items-center"><span>THU</span> <input type="checkbox"></div>
+              </div>
+              <div class="col-md-2">
+                <div class="d-flex gap-1 align-items-center"><span>FRI</span> <input type="checkbox"></div>
+
+              </div>
+            </div>
+          </div>
+          }
 
           <div class="col-12">
             <div class="d-flex justify-content-end align-items-center gap-2">
