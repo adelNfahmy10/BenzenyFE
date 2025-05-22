@@ -21,16 +21,26 @@ export class AdsComponent implements OnInit{
   userId: WritableSignal<string> = signal(localStorage.getItem('userId') || '');
   role: WritableSignal<string> = signal(localStorage.getItem('role') || '');
   allAds: WritableSignal<any[]> = signal([]);
+  activeAds: WritableSignal<any[]> = signal([]);
   selectedFile: WritableSignal<File | null> = signal(null);
 
   ngOnInit(): void {
     this.getAllAds()
+    this.getActiveds()
   }
 
   getAllAds():void{
     this._AdsService.GetAllAds().subscribe({
       next: (res) => {
         this.allAds.set(res.data);
+      }
+    });
+  }
+
+  getActiveds():void{
+    this._AdsService.GetActiveAds().subscribe({
+      next: (res) => {
+        this.activeAds.set(res.data);
       }
     });
   }
