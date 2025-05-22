@@ -146,11 +146,6 @@
                   <a class="cr" [href]="ad.url" target="_blank">{{ad.name}}</a>
                 </div>
               </div>
-              @if(role() == 'Super Admin'){
-                <div class="x-mark position-absolute d-flex justify-content-center align-items-center text-white rounded-circle cr" (click)="deleteAds(ad.id)">
-                    <i class="fa-solid fa-xmark"></i>
-                  </div>
-              }
             </div>
           </div>
         }
