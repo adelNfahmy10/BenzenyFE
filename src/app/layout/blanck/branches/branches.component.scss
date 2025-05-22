@@ -80,17 +80,17 @@ i:not(.fa-circle-info){
 
   }
 }
-@mixin button-style($bg-color) {
-  width: fit-content;
-  border: none;
+@mixin button-style($bg-color, $color) {
+  width: 70px;
   font-size: 12px;
+  color: $color;
   background-color: $bg-color;
 }
 .dis-active-btn {
-  @include button-style(#DCDCDC);
+  @include button-style(#DCDCDC, #6D6D6D);
 }
 .active-btn {
-  @include button-style(#008d7a);
+  @include button-style(#D9F8E8, #35cf80);
 }
 .search{
   input{

@@ -2,13 +2,13 @@ import { Component, inject, OnInit, PLATFORM_ID, signal, WritableSignal } from '
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import { AdsService } from './core/ads.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgClass } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ads',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule],
+  imports: [HeaderComponent, ReactiveFormsModule, NgClass],
   templateUrl: './ads.component.html',
   styleUrl: './ads.component.scss'
 })
@@ -37,9 +37,14 @@ export class AdsComponent implements OnInit{
 
   adsForm:FormGroup = this._FormBuilder.group({
     Name:[],
-    Url:[],
-    CreatedBy:[],
     Image:[],
+    Url:[],
+    Description:[],
+    Type:[1],
+    DurationInMonths:[],
+    IsActive :[true],
+    CreatedBy:[],
+
   })
 
   onFileSelected(event: Event): void {
@@ -53,9 +58,13 @@ export class AdsComponent implements OnInit{
     let formData = new FormData();
 
     formData.append('Name', data.Name);
-    formData.append('Url', data.Url);
-    formData.append('CreatedBy', this.userId()!);
     formData.append('Image', this.selectedFile()!);
+    formData.append('Url', data.Url);
+    formData.append('Description', data.Description);
+    formData.append('Type', data.Type);
+    formData.append('DurationInMonths', data.DurationInMonths);
+    formData.append('IsActive', data.IsActive);
+    formData.append('CreatedBy', this.userId()!);
 
     this._AdsService.CreateNewAds(formData).subscribe({
       next: (res) => {
