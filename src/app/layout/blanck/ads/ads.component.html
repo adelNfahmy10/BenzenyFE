@@ -105,9 +105,9 @@
               <td>{{ad.durationInMonths}}</td>
               <td>
                 <span [ngClass]="{
-                  'active-btn': true,
-                  'dis-active-btn': false
-                  }" class="cr rounded-2">
+                  'active-btn': ad.isActive,
+                  'dis-active-btn': !ad.isActive
+                  }" class="cr rounded-2" (click)="switchActiveAds(ad.id)">
                   {{ad.isActive? 'Active': 'DeActive'}}
                 </span>
               </td>

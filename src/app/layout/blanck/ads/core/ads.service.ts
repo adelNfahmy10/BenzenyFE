@@ -17,6 +17,10 @@ export class AdsService {
     return this._HttpClient.post(`${environment.baseURL}api/Advertiesment/v1/Create/CreateNewAds`, data)
   }
 
+  SwitchActiveAds(adsId:any):Observable<any>{
+    return this._HttpClient.post(`${environment.baseURL}api/Advertiesment/v1/AdsSwitchActive/AdsSwitchActive/${adsId}`, {})
+  }
+
   EditAds(data:any):Observable<any>{
     return this._HttpClient.get(`${environment.baseURL}api/Advertiesment/v1/Edit/EditAds`, data)
   }
