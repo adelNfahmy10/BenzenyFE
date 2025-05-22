@@ -42,210 +42,113 @@
 
 
     <!-- Section Tabel -->
-    @if(allCars.length){
-      <div class="col-12 animate__animated animate__fadeInUp z-2">
-        <div class="bg-white rounded-3 p-4">
-          <div class="d-flex justify-content-between align-items-center gap-3 mb-3 flex-wrap">
-            <div class="d-flex gap-3">
-              <div class="search position-relative">
-                <input type="search" (input)="filteredData($event)" class="form-control bg-white rounded-2" placeholder="Search... ">
-                <svg width="30" height="31" viewBox="0 0 30 31" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.5081 25.5129C15.3929 25.5167 18.1895 24.5185 20.4201 22.689L27.8808 30.1489C28.3776 30.6288 29.1692 30.615 29.649 30.1182C30.117 29.6335 30.117 28.8652 29.649 28.3805L22.1896 20.9194C26.5593 15.5706 25.766 7.69188 20.4177 3.32182C15.0693 -1.04824 7.19128 -0.254835 2.82159 5.09394C-1.54811 10.4427 -0.754773 18.3214 4.59356 22.6915C6.82738 24.5167 9.62347 25.5135 12.5081 25.5129Z"/>
-                    <path d="M22.5 12.9998C22.5 18.5231 18.0228 23.0006 12.5 23.0006C6.97715 23.0006 2.5 18.5231 2.5 12.9998C2.5 7.4765 6.97715 2.99897 12.5 2.99897C18.0228 2.99897 22.5 7.4765 22.5 12.9998Z" fill="white"/>
-                </svg>
-              </div>
-            </div>
-
-            <div class="d-flex justify-content-center align-items-center gap-3">
-              <!-- <div class="add-btn d-flex justify-content-start align-items-center gap-1 rounded-2 py-2 cr" data-bs-toggle="modal" data-bs-target="#exampleModal-add">
-                <svg width="20" height="21" viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 0.5C8.02219 0.5 6.08879 1.08649 4.4443 2.1853C2.79981 3.28412 1.51809 4.8459 0.761209 6.67317C0.00433286 8.50043 -0.193701 10.5111 0.192152 12.4509C0.578004 14.3907 1.53041 16.1725 2.92894 17.5711C4.32746 18.9696 6.10929 19.922 8.0491 20.3079C9.98891 20.6937 11.9996 20.4957 13.8268 19.7388C15.6541 18.9819 17.2159 17.7002 18.3147 16.0557C19.4135 14.4112 20 12.4778 20 10.5C19.9971 7.84872 18.9426 5.30684 17.0679 3.4321C15.1932 1.55736 12.6513 0.502868 10 0.5ZM13.3333 11.3333H10.8333V13.8333C10.8333 14.0543 10.7455 14.2663 10.5893 14.4226C10.433 14.5789 10.221 14.6667 10 14.6667C9.77899 14.6667 9.56703 14.5789 9.41075 14.4226C9.25447 14.2663 9.16667 14.0543 9.16667 13.8333V11.3333H6.66667C6.44566 11.3333 6.2337 11.2455 6.07742 11.0893C5.92113 10.933 5.83334 10.721 5.83334 10.5C5.83334 10.279 5.92113 10.067 6.07742 9.91074C6.2337 9.75447 6.44566 9.66667 6.66667 9.66667H9.16667V7.16667C9.16667 6.94565 9.25447 6.73369 9.41075 6.57741C9.56703 6.42113 9.77899 6.33333 10 6.33333C10.221 6.33333 10.433 6.42113 10.5893 6.57741C10.7455 6.73369 10.8333 6.94565 10.8333 7.16667V9.66667H13.3333C13.5544 9.66667 13.7663 9.75447 13.9226 9.91074C14.0789 10.067 14.1667 10.279 14.1667 10.5C14.1667 10.721 14.0789 10.933 13.9226 11.0893C13.7663 11.2455 13.5544 11.3333 13.3333 11.3333Z"/>
-                </svg>
-                <h5 class="mb-0">Add Branch</h5>
-              </div> -->
-              <div>
-                <i (click)="downloadExcel()" class=" text-success fa-solid fa-file-excel fs-3 cr"></i>
-              </div>
-              <div>
-                <i (click)="downloadPDF()" class="text-danger fa-solid fa-file-pdf fs-3 cr"></i>
-              </div>
+    <div class="col-12 animate__animated animate__fadeInUp z-2">
+      <div class="bg-white rounded-3 p-4">
+        <div class="d-flex justify-content-between align-items-center gap-3 mb-3 flex-wrap">
+          <div class="d-flex gap-3">
+            <div class="search position-relative">
+              <input type="search" (input)="filteredData($event)" class="form-control bg-white rounded-2" placeholder="Search... ">
+              <svg width="30" height="31" viewBox="0 0 30 31" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.5081 25.5129C15.3929 25.5167 18.1895 24.5185 20.4201 22.689L27.8808 30.1489C28.3776 30.6288 29.1692 30.615 29.649 30.1182C30.117 29.6335 30.117 28.8652 29.649 28.3805L22.1896 20.9194C26.5593 15.5706 25.766 7.69188 20.4177 3.32182C15.0693 -1.04824 7.19128 -0.254835 2.82159 5.09394C-1.54811 10.4427 -0.754773 18.3214 4.59356 22.6915C6.82738 24.5167 9.62347 25.5135 12.5081 25.5129Z"/>
+                  <path d="M22.5 12.9998C22.5 18.5231 18.0228 23.0006 12.5 23.0006C6.97715 23.0006 2.5 18.5231 2.5 12.9998C2.5 7.4765 6.97715 2.99897 12.5 2.99897C18.0228 2.99897 22.5 7.4765 22.5 12.9998Z" fill="white"/>
+              </svg>
             </div>
           </div>
 
-          <div class="table-responsive">
-            <table class="table table-striped text-center" #table>
-              <thead class="table-head">
+          <div class="d-flex justify-content-center align-items-center gap-3">
+            <!-- <div class="add-btn d-flex justify-content-start align-items-center gap-1 rounded-2 py-2 cr" data-bs-toggle="modal" data-bs-target="#exampleModal-add">
+              <svg width="20" height="21" viewBox="0 0 20 21" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 0.5C8.02219 0.5 6.08879 1.08649 4.4443 2.1853C2.79981 3.28412 1.51809 4.8459 0.761209 6.67317C0.00433286 8.50043 -0.193701 10.5111 0.192152 12.4509C0.578004 14.3907 1.53041 16.1725 2.92894 17.5711C4.32746 18.9696 6.10929 19.922 8.0491 20.3079C9.98891 20.6937 11.9996 20.4957 13.8268 19.7388C15.6541 18.9819 17.2159 17.7002 18.3147 16.0557C19.4135 14.4112 20 12.4778 20 10.5C19.9971 7.84872 18.9426 5.30684 17.0679 3.4321C15.1932 1.55736 12.6513 0.502868 10 0.5ZM13.3333 11.3333H10.8333V13.8333C10.8333 14.0543 10.7455 14.2663 10.5893 14.4226C10.433 14.5789 10.221 14.6667 10 14.6667C9.77899 14.6667 9.56703 14.5789 9.41075 14.4226C9.25447 14.2663 9.16667 14.0543 9.16667 13.8333V11.3333H6.66667C6.44566 11.3333 6.2337 11.2455 6.07742 11.0893C5.92113 10.933 5.83334 10.721 5.83334 10.5C5.83334 10.279 5.92113 10.067 6.07742 9.91074C6.2337 9.75447 6.44566 9.66667 6.66667 9.66667H9.16667V7.16667C9.16667 6.94565 9.25447 6.73369 9.41075 6.57741C9.56703 6.42113 9.77899 6.33333 10 6.33333C10.221 6.33333 10.433 6.42113 10.5893 6.57741C10.7455 6.73369 10.8333 6.94565 10.8333 7.16667V9.66667H13.3333C13.5544 9.66667 13.7663 9.75447 13.9226 9.91074C14.0789 10.067 14.1667 10.279 14.1667 10.5C14.1667 10.721 14.0789 10.933 13.9226 11.0893C13.7663 11.2455 13.5544 11.3333 13.3333 11.3333Z"/>
+              </svg>
+              <h5 class="mb-0">Add Branch</h5>
+            </div> -->
+            <div>
+              <i (click)="downloadExcel()" class=" text-success fa-solid fa-file-excel fs-3 cr"></i>
+            </div>
+            <div>
+              <i (click)="downloadPDF()" class="text-danger fa-solid fa-file-pdf fs-3 cr"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-striped text-center" #table>
+            <thead class="table-head">
+              <tr>
+                <th class="fw-medium cr" (click)="sortTable('index')">#</th>
+                <th class="fw-medium cr" (click)="sortTable('model')">Model</th>
+                <th class="fw-medium cr" (click)="sortTable('carNumber')">Plate</th>
+                <th class="fw-medium cr" (click)="sortTable('color')">Color</th>
+                <th class="fw-medium cr" (click)="sortTable('licenseDate')">License Date</th>
+                <th class="fw-medium cr" (click)="sortTable('driverName')">Driver Name</th>
+                <th class="fw-medium cr" (click)="sortTable('petrolType')">Petrol Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(car of allCars() | paginate: { itemsPerPage:pageSize() , currentPage: currentPage(), totalItems:totalCars()} ; track $index){
                 <tr>
-                  <th class="fw-medium cr" (click)="sortTable('index')">#</th>
-                  <th class="fw-medium cr" (click)="sortTable('model')">Model</th>
-                  <th class="fw-medium cr" (click)="sortTable('carNumber')">Plate</th>
-                  <th class="fw-medium cr" (click)="sortTable('color')">Color</th>
-                  <th class="fw-medium cr" (click)="sortTable('licenseDate')">License Date</th>
-                  <th class="fw-medium cr" (click)="sortTable('driverName')">Driver Name</th>
-                  <th class="fw-medium cr" (click)="sortTable('petrolType')">Petrol Type</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for(car of allCars() | paginate: { itemsPerPage:pageSize() , currentPage: currentPage(), totalItems:totalCars()} ; track $index){
-                  <tr>
-                    <td>
-                      {{ $index + 1 }}
-                    </td>
-                    <td>
-                      {{ car.model }}
-                    </td>
-                    <td>
-                      {{ car.carNumber }}
-                    </td>
-                    <td>
-                      {{ car.color }}
-                    </td>
-                    <td>
-                      {{ car.licenseDate | date }}
-                    </td>
-                    <td>
-                      @for(driver of car.driversName; track $index){
-                        <p class="text-table">{{ driver }}</p>
-                      }
-                    </td>
-                    <td>
-                      {{ car.petrolType }}
-                    </td>
-                    <!-- <td>
-                      <div class="d-flex justify-content-center align-items-center gap-2 mt-1">
-                        <i [routerLink]="['/details/' + branch.id]" class="text-secondary fa-solid fa-circle-info cr"></i>
-                        <div class="d-flex justify-content-center align-items-center" (click)="deleteBranch(branch.id)">
-                          <svg class="cr" width="16" height="16" viewBox="0 0 14 14" fill="#f00" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_920_9284)">
-                            <path d="M12.8333 2.33333H10.4411C10.1698 1.00392 8.99206 0 7.58331 0H6.41665C5.00848 0 3.83015 1.00392 3.5589 2.33333H1.16665C0.844646 2.33333 0.583313 2.59408 0.583313 2.91667C0.583313 3.23925 0.844646 3.5 1.16665 3.5H1.66831L2.42431 11.3628C2.56898 12.8666 3.81731 14 5.32756 14H8.66831C10.1809 14 11.4292 12.8642 11.5721 11.3587L12.3165 3.5H12.8327C13.1547 3.5 13.4161 3.23925 13.4161 2.91667C13.4161 2.59408 13.1553 2.33333 12.8333 2.33333ZM6.41665 1.16667H7.58331C8.34281 1.16667 8.98448 1.65608 9.22598 2.33333H4.77456C5.01606 1.65608 5.65773 1.16667 6.41723 1.16667H6.41665ZM9.1624 9.50425C9.39048 9.73233 9.39048 10.101 9.1624 10.3291C9.04865 10.4428 8.89931 10.5 8.74998 10.5C8.60065 10.5 8.45131 10.4428 8.33756 10.3291L6.99998 8.9915L5.6624 10.3291C5.54865 10.4428 5.39931 10.5 5.24998 10.5C5.10065 10.5 4.95131 10.4428 4.83756 10.3291C4.60948 10.101 4.60948 9.73233 4.83756 9.50425L6.17515 8.16667L4.83756 6.82908C4.60948 6.601 4.60948 6.23233 4.83756 6.00425C5.06565 5.77617 5.43431 5.77617 5.6624 6.00425L6.99998 7.34183L8.33756 6.00425C8.56565 5.77617 8.93431 5.77617 9.1624 6.00425C9.39048 6.23233 9.39048 6.601 9.1624 6.82908L7.82481 8.16667L9.1624 9.50425Z"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_920_9284">
-                            <rect width="14" height="14" fill="white"/>
-                            </clipPath>
-                            </defs>
-                          </svg>
-                        </div>
+                  <td>
+                    {{ $index + 1 }}
+                  </td>
+                  <td>
+                    {{ car.model }}
+                  </td>
+                  <td>
+                    {{ car.carNumber }}
+                  </td>
+                  <td>
+                    {{ car.color }}
+                  </td>
+                  <td>
+                    {{ car.licenseDate | date }}
+                  </td>
+                  <td>
+                    @for(driver of car.driversName; track $index){
+                      <p class="text-table">{{ driver }}</p>
+                    }
+                  </td>
+                  <td>
+                    {{ car.petrolType }}
+                  </td>
+                  <!-- <td>
+                    <div class="d-flex justify-content-center align-items-center gap-2 mt-1">
+                      <i [routerLink]="['/details/' + branch.id]" class="text-secondary fa-solid fa-circle-info cr"></i>
+                      <div class="d-flex justify-content-center align-items-center" (click)="deleteBranch(branch.id)">
+                        <svg class="cr" width="16" height="16" viewBox="0 0 14 14" fill="#f00" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_920_9284)">
+                          <path d="M12.8333 2.33333H10.4411C10.1698 1.00392 8.99206 0 7.58331 0H6.41665C5.00848 0 3.83015 1.00392 3.5589 2.33333H1.16665C0.844646 2.33333 0.583313 2.59408 0.583313 2.91667C0.583313 3.23925 0.844646 3.5 1.16665 3.5H1.66831L2.42431 11.3628C2.56898 12.8666 3.81731 14 5.32756 14H8.66831C10.1809 14 11.4292 12.8642 11.5721 11.3587L12.3165 3.5H12.8327C13.1547 3.5 13.4161 3.23925 13.4161 2.91667C13.4161 2.59408 13.1553 2.33333 12.8333 2.33333ZM6.41665 1.16667H7.58331C8.34281 1.16667 8.98448 1.65608 9.22598 2.33333H4.77456C5.01606 1.65608 5.65773 1.16667 6.41723 1.16667H6.41665ZM9.1624 9.50425C9.39048 9.73233 9.39048 10.101 9.1624 10.3291C9.04865 10.4428 8.89931 10.5 8.74998 10.5C8.60065 10.5 8.45131 10.4428 8.33756 10.3291L6.99998 8.9915L5.6624 10.3291C5.54865 10.4428 5.39931 10.5 5.24998 10.5C5.10065 10.5 4.95131 10.4428 4.83756 10.3291C4.60948 10.101 4.60948 9.73233 4.83756 9.50425L6.17515 8.16667L4.83756 6.82908C4.60948 6.601 4.60948 6.23233 4.83756 6.00425C5.06565 5.77617 5.43431 5.77617 5.6624 6.00425L6.99998 7.34183L8.33756 6.00425C8.56565 5.77617 8.93431 5.77617 9.1624 6.00425C9.39048 6.23233 9.39048 6.601 9.1624 6.82908L7.82481 8.16667L9.1624 9.50425Z"/>
+                          </g>
+                          <defs>
+                          <clipPath id="clip0_920_9284">
+                          <rect width="14" height="14" fill="white"/>
+                          </clipPath>
+                          </defs>
+                        </svg>
                       </div>
-                    </td> -->
-                  </tr>
-                }
-              </tbody>
-            </table>
+                    </div>
+                  </td> -->
+                </tr>
+              }
+            </tbody>
+          </table>
 
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <select name="pageSize" id="pageSize" class="form-select bg-white py-1" (change)="onChangePageSize($event)">
-                  <option value="10">10</option>
-                  <option value="25">25</option>
-                  <option value="50">50</option>
-                  <option value="100">100</option>
-                  <option value="10000">All</option>
-                </select>
-              </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <select name="pageSize" id="pageSize" class="form-select bg-white py-1" (change)="onChangePageSize($event)">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="10000">All</option>
+              </select>
+            </div>
 
-              <div>
-                <pagination-controls (pageChange)="onPageChange($event)" class="d-flex justify-content-start my-pagination"></pagination-controls>
-              </div>
+            <div>
+              <pagination-controls (pageChange)="onPageChange($event)" class="d-flex justify-content-start my-pagination"></pagination-controls>
             </div>
           </div>
         </div>
       </div>
-    } @else {
-      <div class="vh-100 d-flex flex-column justify-content-center align-items-center bg-white shadow rounded-3">
-        <img loading="lazy" src="/assets/image/error_9042574.png" class="err-img" alt="error404" srcset="">
-      </div>
-    }
-
-
-
-
-
-    <!-- @if(allCars.length){
-      <div class="col-12 animate__animated animate__fadeInUp">
-        <div class="bg-white rounded-3 shadow p-3">
-          <div class="table-responsive">
-            <table class="table overflow-x-scroll table-striped text-center">
-                <tbody>
-                  @for(car of allCars | paginate: { itemsPerPage:pageSize , currentPage: currentPage, totalItems:totalCars } ; track $index){
-                    <tr>
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                          <span class="muted">ID</span>
-                          <p class="text-table">{{ $index + 1 }}</p>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                          <span class="muted">Model</span>
-                          <p class="text-table">{{ car.model }}</p>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                          <span class="muted">Plate</span>
-                          <p class="text-table">{{ car.carNumber }}</p>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                          <span class="muted">Color</span>
-                          <p class="text-table">{{ car.color }}</p>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                          <span class="muted">License Date</span>
-                          <p class="text-table">{{ car.licenseDate | date }}</p>
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                          <span class="muted">Driver Name</span>
-                          @for(driver of car.driversName; track $index){
-                            <p class="text-table">{{ driver }}</p>
-                          }
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                          <span class="muted">Petrol Type</span>
-                          <p class="text-table">{{ car.petrolType ?? 'UnKnown' }}</p>
-                        </div>
-                      </td>
-                    </tr>
-                  }
-                </tbody>
-            </table>
-
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <select name="pageSize" id="pageSize" class="form-select py-1" (change)="onChangePageSize($event)">
-                  <option value="10">10</option>
-                  <option value="25">25</option>
-                  <option value="50">50</option>
-                  <option value="100">100</option>
-                  <option value="10000">All</option>
-                </select>
-              </div>
-
-              <div>
-                <pagination-controls (pageChange)="onPageChange($event)" class="d-flex justify-content-center my-pagination"></pagination-controls>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    } @else {
-      <div class="vh-100 d-flex flex-column justify-content-center align-items-center bg-white shadow rounded-3">
-        <img loading="lazy" src=".///error_9042574.png" class="err-img loading="lazy"" alt="error404" srcset="">
-      </div>
-    } -->
+    </div>
   </div>
 </section>

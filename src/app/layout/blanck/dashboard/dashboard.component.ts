@@ -7,12 +7,13 @@ import { CompanyService } from '../companies/core/service/company.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BranchService } from '../branches/core/service/branch.service';
 import { SwiperOptions } from 'swiper/types';
+import { RouterLink } from '@angular/router';
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [HeaderComponent, CarouselModule, ReactiveFormsModule],
+  imports: [HeaderComponent, CarouselModule, ReactiveFormsModule, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
