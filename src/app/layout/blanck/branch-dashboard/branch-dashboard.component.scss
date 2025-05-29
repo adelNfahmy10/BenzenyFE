@@ -1,0 +1,29 @@
+/* #################################### Style Head Cards ####################################### */
+$mainColor:#F79320;
+.head-card {
+  .icon-head{
+    height: fit-content;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dotted $mainColor;
+  }
+  img{
+    width: 130px;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(350%);
+  }
+  p{
+    color: #96a0b5;
+    font-size: 18px;
+  }
+  h4 {
+    font-weight: 500;
+  }
+}
+.balance-chart{
+  height: 400px;
+}
