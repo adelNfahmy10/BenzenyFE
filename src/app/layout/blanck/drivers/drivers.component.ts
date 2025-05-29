@@ -36,7 +36,9 @@ export class DriversComponent implements OnInit{
   files: WritableSignal<File[]> = signal([]);
   sortColumn: WritableSignal<string> = signal('');
   sortDirection: WritableSignal<boolean> = signal(true);
-
+  get isEnabled(): boolean {
+    return this.selectedDriverIds.length > 0;
+  }
   ngOnInit(): void {
     this.getAllDrivers()
   }
@@ -56,15 +58,13 @@ export class DriversComponent implements OnInit{
     }
   }
 
-  isAllSelected(): boolean {
+  isAllSelected():any {
     return this.allDrivers().length > 0 && this.allDrivers().every(Driver => this.selectedDriverIds.includes(Driver.id));
   }
 
   toggleAllSelection(event: any): void {
     if (event.target.checked) {
       this.selectedDriverIds = this.allDrivers().map(Driver => Driver.id);
-      console.log(this.selectedDriverIds);
-
     } else {
       this.selectedDriverIds = [];
     }

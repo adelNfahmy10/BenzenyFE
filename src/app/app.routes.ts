@@ -49,6 +49,7 @@ export const routes: Routes = [
       { path: 'home', loadComponent: () => import('./layout/blanck/dashboard/dashboard.component').then(m => m.DashboardComponent), title: 'Home' },
       { path: 'company', loadComponent: () => import('./layout/blanck/companies/companies.component').then(m => m.CompaniesComponent), title: 'Company' },
       { path: 'users', loadComponent: () => import('./layout/blanck/companies/users/users.component').then(m => m.UsersComponent), title: 'Users' },
+      { path: 'branch-dashboard', loadComponent: () => import('./layout/blanck/branch-dashboard/branch-dashboard.component').then(m => m.BranchDashboardComponent), title: 'Branches' },
       { path: 'branch', loadComponent: () => import('./layout/blanck/branches/branches.component').then(m => m.BranchesComponent), title: 'Branches' },
       { path: 'details/:id', loadComponent: () => import('./layout/blanck/branches/branchdetails/branchdetails.component').then(m => m.BranchdetailsComponent), title: 'Branch' },
       { path: 'balance', loadComponent: () => import('./layout/blanck/balance/balance.component').then(m => m.BalanceComponent), title: 'Balance' },

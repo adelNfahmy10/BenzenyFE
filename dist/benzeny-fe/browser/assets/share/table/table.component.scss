@@ -69,3 +69,7 @@ $mainColor: #f79320;
     }
   }
 }
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: $mainColor !important;
+  color: #fff !important ;
+}

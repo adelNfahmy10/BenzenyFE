@@ -38,12 +38,12 @@ export class BalanceComponent implements OnInit{
 
   if(this.role == 'Branch-Manager'){
     this.data = [
-          { id: '646464156', Transactions: '597', selected: false },
-          { id: '646464157', Transactions: '523', selected: false },
-          { id: '646464158', Transactions: '755', selected: false },
-          { id: '646464159', Transactions: '090', selected: false },
-          { id: '646464160', Transactions: '342', selected: false },
-          { id: '646464161', Transactions: '512', selected: false },
+          { id: '646464156', Amount: '597', Type: 'Fuel', Date: '14, April 2025', balance: '40 SAR',selected: false },
+          { id: '646464157', Amount: '523', Type: 'Fuel', Date: '18, May 2025', balance: '32 SAR',selected: false },
+          { id: '646464158', Amount: '755', Type: 'Oil', Date: '22, May 2025', balance: '62 SAR',selected: false },
+          { id: '646464159', Amount: '090', Type: 'Wash', Date: '5, June 2025', balance: '30 SAR',selected: false },
+          { id: '646464160', Amount: '342', Type: 'Fuel', Date: '17, June 2025', balance: '72 SAR',selected: false },
+          { id: '646464161', Amount: '512', Type: 'Wash', Date: '30, July 2025', balance: '14 SAR',selected: false },
       ]
     }
   }

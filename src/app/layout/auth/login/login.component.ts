@@ -36,7 +36,7 @@ export class LoginComponent {
         this.role = localStorage.getItem('role')
         if(res.data.branchId){
           localStorage.setItem('branchId', res.data.branchId)
-          this._Router.navigate(['/balance'])
+          this._Router.navigate(['/branch-dashboard'])
         } else if(this.role == "Super Admin"){
           this._Router.navigate(['/benzeny-dashboard'])
         } else {
