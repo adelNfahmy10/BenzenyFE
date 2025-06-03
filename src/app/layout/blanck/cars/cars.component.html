@@ -76,13 +76,75 @@
                 <th>
                   <input type="checkbox" class="custom-checkbox" [checked]="isAllSelected()" (change)="toggleAllSelection($event)">
                 </th>
-                <th class="fw-medium cr" (click)="sortTable('model')">Model</th>
-                <th class="fw-medium cr" (click)="sortTable('carNumber')">Plate</th>
-                <th class="fw-medium cr" (click)="sortTable('color')">Color</th>
-                <th class="fw-medium cr" (click)="sortTable('licenseDate')">License Date</th>
-                <th class="fw-medium cr" (click)="sortTable('driverName')">Driver Name</th>
-                <th class="fw-medium cr" (click)="sortTable('petrolType')">Petrol Type</th>
+                <th class="fw-medium cr" (click)="sortTable('model')">
+                  <div class="d-flex justify-content-center align-items-center gap-1">
+                    <span>Model</span>
+                    <i class="fa-solid fa-arrow-up"
+                      [ngClass]="{
+                        'fa-arrow-up': sortColumn() === 'model' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'model' && sortDirection())
+                      }">
+                    </i>
+                  </div>
+                </th>
+                <th class="fw-medium cr" (click)="sortTable('pin')">
+                  <div class="d-flex justify-content-center align-items-center gap-1">
+                    <span>PIN</span>
+                    <i class="fa-solid fa-arrow-up"
+                      [ngClass]="{
+                        'fa-arrow-up': sortColumn() === 'pin' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'pin' && sortDirection())
+                      }">
+                    </i>
+                  </div>
+                </th>
+                <th class="fw-medium cr" (click)="sortTable('carNumber')">
+                  <div class="d-flex justify-content-center align-items-center gap-1">
+                    <span>Plate</span>
+                    <i class="fa-solid fa-arrow-up"
+                      [ngClass]="{
+                        'fa-arrow-up': sortColumn() === 'carNumber' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'carNumber' && sortDirection())
+                      }">
+                    </i>
+                  </div>
+                </th>
+                <th class="fw-medium cr" (click)="sortTable('brand')">
+                  <div class="d-flex justify-content-center align-items-center gap-1">
+                    <span>Brand</span>
+                    <i class="fa-solid fa-arrow-up"
+                      [ngClass]="{
+                        'fa-arrow-up': sortColumn() === 'brand' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'brand' && sortDirection())
+                      }">
+                    </i>
+                  </div>
+                </th>
+                <th class="fw-medium cr" (click)="sortTable('petrolType')">
+                  <div class="d-flex justify-content-center align-items-center gap-1">
+                    <span>Petrol Type</span>
+                    <i class="fa-solid fa-arrow-up"
+                      [ngClass]="{
+                        'fa-arrow-up': sortColumn() === 'petrolType' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'petrolType' && sortDirection())
+                      }">
+                    </i>
+                  </div>
+                </th>
+                <th class="fw-medium cr" (click)="sortTable('driverName')">
+                  <div class="d-flex justify-content-center align-items-center gap-1">
+                    <span>Driver Name</span>
+                    <!-- <i class="fa-solid fa-arrow-up"
+                      [ngClass]="{
+                        'fa-arrow-up': sortColumn() === 'driverName' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'driverName' && sortDirection())
+                      }">
+                    </i> -->
+                  </div>
+                </th>
                 <th class="fw-medium cr">Actions</th>
+                <!-- <th class="fw-medium cr" (click)="sortTable('color')">Color</th>
+                <th class="fw-medium cr" (click)="sortTable('licenseDate')">License Date</th> -->
               </tr>
             </thead>
             <tbody>
@@ -95,21 +157,27 @@
                     {{ car.model }}
                   </td>
                   <td>
+                    {{ car.pin }}
+                  </td>
+                  <td>
                     {{ car.carNumber }}
                   </td>
                   <td>
+                    {{ car.Brand }}
+                  </td>
+                  <td>
+                    {{ car.petrolType }}
+                  </td>
+                  <!-- <td>
                     {{ car.color }}
                   </td>
                   <td>
                     {{ car.licenseDate | date }}
-                  </td>
+                  </td> -->
                   <td>
                     @for(driver of car.driversName; track $index){
                       <p class="text-table">{{ driver }}</p>
                     }
-                  </td>
-                  <td>
-                    {{ car.petrolType }}
                   </td>
                   <td>
                     <div class="d-flex justify-content-center align-items-center gap-2 mt-1">
@@ -184,55 +252,94 @@
 
         <div class="row g-2">
           <div class="col-md-6">
-            <form class="w-100" [formGroup]="carForm">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-12">
-                    <label for="model">Car Model</label>
-                    <input type="text" formControlName="model" name="model" id="model" class="form-control" placeholder="Car Model...">
-                  </div>
+            <form class="row g-2" [formGroup]="carForm">
+              <div class="col-md-6">
+                <label for="type">Viehicle Type</label>
+                <select name="type" id="type" formControlName="type" class="form-select">
+                  <option value="" selected disabled>Choose Viehicle Type</option>
+                  <option value="1">HatchBack</option>
+                  <option value="1">Minivan</option>
+                  <option value="1">Seden</option>
+                  <option value="1">Van</option>
+                </select>
+              </div>
 
-                  <div class="col-12">
-                    <label for="color">Color</label>
-                    <input type="text" formControlName="color" name="color" id="color" class="form-control" placeholder="Color...">
-                  </div>
+              <div class="col-md-6">
+                <label for="brand">Car Brand</label>
+                <select name="brand" id="brand" formControlName="brand" class="form-select">
+                  <option value="" selected disabled>Choose Brand</option>
+                  <option value="1">Toyota</option>
+                  <option value="2">Ford</option>
+                  <option value="3">Honda</option>
+                  <option value="4">Volkswagen</option>
+                </select>
+              </div>
 
+              <div class="col-md-6">
+                <label for="model">Car Model</label>
+                <select name="model" id="model" formControlName="model" class="form-select">
+                  <option value="" selected disabled>Choose Model</option>
+                  <option value="1">2020</option>
+                  <option value="2">2022</option>
+                  <option value="3">2023</option>
+                  <option value="4">2025</option>
+                </select>
+              </div>
 
-                  <div class="col-12">
-                    <label for="petrolType">petrolType</label>
-                    <input type="text" formControlName="petrolType" name="petrolType" id="petrolType" class="form-control" placeholder="Plate...">
-                  </div>
+              <div class="col-md-6">
+                <label for="modelYear">Year Model</label>
+                <input type="number" formControlName="modelYear" name="modelYear" id="modelYear" class="form-control" placeholder="Model Year...">
+              </div>
 
-                  <div class="col-12">
-                    <label for="licenseDate">License Date</label>
-                    <input type="date" formControlName="licenseDate" name="licenseDate" id="licenseDate" class="form-control" placeholder="License Date...">
-                  </div>
+              <div class="col-md-6">
+                <label for="plateType">Plate Type</label>
+                <select name="plateType" id="plateType" formControlName="plateType" class="form-select">
+                  <option value="" selected disabled>Choose Plate Type</option>
+                  <option value="1">Private</option>
+                  <option value="2">Taxi</option>
+                  <option value="3">Trucks</option>
+                </select>
+              </div>
 
-                  <div class="col-12">
-                    <label for="driverId">Drivers</label>
-                    <div class="d-flex gap-2">
-                      <div formArrayName="driversId" class="d-flex flex-column gap-2 w-100">
-                        <div *ngFor="let driver of drivers.controls; let i = index" class="d-flex gap-2">
-                          <select name="driverId" id="driverId" class="form-select" [formControlName]="i">
-                            <option value="" selected disabled>Select Driver...</option>
-                            @for(driver of allDrivers();track $index){
-                              <option [value]="driver.id">{{driver.fullName}}</option>
-                            }
-                          </select>
-                          @if(i > 0){
-                            <span class="text-danger mt-2 cr" (click)="removeDriver(i)"><i class="fa-solid fa-minus"></i></span>
-                          }
-                        </div>
-                      </div>
-                      @if(driverCount() <= 2){
-                        <span type="button" class="add-car-btn d-flex justify-content-center align-items-center rounded-circle" (click)="addDriver()"><i class="fa-solid fa-plus"></i></span>
+              <div class="col-md-6">
+                <label for="petrolType">Petrol Type</label>
+                <input type="text" formControlName="petrolType" name="petrolType" id="petrolType" class="form-control" placeholder="Plate...">
+              </div>
+
+              <!-- <div class="col-12">
+                <label for="color">Color</label>
+                <input type="text" formControlName="color" name="color" id="color" class="form-control" placeholder="Color...">
+              </div> -->
+
+              <!-- <div class="col-12">
+                <label for="licenseDate">License Date</label>
+                <input type="date" formControlName="licenseDate" name="licenseDate" id="licenseDate" class="form-control" placeholder="License Date...">
+              </div> -->
+
+              <div class="col-12">
+                <label for="driverId">Drivers</label>
+                <div class="d-flex gap-2">
+                  <div formArrayName="driversId" class="d-flex flex-column gap-2 w-100">
+                    <div *ngFor="let driver of drivers.controls; let i = index" class="d-flex gap-2">
+                      <select name="driverId" id="driverId" class="form-select" [formControlName]="i">
+                        <option value="" selected disabled>Select Driver...</option>
+                        @for(driver of allDrivers();track $index){
+                          <option [value]="driver.id">{{driver.fullName}}</option>
+                        }
+                      </select>
+                      @if(i > 0){
+                        <span class="text-danger mt-2 cr" (click)="removeDriver(i)"><i class="fa-solid fa-minus"></i></span>
                       }
                     </div>
                   </div>
+                  @if(driverCount() <= 2){
+                    <span type="button" class="add-car-btn d-flex justify-content-center align-items-center rounded-circle" (click)="addDriver()"><i class="fa-solid fa-plus"></i></span>
+                  }
                 </div>
               </div>
             </form>
           </div>
+
           <div class="col-md-6">
             <div class="row g-2">
               <div class="col-6">
@@ -292,6 +399,7 @@
               </div>
             </div>
           </div>
+
           <div class="col-12">
             <div class="d-flex justify-content-end align-items-center gap-2">
               <button (click)="submitCarForm()" class="save-btn btn d-flex justify-content-center align-items-center gap-2">

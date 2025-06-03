@@ -20,8 +20,8 @@ $mainColor:#f79320;
     color: #222;
   }
 }
-i:not(.fa-circle-info, .fa-pen-to-square){
-  font-size: 25px !important;
+i{
+  font-size: 25px;
 }
 
 /* #################################### Form Style ####################################### */
@@ -166,7 +166,6 @@ label{
 .active-btn {
   @include button-style(#D9F8E8, #35cf80);
 }
-
 .disabled-btn{
   pointer-events: none;
   opacity: 0.6;
@@ -174,6 +173,9 @@ label{
 .enable-btn{
   pointer-events: auto;
   opacity: 1;
+}
+.fa-arrow-up, .fa-arrow-down, .fa-circle-info, .fa-pen-to-square{
+  font-size: 12px;
 }
 
 /* #################################### Pagination Style ####################################### */
