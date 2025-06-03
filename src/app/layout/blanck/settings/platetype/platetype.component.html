@@ -1,0 +1,44 @@
+<section>
+  <div class="container-fluid">
+    <h3 class="mb-3">Setting Plate Type</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <form [formGroup]="plateTypeForm" (ngSubmit)="submitPlateTypeForm()">
+          <label class="mb-2" for="plate">Plate Type</label>
+          <input id="plate" type="text" formControlName="title" class="form-control mb-2" placeholder="Enter Plate Type...">
+          @if(update){
+            <app-btnupdate (click)="updatePlateType()"></app-btnupdate>
+          } @else {
+            <app-btnadd></app-btnadd>
+          }
+        </form>
+      </div>
+      <div class="col-md-8">
+        <label class="mb-2">Plate Type Details</label>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="text-center">#</th>
+              <th class="text-center">Plate Type</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(plate of allPlateType; track $index){
+              <tr>
+                <td class="text-center">{{$index + 1}}</td>
+                <td class="text-center">{{plate.title}}</td>
+                <td class="text-center">
+                  <div class="d-flex justify-content-center align-items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square cr text-success" (click)="patchPlateType(plate)"></i>
+                    <i class="fa-solid fa-trash-can cr text-danger" (click)="deletePlateType(plate.id)"></i>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

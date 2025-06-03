@@ -1,0 +1,44 @@
+<section>
+  <div class="container-fluid">
+    <h3 class="mb-3">Setting Car Model</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <form [formGroup]="carModelForm" (ngSubmit)="submitCarModelForm()">
+          <label class="mb-2" for="model">Car Model</label>
+          <input id="model" type="text" formControlName="title" class="form-control mb-2" placeholder="Enter Car Model...">
+          @if(update){
+            <app-btnupdate (click)="updateCarModel()"></app-btnupdate>
+          } @else {
+            <app-btnadd></app-btnadd>
+          }
+        </form>
+      </div>
+      <div class="col-md-8">
+        <label class="mb-2">Car Model Details</label>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="text-center">#</th>
+              <th class="text-center">Model</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(model of allCarModel; track $index){
+              <tr>
+                <td class="text-center">{{$index + 1}}</td>
+                <td class="text-center">{{model.title}}</td>
+                <td class="text-center">
+                  <div class="d-flex justify-content-center align-items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square cr text-success" (click)="patchCarModel(model)"></i>
+                    <i class="fa-solid fa-trash-can cr text-danger" (click)="deleteCarModel(model.id)"></i>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
