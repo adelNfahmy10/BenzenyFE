@@ -61,6 +61,10 @@ export const routes: Routes = [
       { path: 'ads', loadComponent: () => import('./layout/blanck/ads/ads.component').then(m => m.AdsComponent), title: 'ADS' },
       { path: 'management', loadComponent: () => import('./layout/blanck/management/management.component').then(m => m.ManagementComponent), title: 'Management' },
       { path: 'setting', loadComponent: () => import('./layout/blanck/settings/settings.component').then(m => m.SettingsComponent), title: 'Setting' },
+      { path: 'setting-car-brand', loadComponent: () => import('./layout/blanck/settings/carbrand/carbrand.component').then(m => m.CarbrandComponent), title: 'Setting' },
+      { path: 'setting-car-model', loadComponent: () => import('./layout/blanck/settings/carmodel/carmodel.component').then(m => m.CarmodelComponent), title: 'Setting' },
+      { path: 'setting-plate-type', loadComponent: () => import('./layout/blanck/settings/platetype/platetype.component').then(m => m.PlatetypeComponent), title: 'Setting' },
+      { path: 'setting-car-type', loadComponent: () => import('./layout/blanck/settings/cartype/cartype.component').then(m => m.CartypeComponent), title: 'Setting' },
       { path: 'footer', loadComponent: () => import('./layout/blanck/footer/footer.component').then(m => m.FooterComponent), title: 'Footer' },
     ]
   },

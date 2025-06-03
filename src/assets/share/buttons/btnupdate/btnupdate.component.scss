@@ -1,0 +1,17 @@
+$mainColor: rgba(0, 192, 0, 0.733);
+.update-btn{
+  color: $mainColor;
+  width: 111px;
+  height: 29px;
+  padding: 5px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 17px;
+  border: 1px solid $mainColor;
+  background-color: #FFF;
+  &:hover{
+    background-color: $mainColor;
+    color: #fff;
+  }
+}
