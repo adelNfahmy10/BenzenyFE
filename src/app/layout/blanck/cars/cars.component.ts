@@ -5,7 +5,7 @@ import * as XLSX from 'xlsx';
 import { CarService } from './core/service/car.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { DatePipe, isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
+import { isPlatformBrowser, NgClass, NgFor, NgIf } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DriverService } from '../drivers/core/service/driver.service';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +14,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 @Component({
   selector: 'app-cars',
   standalone: true,
-  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgFor, NgxDropzoneModule, DatePipe],
+  imports: [FormsModule, HeaderComponent, ReactiveFormsModule, NgxPaginationModule, NgFor, NgxDropzoneModule, NgClass],
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.scss'
 })

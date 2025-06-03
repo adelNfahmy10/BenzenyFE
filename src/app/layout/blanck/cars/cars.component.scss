@@ -20,9 +20,6 @@ $mainColor:#f79320;
     color: #222;
   }
 }
-i:not(.fa-circle-info){
-  font-size: 25px !important;
-}
 .plate-table{
   width: 70%;
   height: 50%;
@@ -104,6 +101,9 @@ i:not(.fa-circle-info){
   color: #fff;
   border: 1px solid $mainColor;
   box-shadow: none !important;
+}
+.fa-arrow-up, .fa-arrow-down, .fa-circle-info{
+  font-size: 12px;
 }
 /* #################################### Form Style ####################################### */
 label{

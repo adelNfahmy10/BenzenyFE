@@ -102,12 +102,72 @@
                   <th>
                     <input type="checkbox" class="custom-checkbox" [checked]="isAllSelected()" (change)="toggleAllSelection($event)">
                   </th>
-                  <th class="fw-medium cr" (click)="sortTable('fullName')">Driver Name</th>
-                  <th class="fw-medium cr" (click)="sortTable('phoneNumber')">Phone No.</th>
-                  <th class="fw-medium cr" (click)="sortTable('currentBalance')">Current Balance</th>
-                  <th class="fw-medium cr" (click)="sortTable('cardStatus')">Card Status</th>
-                  <th class="fw-medium cr" (click)="sortTable('consumptionType')">Consumption Type</th>
-                  <th class="fw-medium cr" (click)="sortTable('refundBalance')">Refund Balance</th>
+                  <th class="fw-medium cr" (click)="sortTable('fullName')">
+                    <div class="d-flex justify-content-center align-items-center gap-1">
+                      <span>Driver Name</span>
+                      <i class="fa-solid fa-arrow-up"
+                        [ngClass]="{
+                          'fa-arrow-up': sortColumn() === 'fullName' && sortDirection(),
+                          'fa-arrow-down': !(sortColumn() === 'fullName' && sortDirection())
+                        }">
+                      </i>
+                    </div>
+                  </th>
+                  <th class="fw-medium cr" (click)="sortTable('phoneNumber')">
+                    <div class="d-flex justify-content-center align-items-center gap-1">
+                      <span>Phone No.</span>
+                      <i class="fa-solid fa-arrow-up"
+                        [ngClass]="{
+                          'fa-arrow-up': sortColumn() === 'phoneNumber' && sortDirection(),
+                          'fa-arrow-down': !(sortColumn() === 'phoneNumber' && sortDirection())
+                        }">
+                      </i>
+                    </div>
+                  </th>
+                  <th class="fw-medium cr" (click)="sortTable('currentBalance')">
+                    <div class="d-flex justify-content-center align-items-center gap-1">
+                      <span>Current Balance</span>
+                      <i class="fa-solid fa-arrow-up"
+                        [ngClass]="{
+                          'fa-arrow-up': sortColumn() === 'currentBalance' && sortDirection(),
+                          'fa-arrow-down': !(sortColumn() === 'currentBalance' && sortDirection())
+                        }">
+                      </i>
+                    </div>
+                  </th>
+                  <th class="fw-medium cr" (click)="sortTable('cardStatus')">
+                    <div class="d-flex justify-content-center align-items-center gap-1">
+                      <span>Card Status</span>
+                      <i class="fa-solid fa-arrow-up"
+                        [ngClass]="{
+                          'fa-arrow-up': sortColumn() === 'cardStatus' && sortDirection(),
+                          'fa-arrow-down': !(sortColumn() === 'cardStatus' && sortDirection())
+                        }">
+                      </i>
+                    </div>
+                  </th>
+                  <th class="fw-medium cr" (click)="sortTable('consumptionType')">
+                    <div class="d-flex justify-content-center align-items-center gap-1">
+                      <span>Consumption Type</span>
+                      <i class="fa-solid fa-arrow-up"
+                        [ngClass]="{
+                          'fa-arrow-up': sortColumn() === 'consumptionType' && sortDirection(),
+                          'fa-arrow-down': !(sortColumn() === 'consumptionType' && sortDirection())
+                        }">
+                      </i>
+                    </div>
+                  </th>
+                  <th class="fw-medium cr" (click)="sortTable('refundBalance')">
+                    <div class="d-flex justify-content-center align-items-center gap-1">
+                      <span>Refund Balance</span>
+                      <i class="fa-solid fa-arrow-up"
+                        [ngClass]="{
+                          'fa-arrow-up': sortColumn() === 'refundBalance' && sortDirection(),
+                          'fa-arrow-down': !(sortColumn() === 'refundBalance' && sortDirection())
+                        }">
+                      </i>
+                    </div>
+                  </th>
                   <!-- <th class="fw-medium cr" (click)="sortTable('license')">License</th>
                   <th class="fw-medium cr" (click)="sortTable('licenseDegree')">License Degree</th> -->
                   <th class="fw-medium cr">Actions</th>
