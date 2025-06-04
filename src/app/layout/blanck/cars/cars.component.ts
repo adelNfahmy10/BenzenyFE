@@ -10,6 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DriverService } from '../drivers/core/service/driver.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { SettingService } from '../settings/core/services/setting.service';
 
 @Component({
   selector: 'app-cars',
@@ -21,8 +22,9 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 export class CarsComponent implements OnInit{
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _CarService = inject(CarService)
-  private readonly _PLATFORM_ID = inject(PLATFORM_ID)
   private readonly _DriverService = inject(DriverService)
+  private readonly _SettingService = inject(SettingService)
+  private readonly _PLATFORM_ID = inject(PLATFORM_ID)
   private readonly _ToastrService = inject(ToastrService)
 
   branchId: WritableSignal<string> = signal(localStorage.getItem('branchId') || '');
@@ -52,6 +54,10 @@ export class CarsComponent implements OnInit{
     this.getAllCars()
     this.getAllDriver()
     this.addDriver()
+    this.getAllCarBrand()
+    this.getAllCarModel()
+    this.getAllCarType()
+    this.getAllPlateType()
   }
 
   selectedCarIds: number[] = [];
@@ -62,10 +68,8 @@ export class CarsComponent implements OnInit{
   toggleSelection(carId: number): void {
     if (this.selectedCarIds.includes(carId)) {
       this.selectedCarIds = this.selectedCarIds.filter(id => id !== carId);
-      console.log(this.selectedCarIds);
     } else {
       this.selectedCarIds.push(carId);
-      console.log(this.selectedCarIds);
     }
   }
 
@@ -76,7 +80,6 @@ export class CarsComponent implements OnInit{
   toggleAllSelection(event: any): void {
     if (event.target.checked) {
       this.selectedCarIds = this.allCars().map(car => car.id);
-      console.log(this.selectedCarIds);
 
     } else {
       this.selectedCarIds = [];
@@ -104,7 +107,48 @@ export class CarsComponent implements OnInit{
     });
   }
 
+  allCarBrand:WritableSignal<any[]> = signal([])
+  allCarModel:WritableSignal<any[]> = signal([])
+  allCarType:WritableSignal<any[]> = signal([])
+  allPlateType:WritableSignal<any[]> = signal([])
+
+  getAllCarBrand():void{
+    this._SettingService.getAllCarBrand().subscribe({
+      next:(res)=>{
+        this.allCarBrand.set(res.data)
+      }
+    })
+  }
+
+  getAllCarModel():void{
+    this._SettingService.GetAllCarModels().subscribe({
+      next:(res)=>{
+        this.allCarModel.set(res.data)
+      }
+    })
+  }
+
+  getAllCarType():void{
+    this._SettingService.GetAllCarTypes().subscribe({
+      next:(res)=>{
+        this.allCarType.set(res.data)
+      }
+    })
+  }
+
+  getAllPlateType():void{
+    this._SettingService.GetAllPlateTypes().subscribe({
+      next:(res)=>{
+        this.allPlateType.set(res.data)
+      }
+    })
+  }
+
   carForm:FormGroup = this._FormBuilder.group({
+    carModelId:[''],
+    carBrandId:[''],
+    plateTypeId:[''],
+    carTypeId:[''],
     model:[''],
     carNumber:[''],
     color:[''],
@@ -137,7 +181,7 @@ export class CarsComponent implements OnInit{
     let carPalate = `${carPaletEn} / ${carPaletAr}`;
     data.branchId = this.branchId();
     data.carNumber = carPalate;
-    data.cardNum = data.model;
+    // data.cardNum = data.model;
     data.createdBy = this.userId();
 
     this._CarService.CreateCar(data).subscribe({

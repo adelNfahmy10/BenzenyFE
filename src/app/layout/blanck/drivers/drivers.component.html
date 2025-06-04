@@ -124,6 +124,17 @@
                       </i>
                     </div>
                   </th>
+                   <th class="fw-medium cr" (click)="sortTable('tagId')">
+                    <div class="d-flex justify-content-center align-items-center gap-1">
+                      <span>Tags</span>
+                      <i class="fa-solid fa-arrow-up"
+                        [ngClass]="{
+                          'fa-arrow-up': sortColumn() === 'tagId' && sortDirection(),
+                          'fa-arrow-down': !(sortColumn() === 'tagId' && sortDirection())
+                        }">
+                      </i>
+                    </div>
+                  </th>
                   <th class="fw-medium cr" (click)="sortTable('currentBalance')">
                     <div class="d-flex justify-content-center align-items-center gap-1">
                       <span>Current Balance</span>
@@ -186,13 +197,16 @@
                       {{ driver.phoneNumber }}
                     </td>
                     <td>
-                      <span>Dollar</span>
+                      {{ driver.tagName }}
                     </td>
                     <td>
-                      <span>Acive</span>
+                      {{driver.balance || 'SAR'}}
                     </td>
                     <td>
-                      <span>Monthly</span>
+                      {{driver.cardStatus ? 'Active' : 'DeActive'}}
+                    </td>
+                    <td>
+                      {{driver.consumptionType || 'Monthly'}}
                     </td>
                     <td>
                       <div class="d-flex justify-content-center align-items-center gap-2">
@@ -296,11 +310,11 @@
 
           <div class="col-md-6">
             <label for="fullName">Tag</label>
-            <select class="form-select" name="tag" id="tag">
+            <select class="form-select" name="tag" id="tag" formControlName="tagId">
               <option value="" disabled selected>Choose Tag</option>
-              <option value="1">Team 1</option>
-              <option value="2">Team 2</option>
-              <option value="3">Team 3</option>
+              @for(tag of allTags(); track $index){
+                <option [value]="tag.id">{{tag.title}}</option>
+              }
             </select>
           </div>
 

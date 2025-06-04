@@ -87,13 +87,35 @@
                     </i>
                   </div>
                 </th>
+                <th class="fw-medium cr" (click)="sortTable('model')">
+                  <div class="d-flex justify-content-center align-items-center gap-1">
+                    <span>Brand</span>
+                    <i class="fa-solid fa-arrow-up"
+                      [ngClass]="{
+                        'fa-arrow-up': sortColumn() === 'model' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'model' && sortDirection())
+                      }">
+                    </i>
+                  </div>
+                </th>
                 <th class="fw-medium cr" (click)="sortTable('pin')">
                   <div class="d-flex justify-content-center align-items-center gap-1">
-                    <span>PIN</span>
+                    <span>Type</span>
                     <i class="fa-solid fa-arrow-up"
                       [ngClass]="{
                         'fa-arrow-up': sortColumn() === 'pin' && sortDirection(),
                         'fa-arrow-down': !(sortColumn() === 'pin' && sortDirection())
+                      }">
+                    </i>
+                  </div>
+                </th>
+                <th class="fw-medium cr" (click)="sortTable('carNumber')">
+                  <div class="d-flex justify-content-center align-items-center gap-1">
+                    <span>Plate Type</span>
+                    <i class="fa-solid fa-arrow-up"
+                      [ngClass]="{
+                        'fa-arrow-up': sortColumn() === 'carNumber' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'carNumber' && sortDirection())
                       }">
                     </i>
                   </div>
@@ -109,7 +131,18 @@
                     </i>
                   </div>
                 </th>
-                <th class="fw-medium cr" (click)="sortTable('brand')">
+                <th class="fw-medium cr" (click)="sortTable('pin')">
+                  <div class="d-flex justify-content-center align-items-center gap-1">
+                    <span>PIN</span>
+                    <i class="fa-solid fa-arrow-up"
+                      [ngClass]="{
+                        'fa-arrow-up': sortColumn() === 'pin' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'pin' && sortDirection())
+                      }">
+                    </i>
+                  </div>
+                </th>
+                <!-- <th class="fw-medium cr" (click)="sortTable('brand')">
                   <div class="d-flex justify-content-center align-items-center gap-1">
                     <span>Brand</span>
                     <i class="fa-solid fa-arrow-up"
@@ -119,7 +152,7 @@
                       }">
                     </i>
                   </div>
-                </th>
+                </th> -->
                 <th class="fw-medium cr" (click)="sortTable('petrolType')">
                   <div class="d-flex justify-content-center align-items-center gap-1">
                     <span>Petrol Type</span>
@@ -134,12 +167,6 @@
                 <th class="fw-medium cr" (click)="sortTable('driverName')">
                   <div class="d-flex justify-content-center align-items-center gap-1">
                     <span>Driver Name</span>
-                    <!-- <i class="fa-solid fa-arrow-up"
-                      [ngClass]="{
-                        'fa-arrow-up': sortColumn() === 'driverName' && sortDirection(),
-                        'fa-arrow-down': !(sortColumn() === 'driverName' && sortDirection())
-                      }">
-                    </i> -->
                   </div>
                 </th>
                 <th class="fw-medium cr">Actions</th>
@@ -154,20 +181,28 @@
                     <input type="checkbox" [checked]="isAllSelected()" class="custom-checkbox" (change)="toggleSelection(car.id)">
                   </td>
                   <td>
-                    {{ car.model }}
+                    {{ car.carModel  }}
                   </td>
                   <td>
-                    {{ car.pin }}
+                    {{ car.carBrand  }}
+                  </td>
+                  <td>
+                    {{ car.carType  }}
+                  </td>
+                  <td>
+                    {{ car.plateType  }}
                   </td>
                   <td>
                     {{ car.carNumber }}
                   </td>
                   <td>
-                    {{ car.Brand }}
+                    {{ car.pin }}
                   </td>
                   <td>
                     {{ car.petrolType }}
                   </td>
+
+
                   <!-- <td>
                     {{ car.color }}
                   </td>
@@ -254,35 +289,32 @@
           <div class="col-md-6">
             <form class="row g-2" [formGroup]="carForm">
               <div class="col-md-6">
-                <label for="type">Viehicle Type</label>
-                <select name="type" id="type" formControlName="type" class="form-select">
-                  <option value="" selected disabled>Choose Viehicle Type</option>
-                  <option value="1">HatchBack</option>
-                  <option value="1">Minivan</option>
-                  <option value="1">Seden</option>
-                  <option value="1">Van</option>
+                <label for="type">Vehicle Type</label>
+                <select name="type" id="type" formControlName="carTypeId" class="form-select">
+                  <option value="" selected disabled>Choose Vehicle Type</option>
+                  @for(type of allCarType(); track $index){
+                    <option [value]="type.id">{{type.title}}</option>
+                  }
                 </select>
               </div>
 
               <div class="col-md-6">
                 <label for="brand">Car Brand</label>
-                <select name="brand" id="brand" formControlName="brand" class="form-select">
+                <select name="brand" id="brand" formControlName="carBrandId" class="form-select">
                   <option value="" selected disabled>Choose Brand</option>
-                  <option value="1">Toyota</option>
-                  <option value="2">Ford</option>
-                  <option value="3">Honda</option>
-                  <option value="4">Volkswagen</option>
+                   @for(brand of allCarBrand(); track $index){
+                    <option [value]="brand.id">{{brand.title}}</option>
+                  }
                 </select>
               </div>
 
               <div class="col-md-6">
                 <label for="model">Car Model</label>
-                <select name="model" id="model" formControlName="model" class="form-select">
+                <select name="model" id="model" formControlName="carModelId" class="form-select">
                   <option value="" selected disabled>Choose Model</option>
-                  <option value="1">2020</option>
-                  <option value="2">2022</option>
-                  <option value="3">2023</option>
-                  <option value="4">2025</option>
+                  @for(model of allCarModel(); track $index){
+                    <option [value]="model.id">{{model.title}}</option>
+                  }
                 </select>
               </div>
 
@@ -293,11 +325,11 @@
 
               <div class="col-md-6">
                 <label for="plateType">Plate Type</label>
-                <select name="plateType" id="plateType" formControlName="plateType" class="form-select">
+                <select name="plateType" id="plateType" formControlName="plateTypeId" class="form-select">
                   <option value="" selected disabled>Choose Plate Type</option>
-                  <option value="1">Private</option>
-                  <option value="2">Taxi</option>
-                  <option value="3">Trucks</option>
+                  @for(plate of allPlateType(); track $index){
+                    <option [value]="plate.id">{{plate.title}}</option>
+                  }
                 </select>
               </div>
 
