@@ -10,6 +10,7 @@ import jsPDF from 'jspdf';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
+import { SettingService } from '../settings/core/services/setting.service';
 
 @Component({
   selector: 'app-drivers',
@@ -22,11 +23,13 @@ export class DriversComponent implements OnInit{
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _DriverService = inject(DriverService)
   private readonly _ToastrService = inject(ToastrService)
+  private readonly _SettingService = inject(SettingService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
 
   branchId: WritableSignal<string | null> = signal(localStorage.getItem('branchId'));
   userId: WritableSignal<string | null> = signal(localStorage.getItem('userId'));
   allDrivers: WritableSignal<any[]> = signal([]);
+  allTags:WritableSignal<any[]> = signal([])
   title: WritableSignal<string> = signal('Drivers');
   allPage: WritableSignal<number> = signal(1);
   currentPage: WritableSignal<number> = signal(1);
@@ -41,6 +44,7 @@ export class DriversComponent implements OnInit{
   }
   ngOnInit(): void {
     this.getAllDrivers()
+    this.getAllTags()
   }
 
   selectedDriverIds: number[] = [];
@@ -103,11 +107,20 @@ export class DriversComponent implements OnInit{
     });
   }
 
+  getAllTags():void{
+    this._SettingService.GetAllTags().subscribe({
+      next:(res)=>{
+        this.allTags.set(res.data)
+      }
+    })
+  }
+
   driverForm:FormGroup = this._FormBuilder.group({
     branchId:[''],
     createdBy:[''],
     fullName:[''],
     phoneNumber:[''],
+    tagId:[''],
     license:[''],
     licenseDegree:['']
   })
@@ -201,7 +214,6 @@ export class DriversComponent implements OnInit{
     );
   }
 
-
   onChangePageSize(event:Event):void{
     let pageSize = +(event.target as HTMLSelectElement).value;
     this._DriverService.GetDriversInBranch(this.branchId(), '', 1, pageSize).subscribe({
@@ -250,6 +262,4 @@ export class DriversComponent implements OnInit{
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, 'table_data.xlsx');
   }
-
-
 }
