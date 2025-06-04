@@ -82,4 +82,22 @@ export class SettingService {
   }
   /* End Car Type */
 
+  /* Start Tags */
+  GetAllTags():Observable<any>{
+    return this._HttpClient.get(`${environment.baseURL}api/Settings/GetAllTags`)
+  }
+
+  CreateTags(data:any):Observable<any>{
+    return this._HttpClient.post(`${environment.baseURL}api/Settings/CreateTags`, data)
+  }
+
+  UpdateTags(data:any):Observable<any>{
+    return this._HttpClient.put(`${environment.baseURL}api/Settings/UpdateTags`, data)
+  }
+
+  DeleteTags(id:any):Observable<any>{
+    return this._HttpClient.delete(`${environment.baseURL}api/Settings/DeleteTags/${id}`)
+  }
+  /* End Tags */
+
 }

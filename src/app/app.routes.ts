@@ -65,6 +65,7 @@ export const routes: Routes = [
       { path: 'setting-car-model', loadComponent: () => import('./layout/blanck/settings/carmodel/carmodel.component').then(m => m.CarmodelComponent), title: 'Setting' },
       { path: 'setting-plate-type', loadComponent: () => import('./layout/blanck/settings/platetype/platetype.component').then(m => m.PlatetypeComponent), title: 'Setting' },
       { path: 'setting-car-type', loadComponent: () => import('./layout/blanck/settings/cartype/cartype.component').then(m => m.CartypeComponent), title: 'Setting' },
+      { path: 'setting-tags', loadComponent: () => import('./layout/blanck/settings/tags/tags.component').then(m => m.TagsComponent), title: 'Setting' },
       { path: 'footer', loadComponent: () => import('./layout/blanck/footer/footer.component').then(m => m.FooterComponent), title: 'Footer' },
     ]
   },
