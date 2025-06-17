@@ -149,11 +149,7 @@ export class CarsComponent implements OnInit{
     carBrandId:[''],
     plateTypeId:[''],
     carTypeId:[''],
-    model:[''],
     carNumber:[''],
-    color:[''],
-    cardNum:[''],
-    licenseDate:[''],
     branchId:[''],
     petrolType:[''],
     driversId:this._FormBuilder.array([]),
@@ -181,7 +177,6 @@ export class CarsComponent implements OnInit{
     let carPalate = `${carPaletEn} / ${carPaletAr}`;
     data.branchId = this.branchId();
     data.carNumber = carPalate;
-    // data.cardNum = data.model;
     data.createdBy = this.userId();
 
     this._CarService.CreateCar(data).subscribe({

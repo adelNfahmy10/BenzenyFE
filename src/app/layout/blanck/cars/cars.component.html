@@ -318,10 +318,10 @@
                 </select>
               </div>
 
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                 <label for="modelYear">Year Model</label>
                 <input type="number" formControlName="modelYear" name="modelYear" id="modelYear" class="form-control" placeholder="Model Year...">
-              </div>
+              </div> -->
 
               <div class="col-md-6">
                 <label for="plateType">Plate Type</label>
@@ -338,17 +338,7 @@
                 <input type="text" formControlName="petrolType" name="petrolType" id="petrolType" class="form-control" placeholder="Plate...">
               </div>
 
-              <!-- <div class="col-12">
-                <label for="color">Color</label>
-                <input type="text" formControlName="color" name="color" id="color" class="form-control" placeholder="Color...">
-              </div> -->
-
-              <!-- <div class="col-12">
-                <label for="licenseDate">License Date</label>
-                <input type="date" formControlName="licenseDate" name="licenseDate" id="licenseDate" class="form-control" placeholder="License Date...">
-              </div> -->
-
-              <div class="col-12">
+              <div class="col-md-6">
                 <label for="driverId">Drivers</label>
                 <div class="d-flex gap-2">
                   <div formArrayName="driversId" class="d-flex flex-column gap-2 w-100">
@@ -364,7 +354,7 @@
                       }
                     </div>
                   </div>
-                  @if(driverCount() <= 2){
+                  @if(driverCount() < 2){
                     <span type="button" class="add-car-btn d-flex justify-content-center align-items-center rounded-circle" (click)="addDriver()"><i class="fa-solid fa-plus"></i></span>
                   }
                 </div>
