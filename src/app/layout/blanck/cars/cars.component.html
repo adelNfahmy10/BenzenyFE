@@ -76,46 +76,46 @@
                 <th>
                   <input type="checkbox" class="custom-checkbox" [checked]="isAllSelected()" (change)="toggleAllSelection($event)">
                 </th>
-                <th class="fw-medium cr" (click)="sortTable('model')">
+                <th class="fw-medium cr" (click)="sortTable('carModel')">
                   <div class="d-flex justify-content-center align-items-center gap-1">
                     <span>Model</span>
                     <i class="fa-solid fa-arrow-up"
                       [ngClass]="{
-                        'fa-arrow-up': sortColumn() === 'model' && sortDirection(),
-                        'fa-arrow-down': !(sortColumn() === 'model' && sortDirection())
+                        'fa-arrow-up': sortColumn() === 'carModel' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'carModel' && sortDirection())
                       }">
                     </i>
                   </div>
                 </th>
-                <th class="fw-medium cr" (click)="sortTable('model')">
+                <th class="fw-medium cr" (click)="sortTable('carBrand')">
                   <div class="d-flex justify-content-center align-items-center gap-1">
                     <span>Brand</span>
                     <i class="fa-solid fa-arrow-up"
                       [ngClass]="{
-                        'fa-arrow-up': sortColumn() === 'model' && sortDirection(),
-                        'fa-arrow-down': !(sortColumn() === 'model' && sortDirection())
+                        'fa-arrow-up': sortColumn() === 'carBrand' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'carBrand' && sortDirection())
                       }">
                     </i>
                   </div>
                 </th>
-                <th class="fw-medium cr" (click)="sortTable('pin')">
+                <th class="fw-medium cr" (click)="sortTable('carType')">
                   <div class="d-flex justify-content-center align-items-center gap-1">
                     <span>Type</span>
                     <i class="fa-solid fa-arrow-up"
                       [ngClass]="{
-                        'fa-arrow-up': sortColumn() === 'pin' && sortDirection(),
-                        'fa-arrow-down': !(sortColumn() === 'pin' && sortDirection())
+                        'fa-arrow-up': sortColumn() === 'carType' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'carType' && sortDirection())
                       }">
                     </i>
                   </div>
                 </th>
-                <th class="fw-medium cr" (click)="sortTable('carNumber')">
+                <th class="fw-medium cr" (click)="sortTable('plateType')">
                   <div class="d-flex justify-content-center align-items-center gap-1">
                     <span>Plate Type</span>
                     <i class="fa-solid fa-arrow-up"
                       [ngClass]="{
-                        'fa-arrow-up': sortColumn() === 'carNumber' && sortDirection(),
-                        'fa-arrow-down': !(sortColumn() === 'carNumber' && sortDirection())
+                        'fa-arrow-up': sortColumn() === 'plateType' && sortDirection(),
+                        'fa-arrow-down': !(sortColumn() === 'plateType' && sortDirection())
                       }">
                     </i>
                   </div>
@@ -142,17 +142,6 @@
                     </i>
                   </div>
                 </th>
-                <!-- <th class="fw-medium cr" (click)="sortTable('brand')">
-                  <div class="d-flex justify-content-center align-items-center gap-1">
-                    <span>Brand</span>
-                    <i class="fa-solid fa-arrow-up"
-                      [ngClass]="{
-                        'fa-arrow-up': sortColumn() === 'brand' && sortDirection(),
-                        'fa-arrow-down': !(sortColumn() === 'brand' && sortDirection())
-                      }">
-                    </i>
-                  </div>
-                </th> -->
                 <th class="fw-medium cr" (click)="sortTable('petrolType')">
                   <div class="d-flex justify-content-center align-items-center gap-1">
                     <span>Petrol Type</span>
@@ -170,8 +159,6 @@
                   </div>
                 </th>
                 <th class="fw-medium cr">Actions</th>
-                <!-- <th class="fw-medium cr" (click)="sortTable('color')">Color</th>
-                <th class="fw-medium cr" (click)="sortTable('licenseDate')">License Date</th> -->
               </tr>
             </thead>
             <tbody>
@@ -201,14 +188,6 @@
                   <td>
                     {{ car.petrolType }}
                   </td>
-
-
-                  <!-- <td>
-                    {{ car.color }}
-                  </td>
-                  <td>
-                    {{ car.licenseDate | date }}
-                  </td> -->
                   <td>
                     @for(driver of car.driversName; track $index){
                       <p class="text-table">{{ driver }}</p>
@@ -317,11 +296,6 @@
                   }
                 </select>
               </div>
-
-              <!-- <div class="col-md-6">
-                <label for="modelYear">Year Model</label>
-                <input type="number" formControlName="modelYear" name="modelYear" id="modelYear" class="form-control" placeholder="Model Year...">
-              </div> -->
 
               <div class="col-md-6">
                 <label for="plateType">Plate Type</label>
