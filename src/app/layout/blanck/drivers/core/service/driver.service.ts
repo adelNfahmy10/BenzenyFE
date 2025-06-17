@@ -17,6 +17,10 @@ export class DriverService {
     return this._HttpClient.get(`${environment.baseURL}api/Driver/v1/GetDriverById/GetDriverById/${id}`)
   }
 
+  GetDriversInBranch(branchId:any,searchTerm:any = '', pageNum:any = 1, pageSize:any = 10):Observable<any>{
+    return this._HttpClient.get(`${environment.baseURL}api/Driver/v1/GetDriversInBranch/GetDriversInBranch/${branchId}?searchTerm=${searchTerm}&pageNumber=${pageNum}&pageSize=${pageSize}`)
+  }
+
   CreateDriver(data:any):Observable<any>{
     return this._HttpClient.post(`${environment.baseURL}api/Driver/v1/CreateDriver/CreateDriver`, data)
   }
@@ -30,15 +34,17 @@ export class DriverService {
   }
 
   // Driver To Car APIs
-  GetDriversInBranch(branchId:any,searchTerm:any = '', pageNum:any = 1, pageSize:any = 10):Observable<any>{
-    return this._HttpClient.get(`${environment.baseURL}api/Driver/v1/GetDriversInBranch/GetDriversInBranch/${branchId}?searchTerm=${searchTerm}&pageNumber=${pageNum}&pageSize=${pageSize}`)
-  }
-
   AssignDriverToCar(data:any):Observable<any>{
     return this._HttpClient.post(`${environment.baseURL}api/Driver/v1/AssignDriverToCar/AssignDriverToCar`, data)
   }
   UnassignDriverFromCar(data:any):Observable<any>{
     return this._HttpClient.post(`${environment.baseURL}api/Driver/v1/UnassignDriverFromCar/UnassignDriverFromCar`, data)
+  }
+  refundAmountToDriver(data:any):Observable<any>{
+    return this._HttpClient.post(`${environment.baseURL}api/Driver/v1/AssignFundsToDrivers/assign-funds`, data)
+  }
+  DriverSwitchActive(id:any):Observable<any>{
+    return this._HttpClient.post(`${environment.baseURL}api/Driver/v1/DriverSwitchActive/DriverSwitchActive/${id}`, {})
   }
 
   // Upload Excel File

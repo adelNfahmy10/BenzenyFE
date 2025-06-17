@@ -187,8 +187,17 @@
                       </i>
                     </div>
                   </th>
-                  <!-- <th class="fw-medium cr" (click)="sortTable('license')">License</th>
-                  <th class="fw-medium cr" (click)="sortTable('licenseDegree')">License Degree</th> -->
+                   <th class="fw-medium cr" (click)="sortTable('isActive')">
+                    <div class="d-flex justify-content-center align-items-center gap-1">
+                      <span>Activation</span>
+                      <i class="fa-solid fa-arrow-up"
+                        [ngClass]="{
+                          'fa-arrow-up': sortColumn() === 'isActive' && sortDirection(),
+                          'fa-arrow-down': !(sortColumn() === 'isActive' && sortDirection())
+                        }">
+                      </i>
+                    </div>
+                  </th>
                   <th class="fw-medium cr">Actions</th>
                 </tr>
               </thead>
@@ -218,21 +227,19 @@
                     </td>
                     <td>
                       <div class="d-flex justify-content-center align-items-center gap-2">
-                        <span class="active-btn cr">Refund</span>
+                        <span class="active-btn cr" data-bs-toggle="modal" data-bs-target="#exampleModal-refund-form-manager">Refund</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-center align-items-center gap-2">
                         <span [ngClass]="{
-                          'active-btn': false,
-                          'dis-active-btn': true
-                          }" class="cr rounded-2">
-                          {{!true ? 'Active': 'DeActive'}}
+                          'active-btn': driver.isActive,
+                          'dis-active-btn': !driver.isActive
+                          }" class="cr rounded-2" (click)="switchActiveDriver(driver.id)">
+                          {{driver.isActive ? 'Active': 'DeActive'}}
                         </span>
                       </div>
                     </td>
-                    <!-- <td>
-                      {{ driver.license }}
-                    </td>
-                    <td>
-                      {{ driver.licenseDegree }}
-                    </td> -->
                     <td>
                       <div class="d-flex justify-content-center align-items-center gap-2 mt-1">
                         <img class="unassign-icon cr" src="assets/image/unassign-icon.png" alt="unassign" (click)="unassignToCar(driver.id, driver.carId)">
@@ -456,23 +463,23 @@
           </div>
         </div>
 
-        <form class="row g-2">
+        <form class="row g-2" [formGroup]="refundAmountForm" (ngSubmit)="submitRefundAmount()">
           <div class="col-md-6">
             <div class="d-flex align-items-center gap-2">
               <svg width="40" height="40" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17.5 17C12.8123 17 9 13.1877 9 8.5C9 3.81225 12.8123 0 17.5 0C22.1878 0 26 3.81225 26 8.5C26 13.1877 22.1878 17 17.5 17ZM17.5 19.8333C10.2708 19.8333 4.21875 25.2478 3.424 32.4275C3.38008 32.8284 3.509 33.2279 3.77675 33.5282C4.04592 33.8286 4.42983 34 4.83217 34H8.99858C8.99858 29.3123 12.8108 25.5 17.4986 25.5C22.1863 25.5 25.9986 29.3123 25.9986 34H30.165C30.5673 34 30.9513 33.8286 31.2204 33.5282C31.4882 33.2279 31.6171 32.8284 31.5732 32.4275C30.7784 25.2478 24.7264 19.8333 17.4972 19.8333H17.5ZM17.5 28.3333C14.3748 28.3333 11.8333 30.8748 11.8333 34H23.1667C23.1667 30.8748 20.6252 28.3333 17.5 28.3333Z" fill="#F97C21"/>
               </svg>
-              <span class="fs-3">2 Driver(s)</span>
+              <span class="fs-3">{{selectedDriverIds.length}} Driver(s)</span>
             </div>
           </div>
 
           <div class="col-md-6">
             <label for="amount">Amount</label>
-            <input type="number" name="amount" id="amount" class="form-control" placeholder="Amount...">
+            <input formControlName="amount" type="number" name="amount" id="amount" class="form-control" placeholder="Amount...">
           </div>
 
           <div class="col-12" [ngClass]="{'col-md-6': limitVehical}">
-            <select class="form-select" name="option-limit" id="option-limit" (change)="selectLimit($event)">
+            <select formControlName="transactionType" class="form-select" name="option-limit" id="option-limit" (change)="selectLimit($event)">
               <option value="" selected disabled>Choose Limit</option>
               <option value="1">This Time Only</option>
               <option value="2">Set Vehicles Limit</option>
@@ -522,6 +529,62 @@
             </div>
           </div>
           }
+
+          <div class="col-12">
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <button class="save-btn btn d-flex justify-content-center align-items-center gap-2">
+                <span>Save</span>
+                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_893_4557)">
+                  <path d="M17.7083 25H9.375C4.20521 25 0 20.7937 0 15.625V7.29167C0 6.71667 0.465625 6.25 1.04167 6.25C1.61771 6.25 2.08333 6.71667 2.08333 7.29167V15.625C2.08333 19.6458 5.35521 22.9167 9.375 22.9167H17.7083C18.2844 22.9167 18.75 23.3833 18.75 23.9583C18.75 24.5333 18.2844 25 17.7083 25ZM17.7083 0H11.4583V5.20833H17.7083V0ZM25 6.52812V15.625C25 18.501 22.6677 20.8333 19.7917 20.8333H9.375C6.49896 20.8333 4.16667 18.501 4.16667 15.625V5.20833C4.16667 2.33646 6.50312 0 9.375 0V5.20833C9.375 6.35938 10.3073 7.29167 11.4583 7.29167H17.7083C18.8594 7.29167 19.7917 6.35938 19.7917 5.20833V0.288542C20.1354 0.444792 20.4552 0.655208 20.7229 0.925L24.0937 4.32604C24.674 4.91146 25 5.70312 25 6.52812ZM18.75 14.0625C18.75 12.049 17.1177 10.4167 15.1042 10.4167C13.0906 10.4167 11.4583 12.049 11.4583 14.0625C11.4583 16.076 13.0906 17.7083 15.1042 17.7083C17.1177 17.7083 18.75 16.076 18.75 14.0625ZM16.6667 14.0625C16.6667 14.925 15.9667 15.625 15.1042 15.625C14.2417 15.625 13.5417 14.925 13.5417 14.0625C13.5417 13.2 14.2417 12.5 15.1042 12.5C15.9667 12.5 16.6667 13.2 16.6667 14.0625Z"/>
+                  <circle cx="15" cy="14" r="1" fill="#F97C21"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_893_4557">
+                  <rect width="25" height="25" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Refund -->
+<div class="modal fade" id="exampleModal-refund-form-manager" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content p-3">
+      <div class="modal-header justify-content-end border-0 py-0 pt-2">
+        <svg class="cr" data-bs-dismiss="modal" width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_893_6942)">
+          <path d="M18.5 0C8.29879 0 0 8.29879 0 18.5C0 28.7012 8.29879 37 18.5 37C28.7012 37 37 28.7012 37 18.5C37 8.29879 28.7012 0 18.5 0ZM25.846 24.8285C26.3949 25.4807 26.3116 26.4535 25.661 27.0007C25.3712 27.2443 25.0182 27.363 24.6682 27.363C24.2288 27.363 23.7925 27.1765 23.4873 26.8157L18.5 20.8927L13.5127 26.8157C13.209 27.1765 12.7727 27.363 12.3318 27.363C11.9818 27.363 11.6288 27.2443 11.339 27.0007C10.6884 26.4535 10.6036 25.4807 11.154 24.8285L16.4835 18.5L11.154 12.1715C10.6051 11.5193 10.6884 10.5465 11.339 9.99925C11.9911 9.44887 12.9654 9.53521 13.5112 10.1842L18.4985 16.1073L23.4858 10.1842C24.0315 9.53675 25.0058 9.44887 25.658 9.99925C26.3085 10.5465 26.3933 11.5193 25.843 12.1715L20.5134 18.5L25.843 24.8285H25.846Z" fill="#F79320"/>
+          </g>
+          <defs>
+          <clipPath id="clip0_893_6942">
+          <rect width="37" height="37" fill="white"/>
+          </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <div class="modal-body d-flex flex-column gap-3 px-4 pt-0">
+        <div class="d-flex align-items-center gap-2">
+          <svg width="50" height="50" viewBox="0 0 22 24" fill="#f79320" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.5333 19.9724C21.5333 21.8219 20.1576 23.3265 18.4663 23.3265H3.56941C0.107193 23.3179 -0.641158 17.9484 2.61864 16.8003C6.58297 22.8857 15.4545 22.8838 19.4171 16.8003C20.6413 17.2411 21.5333 18.4889 21.5333 19.9724ZM19.7807 9.90986C19.7807 15.1941 15.8497 19.4932 11.0179 19.4932C-0.59121 19.0111 -0.587705 0.806648 11.0179 0.326523C15.8497 0.326523 19.7807 4.62561 19.7807 9.90986ZM14.523 11.8265C14.523 10.5241 13.6695 9.42111 12.4944 9.2074L9.82961 8.72248C8.87709 8.52027 9.26791 6.97256 10.1416 7.03486H12.129C12.441 7.03486 12.7319 7.2179 12.8887 7.51498C13.1315 7.97306 13.6686 8.13119 14.0857 7.86381C14.5055 7.59931 14.6483 7.01281 14.4056 6.55473C13.9368 5.66827 13.064 5.11819 12.129 5.11819H11.8941V4.15986C11.8889 2.90636 10.146 2.90731 10.1416 4.15986V5.11819C7.13152 5.09998 6.47518 9.9894 9.54132 10.6123L12.2061 11.0972C13.1586 11.2994 12.7678 12.8471 11.8941 12.7849H9.90673C9.59477 12.7849 9.30384 12.6018 9.14699 12.3047C8.90425 11.8466 8.36709 11.6885 7.94998 11.9559C7.53023 12.2204 7.3874 12.8069 7.63013 13.265C8.09894 14.1514 8.97173 14.7015 9.90673 14.7015H10.1416V15.6599C10.1468 16.9134 11.8898 16.9124 11.8941 15.6599V14.7015C13.3435 14.7015 14.523 13.4116 14.523 11.8265Z"/>
+          </svg>
+          <div>
+            <h3>Refund</h3>
+          </div>
+        </div>
+
+        <form class="row g-2" [formGroup]="refundFromManagerForm" (ngSubmit)="submitRefundFromManager()">
+          <div class="col-md-6">
+            <label for="cars">Vehicles</label>
+            <input formControlName="amount" type="number" class="form-control" placeholder="Enter Amount...">
+          </div>
 
           <div class="col-12">
             <div class="d-flex justify-content-end align-items-center gap-2">

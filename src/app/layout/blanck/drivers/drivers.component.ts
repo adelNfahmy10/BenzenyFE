@@ -45,6 +45,8 @@ export class DriversComponent implements OnInit{
   get isEnabled(): boolean {
     return this.selectedDriverIds.length > 0;
   }
+
+
   ngOnInit(): void {
     this.getAllDrivers()
     this.getAllCars()
@@ -303,5 +305,42 @@ export class DriversComponent implements OnInit{
     })
   }
 
+  // Refund Amount To Drivers
+  refundAmountForm:FormGroup = this._FormBuilder.group({
+    driversIds: [null],
+    amount:[null],
+    transactionType:[''],
+  })
+
+  submitRefundAmount():void{
+    let data = this.refundAmountForm.value
+    data.driversIds = this.selectedDriverIds
+    data.transactionType = +data.transactionType
+    this._DriverService.refundAmountToDriver(data).subscribe({
+      next:(res)=>{
+        this._ToastrService.success(res.msg)
+        this.refundAmountForm.reset()
+      }
+    })
+  }
+
+  // Refund Amount Form Manager
+  refundFromManagerForm:FormGroup = this._FormBuilder.group({
+    amount:[null],
+  })
+
+  submitRefundFromManager():void{
+    let data = this.refundAmountForm.value
+    this._ToastrService.success(`Refund ${data.amount} is Successfully`)
+  }
+  // Driver Switch Active
+  switchActiveDriver(id:number):void{
+    this._DriverService.DriverSwitchActive(id).subscribe({
+      next:(res)=>{
+        this._ToastrService.success(res.msg)
+        this.getAllDrivers()
+      }
+    })
+  }
 
 }
