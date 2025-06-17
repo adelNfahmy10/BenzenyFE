@@ -1,6 +1,6 @@
 <section class="w-100">
     <div class="container-fluid">
-      <div class="row g-3">
+      <div class="row g-4">
         <div class="col-12 animate__animated animate__fadeInDown">
           <app-header></app-header>
           <h1>Analytics</h1>
@@ -68,197 +68,289 @@
         </div>
 
         <div class="col-12">
+          <div class="row bg-white rounded-3 p-3 px-5 g-2">
+            <div class="col-md-3 col-sm-2">
+              <label>Company</label>
+              <input type="text" class="form-control" [(ngModel)]="filters.company" (input)="applyFilters()" />
+            </div>
+
+            <div class="col-md-3 col-sm-2">
+              <label>Branch</label>
+              <input type="text" class="form-control" [(ngModel)]="filters.branch" (input)="applyFilters()" />
+            </div>
+
+            <div class="col-md-3 col-sm-2">
+              <label>Vehicles</label>
+              <input type="text" class="form-control" [(ngModel)]="filters.car" (input)="applyFilters()" />
+            </div>
+
+            <div class="col-md-3 col-sm-2">
+              <label>Driver</label>
+              <input type="text" class="form-control" [(ngModel)]="filters.driver" (input)="applyFilters()" />
+            </div>
+
+            <div class="col-md-3 col-sm-2">
+              <label>Transactions</label>
+              <input type="text" class="form-control" [(ngModel)]="filters.transaction" (input)="applyFilters()" />
+            </div>
+
+            <div class="col-md-3 col-sm-2">
+              <label>Station</label>
+              <input type="text" class="form-control" [(ngModel)]="filters.station" (input)="applyFilters()" />
+            </div>
+
+             <div class="col-md-3 col-sm-2">
+              <label>Balance</label>
+              <input type="text" class="form-control" [(ngModel)]="filters.balance" (input)="applyFilters()" />
+            </div>
+
+            <div class="col-md-3 col-sm-2">
+              <label>FromDate</label>
+              <input type="date" class="form-control" [(ngModel)]="filters.fromDate" (change)="applyFilters()" />
+            </div>
+
+            <div class="col-md-3 col-sm-2">
+              <label>ToDate</label>
+              <input type="date" class="form-control" [(ngModel)]="filters.toDate" (change)="applyFilters()" />
+            </div>
+
+            <div class="col-12">
+              <div class="d-flex justify-content-end">
+                <button class="btn reset-btn" (click)="resetFilter()">Reset</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-12 bg-white p-3 rounded-3">
+            <div class="table-responsive">
+            <table class="table">
+              <thead class="table-light">
+                  <tr>
+                    <th (click)="sortData('company')">Companies</th>
+                    <th (click)="sortData('branch')">Branches</th>
+                    <th (click)="sortData('car')">Vehicles</th>
+                    <th (click)="sortData('driver')">Drivers</th>
+                    <th (click)="sortData('transaction')">Transactions</th>
+                    <th (click)="sortData('station')">Fuel Stations</th>
+                    <th (click)="sortData('balance')">Balance</th>
+                    <th (click)="sortData('fromDate')">From Date</th>
+                    <th (click)="sortData('toDate')">To Date</th>
+                  </tr>
+              </thead>
+              <tbody>
+                @for(item of filteredData ; track $index){
+                  <tr>
+                    <td>{{ item.company }}</td>
+                    <td>{{ item.branch }}</td>
+                    <td>{{ item.car }}</td>
+                    <td>{{ item.driver }}</td>
+                    <td>{{ item.transaction }}</td>
+                    <td>{{ item.station }}</td>
+                    <td>{{ item.balance }}</td>
+                    <td>{{ item.fromDate }}</td>
+                    <td>{{ item.toDate }}</td>
+                  </tr>
+                }
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- <div class="col-12">
             <div class="chart-container">
-                <div class="container">
-                  <canvas id="MyChart">{{chart}}</canvas>
-                </div>
-                <div class="p-3 rounded-3">
-                  <h4 class="mb-2">Top Companies Balance</h4>
-                  <div class="table-responsive">
-                    <table class="table">
-                        <tbody>
-                          <tr>
-                            <td class="d-flex justify-content-start align-items-center gap-3">
-                              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="38" height="38" rx="19" fill="#F79320"/>
-                              </svg>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Co.Name</span>
-                                <h6 class="text-table">Fast cargo</h6>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">IBAN</span>
-                                <h6 class="text-table">EG6564646464156</h6>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Address</span>
-                                <h6 class="text-table">TaifKsa</h6>
-                              </div>
-                            </td>
+              <div class="container">
+                <canvas id="MyChart">{{chart}}</canvas>
+              </div>
+              <div class="p-3 rounded-3">
+                <h4 class="mb-2">Top Companies Balance</h4>
+                <div class="table-responsive">
+                  <table class="table">
+                      <tbody>
+                        <tr>
+                          <td class="d-flex justify-content-start align-items-center gap-3">
+                            <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <rect width="38" height="38" rx="19" fill="#F79320"/>
+                            </svg>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Co.Name</span>
+                              <h6 class="text-table">Fast cargo</h6>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">IBAN</span>
+                              <h6 class="text-table">EG6564646464156</h6>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Address</span>
+                              <h6 class="text-table">TaifKsa</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Country</span>
-                                <h6 class="text-table">Saudi Arabia</h6>
-                              </div>
-                            </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Country</span>
+                              <h6 class="text-table">Saudi Arabia</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Branch's</span>
-                                <h6 class="text-table">3</h6>
-                              </div>
-                            </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Branch's</span>
+                              <h6 class="text-table">3</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Vehicles</span>
-                                <h6 class="text-table">15</h6>
-                              </div>
-                            </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Vehicles</span>
+                              <h6 class="text-table">15</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">balance</span>
-                                <div class="d-flex justify-content-start align-items-center">
-                                  <h6 class="text-table">3000</h6>
-                                  <span class="mt-1 sub-usual fw-bold">SAR</span>
-                                </div>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">balance</span>
+                              <div class="d-flex justify-content-start align-items-center">
+                                <h6 class="text-table">3000</h6>
+                                <span class="mt-1 sub-usual fw-bold">SAR</span>
                               </div>
-                            </td>
+                            </div>
+                          </td>
 
-                            <td class="d-flex justify-content-center align-items-center">
-                                <i class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
-                            </td>
-                          </tr>
+                          <td class="d-flex justify-content-center align-items-center">
+                              <i class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
+                          </td>
+                        </tr>
 
-                          <tr>
-                            <td class="d-flex justify-content-start align-items-center gap-3">
-                              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="38" height="38" rx="19" fill="#CBCBCB"/>
-                              </svg>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Co.Name</span>
-                                <h6 class="text-table">Fast cargo</h6>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">IBAN</span>
-                                <h6 class="text-table">EG6564646464156</h6>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Address</span>
-                                <h6 class="text-table">TaifKsa</h6>
-                              </div>
-                            </td>
+                        <tr>
+                          <td class="d-flex justify-content-start align-items-center gap-3">
+                            <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <rect width="38" height="38" rx="19" fill="#CBCBCB"/>
+                            </svg>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Co.Name</span>
+                              <h6 class="text-table">Fast cargo</h6>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">IBAN</span>
+                              <h6 class="text-table">EG6564646464156</h6>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Address</span>
+                              <h6 class="text-table">TaifKsa</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Country</span>
-                                <h6 class="text-table">Saudi Arabia</h6>
-                              </div>
-                            </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Country</span>
+                              <h6 class="text-table">Saudi Arabia</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Branch's</span>
-                                <h6 class="text-table">3</h6>
-                              </div>
-                            </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Branch's</span>
+                              <h6 class="text-table">3</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Vehicles</span>
-                                <h6 class="text-table">15</h6>
-                              </div>
-                            </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Vehicles</span>
+                              <h6 class="text-table">15</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">balance</span>
-                                <div class="d-flex justify-content-start align-items-center">
-                                  <h6 class="text-table">3000</h6>
-                                  <span class="mt-1 sub-usual fw-bold">SAR</span>
-                                </div>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">balance</span>
+                              <div class="d-flex justify-content-start align-items-center">
+                                <h6 class="text-table">3000</h6>
+                                <span class="mt-1 sub-usual fw-bold">SAR</span>
                               </div>
-                            </td>
+                            </div>
+                          </td>
 
-                            <td class="d-flex justify-content-center align-items-center">
-                                <i class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
-                            </td>
-                          </tr>
+                          <td class="d-flex justify-content-center align-items-center">
+                              <i class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
+                          </td>
+                        </tr>
 
-                          <tr>
-                            <td class="d-flex justify-content-start align-items-center gap-3">
-                              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="38" height="38" rx="19" fill="#F79320"/>
-                              </svg>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Co.Name</span>
-                                <h6 class="text-table">Fast cargo</h6>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">IBAN</span>
-                                <h6 class="text-table">EG6564646464156</h6>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Address</span>
-                                <h6 class="text-table">TaifKsa</h6>
-                              </div>
-                            </td>
+                        <tr>
+                          <td class="d-flex justify-content-start align-items-center gap-3">
+                            <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <rect width="38" height="38" rx="19" fill="#F79320"/>
+                            </svg>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Co.Name</span>
+                              <h6 class="text-table">Fast cargo</h6>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">IBAN</span>
+                              <h6 class="text-table">EG6564646464156</h6>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Address</span>
+                              <h6 class="text-table">TaifKsa</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Country</span>
-                                <h6 class="text-table">Saudi Arabia</h6>
-                              </div>
-                            </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Country</span>
+                              <h6 class="text-table">Saudi Arabia</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Branch's</span>
-                                <h6 class="text-table">3</h6>
-                              </div>
-                            </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Branch's</span>
+                              <h6 class="text-table">3</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">Vehicles</span>
-                                <h6 class="text-table">15</h6>
-                              </div>
-                            </td>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">Vehicles</span>
+                              <h6 class="text-table">15</h6>
+                            </div>
+                          </td>
 
-                            <td>
-                              <div class="d-flex flex-column">
-                                <span class="muted">balance</span>
-                                <div class="d-flex justify-content-start align-items-center">
-                                  <h6 class="text-table">3000</h6>
-                                  <span class="mt-1 sub-usual fw-bold">SAR</span>
-                                </div>
+                          <td>
+                            <div class="d-flex flex-column">
+                              <span class="muted">balance</span>
+                              <div class="d-flex justify-content-start align-items-center">
+                                <h6 class="text-table">3000</h6>
+                                <span class="mt-1 sub-usual fw-bold">SAR</span>
                               </div>
-                            </td>
+                            </div>
+                          </td>
 
-                            <td class="d-flex justify-content-center align-items-center">
-                                <i class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
-                            </td>
-                          </tr>
-                        </tbody>
-                    </table>
-                  </div>
+                          <td class="d-flex justify-content-center align-items-center">
+                              <i class="fa-solid fa-ellipsis-vertical fs-5 cr"></i>
+                          </td>
+                        </tr>
+                      </tbody>
+                  </table>
                 </div>
               </div>
             </div>
-        </div>
+        </div> -->
+      </div>
     </div>
 </section>

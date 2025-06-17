@@ -43,3 +43,11 @@ $mainColor:#F79320;
     background-color: #FAFAFA;
   }
 }
+
+.reset-btn{
+  width: 100px;
+  height: 40px;
+  background-color: $mainColor;
+  color: #fff;
+  transition: all .3s;
+}
