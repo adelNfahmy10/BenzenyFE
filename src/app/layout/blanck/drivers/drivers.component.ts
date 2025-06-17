@@ -11,6 +11,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
 import { SettingService } from '../settings/core/services/setting.service';
+import { CarService } from '../cars/core/service/car.service';
 
 @Component({
   selector: 'app-drivers',
@@ -22,6 +23,7 @@ import { SettingService } from '../settings/core/services/setting.service';
 export class DriversComponent implements OnInit{
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _DriverService = inject(DriverService)
+  private readonly _CarService = inject(CarService)
   private readonly _ToastrService = inject(ToastrService)
   private readonly _SettingService = inject(SettingService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
@@ -29,6 +31,7 @@ export class DriversComponent implements OnInit{
   branchId: WritableSignal<string | null> = signal(localStorage.getItem('branchId'));
   userId: WritableSignal<string | null> = signal(localStorage.getItem('userId'));
   allDrivers: WritableSignal<any[]> = signal([]);
+  allCars: WritableSignal<any[]> = signal([]);
   allTags:WritableSignal<any[]> = signal([])
   title: WritableSignal<string> = signal('Drivers');
   allPage: WritableSignal<number> = signal(1);
@@ -44,6 +47,7 @@ export class DriversComponent implements OnInit{
   }
   ngOnInit(): void {
     this.getAllDrivers()
+    this.getAllCars()
     this.getAllTags()
   }
 
@@ -103,6 +107,14 @@ export class DriversComponent implements OnInit{
         this.allPage.set(Math.ceil(res.data.totalCount / res.data.pageSize));
         this.currentPage.set(res.data.pageNumber);
         this.pageSize.set(res.data.pageSize);
+      }
+    });
+  }
+
+  getAllCars():void{
+    this._CarService.GetAllCarsByBranchId(this.branchId()).subscribe({
+      next: (res) => {
+        this.allCars.set(res.data.items)
       }
     });
   }
@@ -262,4 +274,34 @@ export class DriversComponent implements OnInit{
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, 'table_data.xlsx');
   }
+
+  // Assign Drivers To Cars
+  assignToCarForm:FormGroup = this._FormBuilder.group({
+    driverId:[null],
+    carId:[null],
+  })
+
+  submitAssignToCar():void{
+    let data = this.assignToCarForm.value
+    this._DriverService.AssignDriverToCar(data).subscribe({
+      next:(res)=>{
+        this._ToastrService.success('Assign Is Successfully')
+        this.assignToCarForm.reset()
+      }
+    })
+  }
+
+  unassignToCar(driverId:number, carId:number):void{
+    let data = {
+      driverId: driverId,
+      carId: carId
+    }
+    this._DriverService.UnassignDriverFromCar(data).subscribe({
+      next:(res)=>{
+        this._ToastrService.success(res.msg)
+      }
+    })
+  }
+
+
 }
