@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, PLATFORM_ID, signal, ViewChild, WritableSignal } from '@angular/core';
+import { Component, computed, effect, ElementRef, inject, OnInit, PLATFORM_ID, Signal, signal, ViewChild, WritableSignal } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import * as XLSX from 'xlsx';
@@ -11,6 +11,7 @@ import { DriverService } from '../drivers/core/service/driver.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SettingService } from '../settings/core/services/setting.service';
+import { BranchDefultService } from '../../../../core/services/branch-defult.service';
 
 @Component({
   selector: 'app-cars',
@@ -26,8 +27,10 @@ export class CarsComponent implements OnInit{
   private readonly _SettingService = inject(SettingService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
   private readonly _ToastrService = inject(ToastrService)
+  private readonly _BranchDefultService = inject(BranchDefultService)
 
-  branchId: WritableSignal<string> = signal(localStorage.getItem('branchId') || '');
+  // branchId: WritableSignal<string> = signal(localStorage.getItem('branchId') || '');
+  branchId: Signal<string> = computed( () => this._BranchDefultService.branchId()! )
   userId: WritableSignal<string> = signal(localStorage.getItem('userId') || '');
   allCars: WritableSignal<any[]> = signal([]);
   allDrivers: WritableSignal<any[]> = signal([]);
@@ -50,14 +53,25 @@ export class CarsComponent implements OnInit{
   isChecked: WritableSignal<boolean> = signal(false);
   selectedRowId: WritableSignal<number | null> = signal(null);
 
+  constructor(){
+    effect(() => {
+      const id = this._BranchDefultService.branchId();
+      if (id) {
+        console.log('Branch ID changed:', id);
+        this.getAllCars();
+        this.getAllDriver();
+      }
+    });
+  }
+
   ngOnInit(): void {
-    this.getAllCars()
-    this.getAllDriver()
-    this.addDriver()
-    this.getAllCarBrand()
-    this.getAllCarModel()
-    this.getAllCarType()
-    this.getAllPlateType()
+    this.getAllCars();
+    this.getAllDriver();
+    this.getAllCarBrand();
+    this.getAllCarModel();
+    this.getAllCarType();
+    this.getAllPlateType();
+    this.addDriver();
   }
 
   selectedCarIds: number[] = [];

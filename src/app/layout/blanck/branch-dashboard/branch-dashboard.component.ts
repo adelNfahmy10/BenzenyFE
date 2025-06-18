@@ -1,8 +1,25 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, signal, WritableSignal, ViewChild, ElementRef, OnInit, Signal, computed, effect } from '@angular/core';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import { Chart, registerables } from 'chart.js';
 import { CompanyService } from '../companies/core/service/company.service';
 import { CarService } from '../cars/core/service/car.service';
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexTitleSubtitle
+} from "ng-apexcharts";
+import { BranchDefultService } from '../../../../core/services/branch-defult.service';
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  title: ApexTitleSubtitle;
+};
+
+
 Chart.register(...registerables);
 
 @Component({
@@ -13,13 +30,27 @@ Chart.register(...registerables);
   styleUrl: './branch-dashboard.component.scss',
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
-export class BranchDashboardComponent {
+export class BranchDashboardComponent implements OnInit{
   private readonly _CompanyService = inject(CompanyService)
-   private readonly _CarService = inject(CarService)
+  private readonly _BranchDefultService = inject(BranchDefultService)
+  private readonly _CarService = inject(CarService)
 
-  branchId: WritableSignal<string> = signal(localStorage.getItem('branchId') || '');
+  // branchId: WritableSignal<string> = signal(localStorage.getItem('branchId') || '');
+  branchId: Signal<string> = computed( () => this._BranchDefultService.branchId()! )
   carCount: WritableSignal<number> = signal(0);
 
+  @ViewChild("chart") chart!: ChartComponent;
+  public chartOptions!: Partial<ChartOptions>;
+
+  constructor(){
+      effect(() => {
+        const id = this._BranchDefultService.branchId();
+        if (id) {
+          console.log('Branch ID changed:', id);
+          this.getAllCars();
+        }
+      });
+    }
   // Run Charts And Funtions When Project Load
   ngOnInit(): void {
     // this.chartLine = new Chart('ChartLine', this.configLine)
@@ -27,7 +58,25 @@ export class BranchDashboardComponent {
     this.chartLineFuel = new Chart('chartLineFuel', this.configLineFuel);
 
     this.getallCompanies()
-    this.getAllCars()
+
+    this.chartOptions = {
+    series: [
+      {
+        name: "My-series",
+        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+      }
+    ],
+    chart: {
+      height: 350,
+      type: "bar"
+    },
+    title: {
+      text: "My First Angular Chart"
+    },
+    xaxis: {
+      categories: ["Jan", "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug", "Sep"]
+    }
+    };
   }
 
   allCompanies: WritableSignal<any[]> = signal([]);

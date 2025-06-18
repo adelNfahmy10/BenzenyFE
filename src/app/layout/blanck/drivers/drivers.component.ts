@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, PLATFORM_ID, signal, ViewChild, WritableSignal } from '@angular/core';
+import { Component, computed, effect, ElementRef, inject, OnInit, PLATFORM_ID, Signal, signal, ViewChild, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from "../../../../assets/share/header/header.component";
 import * as XLSX from 'xlsx';
@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RouterLink } from '@angular/router';
 import { SettingService } from '../settings/core/services/setting.service';
 import { CarService } from '../cars/core/service/car.service';
+import { BranchDefultService } from '../../../../core/services/branch-defult.service';
 
 @Component({
   selector: 'app-drivers',
@@ -26,9 +27,11 @@ export class DriversComponent implements OnInit{
   private readonly _CarService = inject(CarService)
   private readonly _ToastrService = inject(ToastrService)
   private readonly _SettingService = inject(SettingService)
+    private readonly _BranchDefultService = inject(BranchDefultService)
   private readonly _PLATFORM_ID = inject(PLATFORM_ID)
 
-  branchId: WritableSignal<string | null> = signal(localStorage.getItem('branchId'));
+  // branchId: WritableSignal<string | null> = signal(localStorage.getItem('branchId'));
+  branchId: Signal<string> = computed( () => this._BranchDefultService.branchId()! )
   userId: WritableSignal<string | null> = signal(localStorage.getItem('userId'));
   allDrivers: WritableSignal<any[]> = signal([]);
   allCars: WritableSignal<any[]> = signal([]);
@@ -46,10 +49,18 @@ export class DriversComponent implements OnInit{
     return this.selectedDriverIds.length > 0;
   }
 
+  constructor(){
+    effect(() => {
+      const id = this._BranchDefultService.branchId();
+      if (id) {
+        console.log('Branch ID changed:', id);
+        this.getAllDrivers()
+        this.getAllCars()
+      }
+    });
+  }
 
   ngOnInit(): void {
-    this.getAllDrivers()
-    this.getAllCars()
     this.getAllTags()
   }
 

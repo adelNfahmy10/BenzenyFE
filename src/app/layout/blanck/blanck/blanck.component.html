@@ -107,7 +107,16 @@
                 </svg>
                 <span>Settings</span>
             </li>
+            <li class="ps-0 bg-white">
+               <select  (change)="switchBranchId($event)" class="form-select" name="branch" id="branch">
+                  @for (branch of userBranches; track $index) {
+                    <option [value]="branch.branchId">{{branch.branchName}}</option>
+                  }
+              </select>
+            </li>
           </ul>
+
+
 
           <div class="logout cr" (click)="logout()">
               <svg width="67" height="33" viewBox="0 0 67 33" fill="none" xmlns="http://www.w3.org/2000/svg">

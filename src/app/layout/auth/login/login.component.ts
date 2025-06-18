@@ -16,7 +16,7 @@ export class LoginComponent {
   private readonly _Router = inject(Router)
 
   role:string | null = null
-
+  userBranches:any[] = []
   loginForm:FormGroup = this._FormBuilder.group({
     username: [''],
     password: [''],
@@ -33,6 +33,7 @@ export class LoginComponent {
         localStorage.setItem('companyId', res.data.companyId)
         localStorage.setItem('companyName', res.data.companyName)
         localStorage.setItem('role', res.data.roles)
+        localStorage.setItem('userBranches', JSON.stringify(res.data.userBranches));
         this.role = localStorage.getItem('role')
         if(res.data.branchId){
           localStorage.setItem('branchId', res.data.branchId)
