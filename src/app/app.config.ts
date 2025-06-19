@@ -9,7 +9,6 @@ import { headerInterceptor } from '../core/interceptor/header.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from '../core/interceptor/loading.interceptor';
 import { errorInterceptor } from '../core/interceptor/error.interceptor';
-import { NgApexchartsModule } from 'ng-apexcharts';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withViewTransitions(), withInMemoryScrolling({scrollPositionRestoration:'top'})),
@@ -18,6 +17,5 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideToastr(),
     importProvidersFrom(NgxSpinnerModule),
-    importProvidersFrom(NgApexchartsModule)
   ]
 };
