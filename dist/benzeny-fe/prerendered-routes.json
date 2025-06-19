@@ -19,6 +19,11 @@
     "/petrolstation",
     "/register",
     "/setting",
+    "/setting-car-brand",
+    "/setting-car-model",
+    "/setting-car-type",
+    "/setting-plate-type",
+    "/setting-tags",
     "/users"
   ]
 }

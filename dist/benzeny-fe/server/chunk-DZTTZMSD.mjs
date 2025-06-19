@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{$a as n,O as r}from"./chunk-FB7ANMSU.mjs";var s=(()=>{class t{constructor(){this.branchIdSignal=n(localStorage.getItem("branchId")),this.branchId=this.branchIdSignal}setBranchId(a){localStorage.setItem("branchId",a),this.branchIdSignal.set(a)}static{this.\u0275fac=function(c){return new(c||t)}}static{this.\u0275prov=r({token:t,factory:t.\u0275fac,providedIn:"root"})}}return t})();export{s as a};

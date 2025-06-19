@@ -3,23 +3,7 @@ import { HeaderComponent } from "../../../../assets/share/header/header.componen
 import { Chart, registerables } from 'chart.js';
 import { CompanyService } from '../companies/core/service/company.service';
 import { CarService } from '../cars/core/service/car.service';
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexTitleSubtitle
-} from "ng-apexcharts";
 import { BranchDefultService } from '../../../../core/services/branch-defult.service';
-
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  title: ApexTitleSubtitle;
-};
-
-
 Chart.register(...registerables);
 
 @Component({
@@ -39,8 +23,6 @@ export class BranchDashboardComponent implements OnInit{
   branchId: Signal<string> = computed( () => this._BranchDefultService.branchId()! )
   carCount: WritableSignal<number> = signal(0);
 
-  @ViewChild("chart") chart!: ChartComponent;
-  public chartOptions!: Partial<ChartOptions>;
 
   constructor(){
       effect(() => {
@@ -56,27 +38,7 @@ export class BranchDashboardComponent implements OnInit{
     // this.chartLine = new Chart('ChartLine', this.configLine)
     this.chartBarTransactions = new Chart('chartBarTransactions', this.configBarTrans);
     this.chartLineFuel = new Chart('chartLineFuel', this.configLineFuel);
-
     this.getallCompanies()
-
-    this.chartOptions = {
-    series: [
-      {
-        name: "My-series",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-      }
-    ],
-    chart: {
-      height: 350,
-      type: "bar"
-    },
-    title: {
-      text: "My First Angular Chart"
-    },
-    xaxis: {
-      categories: ["Jan", "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug", "Sep"]
-    }
-    };
   }
 
   allCompanies: WritableSignal<any[]> = signal([]);

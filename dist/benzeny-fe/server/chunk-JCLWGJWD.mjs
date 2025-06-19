@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{Jb as a,Sb as r,Y as o,qb as n,rb as i}from"./chunk-FB7ANMSU.mjs";import"./chunk-VVCT4QZE.mjs";var m=(()=>{class t{static{this.\u0275fac=function(e){return new(e||t)}}static{this.\u0275cmp=o({type:t,selectors:[["app-petrolstation"]],standalone:!0,features:[r],decls:2,vars:0,template:function(e,p){e&1&&(n(0,"p"),a(1,"petrolstation works!"),i())}})}}return t})();export{m as PetrolstationComponent};
